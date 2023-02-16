@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2023 Dmitry Frolkov <dimon6018t@gmail.com>
+ 
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:srcCompat="@drawable/ic_fullcat_icon" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/abouttitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="22sp"
+        android:gravity="center"
+        app:fontFamily="@font/opensans_medium"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/abouttext"
+	    android:textSize="20sp"
+	    android:layout_marginStart="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/about_text" />
+	<Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_weight="0" />
+		
+	 <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/about_dev1"
+        android:layout_width="match_parent"
+		android:layout_marginStart="15dp"
+        android:layout_height="match_parent"
+        android:text="@string/about_dev1" />
+	<Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_weight="0" />
+	<com.google.android.material.textview.MaterialTextView
+        android:id="@+id/about_dev2"
+        android:layout_width="match_parent"
+		android:layout_marginStart="15dp"
+        android:layout_height="match_parent"
+        android:text="@string/about_dev2" />
+	<Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_weight="0" />
+	<com.google.android.material.textview.MaterialTextView
+        android:id="@+id/about_dev3"
+        android:layout_width="match_parent"
+		android:layout_marginStart="15dp"
+        android:layout_height="match_parent"
+        android:text="@string/about_dev3" />
+	<Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_weight="0" />
+	<com.google.android.material.textview.MaterialTextView
+        android:id="@+id/about_dev4"
+        android:layout_width="match_parent"
+		android:layout_marginStart="15dp"
+        android:layout_height="match_parent"
+        android:text="@string/about_dev4" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_weight="0" />
+     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/about_dev5"
+        android:layout_width="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_height="match_parent"
+        android:text="@string/about_dev5" />
+   	<com.google.android.material.textview.MaterialTextView
+        android:id="@+id/about_you"
+        android:layout_width="match_parent"
+		android:gravity="center"
+		android:textSize="16sp"
+        android:layout_height="match_parent"
+        android:text="@string/about_you" />	
+	 <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_weight="0" />	
+	<com.google.android.material.button.MaterialButton
+        android:id="@+id/gitlab_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/gitlab"
+        app:icon="@drawable/ic_code" />	
+</LinearLayout>

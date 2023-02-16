@@ -1,0 +1,118 @@
+<!--
+  Copyright (C) 2023 Dmitry Frolkov <dimon6018t@gmail.com>
+ 
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ -->
+<resources>
+    <style name="Theme.Neko11.Standart" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">#3a0093</item>
+        <item name="colorSecondary">#cbc2dc</item>
+		<item name="colorSurface">@color/background_purpled</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+		<item name="android:colorBackground">@color/background_purpled</item>
+        <item name="colorOnSecondary">#332d41</item>
+        <item name="android:fontFamily">@font/opensans_regular</item>
+        <item name="alertDialogStyle">@style/Theme.Material3.Dark.Dialog.Alert</item>
+        <item name="materialCardViewStyle">@style/Theme.Neko11.Cards.Theme</item>
+		<item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+    <style name="Theme.Neko11.Pink" parent="Theme.Neko11.Standart">
+	 <item name="colorPrimary">@color/pink_theme_primary</item>
+	 <item name="colorSecondary">@color/pink_theme_sec_dark</item>
+	 <item name="colorSurface">@color/background_pinkd</item>
+	 <item name="android:colorBackground">@color/background_pinkd</item>
+	 <item name="colorOnSecondary">#422931</item>
+	 <item name="colorOnPrimary">#650033</item>
+	</style>
+	 <style name="Theme.Neko11.Red" parent="Theme.Neko11.Standart">
+	 <item name="colorPrimary">@color/red_theme_primary</item>
+	 <item name="colorSecondary">@color/red_theme_sec_dark</item>
+	 <item name="colorSurface">@color/background_redd</item>
+	 <item name="colorOnSecondary">#442927</item>
+	 <item name="android:colorBackground">@color/background_redd</item>
+	 <item name="colorOnPrimary">#690007</item>
+	</style>
+	<!-- orange == yellow -->
+	 <style name="Theme.Neko11.Orange" parent="Theme.Neko11.Standart">
+	 <item name="colorPrimary">@color/yellow_theme_primary</item>
+	 <item name="colorSecondary">@color/yellow_theme_sec</item>
+	 <item name="colorSurface">@color/background_yellowd</item>
+     <item name="android:colorBackground">@color/background_yellowd</item> 
+	 <item name="colorOnSecondary">#3d2e00</item>
+	 <item name="colorOnPrimary">#621100</item>
+	</style>
+	 <style name="Theme.Neko11.Green" parent="Theme.Neko11.Standart">
+	 <item name="colorPrimary">@color/green_theme_primary</item>
+	 <item name="colorSecondary">@color/green_theme_sec_dark</item>
+	 <item name="colorSurface">@color/background_greend</item>
+	 <item name="colorOnSecondary">#263422</item>
+	 <item name="android:colorBackground">@color/background_greend</item>
+	 <item name="colorOnPrimary">#003a02</item>
+	</style>
+	 <style name="Theme.Neko11.Lime" parent="Theme.Neko11.Standart">
+	 <item name="android:colorBackground">@color/background_limed</item>
+	 <item name="colorSurface">@color/background_limed</item>
+	 <item name="colorPrimary">@color/lime_theme_primary</item>
+	 <item name="colorSecondary">@color/lime_theme_sec_dark</item>
+	 <item name="colorOnSecondary">#263422</item>
+	 <item name="colorOnPrimary">#003a02</item>
+	</style>
+	 <style name="Theme.Neko11.Aqua" parent="Theme.Neko11.Standart">
+	 <item name="colorPrimary">@color/aqua_theme_primary</item>
+	 <item name="colorSurface">@color/background_aquad</item>
+	 <item name="colorSecondary">@color/aqua_theme_sec_dark</item>
+	 <item name="android:colorBackground">@color/background_aquad</item>
+	 <item name="colorOnSecondary">#1c3530</item>
+	 <item name="colorOnPrimary">#003731</item>
+	</style>
+	 <style name="Theme.Neko11.Blue" parent="Theme.Neko11.Standart">
+	 <item name="colorPrimary">@color/blue_theme_primary</item>
+	 <item name="android:colorBackground">@color/background_blued</item>
+	 <item name="colorSurface">@color/background_blued</item>
+	 <item name="colorSecondary">@color/blue_theme_sec_dark</item>
+	 <item name="colorOnSecondary">#20333d</item>
+	 <item name="colorOnPrimary">#003549</item>
+	</style>
+	
+    <style name="Theme.Neko11.AppBarOverlay" parent="Theme.Material3.DayNight.NoActionBar" />
+
+    <style name="Theme.Neko11.Cards" parent="" >
+        <item name="colorSecondary">@color/tiles</item>
+        <item name="colorSurface">@color/tiles</item>
+        <item name="colorOnSurfaceVariant">@color/tiles</item>
+    </style>
+
+    <style name="Theme.Neko11.Cards.Theme" parent="Widget.Material3.CardView.Filled">
+        <item name="materialThemeOverlay">@style/Theme.Neko11.Cards</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Material3.Corner.Medium</item>
+    </style>
+
+    <style name="Theme.Neko11.PopupOverlay" parent="ThemeOverlay.Material3.Dark" />
+	
+	<style name="Theme.Neko11.Dynamic" parent="ThemeOverlay.Material3.DynamicColors.DayNight">
+        <item name="colorPrimary">@android:color/system_accent1_200</item>
+        <item name="colorOnPrimary">@android:color/system_accent1_800</item>
+        <item name="colorSecondary">@android:color/system_accent2_200</item>
+        <item name="colorOnSecondary">@android:color/system_accent2_800</item>
+		<item name="colorSurface">@android:color/system_neutral1_900</item>
+		<item name="android:colorBackground">@android:color/system_neutral1_900</item>
+        <item name="android:fontFamily">@font/opensans_regular</item>
+        <item name="alertDialogStyle">@style/Theme.Material3.Dark.Dialog.Alert</item>
+        <item name="materialCardViewStyle">@style/Theme.Neko11.Cards.Theme</item>
+		<item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>
