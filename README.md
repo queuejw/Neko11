@@ -15,8 +15,8 @@ Neko11 - is a game that will allow you to collect cats. There is a similar game 
  Releases tab / Community groups
 
 ## Community 🤗😄🤭☹️
-☂️🇷🇺🇺🇦🇺🇸🇵🇼🇬🇧Matrix: https://matrix.to/#/!bnBFbSWBzofYtdOTIP:matrix.org?via=matrix.org
+☂️Matrix: https://matrix.to/#/!bnBFbSWBzofYtdOTIP:matrix.org?via=matrix.org
  
-🧦🇷🇺Telegram channel: https://t.me/nekoapp_news
+🧦Telegram channel (🇷🇺): https://t.me/nekoapp_news
  
-🎃🇷🇺Telegram chat: https://t.me/neko_app
+🎃Telegram chat(🇷🇺): https://t.me/neko_app
