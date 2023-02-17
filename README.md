@@ -15,11 +15,19 @@ More screenshots in /screenshots folder 📷
 
 
 ## Features / Why Neko11 better than original game? 🚽
- • 8 color themes 
+ • 8 color themes
+ 
  • Dark mode 
+
  • Achievements
+
  • Material You
- • You can use controls in app or add app to Device controls and play from there
+
+ • You can use controls in app or add app to Device controls and play from there (planned in nearest build)
+
+ • .......
+
+ // At the moment, the application is under development and does not yet boast a large number of functions.
 
 ## Downloads 📲
  Download latest release: https://github.com/queuejw/Neko11/releases
