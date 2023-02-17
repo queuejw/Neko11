@@ -105,10 +105,10 @@
         android:layout_height="10dp"
         android:layout_weight="0" />	
 	<com.google.android.material.button.MaterialButton
-        android:id="@+id/gitlab_button"
+        android:id="@+id/github_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/gitlab"
+        android:text="@string/github"
         app:icon="@drawable/ic_code" />	
 </LinearLayout>

@@ -24,7 +24,9 @@ import com.google.android.material.color.DynamicColors;
 import com.google.android.material.elevation.SurfaceColors;
 
 public class NekoApplication extends Application {
-
+	
+    private static Context context;
+	
 	public void applyDynamicColors(Context context) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
 		DynamicColors.applyToActivitiesIfAvailable(this, R.style.Theme_Neko11_Dynamic);
@@ -32,4 +34,12 @@ public class NekoApplication extends Application {
 			Log.e("Neko","Android version >= android 12. I cant use dynamic color");
 		}
 	}
+	public void onCreate() {
+        super.onCreate();
+        NekoApplication.context = getApplicationContext();
+    }
+
+    public static Context getNekoApplicationContext() {
+        return NekoApplication.context;
+    }
 }

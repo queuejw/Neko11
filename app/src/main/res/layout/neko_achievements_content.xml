@@ -19,4 +19,108 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+	
+	
+	<com.google.android.material.textview.MaterialTextView
+	  android:id="@+id/achiev_1"
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content"
+	  android:layout_marginStart="10dp"
+	  android:textSize="24sp"
+      android:text="I love cat's!" /> 
+	  
+	<com.google.android.material.progressindicator.LinearProgressIndicator
+    android:layout_width="match_parent"
+	android:layout_marginStart="10dp"
+	android:layout_marginEnd="10dp"
+    android:layout_height="wrap_content" />
+	
+	<com.google.android.material.textview.MaterialTextView
+	  android:id="@+id/achiev_1_sub"
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content"
+	  android:layout_marginStart="5dp"
+	  android:textSize="14sp"
+      android:text="Collect 10 cats" />
+	  
+	 <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_weight="0" /> 
+		
+	<com.google.android.material.textview.MaterialTextView
+	  android:id="@+id/achiev_2"
+      android:layout_height="wrap_content"
+	  android:layout_marginStart="10dp"
+      android:layout_width="wrap_content"
+	  android:textSize="24sp"
+      android:text="Im a pro" />  
+	  
+	<com.google.android.material.progressindicator.LinearProgressIndicator
+    android:layout_width="match_parent"
+	android:layout_marginStart="10dp"
+	android:layout_marginEnd="10dp"
+    android:layout_height="wrap_content" />
+	
+	<com.google.android.material.textview.MaterialTextView
+	  android:id="@+id/achiev_2_sub"
+      android:layout_height="wrap_content"
+	  android:layout_marginStart="5dp"
+      android:layout_width="wrap_content"
+	  android:textSize="14sp"
+      android:text="Collect 50 cats" />
+	  
+	 <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_weight="0" />
+		
+    <com.google.android.material.textview.MaterialTextView
+	  android:id="@+id/achiev_3"
+      android:layout_height="wrap_content"
+	  android:layout_marginStart="10dp"
+      android:layout_width="wrap_content"
+	  android:textSize="24sp"
+      android:text="Lord of cat's" />  
+	  
+	<com.google.android.material.progressindicator.LinearProgressIndicator
+    android:layout_width="match_parent"
+	android:layout_marginStart="10dp"
+	android:layout_marginEnd="10dp"
+    android:layout_height="wrap_content" />
+	
+	<com.google.android.material.textview.MaterialTextView
+	  android:id="@+id/achiev_3_sub"
+      android:layout_height="wrap_content"
+	  android:layout_marginStart="5dp"
+      android:layout_width="wrap_content"
+	  android:textSize="14sp"
+      android:text="Collect 100 cats" />
+	  
+	<Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_weight="0" />
+		
+	 <com.google.android.material.textview.MaterialTextView
+	  android:id="@+id/achiev_4"
+      android:layout_height="wrap_content"
+	  android:layout_marginStart="10dp"
+      android:layout_width="wrap_content"
+	  android:textSize="24sp"
+      android:text="Impossible is possible!" />  
+	  
+	<com.google.android.material.progressindicator.LinearProgressIndicator
+    android:layout_width="match_parent"
+	android:layout_marginStart="10dp"
+	android:layout_marginEnd="10dp"
+    android:layout_height="wrap_content" />
+	
+	<com.google.android.material.textview.MaterialTextView
+	  android:id="@+id/achiev_3_sub"
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content"
+	  android:layout_marginStart="5dp"
+	  android:textSize="14sp"
+      android:text="Collect 1000 cats" />  
 </LinearLayout>

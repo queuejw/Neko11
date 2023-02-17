@@ -17,7 +17,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.EditText;
 import androidx.annotation.MenuRes;
+import android.view.ContextThemeWrapper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -59,13 +61,37 @@ import java.io.File;
 import java.nio.channels.FileChannel;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.BufferedInputStream;
+import org.xmlpull.v1.XmlPullParserException;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.Element;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
+import javax.xml.parsers.DocumentBuilder;
+
+import androidx.preference.PreferenceManager;
 
 import android.os.Environment;
+
+import static ru.dimon6018.neko11.workers.PrefState.FILE_NAME;
+import static ru.dimon6018.neko11.workers.PrefState.TOY_STATE;
+import static ru.dimon6018.neko11.workers.PrefState.CAT_KEY_PREFIX;
+
+import ru.dimon6018.neko11.workers.PrefState;
 
 public class NekoSettingsActivity extends AppCompatActivity {
 
     public static final String STATEPREF = "statepref";
     public static final String SETTINGS = "SettingsPrefs";
+	
+	public String name;
+	public String value;
 	
     public SharedPreferences nekoprefs;
 	
@@ -73,7 +99,6 @@ public class NekoSettingsActivity extends AppCompatActivity {
         MaterialSwitch whiteswitch;
         MaterialSwitch linearcontrol;
 		MaterialSwitch dyncolor;
-		MaterialSwitch edge; 
 		MaterialSwitch autowhiteswitch;
 		MaterialButton accentchoose;
 		MaterialButton save;
@@ -194,13 +219,19 @@ public class NekoSettingsActivity extends AppCompatActivity {
                     }            
 		});
 		restore.setOnClickListener(v -> {
-			new MaterialAlertDialogBuilder(this)
-                        .setTitle(R.string.backup_title)
-                        .setIcon(R.drawable.ic_backup_error)
-                        .setMessage(R.string.backup_failed)
-                        .setCancelable(false)
-                        .setNegativeButton(android.R.string.ok, null)
-                        .show();
+			final Context context = new ContextThemeWrapper(this,
+                getTheme());
+        View view = LayoutInflater.from(context).inflate(R.layout.edit_text, null);
+        final EditText text = view.findViewById(android.R.id.edit);
+        final int size = context.getResources()
+                .getDimensionPixelSize(android.R.dimen.app_icon_size);
+        new MaterialAlertDialogBuilder(context)
+                .setTitle(R.string.rename_cat_title)
+                .setView(view)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    value = text.getText().toString();
+					nextDialog();
+                }).show();
 		});
         opensettingsbtn.setOnClickListener(v -> {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
@@ -255,18 +286,14 @@ public class NekoSettingsActivity extends AppCompatActivity {
             }
         });
         linearcontrol.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            SharedPreferences.Editor editor = nekoprefs.edit();       
-            new MaterialAlertDialogBuilder(this)
-                    .setTitle(R.string.app_name_neko)
-                    .setIcon(R.drawable.ic_success)
-                    .setMessage(R.string.success)
-                    .setCancelable(false)
-                    .setNegativeButton(android.R.string.ok, null)
-                    .show();
-			editor.putBoolean("linear_control", isChecked);
-            editor.apply();		
-        });
-		nekoprefs = getSharedPreferences(SETTINGS, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = nekoprefs.edit(); 
+			if (isChecked) {       
+			editor.putBoolean("linear_control", true);        		
+			} else {
+			editor.putBoolean("linear_control", false);	
+			}
+			 editor.apply();			 
+        });		
 		
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             version_check.setVisibility(View.INVISIBLE);
@@ -281,8 +308,9 @@ public class NekoSettingsActivity extends AppCompatActivity {
         }
 		
 		version_num.setText(BuildConfig.VERSION_NAME);
+			
         linearcontrol.setChecked(LINEAR_CONTROL);
-		
+	
 		if(THEME == 8) {
 		    dyncolor.setChecked(true);
 		} else {
@@ -406,4 +434,78 @@ public class NekoSettingsActivity extends AppCompatActivity {
              break;	
 		  }			 
 	  }
+	public static boolean restoreUserPrefs(Context context) {
+    final File backupFile = new File(context.getExternalFilesDir(null),
+        "Neko11mPrefsBackup.xml");
+    try {
+		
+		PrefState mPrefs = new PrefState(context);
+
+        InputStream inputStream = new FileInputStream(backupFile);
+
+        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+        Document doc = docBuilder.parse(inputStream);
+        Element root = doc.getDocumentElement();
+
+        Node child = root.getFirstChild();
+        while (child != null) {
+            if (child.getNodeType() == Node.ELEMENT_NODE) {
+
+                Element element = (Element) child;
+
+                String type = element.getNodeName();
+                String name = element.getAttribute(CAT_KEY_PREFIX);
+ 
+                if (type.equals("string")) {
+                    String value = element.getTextContent();   
+					mPrefs.restoreCat(value);
+            }
+
+            child = child.getNextSibling();
+        }
+		}	
+		new MaterialAlertDialogBuilder(context)
+                        .setTitle(R.string.backup_title)
+                        .setIcon(R.drawable.ic_backup_done)
+                        .setMessage(R.string.restore_done)
+                        .setCancelable(false)
+                        .setNegativeButton(android.R.string.ok, null)
+                        .show();
+        return true;
+
+    } catch (IOException | ParserConfigurationException | SAXException e) {
+       Log.e("Restore","Error in restore method. See: " + e);
+	   new MaterialAlertDialogBuilder(context)
+                        .setTitle(R.string.backup_title)
+                        .setIcon(R.drawable.ic_backup_error)
+                        .setMessage(R.string.restore_failed)
+                        .setCancelable(false)
+                        .setNegativeButton(android.R.string.ok, null)
+                        .show();
+    }
+	return false;
+	}
+	private void nextDialog() {
+		final Context context = new ContextThemeWrapper(this,
+                getTheme());
+        View view = LayoutInflater.from(context).inflate(R.layout.edit_text, null);
+        final EditText text = view.findViewById(android.R.id.edit);
+        final int size = context.getResources()
+                .getDimensionPixelSize(android.R.dimen.app_icon_size);
+        new MaterialAlertDialogBuilder(context)
+                .setTitle(R.string.rename_cat_title)
+                .setView(view)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    name = text.getText().toString();
+					restore();
+                }).show();
+	    }
+	private void restore() {
+	SharedPreferences mPrefs = this.getSharedPreferences(FILE_NAME, 0);
+		mPrefs.edit()
+              .putString(value, name)
+              .apply();
+	}
 }

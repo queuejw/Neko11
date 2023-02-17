@@ -101,11 +101,13 @@
 	<string name="cat_status_string">Cat status: %s</string>
 	<string name="input_sub_promo">Type promo</string>
 	<string name="activation_tip">Попробуйте прокрутить 3 раза =)</string>	
-	<string name="gitlab">Neko11 in GitLab (Source code)</string>
+	<string name="github">Neko11 in GitHub (Source code)</string>
 	
 	<string name="backup_restore">Restore my cat\'s</string>
 	<string name="backup_save">Save my cat\'s</string>
 	<string name="backup_title">Recovery</string>
+	<string name="restore_failed">Упс. Что-то пошло не так. Востановить ваших котов не получилось. Сожалею =(</string>
+	<string name="restore_done">Востановление ваших котов успешно завершено.</string>
     <string name="backup_done">Востановление успешно завершено. Файл Neko11mPrefsBackup.xml сохранен в памяти устройства.</string>
 	<string name="backup_failed">Упс. Что-то пошло не так. Сохранить ваших котов не получилось. Возможно выданы не все разрешения для приложения.</string>
 	

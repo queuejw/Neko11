@@ -66,9 +66,9 @@ public class NekoAboutActivity extends AppCompatActivity {
 		
 	    getWindow().setNavigationBarColor(SurfaceColors.SURFACE_2.getColor(this));
 		
-		MaterialButton gitlab = findViewById(R.id.gitlab_button);
-		gitlab.setOnClickListener(v -> {
-		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://gitlab.com/project-neko/neko11"));
+		MaterialButton github = findViewById(R.id.github_button);
+		github.setOnClickListener(v -> {
+		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/queuejw/Neko11"));
 		startActivity(intent);
 		});
     }

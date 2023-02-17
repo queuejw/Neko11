@@ -102,12 +102,14 @@
 	<string name="input_sub_promo">Введите промокод</string>
 	<string name="about_you">И тебе &#10084;</string>
 	<string name="activation_tip">Попробуйте прокрутить 3 раза =)</string>
-	<string name="gitlab">Neko11 в GitLab (Исходники)</string>	
+	<string name="github">Neko11 в GitHub (Исходники)</string>	
 	
 	<string name="backup_restore">Востановить моих котов</string>
 	<string name="backup_save">Сохранить моих котов</string>	
 	<string name="backup_title">Востановление</string>
 	<string name="backup_done">Востановление успешно завершено. Файл Neko11mPrefsBackup.xml сохранен в памяти устройства.</string>
+	<string name="restore_failed">Упс. Что-то пошло не так. Востановить ваших котов не получилось. Сожалею =(</string>
+	<string name="restore_done">Востановление ваших котов успешно завершено.</string>
 	<string name="backup_failed">Упс. Что-то пошло не так. Сохранить ваших котов не получилось. Возможно выданы не все разрешения для приложения.</string>	
 	
 	<string name="sort_standart">Стандартно</string>

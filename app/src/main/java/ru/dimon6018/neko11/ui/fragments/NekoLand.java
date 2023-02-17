@@ -84,17 +84,20 @@ public class NekoLand extends Fragment implements PrefState.PrefsListener {
 
     private static final boolean CAT_GEN = false;
 	
+	private boolean paused = true;
+	
     private PrefState mPrefs;
     private CatAdapter mAdapter;
     private Cat mPendingShareCat;
+	private int numCats;
 	
 	private MaterialTextView counter;
 	public SharedPreferences nekoprefs;
+	
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.i("NekoLand","Start NekoLand Fragment");
         View view = inflater.inflate(R.layout.neko_activity_content, container, false);
         return view;
     }
@@ -124,7 +127,7 @@ public class NekoLand extends Fragment implements PrefState.PrefsListener {
             WelcomeDialog();
         }
 		counter = view.findViewById(R.id.counter);
-		int numCats = updateCats();
+		numCats = updateCats();
         String count = getResources().getString(R.string.cat_counter, numCats);
         counter.setText(count);
         if(numCats <= 0 ) {
@@ -181,8 +184,8 @@ public class NekoLand extends Fragment implements PrefState.PrefsListener {
         mAdapter.setCats(cats);
         return cats.length;
     }
-	private void updateCounter() {
-		// чет придумаю
+	public void updateScreen() {
+	getParentFragmentManager().beginTransaction().replace(R.id.container, new NekoLand()).commit();
 	}
     private void onCatClick(Cat cat) {
 	Random random = new Random(cat.getSeed());	
@@ -223,6 +226,7 @@ public class NekoLand extends Fragment implements PrefState.PrefsListener {
 		 bottomsheet.dismiss();
 		});
 	 save.setOnClickListener(v -> {
+	  bottomsheet.dismiss(); 
 	  if (ActivityCompat.checkSelfPermission(requireContext(), WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
                     mPendingShareCat = cat;
@@ -231,15 +235,14 @@ public class NekoLand extends Fragment implements PrefState.PrefsListener {
                             STORAGE_PERM_REQUEST);
                     return;
                 }
-                shareCat(cat);
-				bottomsheet.dismiss();
+                shareCat(cat);				
 	 });	 
 	 bottomsheet.show();
     }
 
     private void onCatRemove(Cat cat) {
 		 mPrefs.removeCat(cat);
-		 updateCounter();
+		 getParentFragmentManager().beginTransaction().replace(R.id.container, new NekoLand()).commit();
     }
     private void showNameDialog(final Cat cat) {
         final Context context = new ContextThemeWrapper(getContext(),
@@ -264,7 +267,6 @@ public class NekoLand extends Fragment implements PrefState.PrefsListener {
     @Override
     public void onPrefsChanged() {
         updateCats();
-		updateCounter();
     }
 
     private class CatAdapter extends RecyclerView.Adapter<CatHolder> {
@@ -281,21 +283,6 @@ public class NekoLand extends Fragment implements PrefState.PrefsListener {
         public CatHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             return new CatHolder(LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.cat_view, parent, false));
-        }
-
-        private void setContextGroupVisible(final CatHolder holder, boolean vis) {
-            final View group = holder.contextGroup;
-            if (vis && group.getVisibility() != View.VISIBLE) {
-                group.setAlpha(0);
-                group.setVisibility(View.VISIBLE);
-                group.animate().alpha(1.0f).setDuration(300);
-                Runnable hideAction = () -> setContextGroupVisible(holder, false);
-                group.setTag(hideAction);
-                group.postDelayed(hideAction, 2000);
-            } else if (!vis && group.getVisibility() == View.VISIBLE) {
-                group.removeCallbacks((Runnable) group.getTag());
-                group.animate().alpha(0f).setDuration(200).withEndAction(() -> group.setVisibility(View.INVISIBLE));
-            }
         }
         @SuppressWarnings({"deprecation", "ObsoleteSdkInt"})
         @SuppressLint("RecyclerView")
@@ -385,4 +372,12 @@ public class NekoLand extends Fragment implements PrefState.PrefsListener {
             save = itemView.findViewById(R.id.saveText);
         }
     }
+	@Override
+	public void onResume() {		
+	super.onResume();
+}
+	@Override
+	public void onPause() {
+	super.onPause();
+	}
 }

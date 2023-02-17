@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2020 The Android Open Source Project
- * Copyright (C) 2017, 2018, 2019 Christopher Blay <chris.b.blay@gmail.com>
  * Copyright (C) 2023 Dmitry Frolkov <dimon6018t@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,21 +25,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import ru.dimon6018.neko11.workers.Sort;
-
 public class PrefState implements OnSharedPreferenceChangeListener {
 
-    private static final String FILE_NAME = "mPrefs";
+    public static final String FILE_NAME = "mPrefs";
 
     private static final String FOOD_STATE = "food";
 
-    private static final String TOY_STATE = "toy";
+    public static final String TOY_STATE = "toy";
 
-    private static final String WATER_STATE = "water";
+    public static final String WATER_STATE = "water";
 
-    private static final String CAT_KEY_PREFIX = "cat:";
-	
-	private static final String SORT = "sort";
+    public static final String CAT_KEY_PREFIX = "cat:";
 
     private final Context mContext;
     private final SharedPreferences mPrefs;
@@ -55,6 +50,11 @@ public class PrefState implements OnSharedPreferenceChangeListener {
     public void addCat(Cat cat) {
         mPrefs.edit()
               .putString(CAT_KEY_PREFIX + (cat.getSeed()), cat.getName())
+              .apply();
+    }
+	public void restoreCat(String string) {
+        mPrefs.edit()
+              .putString(string, string)
               .apply();
     }
 
@@ -91,13 +91,6 @@ public class PrefState implements OnSharedPreferenceChangeListener {
     public float getWaterState() {
         return mPrefs.getFloat(WATER_STATE, 0f);
     }
-   @Sort
-    int getSort() {
-        return mPrefs.getInt(SORT, Sort.BODY_HUE);
-    }
-    void setSort(@Sort int sort) {
-        mPrefs.edit().putInt(SORT, sort).apply();
-	}
     public void setWaterState(float waterState) {
         mPrefs.edit().putFloat(WATER_STATE, waterState).apply();
     }
