@@ -67,16 +67,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.Element;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.xml.sax.SAXException;
-import javax.xml.parsers.DocumentBuilder;
-
-import androidx.preference.PreferenceManager;
-
 import android.os.Environment;
 
 import static ru.dimon6018.neko11.workers.PrefState.FILE_NAME;
@@ -425,68 +415,15 @@ public class NekoSettingsActivity extends AppCompatActivity {
 			default:
 		    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
 					UiModeManager UImanager = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);	
-                    UImanager.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES);					
+                                        UImanager.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES);					
 					UImanager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO);
-				} else {
+			} else {
 				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);	
 				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 				}
              break;	
 		  }			 
 	  }
-	public static boolean restoreUserPrefs(Context context) {
-    final File backupFile = new File(context.getExternalFilesDir(null),
-        "Neko11mPrefsBackup.xml");
-    try {
-		
-		PrefState mPrefs = new PrefState(context);
-
-        InputStream inputStream = new FileInputStream(backupFile);
-
-        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-
-        Document doc = docBuilder.parse(inputStream);
-        Element root = doc.getDocumentElement();
-
-        Node child = root.getFirstChild();
-        while (child != null) {
-            if (child.getNodeType() == Node.ELEMENT_NODE) {
-
-                Element element = (Element) child;
-
-                String type = element.getNodeName();
-                String name = element.getAttribute(CAT_KEY_PREFIX);
- 
-                if (type.equals("string")) {
-                    String value = element.getTextContent();   
-					mPrefs.restoreCat(value);
-            }
-
-            child = child.getNextSibling();
-        }
-		}	
-		new MaterialAlertDialogBuilder(context)
-                        .setTitle(R.string.backup_title)
-                        .setIcon(R.drawable.ic_backup_done)
-                        .setMessage(R.string.restore_done)
-                        .setCancelable(false)
-                        .setNegativeButton(android.R.string.ok, null)
-                        .show();
-        return true;
-
-    } catch (IOException | ParserConfigurationException | SAXException e) {
-       Log.e("Restore","Error in restore method. See: " + e);
-	   new MaterialAlertDialogBuilder(context)
-                        .setTitle(R.string.backup_title)
-                        .setIcon(R.drawable.ic_backup_error)
-                        .setMessage(R.string.restore_failed)
-                        .setCancelable(false)
-                        .setNegativeButton(android.R.string.ok, null)
-                        .show();
-    }
-	return false;
-	}
 	private void nextDialog() {
 		final Context context = new ContextThemeWrapper(this,
                 getTheme());
