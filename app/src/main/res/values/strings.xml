@@ -65,7 +65,7 @@
     <string name="help">Help</string>
 	<string name="achievements">Achievements</string>
     <string name="help_message">Welcome to Neko! For start play click Cat Controls on bottom bar and fill all tiles. Then close app. If cat arrive, I send you notification. After you cat send cat your friends, or continue collect cats. Do not forget check tiles, because after arrive cat\'s eat your food and drink water. Good luck!  </string>
-    <string name="update_message">You use demo version of Neko. Download full version from our Telegram channel</string>
+    <string name="update_message">You can download update from F-DROID, or Releases tab in GitHub.</string>
     <string name="themechanged">Theme successfully changed, but you need to restart the application for the changes to take effect.</string>
     <string name="later">Later</string>
     <string name="restart">Restart</string>
