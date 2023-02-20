@@ -6,7 +6,7 @@ Neko11 - is a game that will allow you to collect cats. There is a similar game 
 
 ## Screenshots 📸
  ![](/screenshots/1.jpg!raw=true)
- ![](/screenshots/2.jpg?raw=true)
+ ![](/screenshots/9.jpg?raw=true)
  ![](/screenshots/3.jpg?raw=true)
  ![](/screenshots/4.jpg?raw=true)
  ![](/screenshots/5.jpg?raw=true)
