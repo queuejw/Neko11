@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2017, 2018, 2019 Christopher Blay <chris.b.blay@gmail.com>
  * Copyright (C) 2023 Dmitry Frolkov <dimon6018t@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
