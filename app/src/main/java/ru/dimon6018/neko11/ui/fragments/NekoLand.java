@@ -84,8 +84,6 @@ public class NekoLand extends Fragment implements PrefState.PrefsListener {
 
     private static final boolean CAT_GEN = false;
 	
-	private boolean paused = true;
-	
     private PrefState mPrefs;
     private CatAdapter mAdapter;
     private Cat mPendingShareCat;
@@ -98,8 +96,7 @@ public class NekoLand extends Fragment implements PrefState.PrefsListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.neko_activity_content, container, false);
-        return view;
+        return inflater.inflate(R.layout.neko_activity_content, container, false);
     }
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -126,14 +123,22 @@ public class NekoLand extends Fragment implements PrefState.PrefsListener {
 		if(GIFT_ENABLED) {
             WelcomeDialog();
         }
+		
 		counter = view.findViewById(R.id.counter);
 		numCats = updateCats();
+		SharedPreferences.Editor editor = nekoprefs.edit();
+		editor.putInt("num", numCats);
+        editor.apply();
+		
         String count = getResources().getString(R.string.cat_counter, numCats);
         counter.setText(count);
         if(numCats <= 0 ) {
             counter.setVisibility(View.INVISIBLE);
         }
     }
+	private void updateNumCats() {
+		
+	}
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -162,10 +167,10 @@ public class NekoLand extends Fragment implements PrefState.PrefsListener {
 		NekoWorker.notifyCat(context, cat, title_message);
 		getParentFragmentManager().beginTransaction().replace(R.id.container, new NekoLand()).commit();
 	}
-    private int updateCats() {
+    public int updateCats() {
         Cat[] cats;
         if (CAT_GEN) {
-            cats = new Cat[15];
+            cats = new Cat[500];
             for (int i = 0; i < cats.length; i++) {
                 cats[i] = Cat.create(getContext());
             }
