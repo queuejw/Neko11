@@ -63,16 +63,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.BufferedInputStream;
-import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 
 import android.os.Environment;
-
-import static ru.dimon6018.neko11.workers.PrefState.FILE_NAME;
-import static ru.dimon6018.neko11.workers.PrefState.TOY_STATE;
-import static ru.dimon6018.neko11.workers.PrefState.CAT_KEY_PREFIX;
-
 import ru.dimon6018.neko11.workers.PrefState;
 
 public class NekoSettingsActivity extends AppCompatActivity {
@@ -82,6 +75,8 @@ public class NekoSettingsActivity extends AppCompatActivity {
 	
 	public String name;
 	public String value;
+	
+	private static final int REQ_CODE_PICK_XML = 2;
 	
     public SharedPreferences nekoprefs;
 	
@@ -209,19 +204,10 @@ public class NekoSettingsActivity extends AppCompatActivity {
                     }            
 		});
 		restore.setOnClickListener(v -> {
-			final Context context = new ContextThemeWrapper(this,
-                getTheme());
-        View view = LayoutInflater.from(context).inflate(R.layout.edit_text, null);
-        final EditText text = view.findViewById(android.R.id.edit);
-        final int size = context.getResources()
-                .getDimensionPixelSize(android.R.dimen.app_icon_size);
-        new MaterialAlertDialogBuilder(context)
-                .setTitle(R.string.rename_cat_title)
-                .setView(view)
-                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                    value = text.getText().toString();
-					nextDialog();
-                }).show();
+			Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("xml"); 
+            startActivityForResult(intent, REQ_CODE_PICK_XML);
 		});
         opensettingsbtn.setOnClickListener(v -> {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
@@ -389,60 +375,8 @@ public class NekoSettingsActivity extends AppCompatActivity {
     popup.show();
 	  }
 	  private void themeChangedDialog() {
-		  SharedPreferences nekoprefs = getSharedPreferences(SETTINGS, Context.MODE_PRIVATE);
-		  int DARK_ENABLE = nekoprefs.getInt("darktheme", 0);
-		  switch(DARK_ENABLE) {
-			case 0:
-			  if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-				  UiModeManager UImanager = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);	
-				    UImanager.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES);
-					UImanager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO);
-				} else {
-				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-				}
-			 break;
-			case 1:
-			    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-					UiModeManager UImanager = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);		
-					UImanager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO);
-					UImanager.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES);
-				} else {
-			    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-				}
-			 break;
-			default:
-		    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-					UiModeManager UImanager = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);	
-                                        UImanager.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES);					
-					UImanager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO);
-			} else {
-				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);	
-				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-				}
-             break;	
-		  }			 
+		Intent intent = new Intent(this, NekoSettingsActivity.class);  
+	    finish();
+		startActivity(intent);
 	  }
-	private void nextDialog() {
-		final Context context = new ContextThemeWrapper(this,
-                getTheme());
-        View view = LayoutInflater.from(context).inflate(R.layout.edit_text, null);
-        final EditText text = view.findViewById(android.R.id.edit);
-        final int size = context.getResources()
-                .getDimensionPixelSize(android.R.dimen.app_icon_size);
-        new MaterialAlertDialogBuilder(context)
-                .setTitle(R.string.rename_cat_title)
-                .setView(view)
-                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                    name = text.getText().toString();
-					restore();
-                }).show();
-	    }
-	private void restore() {
-	SharedPreferences mPrefs = this.getSharedPreferences(FILE_NAME, 0);
-		mPrefs.edit()
-              .putString(value, name)
-              .apply();
-	}
 }
