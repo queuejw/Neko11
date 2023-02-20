@@ -103,19 +103,19 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
 		app:singleSelection="true">
-		<Button
+		<com.google.android.material.button.MaterialButton
 		 style="?attr/materialButtonOutlinedStyle"
 		 android:id="@+id/sortcolor"
 		 android:layout_width="wrap_content"
          android:layout_height="wrap_content"
 		 android:text="@string/sort_color"/>
-		<Button
+		<com.google.android.material.button.MaterialButton
 		 style="?attr/materialButtonOutlinedStyle"
 		 android:id="@+id/sortname"
 		 android:layout_width="wrap_content"
          android:layout_height="wrap_content"
 		 android:text="@string/sort_name"/>
-	    <Button
+	    <com.google.android.material.button.MaterialButton
 		 style="?attr/materialButtonOutlinedStyle"
 		 android:id="@+id/sortstandart"
 		 android:layout_width="wrap_content"
