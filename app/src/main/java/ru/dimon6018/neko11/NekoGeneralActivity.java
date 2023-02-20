@@ -74,6 +74,7 @@ public class NekoGeneralActivity extends AppCompatActivity {
 	private Toolbar toolbar;
 	public String promo;
 
+    public boolean settings = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences nekoprefs = getSharedPreferences(SETTINGS, Context.MODE_PRIVATE);
@@ -180,7 +181,7 @@ public class NekoGeneralActivity extends AppCompatActivity {
 	   
 	   	Insetter.builder()
        .padding(WindowInsetsCompat.Type.navigationBars())
-       .applyToView(cord);
+       .applyToView(navbar);
 	   
 	   getWindow().setNavigationBarColor(SurfaceColors.SURFACE_2.getColor(this));
 	   
@@ -228,6 +229,7 @@ public class NekoGeneralActivity extends AppCompatActivity {
                 return true;
             case R.id.settingsMenuId:
                 startActivity(new Intent(NekoGeneralActivity.this, NekoSettingsActivity.class));    
+				settings = true;
                 return true;
             case R.id.checkUpdateId:
                 new MaterialAlertDialogBuilder(this)
@@ -258,6 +260,18 @@ public class NekoGeneralActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
     }
+	@Override
+    public void onPause() {
+        super.onPause();
+    }
+	@Override
+    public void onResume() {
+        super.onResume();
+		
+		if(settings) {
+		refresh();
+		}
+    }
 	private void showPromoDialog() {
 		 final Context context = new ContextThemeWrapper(this, getTheme());	
         View view = LayoutInflater.from(context).inflate(R.layout.edit_text_promo, null);
@@ -270,5 +284,11 @@ public class NekoGeneralActivity extends AppCompatActivity {
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                     promo = text.getText().toString();	
                 }).show();
+	}
+	private void refresh() {
+		Intent intent = new Intent(this, NekoGeneralActivity.class);  
+		settings = false;
+	    finish();
+		startActivity(intent);
 	}
 }
