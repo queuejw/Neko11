@@ -20,7 +20,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 	
-	
+	 <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_weight="0" /> 
+		
 	<com.google.android.material.textview.MaterialTextView
 	  android:id="@+id/achiev_1"
       android:layout_height="wrap_content"
@@ -32,8 +36,10 @@
 	<com.google.android.material.progressindicator.LinearProgressIndicator
     android:layout_width="match_parent"
 	android:layout_marginStart="10dp"
+	android:id="@+id/achiev_1_progress"
 	android:layout_marginEnd="10dp"
-    android:layout_height="wrap_content" />
+    android:layout_height="wrap_content" 
+	app:trackColor="?attr/colorSecondary"/>
 	
 	<com.google.android.material.textview.MaterialTextView
 	  android:id="@+id/achiev_1_sub"
@@ -43,6 +49,14 @@
 	  android:textSize="14sp"
       android:text="Collect 10 cats" />
 	  
+	 <com.google.android.material.button.MaterialButton
+        android:id="@+id/get_prize_1"
+        android:layout_width="wrap_content"
+		android:enabled="false"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/get_prize"/>  
+		
 	 <Space
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -59,8 +73,10 @@
 	<com.google.android.material.progressindicator.LinearProgressIndicator
     android:layout_width="match_parent"
 	android:layout_marginStart="10dp"
+	android:id="@+id/achiev_2_progress"
 	android:layout_marginEnd="10dp"
-    android:layout_height="wrap_content" />
+    android:layout_height="wrap_content" 
+	app:trackColor="?attr/colorSecondary"/>
 	
 	<com.google.android.material.textview.MaterialTextView
 	  android:id="@+id/achiev_2_sub"
@@ -70,6 +86,14 @@
 	  android:textSize="14sp"
       android:text="Collect 50 cats" />
 	  
+	 <com.google.android.material.button.MaterialButton
+        android:id="@+id/get_prize_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:enabled="false"
+        android:layout_gravity="center"
+        android:text="@string/get_prize"/>   
+		
 	 <Space
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -87,7 +111,9 @@
     android:layout_width="match_parent"
 	android:layout_marginStart="10dp"
 	android:layout_marginEnd="10dp"
-    android:layout_height="wrap_content" />
+	android:id="@+id/achiev_3_progress"
+    android:layout_height="wrap_content" 
+	app:trackColor="?attr/colorSecondary"/>
 	
 	<com.google.android.material.textview.MaterialTextView
 	  android:id="@+id/achiev_3_sub"
@@ -96,6 +122,14 @@
       android:layout_width="wrap_content"
 	  android:textSize="14sp"
       android:text="Collect 100 cats" />
+	  
+	 <com.google.android.material.button.MaterialButton
+        android:id="@+id/get_prize_3"
+		android:enabled="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/get_prize"/>  
 	  
 	<Space
         android:layout_width="match_parent"
@@ -114,13 +148,36 @@
     android:layout_width="match_parent"
 	android:layout_marginStart="10dp"
 	android:layout_marginEnd="10dp"
-    android:layout_height="wrap_content" />
+	android:id="@+id/achiev_4_progress"
+    android:layout_height="wrap_content" 
+	app:trackColor="?attr/colorSecondary"/>
 	
 	<com.google.android.material.textview.MaterialTextView
-	  android:id="@+id/achiev_3_sub"
+	  android:id="@+id/achiev_4_sub"
       android:layout_height="wrap_content"
       android:layout_width="wrap_content"
 	  android:layout_marginStart="5dp"
 	  android:textSize="14sp"
       android:text="Collect 1000 cats" />  
+	  
+	 <com.google.android.material.button.MaterialButton
+        android:id="@+id/get_prize_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+		android:enabled="false"
+        android:text="@string/get_prize"/>  
+		
+	<Space
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="0" />
+		
+	<com.google.android.material.textview.MaterialTextView
+	  android:id="@+id/more"
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content"
+	  android:layout_marginStart="5dp"
+	  android:textSize="14sp"
+      android:text="Soon..." />	
 </LinearLayout>
