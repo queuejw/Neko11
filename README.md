@@ -23,7 +23,7 @@ More screenshots in /screenshots folder 📷
 
  • Material You
 
- • You can use controls in app or add app to Device controls and play from there (planned in nearest build)
+ • You can use controls in app or add app to Device controls and play from there (not planned in nearest build)
 
  • .......
 
