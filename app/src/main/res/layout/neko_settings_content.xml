@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2023 Dmitry Frolkov <dimon6018t@gmail.com>
+ 
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NekoSettingsFragment"
+    android:orientation="vertical">
+
+      <com.google.android.material.materialswitch.MaterialSwitch
+        android:text="@string/dark_theme"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:layout_marginStart="5dp"
+        android:id="@+id/white_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+		
+    	<com.google.android.material.materialswitch.MaterialSwitch
+        android:text="@string/dark_theme_auto"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:layout_marginStart="5dp"
+        android:id="@+id/white_switch_auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+		
+	 <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/dark_theme_auto_sub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dark_theme_auto_sub"
+        android:textSize="12sp"
+		android:layout_marginStart="5dp"
+        app:fontFamily="@font/opensans_regular" />
+     <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_weight="0" />
+
+     <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/linear_controls_enable"
+        android:layout_width="match_parent"
+        android:layout_marginStart="5dp"
+        android:layout_height="wrap_content"
+        android:text="@string/compact_view"
+        android:textSize="18sp" />
+
+     <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_weight="0" />
+		
+	 <com.google.android.material.button.MaterialButton
+        android:id="@+id/choosetheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/choosetheme"
+        app:icon="@drawable/ic_brush" />
+				
+     <com.google.android.material.materialswitch.MaterialSwitch
+        android:text="@string/dynamic_color"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:layout_marginStart="5dp"
+        android:id="@+id/dynamic_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+		
+     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/dyncolor_sub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dynamic_color_sub"
+        android:textSize="12sp"
+		android:layout_marginStart="5dp"
+        app:fontFamily="@font/opensans_regular" />
+     <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_weight="0" />
+				
+     <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/sortgroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+		app:singleSelection="true"
+		app:selectionRequired="true">
+		<com.google.android.material.button.MaterialButton
+		 style="?attr/materialButtonOutlinedStyle"
+		 android:id="@+id/sortname"
+		 android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+		 android:text="@string/sort_name"/>
+	    <com.google.android.material.button.MaterialButton
+		 style="?attr/materialButtonOutlinedStyle"
+		 android:id="@+id/sortstandart"
+		 android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+		 android:text="@string/sort_standart"/>
+		<com.google.android.material.button.MaterialButton
+		 style="?attr/materialButtonOutlinedStyle"
+		 android:id="@+id/sortoff"
+		 android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+		 android:text="@string/sort_off"/> 
+	</com.google.android.material.button.MaterialButtonToggleGroup>
+	
+	<com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sorttitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:gravity="center"
+        android:text="@string/sort_title"
+        android:textSize="12sp"
+		android:layout_marginStart="5dp"
+        app:fontFamily="@font/opensans_regular" />
+		
+	<Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_weight="0" />
+	
+	<com.google.android.material.slider.Slider
+    android:id="@+id/max_cat_line_slider"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+	android:layout_marginStart="20dp"
+	android:layout_marginEnd="20dp"
+    android:valueFrom="2.0"
+    android:valueTo="4.0"
+    android:stepSize="1.0" />	
+	
+	<com.google.android.material.textview.MaterialTextView
+        android:id="@+id/max_cat_line_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/max_cat_line_title"
+        android:textSize="12sp"
+		android:layout_marginStart="5dp"
+        app:fontFamily="@font/opensans_regular" />
+	
+	<Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_weight="0" />
+		
+	<com.google.android.material.button.MaterialButton
+        android:id="@+id/backup_restore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/backup_restore"
+        app:icon="@drawable/ic_backup_upload" />
+		
+	<com.google.android.material.button.MaterialButton
+        android:id="@+id/backup_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/backup_save"
+        app:icon="@drawable/ic_backup_restore" />
+		
+	<Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_weight="0" />
+		
+	<com.google.android.material.button.MaterialButton
+        android:id="@+id/opensettingsbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/open_settings"
+        app:icon="@drawable/ic_open_in" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_weight="1" />
+		
+     <com.google.android.material.textview.MaterialTextView
+          android:id="@+id/ver_num"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="right" />
+			
+</LinearLayout>

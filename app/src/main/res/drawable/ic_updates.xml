@@ -1,0 +1,25 @@
+<!--
+  Copyright (C) 2023 Dmitry Frolkov <dimon6018t@gmail.com>
+ 
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48"
+    android:tint="?attr/colorControlNormal">
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M11,40Q9.8,40 8.9,39.1Q8,38.2 8,37V29.85H11V37Q11,37 11,37Q11,37 11,37H37Q37,37 37,37Q37,37 37,37V29.85H40V37Q40,38.2 39.1,39.1Q38.2,40 37,40ZM24,32.35 L14.35,22.7 16.5,20.55 22.5,26.55V8H25.5V26.55L31.5,20.55L33.65,22.7Z"/>
+</vector>
