@@ -16,10 +16,14 @@ More screenshots in /screenshots folder 📷
 
 ## Features / Why Neko11 better than original game? 🚽
  • You can customize Neko11 for yourself
-  ° 8 color themes 
-  ° Dark Mode
-  ° Material You design
-  ° Cat sorting and more other cool features
+  
+   ° 8 color themes 
+
+   ° Dark Mode
+ 
+   ° Material You design
+  
+   ° Cat sorting and more other cool features
 
  • You can use controls in app or add app to Device controls and play from there
 
