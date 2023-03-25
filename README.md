@@ -31,7 +31,7 @@ More screenshots in /screenshots folder 📷
 
  // At the moment, the application is under development and does not yet boast a large number of functions.
 
-## Downloads 📲
+## Downloads 📲u
  Download latest release: https://github.com/queuejw/Neko11/releases
  
 
