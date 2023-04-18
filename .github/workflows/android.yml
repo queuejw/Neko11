@@ -24,8 +24,8 @@ jobs:
     - name: Build Neko11 with Gradle
       run: ./gradlew assembleDebug
     - name: Upload debug APK
-        uses: actions/upload-artifact@v3
-        with:
-          name: Upload APK
-          path: app/build/outputs/apk/app-debug.apk
+      uses: actions/upload-artifact@v3
+      with:
+         name: neko11-artifact
+         path: app/build/outputs/apk/app-debug.apk
 
