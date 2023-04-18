@@ -23,10 +23,6 @@ More screenshots in /screenshots folder 📷
 
  • You can use controls in app or add app to Device controls and play from there
 
- • 
-
- // At the moment, the application is under development and does not yet boast a large number of functions.
-
 ## Downloads 📲
  Download latest release: https://github.com/queuejw/Neko11/releases
  
