@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2023 Dmitry Frolkov <dimon6018t@gmail.com>
+ 
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ -->
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="statusbar">#1c1b1f</color>
+    <color name="gray">#55555555</color>
+    <color name="black">#FF000000</color>
+    <color name="tiles">#1AFFFFFF</color>
+    <color name="gray_light2">#606060</color>
+    <color name="white_2">#EADDFF</color>
+    <color name="white_1">#FFFBFE</color>
+    <color name="white_3">#F5F5F5</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="error">#8C1D18</color>
+    <color name="food">#FF8000</color>
+    <color name="water">#0080FF</color>
+    <color name="toy">#FF4080</color>
+    <color name="foodbg">#99FF8000</color>
+    <color name="foodbg2">#33FF8000</color>
+    <color name="waterbg">#990080FF</color>
+    <color name="waterbg2">#340080FF</color>
+    <color name="waterbg3">#140080FF</color>
+    <color name="toybg">#99FF4080</color>
+    <color name="toybg2">#33FF4080</color>
+	
+	<color name="pink_theme_primary">#a43462</color>
+	<color name="pink_theme_sec">#74565f</color>
+	<color name="red_theme_primary">#b72021</color>
+	<color name="red_theme_sec">#775653</color>
+	<color name="yellow_theme_primary">#ffcf40</color>
+	<color name="yellow_theme_sec">#d5c5a0</color>
+	<color name="green_theme_primary">#237e00</color>
+	<color name="green_theme_sec">#54624c</color>
+	<color name="lime_theme_primary">#55c14a</color>
+	<color name="lime_theme_sec">#53634e</color>
+	<color name="aqua_theme_primary">#006c4a</color>
+	<color name="aqua_theme_sec">#4d6357</color>
+	<color name="blue_theme_primary">#0080ab</color>
+	<color name="blue_theme_sec">#4e616d</color>
+	<color name="pink_theme_primary_dark">#ffb0c8</color>
+	<color name="pink_theme_sec_dark">#74565f</color>
+	<color name="red_theme_primary_dark">#ffb4ac</color>
+	<color name="red_theme_sec_dark">#e7bdb8</color>
+	<color name="yellow_theme_primary_dark">#ffcf40</color>
+	<color name="yellow_theme_sec_dark">#d5c5a0</color>
+	<color name="green_theme_primary_dark">#7cdc6d</color>
+	<color name="green_theme_sec_dark">#bbcbb2</color>
+	<color name="lime_theme_primary_dark">#71de63</color>
+	<color name="lime_theme_sec_dark">#bbccb2</color>
+	<color name="aqua_theme_primary_dark">#6edba9</color>
+	<color name="aqua_theme_sec_dark">#b4ccbd</color>
+	<color name="blue_theme_primary_dark">#78d1ff</color>
+	<color name="blue_theme_sec_dark">#b5c9d7</color>	
+	
+	<color name="background_pink">#fffbff</color>
+    <color name="background_red">#fffbff</color>
+	<color name="background_yellow">#fffbff</color>
+	<color name="background_green">#fdfdf6</color>
+	<color name="background_lime">#fdfdf6</color>
+	<color name="background_aqua">#fbfdf9</color>
+	<color name="background_blue">#fbfcfe</color>
+	<color name="background_purple">#fffbff</color>
+	<color name="background_pinkd">#201a1b</color>
+    <color name="background_redd">#201a19</color>
+	<color name="background_yellowd">#1c1c17</color>
+	<color name="background_greend">#1a1c18</color>
+	<color name="background_limed">#191c1e</color>
+	<color name="background_aquad">#191c1a</color>
+	<color name="background_blued">#191c1e</color>
+	<color name="background_purpled">#1c1b1e</color>
+</resources>
