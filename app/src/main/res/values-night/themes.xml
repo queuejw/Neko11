@@ -1,0 +1,181 @@
+<!--
+  Copyright (C) 2023 Dmitry Frolkov <dimon6018t@gmail.com>
+ 
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ -->
+  <!-- Night -->
+<resources>
+    <style name="Theme.Neko11.Standart" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/purple_500</item>
+		<item name="colorOutline">#948f99</item>
+        <item name="colorOnPrimary">#3a0093</item>
+        <item name="colorSecondary">#cbc2dc</item>
+		<item name="colorSecondaryContainer">#4a4458</item>
+		<item name="colorSurface">@color/background_purpled</item>
+		<item name="colorSurfaceVariant">#49454e</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+		<item name="android:colorBackground">@color/background_purpled</item>
+        <item name="colorOnSecondary">#332d41</item>
+        <item name="android:fontFamily">@font/opensans_regular</item>
+        <item name="alertDialogStyle">@style/Theme.Material3.Dark.Dialog.Alert</item>
+		<item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+		<item name="textAppearanceLargePopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+        <item name="textAppearanceSmallPopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+        <item name="popupMenuBackground">@drawable/menu_background</item>
+    </style>
+    <style name="Theme.Neko11.Pink" parent="Theme.Material3.DayNight.NoActionBar">
+	 <item name="colorPrimary">@color/pink_theme_primary</item>
+	 <item name="colorOutline">#9e8c90</item>
+	 <item name="colorSecondary">@color/pink_theme_sec_dark</item>
+	 <item name="colorSecondaryContainer">#5a3f47</item>
+	 <item name="colorSurface">@color/background_pinkd</item>
+	 <item name="android:colorBackground">@color/background_pinkd</item>
+	 <item name="colorOnSecondary">#422931</item>
+	 <item name="colorSurfaceVariant">#514347</item>
+	 <item name="colorOnPrimary">#650033</item>
+	 <item name="android:statusBarColor">@android:color/transparent</item>
+     <item name="android:navigationBarColor">@android:color/transparent</item>
+     <item name="android:fontFamily">@font/opensans_regular</item>	
+     <item name="textAppearanceLargePopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+     <item name="textAppearanceSmallPopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+     <item name="popupMenuBackground">@drawable/menu_background</item>	 
+	</style>
+	 <style name="Theme.Neko11.Red" parent="Theme.Material3.DayNight.NoActionBar">
+	 <item name="colorPrimary">@color/red_theme_primary</item>
+	 <item name="colorOutline">#a08c8a</item>
+	 <item name="colorSecondary">@color/red_theme_sec_dark</item>
+	 <item name="colorSecondaryContainer">#5d3f3c</item>
+	 <item name="colorSurface">@color/background_redd</item>
+	 <item name="colorOnSecondary">#442927</item>
+	 <item name="colorSurfaceVariant">#534341</item>
+	 <item name="android:colorBackground">@color/background_redd</item>
+	 <item name="colorOnPrimary">#690007</item>
+	 <item name="android:statusBarColor">@android:color/transparent</item>
+     <item name="android:navigationBarColor">@android:color/transparent</item>
+     <item name="android:fontFamily">@font/opensans_regular</item>	
+     <item name="textAppearanceLargePopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+     <item name="textAppearanceSmallPopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+     <item name="popupMenuBackground">@drawable/menu_background</item>	 
+	</style>
+	 <style name="Theme.Neko11.Yellow" parent="Theme.Material3.DayNight.NoActionBar">
+	 <item name="colorPrimary">@color/yellow_theme_primary</item>
+	 <item name="colorOutline">#989080</item>
+	 <item name="colorSecondary">@color/yellow_theme_sec</item>
+	 <item name="colorSecondaryContainer">#51462a</item>
+	 <item name="colorSurface">@color/background_yellowd</item>
+	 <item name="colorSurfaceVariant">#4c4639</item>
+     <item name="android:colorBackground">@color/background_yellowd</item> 
+	 <item name="colorOnSecondary">#392f15</item>
+	 <item name="colorOnPrimary">#3d2e00</item>
+	 <item name="android:statusBarColor">@android:color/transparent</item>
+     <item name="android:navigationBarColor">@android:color/transparent</item>	
+     <item name="android:fontFamily">@font/opensans_regular</item>	
+     <item name="textAppearanceLargePopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+     <item name="textAppearanceSmallPopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+     <item name="popupMenuBackground">@drawable/menu_background</item>	 
+	</style>
+	 <style name="Theme.Neko11.Green" parent="Theme.Material3.DayNight.NoActionBar">
+	 <item name="colorPrimary">@color/green_theme_primary</item>
+	 <item name="colorOutline">#8d9387</item>
+	 <item name="colorSecondary">@color/green_theme_sec_dark</item>
+	 <item name="colorSecondaryContainer">#3d4b36</item>
+	 <item name="colorSurface">@color/background_greend</item>
+	 <item name="colorOnSecondary">#263422</item>
+	 <item name="colorSurfaceVariant">#43483f</item>
+	 <item name="android:colorBackground">@color/background_greend</item>
+	 <item name="colorOnPrimary">#003a02</item>
+	 <item name="android:statusBarColor">@android:color/transparent</item>
+     <item name="android:navigationBarColor">@android:color/transparent</item>
+     <item name="android:fontFamily">@font/opensans_regular</item>	
+     <item name="textAppearanceLargePopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+     <item name="textAppearanceSmallPopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+     <item name="popupMenuBackground">@drawable/menu_background</item>	 
+	</style>
+	 <style name="Theme.Neko11.Lime" parent="Theme.Material3.DayNight.NoActionBar">
+	 <item name="android:colorBackground">@color/background_limed</item>
+	 <item name="colorOutline">#8d9387</item>
+	 <item name="colorSurface">@color/background_limed</item>
+	 <item name="colorSecondaryContainer">#3d4b36</item>
+	 <item name="colorPrimary">@color/lime_theme_primary</item>
+	 <item name="colorSurfaceVariant">#42493f</item>
+	 <item name="colorSecondary">@color/lime_theme_sec_dark</item>
+	 <item name="colorOnSecondary">#263422</item>
+	 <item name="colorOnPrimary">#003a02</item>
+	 <item name="android:statusBarColor">@android:color/transparent</item>
+     <item name="android:navigationBarColor">@android:color/transparent</item>	
+     <item name="android:fontFamily">@font/opensans_regular</item>	
+     <item name="textAppearanceLargePopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+     <item name="textAppearanceSmallPopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+     <item name="popupMenuBackground">@drawable/menu_background</item>	 
+	</style>
+	 <style name="Theme.Neko11.Aqua" parent="Theme.Material3.DayNight.NoActionBar">
+	 <item name="colorPrimary">@color/aqua_theme_primary</item>
+	 <item name="colorOutline">#8a938c</item>
+	 <item name="colorSurface">@color/background_aquad</item>
+	 <item name="colorSecondaryContainer">#364b40</item>
+	 <item name="colorSecondary">@color/aqua_theme_sec_dark</item>
+	 <item name="android:colorBackground">@color/background_aquad</item>
+	 <item name="colorOnSecondary">#1c3530</item>
+	 <item name="colorSurfaceVariant">#404943</item>
+	 <item name="colorOnPrimary">#003731</item>
+	 <item name="android:statusBarColor">@android:color/transparent</item>
+     <item name="android:navigationBarColor">@android:color/transparent</item>	 
+     <item name="android:fontFamily">@font/opensans_regular</item>	
+     <item name="textAppearanceLargePopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+     <item name="textAppearanceSmallPopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+     <item name="popupMenuBackground">@drawable/menu_background</item>	 
+	</style>
+	 <style name="Theme.Neko11.Blue" parent="Theme.Material3.DayNight.NoActionBar">
+	 <item name="colorPrimary">@color/blue_theme_primary</item>
+	 <item name="colorOutline">#8a9297</item>
+	 <item name="android:colorBackground">@color/background_blued</item>
+	 <item name="colorSecondaryContainer">#364954</item>
+	 <item name="colorSurface">@color/background_blued</item>
+	 <item name="colorSecondary">@color/blue_theme_sec_dark</item>
+	 <item name="colorOnSecondary">#20333d</item>
+	 <item name="colorSurfaceVariant">#41484d</item>
+	 <item name="colorOnPrimary">#003549</item>
+	 <item name="android:statusBarColor">@android:color/transparent</item>
+     <item name="android:navigationBarColor">@android:color/transparent</item>
+     <item name="android:fontFamily">@font/opensans_regular</item>	 
+     <item name="textAppearanceLargePopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+     <item name="textAppearanceSmallPopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+     <item name="popupMenuBackground">@drawable/menu_background</item>	 
+	</style>
+	
+    <style name="Theme.Neko11.AppBarOverlay" parent="Theme.Material3.DayNight.NoActionBar" />
+
+    <style name="Theme.Neko11.PopupOverlay" parent="ThemeOverlay.Material3.Dark" />
+	
+	<style name="Theme.Neko11.Dynamic" parent="ThemeOverlay.Material3.DynamicColors.DayNight">
+        <item name="colorPrimary">@android:color/system_accent1_200</item>
+	    <item name="colorOutline">@android:color/system_neutral2_400</item>	
+        <item name="colorOnPrimary">@android:color/system_accent1_800</item>
+        <item name="colorSecondary">@android:color/system_accent2_200</item>
+        <item name="colorOnSecondary">@android:color/system_accent2_800</item>
+		<item name="colorSurface">@android:color/system_neutral1_900</item>
+		<item name="android:colorBackground">@android:color/system_neutral1_900</item>
+        <item name="alertDialogStyle">@style/Theme.Material3.Dark.Dialog.Alert</item>
+		<item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:fontFamily">@font/opensans_regular</item>
+	    <item name="textAppearanceLargePopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+        <item name="textAppearanceSmallPopupMenu">@style/TextAppearance.Neko11.BodyLarge</item>
+        <item name="popupMenuBackground">@drawable/menu_background</item>
+    </style>
+	<style name="TextAppearance.Neko11.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/opensans_regular</item>
+        <item name="android:fontFamily">@font/opensans_regular</item>
+</style>	
+</resources>

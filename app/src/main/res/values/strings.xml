@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2020 The Android Open Source Project
+  Copyright (C) 2023 Dmitry Frolkov <dimon6018t@gmail.com>
+ 
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ -->
+<resources>
+    <string name="app_name">Neko 11</string>
+    <string name="app_name_neko">Neko</string>
+    <string name="dynamic_color">Dynamic colors</string>
+    <string name="dynamic_color_sub">Automatically select an accent color based on the color of your wallpaper. Work only on Android 12+</string>
+	<string name="save_changes">Changes successfully saved</string>
+	<string name="choosetheme">Choose accent color</string>
+	<string name="dark_theme_auto">Auto dark theme</string>
+	<string name="dark_theme_auto_sub">If dark theme is enabled on your device, the app will adapt automatically</string>
+    <string name="back">Back</string>
+    <string name="notification_name">Neko 11</string>
+    <string name="promo">Promo code</string>
+    <string name="notification_channel_name">New cats</string>
+    <string name="default_tile_name">\????</string>
+    <string name="notification_title">A cat is here.</string>
+    <string name="notification_title_return">A cat has returned.</string>
+    <string name="default_cat_name">Cat #%s</string>
+    <string name="directory_name">Cats</string>
+    <string name="cat_controls">Cat Controls</string>
+    <string name="collection">Collection</string>
+    <string name="control_toy_title">Toy</string>
+    <string name="control_toy_subtitle">Tap to use</string>
+    <string name="control_toy_status">Cat attracted!</string>
+    <string name="control_water_title">Water bubbler</string>
+    <string name="control_water_subtitle">Click to fill</string>
+    <string name="control_food_title">Food bowl</string>
+    <string name="control_food_subtitle">Tap to refill</string>
+    <string name="control_food_status_full">Full</string>
+    <string name="control_food_status_empty">Empty</string>
+    <string name="settings">Settings</string>
+    <string name="cat_counter">You collect %d cat\'s!</string>
+    <string name="check_updates">Check for update\'s</string>
+    <string name="about_neko">About Neko</string>
+    <string name="help">Help</string>
+	<string name="achievements">Achievements</string>
+    <string name="help_message">Welcome to Neko! For start play click «Cat Controls» on bottom bar and fill all tiles. Then close app. If cat arrive, I send you notification. After you cat send cat your friends, or continue collect cats. Do not forget check tiles, because after arrive cat\'s eat your food and drink water. Good luck!  </string>
+    <string name="update_message">You can download update from GitHub.</string>
+    <string name="themechanged">Theme successfully changed, but you need to restart the application for the changes to take effect.</string>
+    <string name="later">Later</string>
+    <string name="restart">Restart</string>
+    <string name="success">Success</string>
+    <string name="water_state_ml">%.0f mL</string>
+    <string name="dark_theme">Enable dark theme</string>
+    <string name="compact_view">Use compact view in Cat Controls</string>
+    <string name="accent_choose">Choose accent color</string>
+    <string name="open_settings">Open settings in system</string>
+    <string name="meow_meow">Meow Meow.</string>
+    <string name="permission_denied">I can\'t save picture, because permission denied. Please try again.</string>
+    <string name="picture_saved_successful">Picture «%s» saved in /Pictures/Cats/. You can see it in gallery app.</string>
+    <string name="about_text">Neko11 is a game about cats, which is developed by a small team in their spare time. We hope you enjoyed this app.</string>
+	<string name="about_dev1">dimon6018 (queuejw) - probably did the biggest job</string>
+	<string name="about_dev2">AlertKaput - help finding bugs</string>
+	<string name="about_dev3">MG30 - cool ideas, help finding bugs, and test first alpha versions</string>
+	<string name="about_dev4">ZaCCCP- help finding bugs, аnd test dynamic colors</string>
+	<string name="about_dev5">DarkFox - testing first versions and first collect 100 cats</string>
+	<string name="about_you">And you &#10084;</string>
+	<string name="rename_cat_title">Rename this cat!</string>
+    <string name="input_sub">Type name here</string>
+	<string name="openurl">Open GitHub</string>
+    <string name="update_toast">Download update, if it available</string>
+    <string name="return_to_collection">Return to collection</string>
+    <string name="email">Send me funny SMS: dimon6018t@gmail.com</string>
+	<string name="get_prize">Get prize</string>
+	<string name="welcome_dialog">Welcome to Neko11.</string>
+	<string name="save_title">Save</string>
+	<string name="del_title">Delete</string>
+	<string name="rename_title">Rename</string>
+	<string name="cat_status_string">Cat status: %s</string>
+	<string name="input_sub_promo">Type promo</string>
+	<string name="activation_tip">Try rotate this 3 times =)</string>	
+	<string name="github">Neko11 in GitHub (Source code)</string>
+	<string name="gift_not_enabled">Retrieved</string>
+	<string name="delete_cat">Delete</string>
+	<string name="delete_cat_message">Do you really want delete this cat?</string>
+	<string name="delete_cat_title">Delete cat</string>
+	<string name="max_cat_line_title">Responsible for the number of cats in one line</string>
+	<string name="cat_age">Cat age: %d years</string>
+	<string name="themeChanged">Restart Neko11 to apply the theme</string>
+	<string name="name_changed">Cat name changed!</string>
+	<string name="new_code_generated">Congratulations! You have successfully completed this achievement. As a reward, keep this code: <b><i>%s</i></b>. You can activate it in the menu by selecting "Promo code"</string>
+	<string name="get_old_code">You have already received an award. If you forgot the code, here you go: <b><i>%s</i></b> </string>
+	<string name="wrong_code">Wrong code, try again</string>
+	<string name="copy">Copy</string>
+	<string name="coins"><b>You have: %d NCoins</b></string>
+	<string name="code_is_true">Code accepted. Award received.</string>	
+	<string name="code_is_false">Code accepted. Award received.</string>
+	<string name="controls_first">Open «Cat Controls» first</string>	
+	<string name="controls_first_sub">Allows you to see "Cat Controls" as soon as you open Neko11. Can speed up the launch of the application if you have a lot of cats.</string>	
+	<string name="cat_size_title">Sets the size of the cat icon.</string>
+	<string name="open_controls_tip">Open Cat Controls.</string>
+	<string name="fill_tiles_tip">Fill all tiles.</string>
+	<string name="welcome_dialog_part2">Here are your first cats :3 By clicking on the cat you can rename it, delete, save or zoom in on it.</string>
+	<string name="welcome_dialog_part3">To fill a tile, click on it. You can then close the app. You will receive a notification when the cat comes to you. That\'s basically it. Good luck =)</string>
+	
+	<string name="backup_restore">Restore my cat\'s</string>
+	<string name="backup_save">Save my cat\'s</string>
+	<string name="backup_title">Recovery</string>
+	<string name="restore_failed">Упс. Что-то пошло не так. Востановить ваших котов не получилось. Сожалею =(</string>
+	<string name="restore_done">Востановление ваших котов успешно завершено.</string>
+    <string name="backup_done">Востановление успешно завершено. Файл Neko11mPrefsBackup.xml сохранен в памяти устройства.</string>
+	<string name="backup_failed">Упс. Что-то пошло не так. Сохранить ваших котов не получилось. Возможно выданы не все разрешения для приложения.</string>
+	
+	<string name="sort_standart">By color</string>
+	<string name="sort_name">By name</string>
+	<string name="sort_title">Cat sorting</string>
+	<string name="sort_off">Off</string>
+	
+	<string name="pink">Pink</string>
+	<string name="red">Red</string>
+	<string name="orange">Yellow</string>
+	<string name="green">Green</string>
+	<string name="lime">Lime</string>
+	<string name="aqua">Turquoise</string>
+	<string name="blue">Blue</string>
+	<string name="purple">Purple</string>
+	
+	<string name="a1">I love cat\'s!</string>
+	<string name="a2">I\'m a pro</string>
+	<string name="a3">Lord of cat\'s</string>
+	<string name="a4">Impossible is possible!</string>
+	<string name="a1sub">Collect 10 cat\'s</string>
+	<string name="a2sub">Collect 50 cat\'s</string>
+	<string name="a3sub">Collect 100 cat\'s</string>
+	<string name="a4sub">Collect 1000 cat\'s</string>
+	
+	<string name="get_neko_info">Details</string>
+	<string name="neko_info_ver_name">Neko11 version: %s</string>
+	<string name="neko_info_ver_code">Version code: %d</string>
+	<string name="neko_info_android_ver">Android version: %d</string>
+	
+    <integer-array name="food_intervals">
+        <item>0</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>120</item>
+    </integer-array>
+    <integer-array name="food_new_cat_prob">
+        <item>0</item>
+        <item>5</item>
+        <item>35</item>
+        <item>65</item>
+        <item>90</item>
+    </integer-array>
+    <string-array name="cat_messages">
+        <item>😸</item>
+        <item>😹</item>
+        <item>😺</item>
+        <item>😻</item>
+        <item>😼</item>
+        <item>😽</item>
+        <item>😾</item>
+        <item>😿</item>
+        <item>🙀</item>
+        <item>💩</item>
+        <item>🐁</item>
+    </string-array>
+    <string-array name="rare_cat_messages">
+        <item>🍩</item>
+        <item>🍭</item>
+        <item>🍫</item>
+        <item>🍨</item>
+        <item>🔔</item>
+        <item>🐝</item>
+        <item>🍪</item>
+        <item>🥧</item>
+    </string-array>
+	<string-array name="cat_status">
+        <item>Common</item>
+        <item>Bully</item>
+        <item>Darling</item>
+        <item>Glutton</item>
+		<item>Playful</item>
+		<item>Lazy</item>
+		<item>Wild</item>
+    </string-array>
+	<string-array name="toy_messages">
+        <item>Meow Meow Meow.</item>
+        <item>*Purring*</item>
+        <item>Meeeeoooooow.</item>
+		<item>Meow =(</item>
+    </string-array>
+</resources>
