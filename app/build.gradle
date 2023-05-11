@@ -15,8 +15,8 @@ android {
         applicationId "ru.dimon6018.neko11"
         minSdk 24
         targetSdk 33
-        versionCode 2
-        versionName "2.1 "
+        versionCode 12
+        versionName "infinity"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
