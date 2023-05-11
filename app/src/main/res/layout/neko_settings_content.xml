@@ -28,11 +28,11 @@
 
         android:id="@+id/card_toy"
 
-        android:layout_width="360dp"
+        android:layout_width="wrap_content"
 
 	    	
 					android:layout_weight="1"        
-			android:layout_height="140dp"
+			android:layout_height="120dp"
 
         android:layout_gravity="center"
 
@@ -69,11 +69,11 @@
 
                 android:layout_height="wrap_content"
 
-                android:layout_marginStart="40dp"
+                android:layout_marginStart="20dp"
 
                 android:layout_marginTop="40dp"
 
-                android:text="Want to try the new content that will be added in the next update? Click here to activate it."
+                android:text="Want to try the new content that will be added in the next update? \nClick here to activate it."
 
                 app:fontFamily="@font/opensans_regular" />
 
