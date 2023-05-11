@@ -26,9 +26,9 @@
     android:orientation="vertical">
 <com.google.android.material.card.MaterialCardView
 
-        android:id="@+id/card_toy"
+        android:id="@+id/card_tip"
 
-        android:layout_width="wrap_content"
+        android:layout_width="240dp"
 
 	    	
 					android:layout_weight="1"        
