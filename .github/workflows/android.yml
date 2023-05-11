@@ -2,9 +2,9 @@ name: Android CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "neko11-stable", "neko11-dev" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "neko11-stable", "neko11-dev" ]
 
 jobs:
   build:
