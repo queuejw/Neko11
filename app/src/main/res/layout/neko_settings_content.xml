@@ -28,15 +28,16 @@
 
         android:id="@+id/card_toy"
 
-        android:layout_width="180dp"
+        android:layout_width="360dp"
 
-	    	android:layout_weight="1"        android:layout_height="110dp"
+	    	
+					android:layout_weight="1"        
+			android:layout_height="140dp"
 
         android:layout_gravity="center"
 
-        app:cardBackgroundColor="@color/tiles"
 
-        app:cardCornerRadius="16dp">
+        app:cardCornerRadius="18dp">
 
         <RelativeLayout
 
