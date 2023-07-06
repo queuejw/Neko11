@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2020 The Android Open Source Project
+  Copyright (C) 2023 Dmitry Frolkov <dimon6018t@gmail.com>
+ 
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ -->
+<resources>
+    <string name="app_name">Neko 11</string>
+    <string name="app_name_neko">Neko</string>
+    <string name="dynamic_color">Динамичные цвета</string>
+    <string name="dynamic_color_sub">Автоматический выбор цвета акцента в зависимости от цвета ваших обоев. Работает только на Android 12+</string>
+	<string name="choosetheme">Выбрать цвет акцента</string>
+	<string name="dark_theme_auto">Автоматическая темная тема</string>
+	<string name="dark_theme_auto_sub">Если на вашем устройстве включена темная тема, то приложение будет адаптироваться автоматически</string>
+    <string name="back">Назад</string>
+	<string name="save_changes">Изменения успешно сохранены</string>
+    <string name="promo">Промокоды</string>
+    <string name="notification_name">Neko 11</string>
+    <string name="notification_channel_name">Новые коты</string>
+    <string name="default_tile_name">\????</string>
+    <string name="notification_title">К вам пришёл новый котик!</string>
+    <string name="notification_title_return">Котик вернулся.</string>
+    <string name="default_cat_name">Кот #%s</string>
+    <string name="directory_name">Cats</string>
+    <string name="cat_controls">Управление</string>
+    <string name="collection">Коллекция</string>
+    <string name="control_toy_title">Игрушка</string>
+    <string name="control_toy_subtitle">Нажми чтобы активировать</string>
+    <string name="control_toy_status">Кот привлечён!</string>
+    <string name="control_water_title">Вода</string>
+    <string name="control_water_subtitle">Нажми чтобы заполнить</string>
+    <string name="control_food_title">Еда</string>
+    <string name="control_food_subtitle">Нажми чтобы наполнить</string>
+    <string name="control_food_status_full">Полная</string>
+    <string name="control_food_status_empty">Пустая</string>
+    <string name="settings">Настройки</string>
+    <string name="cat_counter">Ты собрал %d кота(ов)!</string>
+    <string name="check_updates">Проверить обновления</string>
+    <string name="about_neko">Про Neko11</string>
+    <string name="help">Помощь</string>
+    <string name="help_message">Добро пожаловать в Neko! Чтобы начать играть, перейдите во вкладку «Управление» на нижней полоске и заполните все плитки, затем просто закройте приложение. Когда к вам прибудет кот, вам будет отправлено уведомление. После этого Вы сможете поделиться изображением кота с друзьями или продолжить коллекционировать. Но не забывайте заглядывать во вкладку «Управление». Когда прибывает кот, то он съедает еду и выпивает воду. ВАЖНО! Если забудете положить в миску еду, не будете привлекать котов игрушкой, то новые коты не придут!</string>
+    <string name="update_message">Загрузите новый релиз из GitHub.</string>
+    <string name="themechanged">Тема успешно изменена, но чтобы изменения применились нужно перезапустить приложение.</string>
+    <string name="later">Чуть позже</string>
+    <string name="restart">Перезапустить</string>
+    <string name="success">Успешно!</string>
+    <string name="water_state_ml">%.0f Мл</string>
+    <string name="dark_theme">Включить темную тему</string>
+    <string name="compact_view">Компактный вид в меню Управления</string>
+    <string name="accent_choose">Выбрать цвет акцента</string>
+    <string name="open_settings">Открыть настройки в системе</string>
+    <string name="meow_meow">Мяу мяу.</string>
+    <string name="permission_denied">Не получилось сохранить картинку, т.к. у меня нет на это разрешения. Попробуйте еще раз, или откройте настройки и выдайте разрешение вручную.</string>
+    <string name="picture_saved_successful">Картинка «%s» сохранена в /Pictures/Cats/. Вы можете посмотреть её в приложении галереи.</string>
+    <string name="about_text">Neko11 - игра про котов, которая разрабатывается небольшой командой в свободное время. Мы надеемся, что вам понравилось это приложение.</string>
+	<string name="about_dev1">dimon6018 (queuejw) - возможно, делал самую большую работу</string>
+	<string name="about_dev2">AlertKaput - помощь в поиске багов, помощь в разработке</string>
+	<string name="about_dev3">MG30 - крутые идеи, помощь в поиске багов, а также тест ранних версий</string>
+	<string name="about_dev4">ZaCCCP- помощь в поиске багов, а также тест динамичных цветов</string>
+    <string name="about_dev5">DarkFox - тестирование первых версий, первый собрал 100 котов</string>
+	<string name="rename_cat_title">Переименование</string>
+    <string name="input_sub">Введите имя</string>
+	<string name="openurl">Открыть GitHub</string>
+    <string name="update_toast">Скачайте обновление, если оно доступно</string>
+    <string name="return_to_collection">Вернуться к коллекции</string>
+    <string name="email">Отправь мне смешную SMS: dimon6018t@gmail.com</string>
+	<string name="get_prize">Получить</string>
+	<string name="welcome_dialog">Добро пожаловать в Neko11. Давай я научу тебя основам игры. Для начала забери подарок (бесплатно).</string>
+	<string name="welcome_dialog_part2">Вот твои первые котики :3 Нажав на кота ты можешь переименовать его, удалить, сохранить или приблизить его.</string>
+    <string name="achievements">Достижения</string>
+	<string name="save_title">Сохранить</string>
+	<string name="del_title">Удалить</string>
+	<string name="rename_title">Переименовать</string>
+	<string name="cat_status_string">Статус кота: %s</string>
+	<string name="input_sub_promo">Введите промокод</string>
+	<string name="about_you">И тебе &#10084;</string>
+	<string name="activation_tip">Попробуйте прокрутить 3 раза =)</string>
+	<string name="github">Neko11 в GitHub (Исходники)</string>	
+	<string name="gift_not_enabled">Получено</string>
+	<string name="delete_cat">Удалить</string>
+	<string name="delete_cat_message">Вы правда хотите удалить этого кота?</string>
+	<string name="delete_cat_title">Удаление кота</string>	
+	<string name="max_cat_line_title">Отвечает за количество котов в одной линии</string>
+	<string name="cat_age">Возраст кота: %d лет</string>
+	<string name="themeChanged">Перезапустите Neko11 для применения темы.</string>	
+	<string name="name_changed">Имя кота изменено!</string>
+	<string name="new_code_generated">Поздравляем! Вы успешно завершили это достижение. В качестве награды сохраните этот код: <b>%s</b>. Вы можете активировать его в меню, выбрав пункт "Промокод"</string>
+	<string name="get_old_code">Вы уже получили награду. Если забыли код, то держите: <b><i>%s</i></b> </string>
+	<string name="wrong_code">Неверный код, попробуй ещё раз</string>
+	<string name="copy">Скопировать</string>
+	<string name="coins"><b>У вас есть: %d NCoins</b></string>
+	<string name="code_is_true">Код принят. Награда получена.</string>
+	<string name="code_is_false">Этот код уже был использован.</string>	
+	<string name="controls_first">Открывать «Управление» первым</string>	
+	<string name="controls_first_sub">Позволит вам видеть «Управление» сразу после открытия Neko11. Может ускорить запуск приложения, если у вас очень много котов.</string>
+    <string name="cat_size_title">Устанавливает размер иконки кота.</string>
+    <string name="open_controls_tip">Откройте управление.</string>
+    <string name="fill_tiles_tip">Заполните все плитки.</string>
+    <string name="welcome_dialog_part3">Чтобы заполнить плитку нажмите на неё. После этого приложение можно закрывать. Вы получите уведомление, когда кот прибежит к вам. И это впринципе всё. Удачи =)</string>
+
+    <string name="backup_restore">Восстановить мои данные</string>
+	<string name="backup_save">Сохранить мои данные </string>
+	<string name="backup_title">Восстановление</string>
+    <string name="backup_wipe_cats">Удалить мои данные</string>
+	<string name="backup_done">Восстановление успешно завершено. Файл Neko11mBackup.xml сохранен в памяти устройства.</string>
+	<string name="restore_failed">Упс. Что-то пошло не так. Восстановить ваши данные не получилось. Сожалею =(</string>
+	<string name="restore_done">Восстановление ваших данных успешно завершено.</string>
+	<string name="backup_failed">Упс. Что-то пошло не так. Сохранить ваши данные не получилось. Возможно, выданы не все разрешения для приложения.</string>
+	
+	<string name="sort_standart">По цвету</string>
+	<string name="sort_name">По имени</string>
+	<string name="sort_title">Сортировка котов</string>
+	<string name="sort_off">Выкл.</string>
+	
+   	<string name="pink">Розовый</string>
+	<string name="red">Красный</string>
+	<string name="orange">Желтый</string>
+	<string name="green">Зелёный</string>
+	<string name="lime">Лаймовый</string>
+	<string name="aqua">Бирюзовый</string>
+	<string name="blue">Синий</string>
+	<string name="purple">Пурпурный</string>
+	
+	<string name="a1">Любитель котов</string>
+	<string name="a2">Я профи</string>
+	<string name="a3">Повелитель котов</string>
+	<string name="a4">Невозможное возможно!</string>
+	<string name="a1sub">Собери 10 котов</string>
+	<string name="a2sub">Собери 50 котов</string>
+	<string name="a3sub">Собери 100 котов</string>
+	<string name="a4sub">Собери 1000 котов</string>
+		
+	<string name="details">Подробности</string>
+	<string name="neko_info_ver_name">Версия Neko11: %s</string>
+	<string name="neko_info_ver_code">Код версии: %d</string>
+	<string name="neko_info_android_ver">Версия Android: %d</string>
+
+    <string name="unsupported_android">Ваша версия Android не имеет некоторых важных функций для работы приложения. Вы можете играть дальше, но часть функционала будет недоступна или сломана.</string>
+    <string name="next">Далее</string>
+    <string name="backup_action_choose">Что вы хотите сделать?</string>
+    <string name="select">Выбрать</string>
+    <string name="select_backup_file">Выберите файл с сохранением</string>
+    <string name="saving_cats">Сохраняем ваших котов..</string>
+    <string name="moment">Подождите.</string>
+    <string name="working">Идёт выполнение задачи..</string>
+    <string name="force_get_perms">Принудительно получить разрешения</string>
+    <string name="task_success">Операция завершена.</string>
+    <string name="welcome_dialog_final">Приятной игры!</string>
+    <string name="wash_cat_title">Искупать</string>
+    <string name="caress_cat_title">Ласкать</string>
+    <string name="touch_cat_title">Потрогать</string>
+    <string name="aosp">Наша игра основана на другой игре из Android 11 и я хочу выразить благодарность её оригинальным разработчикам, они дали мне вдохновение доработать игру и сделать её еще комфортнее. Спасибо! Ознакомьтесь здесь: https://source.android.com/</string>
+    <string name="about_dev6">SuperRofler - помощь в поиске багов, выявление критических ошибок, моральная поддержка</string>
+
+    <integer-array name="food_intervals">
+        <item>0</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>120</item>
+    </integer-array>
+    <integer-array name="food_new_cat_prob">
+        <item>0</item>
+        <item>5</item>
+        <item>35</item>
+        <item>65</item>
+        <item>90</item>
+    </integer-array>
+    <string-array name="cat_messages">
+        <item>😸</item>
+        <item>😹</item>
+        <item>😺</item>
+        <item>😻</item>
+        <item>😼</item>
+        <item>😽</item>
+        <item>😾</item>
+        <item>😿</item>
+        <item>🙀</item>
+        <item>💩</item>
+        <item>🐁</item>
+    </string-array>
+    <string-array name="rare_cat_messages">
+        <item>🍩</item>
+        <item>🍭</item>
+        <item>🍫</item>
+        <item>🍨</item>
+        <item>🔔</item>
+        <item>🐝</item>
+        <item>🍪</item>
+        <item>🥧</item>
+    </string-array>
+	<string-array name="cat_status">
+        <item>Обычный</item>
+        <item>Задира</item>
+        <item>Любимчик</item>
+        <item>Обжора</item>
+		<item>Игручий</item>
+		<item>Лентяй</item>
+		<item>Дикий</item>
+        <item>Забавный</item>
+    </string-array>
+	<string-array name="toy_messages">
+        <item>Мяу Мяу Мяу.</item>
+        <item>*Мурлыкает*.</item>
+        <item>Мяяяяяяяяууууу.</item>
+		<item>Мяу =(</item>
+    </string-array>
+</resources>
