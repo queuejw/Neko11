@@ -157,6 +157,39 @@
 				android:layout_weight="1" />
 
 			<com.google.android.material.card.MaterialCardView
+				style="?attr/materialCardViewFilledStyle"
+				android:id="@+id/skins_sheet"
+				android:layout_width="74dp"
+				android:layout_height="74dp"
+				app:cardCornerRadius="16dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:orientation="vertical">
+
+					<ImageView
+						android:layout_width="match_parent"
+						android:layout_height="53dp"
+						android:src="@drawable/ic_skins" />
+
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/title_skins"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center"
+						android:text="Skins"
+						android:textSize="13sp" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+			<Space
+				android:layout_width="80dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1" />
+
+			<com.google.android.material.card.MaterialCardView
 				android:id="@+id/wash_cat_sheet"
 				style="?attr/materialCardViewFilledStyle"
 				android:layout_width="74dp"

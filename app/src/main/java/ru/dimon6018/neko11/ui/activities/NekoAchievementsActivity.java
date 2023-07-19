@@ -7,15 +7,19 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.WindowCompat;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.textview.MaterialTextView;
@@ -113,6 +117,9 @@ public class NekoAchievementsActivity extends AppCompatActivity implements PrefS
 		gift3 = findViewById(R.id.get_prize_3);
 		gift4 = findViewById(R.id.get_prize_4);
 
+		MaterialCardView mystery = findViewById(R.id.mystery_box_card);
+		MaterialCardView cat = findViewById(R.id.random_cat_card);
+
 		boolean gift1_enabled = nekoprefs.getBoolean("gift1_enabled", true);
 		boolean gift2_enabled = nekoprefs.getBoolean("gift2_enabled", true);
 		boolean gift3_enabled = nekoprefs.getBoolean("gift3_enabled", true);
@@ -143,8 +150,64 @@ public class NekoAchievementsActivity extends AppCompatActivity implements PrefS
 			}
 		}
 		checkGift();
+
+		mystery.setOnClickListener(view -> {
+			new MaterialAlertDialogBuilder(this)
+					.setTitle(R.string.achievements)
+					.setMessage("Открывая этот загадочный кейс вы можете получить что-то из этих вещей: Случайный кот, NCoins, Шляпы.")
+					.setIcon(R.drawable.key)
+					.setNegativeButton(android.R.string.cancel, null
+					).setPositiveButton(R.string.open, (dialog, id) -> OpenMysteryBox()
+					).show();
+		});
+		cat.setOnClickListener(view -> {
+			new MaterialAlertDialogBuilder(this)
+					.setTitle(R.string.achievements)
+					.setMessage("Вы точно хотите купить нового котика?")
+					.setIcon(R.drawable.key)
+					.setNegativeButton(android.R.string.cancel, null
+					).setPositiveButton(android.R.string.yes, (dialog, id) -> GetNewCat()
+					).show();
+		});
 	}
 
+	private void GetNewCat() {
+		String mes;
+		Drawable ico;
+		if (mPrefs.getNCoins() < 150) {
+			mes = "Не хватает NCoins. Поймайте котов, чтобы получать их";
+			 ico = AppCompatResources.getDrawable(this, R.drawable.key);
+		} else {
+			Cat cat = Cat.create(this);
+			mPrefs.addCat(cat);
+			mPrefs.removeNCoins(150);
+			ico = new BitmapDrawable(getResources(), cat.createBitmap(24,24));
+			mes = "Новый котик теперь живёт у вас. Проверьте его в коллекции";
+		}
+		new MaterialAlertDialogBuilder(this)
+				.setTitle(R.string.achievements)
+				.setMessage(mes)
+				.setIcon(ico)
+				.setNegativeButton(android.R.string.ok, null
+				).show();
+	}
+	private void OpenMysteryBox() {
+		if (mPrefs.getNCoins() < 300) {
+			new MaterialAlertDialogBuilder(this)
+					.setTitle(R.string.achievements)
+					.setMessage("Не хватает NCoins. Поймайте котов, чтобы получать их")
+					.setIcon(R.drawable.key)
+					.setNegativeButton(android.R.string.ok, null
+					).show();
+		} else {
+			new MaterialAlertDialogBuilder(this)
+					.setTitle(R.string.achievements)
+					.setMessage("Оплата прошла успешно, но эта функция еще не готова.")
+					.setIcon(R.drawable.key)
+					.setNegativeButton(android.R.string.ok, null
+					).show();
+		}
+	}
 	private void checkGift() {
 		boolean gift1_enabled = nekoprefs.getBoolean("gift1_enabled", true);
 		boolean gift2_enabled = nekoprefs.getBoolean("gift2_enabled", true);

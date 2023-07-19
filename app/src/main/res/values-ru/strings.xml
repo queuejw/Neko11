@@ -162,6 +162,9 @@
     <string name="touch_cat_title">Потрогать</string>
     <string name="aosp">Наша игра основана на другой игре из Android 11 и я хочу выразить благодарность её оригинальным разработчикам, они дали мне вдохновение доработать игру и сделать её еще комфортнее. Спасибо! Ознакомьтесь здесь: https://source.android.com/</string>
     <string name="about_dev6">SuperRofler - помощь в поиске багов, выявление критических ошибок, моральная поддержка</string>
+    <string name="open">Открыть</string>
+    <string name="mystery_box">Загадочный ящик</string>
+    <string name="random_cat">Случайный кот</string>
 
     <integer-array name="food_intervals">
         <item>0</item>

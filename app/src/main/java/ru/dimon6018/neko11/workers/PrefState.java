@@ -33,6 +33,7 @@ public class PrefState implements OnSharedPreferenceChangeListener {
 	private static final String CATS_LIMIT = "limit";
 	public static final String ICON_SIZE = "size";
 	private static final String NCOINS = "nCoins";
+    public static final String HAT = "hatValue";
     public static final String TOY_STATE = "toy";
     public static final String WATER_STATE = "water";
     public static final String CAT_KEY_PREFIX = "cat:";

@@ -20,6 +20,7 @@ package ru.dimon6018.neko11.ui.fragments;
 import static android.Manifest.permission.MANAGE_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static ru.dimon6018.neko11.ui.activities.NekoSettingsActivity.SETTINGS;
+import static ru.dimon6018.neko11.workers.Cat.CatParts.setHatDrawable;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -47,7 +48,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
@@ -161,11 +161,6 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
      bottomsheet.setDismissWithAnimation(true);
 	 View bottomSheetInternal = bottomsheet.findViewById(com.google.android.material.R.id.design_bottom_sheet);
      BottomSheetBehavior.from(bottomSheetInternal).setPeekHeight(context.getResources().getDimensionPixelSize(R.dimen.bottomsheet));
-     MaterialCardView save = bottomSheetInternal.findViewById(R.id.save_sheet);
-     MaterialCardView del = bottomSheetInternal.findViewById(R.id.delete_sheet);
-     MaterialCardView wash = bottomSheetInternal.findViewById(R.id.wash_cat_sheet);
-     MaterialCardView caress = bottomSheetInternal.findViewById(R.id.caress_cat_sheet);
-     MaterialCardView touch = bottomSheetInternal.findViewById(R.id.touch_cat_sheet);
 	 TextInputLayout textLayout = bottomSheetInternal.findViewById(R.id.catNameField);
 	 EditText catEditor = bottomSheetInternal.findViewById(R.id.catEditName);
 	 ImageView catico = bottomSheetInternal.findViewById(R.id.cat_icon);
@@ -177,12 +172,12 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
         }
      MaterialTextView status = bottomSheetInternal.findViewById(R.id.status_title);
 	 MaterialTextView age = bottomSheetInternal.findViewById(R.id.cat_age);
-	 
+
 	 age.setText(getString(R.string.cat_age, cat.getAge()));
      status.setText(getString(R.string.cat_status_string, cat.getStatus()));
      catEditor.setText(cat.getName());
-	 
-     del.setOnClickListener(v -> {
+
+     bottomSheetInternal.findViewById(R.id.delete_sheet).setOnClickListener(v -> {
 		bottomsheet.dismiss(); 
 	    showCatRemoveDialog(cat, context);
 	});
@@ -195,20 +190,22 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
      catico.setOnClickListener(v -> {
 		 bottomsheet.dismiss();
 	     showCatFull(cat);	
-	});	
-	 save.setOnClickListener(v -> {
+	});
+        bottomSheetInternal.findViewById(R.id.save_sheet).setOnClickListener(v -> {
 	  bottomsheet.dismiss();
          checkPerms(cat, context);
 	 });
-     wash.setOnClickListener(view -> {
+    bottomSheetInternal.findViewById(R.id.wash_cat_sheet).setOnClickListener(view -> {
          NekoGeneralActivity.showSnackBar("вы искупали кота", 3, bottomSheetInternal);
      });
-     caress.setOnClickListener(view -> {
+    bottomSheetInternal.findViewById(R.id.caress_cat_sheet).setOnClickListener(view -> {
          NekoGeneralActivity.showSnackBar("вы погладили кота", 3, bottomSheetInternal);
      });
-     touch.setOnClickListener(view -> {
+   bottomSheetInternal.findViewById(R.id.touch_cat_sheet).setOnClickListener(view -> {
          NekoGeneralActivity.showSnackBar("вы потрогали кота", 3, bottomSheetInternal);
      });
+   bottomSheetInternal.findViewById(R.id.skins_sheet).setOnClickListener(view -> {
+   });
 	 bottomsheet.show();
     }
     private void checkPerms(Cat cat, Context context) {

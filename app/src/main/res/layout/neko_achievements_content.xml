@@ -239,8 +239,9 @@
 			android:orientation="horizontal"
 			app:layout_constraintGuide_begin="769dp" />
 
-		<androidx.cardview.widget.CardView
+		<com.google.android.material.card.MaterialCardView
 			android:id="@+id/random_cat_card"
+			style="@style/Widget.Material3.CardView.Elevated"
 			android:layout_width="120dp"
 			android:layout_height="140dp"
 			app:cardCornerRadius="16dp"
@@ -263,7 +264,8 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:gravity="center_horizontal"
-					android:text="Random cat!" />
+					android:text="@string/random_cat"
+					android:textSize="13sp" />
 
 				<TextView
 					android:id="@+id/textView5"
@@ -272,10 +274,11 @@
 					android:gravity="center_horizontal"
 					android:text="150 NCoins" />
 			</LinearLayout>
-		</androidx.cardview.widget.CardView>
+		</com.google.android.material.card.MaterialCardView>
 
-		<androidx.cardview.widget.CardView
+		<com.google.android.material.card.MaterialCardView
 			android:id="@+id/mystery_box_card"
+			style="@style/Widget.Material3.CardView.Elevated"
 			android:layout_width="120dp"
 			android:layout_height="140dp"
 			app:cardCornerRadius="16dp"
@@ -297,9 +300,10 @@
 				<TextView
 					android:id="@+id/item"
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
+					android:layout_height="20dp"
 					android:gravity="center_horizontal"
-					android:text="Mystery box" />
+					android:text="@string/mystery_box"
+					android:textSize="13sp" />
 
 				<TextView
 					android:id="@+id/textView6"
@@ -308,7 +312,7 @@
 					android:gravity="center_horizontal"
 					android:text="300 NCoins" />
 			</LinearLayout>
-		</androidx.cardview.widget.CardView>
+		</com.google.android.material.card.MaterialCardView>
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -89,8 +89,7 @@ public class NekoGeneralActivity extends AppCompatActivity implements PrefState.
 
 		getWindow().setNavigationBarColor(SurfaceColors.SURFACE_2.getColor(this));
 		setupNavbarListener();
-	    boolean CONTROLS_FIRST = nekoprefs.getBoolean("controlsFirst", false);
-		if(CONTROLS_FIRST) {
+		if(nekoprefs.getBoolean("controlsFirst", false)) {
 			getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
                 .replace(R.id.container, CatControlsFragment.class, null)
@@ -189,33 +188,33 @@ public class NekoGeneralActivity extends AppCompatActivity implements PrefState.
     public void onResume() {
         super.onResume();
     }			
-	private void setupDarkMode() {     
-		switch(nekoprefs.getInt("darktheme", 0)) {
-			case 1:
-			    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-					UiModeManager UImanager = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);		
+	private void setupDarkMode() {
+		switch (nekoprefs.getInt("darktheme", 0)) {
+			case 1 -> {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+					UiModeManager UImanager = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);
 					UImanager.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES);
 				} else {
-			    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+					AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 				}
-			 break;
-			case 2:
-			if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-				    UiModeManager UImanager = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);	
+			}
+			case 2 -> {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+					UiModeManager UImanager = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);
 					UImanager.setApplicationNightMode(UiModeManager.MODE_NIGHT_AUTO);
 				} else {
-			 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+					AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
 				}
-			 break;
-			default:
-		    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-					UiModeManager UImanager = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);		
+			}
+			default -> {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+					UiModeManager UImanager = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);
 					UImanager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO);
 				} else {
-				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+					AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 				}
-             break;		
-		}	
+			}
+		}
     }		
 	private void showPromoDialog() {
 		final Context context;

@@ -21,6 +21,7 @@ package ru.dimon6018.neko11.workers;
 import static android.os.Build.VERSION_CODES.P;
 import static ru.dimon6018.neko11.ui.fragments.NekoLandFragment.CHAN_ID;
 import static ru.dimon6018.neko11.workers.NekoWorker.title_message;
+import static ru.dimon6018.neko11.workers.PrefState.FILE_NAME;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
@@ -28,6 +29,7 @@ import android.app.PendingIntent;
 import android.app.Person;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.graphics.Bitmap;
@@ -71,6 +73,7 @@ public class Cat extends Drawable {
     private String mStatus;
     private String mFirstMessage;
     private boolean mBowTie;
+    private int mHat;
 
     static final Random RANDOM = new Random();
 
@@ -153,9 +156,7 @@ public class Cat extends Drawable {
     public static void tint(int color, Drawable... ds) {
         for (Drawable d : ds) {
             if (d != null) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    d.mutate().setTint(color);
-                }
+                d.mutate().setTint(color);
             }
         }
     }
@@ -171,6 +172,7 @@ public class Cat extends Drawable {
 	    D = new CatParts(context);
         mSeed = seed;	
         setName(name);
+
         final Random nsr = notSoRandom(seed);
         // age
         mAge = nsr.nextInt((18 - 1) + 1);
@@ -432,11 +434,9 @@ public class Cat extends Drawable {
     public String getName() {
         return mName;
     }
-
     public void setName(String name) {
         this.mName = name;
     }
-
     public int getBodyColor() {
         return mBodyColor;
     }
@@ -445,6 +445,12 @@ public class Cat extends Drawable {
     }
     public String getStatus() {
         return mStatus;
+    }
+    public int getHatValue() {
+        return mHat;
+    }
+    public void setHatValue(int hat) {
+        this.mHat = hat;
     }
 	public boolean getBowTie() {
         return mBowTie;
@@ -456,6 +462,8 @@ public class Cat extends Drawable {
     }
 
     public static class CatParts {
+
+        public Drawable hat;
         public Drawable leftEar;
         public Drawable rightEar;
         public Drawable rightEarInside;
@@ -487,6 +495,7 @@ public class Cat extends Drawable {
         public Drawable[] drawingOrder;
 
         public CatParts(Context context) {
+        //    hat = setHatDrawable(context, 1);
             body = AppCompatResources.getDrawable(context, R.drawable.body);
             head = AppCompatResources.getDrawable(context, R.drawable.head);
             leg1 = AppCompatResources.getDrawable(context, R.drawable.leg1);
@@ -518,8 +527,18 @@ public class Cat extends Drawable {
             drawingOrder = getDrawingOrder();
         }
 
+        public static Drawable setHatDrawable(Context context, int hatCustomValue) {
+            Drawable hat = null;
+            switch (hatCustomValue) {
+                case 0 -> hat = AppCompatResources.getDrawable(context, R.drawable.nothing);
+                case 1 -> hat = AppCompatResources.getDrawable(context, R.drawable.hat_1);
+            }
+            return hat;
+        }
+
         private Drawable[] getDrawingOrder() {
             return new Drawable[]{
+            //        hat,
                     collar,
                     leftEar, leftEarInside, rightEar, rightEarInside,
                     head,

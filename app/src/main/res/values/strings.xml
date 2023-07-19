@@ -162,6 +162,9 @@
     <string name="touch_cat_title">Touch</string>
     <string name="aosp">Our game is based on another game from Android 11 and I want to thank its original developers, they gave me the inspiration to rethink the game and make it even more comfortable. Thank you! Check it out here: https://source.android.com/</string>
     <string name="about_dev6">SuperRofler - help in finding bugs, identifying critical errors, moral support</string>
+    <string name="open">Open</string>
+    <string name="mystery_box">Mystery box</string>
+    <string name="random_cat">Random cat</string>
 
     <integer-array name="food_intervals">
         <item>0</item>
