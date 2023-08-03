@@ -1,4 +1,4 @@
-# Neko11
+# Welcome to Neko11!
 Neko11 - is a game about cat collecting
 
 ## Description 🎀
