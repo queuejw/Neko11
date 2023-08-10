@@ -17,37 +17,38 @@
  -->
 <LinearLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <com.google.android.material.textview.MaterialTextView
+    <LinearLayout
+        android:id="@+id/recyclerViewLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/collection"
-        android:textSize="20sp"
-        app:fontFamily="@font/opensans_medium" />
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content"
-        android:text="@string/cat_counter"
-        android:textSize="17sp"
-        android:id="@+id/counter"
-        app:fontFamily="@font/opensans_regular" />
-
+        android:orientation="vertical">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/holder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:drawingCacheQuality="auto"
-        android:scrollbarAlwaysDrawVerticalTrack="false">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="wrap_content"/>
+    </LinearLayout>
 
-    <Space
+    <LinearLayout
+        android:id="@+id/loadHolderView"
         android:layout_width="wrap_content"
-        android:layout_height="24dp" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/loadingHolder"
+            android:layout_width="69dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/loadingHolderSub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/moment" />
+    </LinearLayout>
 </LinearLayout>

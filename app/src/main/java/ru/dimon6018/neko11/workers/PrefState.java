@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import ru.dimon6018.neko11.R;
+
 public class PrefState implements OnSharedPreferenceChangeListener {
     public static final String FILE_NAME = "mPrefs";
     private static final String FOOD_STATE = "food";
@@ -33,13 +35,17 @@ public class PrefState implements OnSharedPreferenceChangeListener {
 	private static final String CATS_LIMIT = "limit";
 	public static final String ICON_SIZE = "size";
 	private static final String NCOINS = "nCoins";
-    public static final String HAT = "hatValue";
     public static final String TOY_STATE = "toy";
     public static final String WATER_STATE = "water";
     public static final String CAT_KEY_PREFIX = "cat:";
+    public static final String CAT_KEY_PREFIX_MOOD = "mood:";
+    public static final String MOOD_BOOSTER = "mood_booster";
+    public static final String LUCKY_BOOSTER = "lucky_booster";
     private final Context mContext;
     private final SharedPreferences mPrefs;
     private PrefsListener mListener;
+
+    public static boolean isLuckyBoosterActive;
 
     public PrefState(Context context) {
         mContext = context;
@@ -53,21 +59,35 @@ public class PrefState implements OnSharedPreferenceChangeListener {
               .apply();
     }
     public void removeCat(Cat cat) {
-        mPrefs.edit().remove(CAT_KEY_PREFIX + (cat.getSeed())).apply();
+        mPrefs.edit()
+                .remove(CAT_KEY_PREFIX + (cat.getSeed()))
+                .apply();
     }
-
+    public void setMood(Cat cat, String mood) {
+        mPrefs.edit()
+                .putString(CAT_KEY_PREFIX_MOOD + (cat.getSeed()), mood)
+                .apply();
+    }
     public List<Cat> getCats() {
         ArrayList<Cat> cats = new ArrayList<>();
         Map<String, ?> map = mPrefs.getAll();
         for (String key : map.keySet()) {
             if (key.startsWith(CAT_KEY_PREFIX)) {
                 long seed = Long.parseLong(key.substring(CAT_KEY_PREFIX.length()));
+                String mood_value = mPrefs.getString(CAT_KEY_PREFIX_MOOD + seed, "");
                 Cat cat = new Cat(mContext, seed, String.valueOf(map.get(key)));
                 cat.setName(String.valueOf(map.get(key)));
+                if(mood_value.equals("")) {
+                    mood_value = mContext.getString(R.string.mood3);
+                }
+                setMood(cat, mood_value);
                 cats.add(cat);
             }
         }
         return cats;
+    }
+    public String getMoodPref(Cat cat) {
+        return mPrefs.getString(CAT_KEY_PREFIX_MOOD + cat.getSeed(), "");
     }
     public int getToyState() {
         return mPrefs.getInt(TOY_STATE, 0);
@@ -120,6 +140,12 @@ public class PrefState implements OnSharedPreferenceChangeListener {
 	public int getNCoins() {
         return mPrefs.getInt(NCOINS, 0);
     }
+    public int getMoodBoosters() {
+        return mPrefs.getInt(MOOD_BOOSTER, 0);
+    }
+    public int getLuckyBoosters() {
+        return mPrefs.getInt(LUCKY_BOOSTER, 0);
+    }
     public void addNCoins(int coins) {
 		int currentCoins = getNCoins();
 		int newCoins = currentCoins + coins;
@@ -129,6 +155,26 @@ public class PrefState implements OnSharedPreferenceChangeListener {
 		int currentCoins = getNCoins();
 		int newCoins = currentCoins - coins;
         mPrefs.edit().putInt(NCOINS, newCoins).apply();
+    }
+    public void addMoodBooster(int boosters) {
+        int currentBoosters = getMoodBoosters();
+        int newBoosters = currentBoosters + boosters;
+        mPrefs.edit().putInt(MOOD_BOOSTER, newBoosters).apply();
+    }
+    public void removeMoodBooster(int boosters) {
+        int currentBoosters = getMoodBoosters();
+        int newBoosters = currentBoosters - boosters;
+        mPrefs.edit().putInt(MOOD_BOOSTER, newBoosters).apply();
+    }
+    public void addLuckyBooster(int boosters) {
+        int currentBoosters = getLuckyBoosters();
+        int newBoosters = currentBoosters + boosters;
+        mPrefs.edit().putInt(LUCKY_BOOSTER, newBoosters).apply();
+    }
+    public void removeLuckyBooster(int boosters) {
+        int currentBoosters = getLuckyBoosters();
+        int newBoosters = currentBoosters - boosters;
+        mPrefs.edit().putInt(LUCKY_BOOSTER, newBoosters).apply();
     }
 	public int getCatIconSize() {
         return mPrefs.getInt(ICON_SIZE, 150);

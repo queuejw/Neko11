@@ -17,7 +17,7 @@
  -->
 <resources>
     <string name="app_name">Neko 11</string>
-    <string name="app_name_neko">Neko</string>
+    <string name="app_name_neko">Neko 11</string>
     <string name="dynamic_color">Динамичные цвета</string>
     <string name="dynamic_color_sub">Автоматический выбор цвета акцента в зависимости от цвета ваших обоев. Работает только на Android 12+</string>
 	<string name="choosetheme">Выбрать цвет акцента</string>
@@ -80,7 +80,7 @@
 	<string name="welcome_dialog_part2">Вот твои первые котики :3 Нажав на кота ты можешь переименовать его, удалить, сохранить или приблизить его.</string>
     <string name="achievements">Достижения</string>
 	<string name="save_title">Сохранить</string>
-	<string name="del_title">Удалить</string>
+	<string name="del_title">Убрать</string>
 	<string name="rename_title">Переименовать</string>
 	<string name="cat_status_string">Статус кота: %s</string>
 	<string name="input_sub_promo">Введите промокод</string>
@@ -88,7 +88,6 @@
 	<string name="activation_tip">Попробуйте прокрутить 3 раза =)</string>
 	<string name="github">Neko11 в GitHub (Исходники)</string>	
 	<string name="gift_not_enabled">Получено</string>
-	<string name="delete_cat">Удалить</string>
 	<string name="delete_cat_message">Вы правда хотите удалить этого кота?</string>
 	<string name="delete_cat_title">Удаление кота</string>	
 	<string name="max_cat_line_title">Отвечает за количество котов в одной линии</string>
@@ -140,6 +139,8 @@
 	<string name="a2sub">Собери 50 котов</string>
 	<string name="a3sub">Собери 100 котов</string>
 	<string name="a4sub">Собери 1000 котов</string>
+    <string name="a5">Счастливый хозяин</string>
+    <string name="a5sub">Получите максимальный уровень \nнастроения у 25 котов</string>
 		
 	<string name="details">Подробности</string>
 	<string name="neko_info_ver_name">Версия Neko11: %s</string>
@@ -152,7 +153,7 @@
     <string name="select">Выбрать</string>
     <string name="select_backup_file">Выберите файл с сохранением</string>
     <string name="saving_cats">Сохраняем ваших котов..</string>
-    <string name="moment">Подождите.</string>
+    <string name="moment">Секунду..</string>
     <string name="working">Идёт выполнение задачи..</string>
     <string name="force_get_perms">Принудительно получить разрешения</string>
     <string name="task_success">Операция завершена.</string>
@@ -165,6 +166,35 @@
     <string name="open">Открыть</string>
     <string name="mystery_box">Загадочный ящик</string>
     <string name="random_cat">Случайный кот</string>
+    <string name="meow">Мяу</string>
+    <string name="shh">Шшшшшшшшшш</string>
+    <string name="ops">Ой!</string>
+    <string name="touch_cat_error">Коту не понравилось, что вы его потрогали и он вас укусил.</string>
+    <string name="mood">Настроение: %s</string>
+
+    <string name="mood1">Очень грустное</string>
+    <string name="mood2">Грустное</string>
+    <string name="mood3">Хорошее</string>
+    <string name="mood4">Очень хорошее</string>
+    <string name="mood5">Отличное</string>
+    <string name="please_make_backup">Neko11 обнаружил, что вы обновили приложение до версии с новым геймплеем. Чтобы предотвратить повреждение данных, загрузка была прервана. Пожалуйста, сделайте Backup всех ваших котиков. Это очень важно. В любом вы можете продолжить загрузку дальше.</string>
+    <string name="boosters_title">Усилители</string>
+    <string name="booster_items">У вас осталось: %d</string>
+    <string name="choose_booster">Выбери усилители.</string>
+    <string name="booster1_title">Витамин счастья</string>
+    <string name="booster1_sub">Увеличивает уровнь счастья кота до максимума</string>
+    <string name="booster2_title">Таблетка удачи</string>
+    <string name="booster2_sub">Коты приносят счастье в дом. Теперь новый кот придёт быстрее</string>
+    <string name="box_win1">Вы открыли ящик и получили: %d NCoins, %d Таблеток удачи.</string>
+    <string name="box_win2">Вы открыли ящик и получили: %d NCoins, %d Витамин счастья.</string>
+    <string name="box_win3">Вы открыли ящик и получили: %d Новых котов, %d Витамин счастья.</string>
+    <string name="box_win4">Вы открыли ящик и получили: 1 новый кот, %d Таблеток счастья.</string>
+    <string name="box_win5">Джекпот! Вы получили: 1 новый кот, %d NCoins, %d Таблеток счастья и %d Витамина радости.</string>
+    <string name="box_win6">Вы открыли ящик и получили: 1 новый кот.</string>
+    <string name="box_error">Нам не удалось открыть этот ящик. Мы вернули вам 300 NCoins</string>
+    <string name="telegram">Наш канал в Telegram</string>
+    <string name="my_stats">Статистика</string>
+    <string name="booster_actived_sub">Усилитель активен</string>
 
     <integer-array name="food_intervals">
         <item>0</item>
@@ -213,10 +243,19 @@
 		<item>Дикий</item>
         <item>Забавный</item>
     </string-array>
+    <string-array name="cat_moods">
+        <item>Очень грустное</item>
+        <item>Грустное</item>
+        <item>Хорошее</item>
+        <item>Отличное</item>
+        <item>Очень хорошее</item>
+        <item>Нормальное</item>
+    </string-array>
 	<string-array name="toy_messages">
         <item>Мяу Мяу Мяу.</item>
         <item>*Мурлыкает*.</item>
         <item>Мяяяяяяяяууууу.</item>
 		<item>Мяу =(</item>
+        <item>Шшшшш</item>
     </string-array>
 </resources>

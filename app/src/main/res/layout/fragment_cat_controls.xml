@@ -23,33 +23,20 @@
     android:id="@+id/relativeLayout"
     app:layout_optimizationLevel="standard">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/cat_controls"
-        android:textSize="20sp"
-        app:fontFamily="@font/opensans_medium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_toy"
         android:layout_width="172dp"
-		android:layout_weight="1"
         android:layout_height="112dp"
         android:layout_gravity="center"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="28dp"
+        android:layout_weight="1"
         android:checkable="true"
         app:cardBackgroundColor="@color/tiles"
-        app:layout_constraintWidth_percent="0.8"
         app:cardCornerRadius="12dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_food"
+        app:layout_constraintWidth_percent="0.8">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -104,7 +91,7 @@
         android:layout_height="112dp"
         android:layout_gravity="center"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="48dp"
         app:cardBackgroundColor="@color/tiles"
         app:layout_constraintWidth_percent="0.8"
         app:cardCornerRadius="12dp"
@@ -151,6 +138,16 @@
                 android:layout_marginTop="72dp"
                 android:text="@string/control_food_subtitle"
                 app:fontFamily="@font/opensans_regular" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/booster_actived_sub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="92dp"
+                android:textSize="12sp"
+                android:alpha="0.75"
+                android:text="@string/booster_actived_sub"
+                app:fontFamily="@font/opensans_regular" />
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -161,7 +158,7 @@
         android:layout_height="112dp"
         android:layout_gravity="center"
         android:layout_marginEnd="5dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="48dp"
         android:checkable="true"
         app:cardBackgroundColor="@color/tiles"
         app:layout_constraintWidth_percent="0.8"

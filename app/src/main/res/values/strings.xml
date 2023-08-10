@@ -17,7 +17,7 @@
  -->
 <resources>
     <string name="app_name">Neko 11</string>
-    <string name="app_name_neko">Neko</string>
+    <string name="app_name_neko">Neko 11</string>
     <string name="dynamic_color">Dynamic colors</string>
     <string name="dynamic_color_sub">Automatically select an accent color based on the color of your wallpaper. Work only on Android 12+</string>
 	<string name="save_changes">Changes successfully saved</string>
@@ -80,18 +80,17 @@
 	<string name="get_prize">Get prize</string>
 	<string name="welcome_dialog">Welcome to Neko11. Let me teach you the basics of the game. First, pick up your gift (free).</string>
 	<string name="save_title">Save</string>
-	<string name="del_title">Delete</string>
+	<string name="del_title">Remove</string>
 	<string name="rename_title">Rename</string>
 	<string name="cat_status_string">Cat status: %s</string>
 	<string name="input_sub_promo">Type promo</string>
 	<string name="activation_tip">Try rotate this 3 times =)</string>	
 	<string name="github">Neko11 in GitHub (Source code)</string>
 	<string name="gift_not_enabled">Retrieved</string>
-	<string name="delete_cat">Delete</string>
 	<string name="delete_cat_message">Do you really want delete this cat?</string>
 	<string name="delete_cat_title">Delete cat</string>
 	<string name="max_cat_line_title">Responsible for the number of cats in one line</string>
-	<string name="cat_age">Cat age: %d years</string>
+	<string name="cat_age">Cat age: %d y.o.</string>
 	<string name="themeChanged">Restart Neko11 to apply the theme</string>
 	<string name="name_changed">Cat name changed!</string>
 	<string name="new_code_generated">Congratulations! You have successfully completed this achievement. As a reward, keep this code: <b><i>%s</i></b>. You can activate it in the menu by selecting "Promo code"</string>
@@ -100,7 +99,7 @@
 	<string name="copy">Copy</string>
 	<string name="coins"><b>You have: %d NCoins</b></string>
 	<string name="code_is_true">Code accepted. Award received.</string>	
-	<string name="code_is_false">Code accepted. Award received.</string>
+	<string name="code_is_false">This code has already been used.</string>
 	<string name="controls_first">Open «Cat Controls» first</string>	
 	<string name="controls_first_sub">Allows you to see "Cat Controls" as soon as you open Neko11. Can speed up the launch of the application if you have a lot of cats.</string>	
 	<string name="cat_size_title">Sets the size of the cat icon.</string>
@@ -140,6 +139,8 @@
 	<string name="a2sub">Collect 50 cat\'s</string>
 	<string name="a3sub">Collect 100 cat\'s</string>
 	<string name="a4sub">Collect 1000 cat\'s</string>
+    <string name="a5">Happy owner</string>
+    <string name="a5sub">Get the maximum mood \n level of 25 cats.</string>
 	
 	<string name="details">Details</string>
 	<string name="neko_info_ver_name">Neko11 version: %s</string>
@@ -165,7 +166,35 @@
     <string name="open">Open</string>
     <string name="mystery_box">Mystery box</string>
     <string name="random_cat">Random cat</string>
+    <string name="meow">Meow</string>
+    <string name="shh">Shhhhhhhh</string>
+    <string name="ops">Ops!</string>
+    <string name="touch_cat_error">Коту не понравилось, что вы его потрогали и он вас укусил.</string>
+    <string name="mood">Mood: %s</string>
 
+    <string name="mood1">Very sad</string>
+    <string name="mood2">Sad</string>
+    <string name="mood3">Good</string>
+    <string name="mood4">Very good</string>
+    <string name="mood5">Great</string>
+    <string name="please_make_backup">Neko11 detected that you have updated the application to a version with new gameplay. To prevent data corruption, the load has been interrupted. Please make a Backup of all your cats. This is very important. In any you can continue downloading further.</string>
+    <string name="boosters_title">Boosters</string>
+    <string name="booster_items">You have: %d</string>
+    <string name="choose_booster">Choose boosters</string>
+    <string name="booster1_title">Vitamin of happiness</string>
+    <string name="booster1_sub">Increases a cat\'s happiness level to maximum</string>
+    <string name="booster2_title">Lucky pill</string>
+    <string name="booster2_sub">Cats bring happiness into the home. Now the new cat will come faster</string>
+    <string name="box_win1">You opened the box and you got: %d NCoins, %d Lucky pills</string>
+    <string name="box_win2">You opened the box and you got: %d NCoins, %d Vitamin of happiness.</string>
+    <string name="box_win3">You opened the box and you got: %d new cats, %d Vitamin of happiness.</string>
+    <string name="box_win4">You opened the box and you got: 1 new cat, %d Lucky pill.</string>
+    <string name="box_win5">Jackpot! You got: 1 new cat, %d NCoins, %d Lucky pill and %d Vitamin of happiness.</string>
+    <string name="box_win6">You opened the box and you got: 1 new cat.</string>
+    <string name="box_error">We were unable to open this box. We\'ve returned 300 NCoins</string>
+    <string name="telegram">Наш канал в Telegram</string>
+    <string name="my_stats">Статистика</string>
+    <string name="booster_actived_sub">Усилитель активен</string>
     <integer-array name="food_intervals">
         <item>0</item>
         <item>15</item>
@@ -213,10 +242,19 @@
 		<item>Wild</item>
         <item>Funny</item>
     </string-array>
+    <string-array name="cat_moods">
+    <item>Very sad</item>
+    <item>Sad</item>
+    <item>Good</item>
+    <item>Great</item>
+    <item>Very Good</item>
+    <item>Normal</item>
+    </string-array>
 	<string-array name="toy_messages">
         <item>Meow Meow Meow.</item>
         <item>*Purring*</item>
         <item>Meeeeoooooow.</item>
 		<item>Meow =(</item>
+        <item>Shhhh</item>
     </string-array>
 </resources>

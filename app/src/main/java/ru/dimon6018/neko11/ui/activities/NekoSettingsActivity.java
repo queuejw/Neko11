@@ -329,21 +329,9 @@ public class NekoSettingsActivity extends AppCompatActivity implements PrefState
 		view.setEnabled(isSave || isDelete || isRestore);
 		int color = MaterialColors.getColor(this, com.google.android.material.R.attr.colorSecondaryContainer, Color.GREEN);
 		int transparent = this.getResources().getColor(android.R.color.transparent);
-		if(isSave) {
-			view2.setBackgroundColor(color);
-		} else {
-			view2.setBackgroundColor(transparent);
-		}
-		if(isRestore) {
-			view3.setBackgroundColor(color);
-		} else {
-			view3.setBackgroundColor(transparent);
-		}
-		if(isDelete) {
-			view4.setBackgroundColor(color);
-		} else {
-			view4.setBackgroundColor(transparent);
-		}
+		if(isSave) {view2.setBackgroundColor(color); } else { view2.setBackgroundColor(transparent); }
+		if(isRestore) { view3.setBackgroundColor(color); } else { view3.setBackgroundColor(transparent); }
+		if(isDelete) { view4.setBackgroundColor(color); } else { view4.setBackgroundColor(transparent); }
 	}
 	@SuppressLint("SdCardPath")
 	public void savePrefs() {
@@ -428,7 +416,7 @@ public class NekoSettingsActivity extends AppCompatActivity implements PrefState
 						@Override
 						public void run() {
 							try {
-								Thread.sleep(1200);
+								Thread.sleep(1100);
 								bottomsheet.dismiss();
 							} catch (InterruptedException e) {
 								throw new RuntimeException(e);
@@ -484,7 +472,7 @@ public class NekoSettingsActivity extends AppCompatActivity implements PrefState
 			inputStream.close();
 			outputStream.close();
 		} catch (Exception e) {
-			Log.e("Exception", e.getMessage());
+			Log.e("ParseURI", "Exception. See: " + e);
 		}
 		return file.getPath();
 	}

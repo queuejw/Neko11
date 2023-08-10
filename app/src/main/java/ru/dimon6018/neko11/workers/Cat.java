@@ -18,10 +18,10 @@
 
 package ru.dimon6018.neko11.workers;
 
+import static android.os.Build.VERSION_CODES.O;
 import static android.os.Build.VERSION_CODES.P;
 import static ru.dimon6018.neko11.ui.fragments.NekoLandFragment.CHAN_ID;
 import static ru.dimon6018.neko11.workers.NekoWorker.title_message;
-import static ru.dimon6018.neko11.workers.PrefState.FILE_NAME;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
@@ -29,9 +29,9 @@ import android.app.PendingIntent;
 import android.app.Person;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -45,6 +45,8 @@ import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.app.NotificationCompat;
+import androidx.core.graphics.drawable.IconCompat;
 
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -68,12 +70,10 @@ public class Cat extends Drawable {
     private final long mSeed;
     private String mName;
     private int mBodyColor;
-    private int mFootType;
-    private int mAge;
-    private String mStatus;
+    private final int mAge;
+    private final String mStatus;
     private String mFirstMessage;
-    private boolean mBowTie;
-    private int mHat;
+    private final boolean mBowTie;
 
     static final Random RANDOM = new Random();
 
@@ -170,16 +170,15 @@ public class Cat extends Drawable {
 
     public Cat(Context context, long seed, String name) {
 	    D = new CatParts(context);
-        mSeed = seed;	
+        Resources res = context.getResources();
+        mSeed = seed;
         setName(name);
 
         final Random nsr = notSoRandom(seed);
         // age
-        mAge = nsr.nextInt((18 - 1) + 1);
+        mAge = nsr.nextInt((17) + 1);
         // set funny status
-        String[] statusArray = context.getResources().getStringArray(R.array.cat_status);
-        mStatus = statusArray[nsr.nextInt(context.getResources().getStringArray(R.array.cat_status).length)];
-
+        mStatus = res.getStringArray(R.array.cat_status)[nsr.nextInt(res.getStringArray(R.array.cat_status).length)];
         // body color
         mBodyColor = chooseP(nsr, P_BODY_COLORS);
         if (mBodyColor == 0) mBodyColor = Color.HSVToColor(new float[]{
@@ -201,7 +200,7 @@ public class Cat extends Drawable {
             tint(0xFF000000, D.mouth, D.nose);
         }
 
-        mFootType = 0;
+        int mFootType = 0;
         if (nsr.nextFloat() < 0.25f) {
             mFootType = 4;
             tint(0xFFFFFFFF, D.foot1, D.foot2, D.foot3, D.foot4);
@@ -226,8 +225,7 @@ public class Cat extends Drawable {
         tint(collarColor, D.collar);
         mBowTie = nsr.nextFloat() < 0.1f;
         tint(mBowTie ? collarColor : 0, D.bowtie);
-
-        String[] messages = context.getResources().getStringArray(
+        String[] messages = res.getStringArray(
                 nsr.nextFloat() < 0.1f ? R.array.rare_cat_messages : R.array.cat_messages);
         mFirstMessage = (String) choose(nsr, (Object[]) messages);
         if (nsr.nextFloat() < 0.5f) mFirstMessage = mFirstMessage + mFirstMessage + mFirstMessage;
@@ -284,6 +282,7 @@ public class Cat extends Drawable {
                 .setKey(getShortcutId())
                 .build();
     }
+    @RequiresApi(O)
     public Notification.Builder buildNotificationO(Context context) {
         final Bundle extras = new Bundle();
         extras.putString("android.substName", context.getString(R.string.notification_name));
@@ -314,6 +313,29 @@ public class Cat extends Drawable {
                         PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE))
                 .setAutoCancel(true)
                 .setShortcutId(getShortcutId())
+                .addExtras(extras);
+    }
+    public NotificationCompat.Builder buildNotificationN(Context context) {
+        final Bundle extras = new Bundle();
+        extras.putString("android.substName", context.getString(R.string.notification_name));
+
+        final Icon notificationIcon = createNotificationLargeIcon(context);
+
+        final Intent intent = new Intent(Intent.ACTION_MAIN)
+                .setClass(context, NekoGeneralActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        return new NotificationCompat.Builder(context, CHAN_ID)
+                .setSmallIcon(IconCompat.createWithResource(context, R.drawable.stat_icon))
+                .setLargeIcon(notificationIcon)
+                .setColor(getBodyColor())
+                .setContentTitle(title_message +  mFirstMessage)
+                .setShowWhen(true)
+                .setCategory(Notification.CATEGORY_STATUS)
+                .setContentText(getName())
+                .setContentIntent(
+                        PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE))
+                .setAutoCancel(true)
                 .addExtras(extras);
     }
     public long getSeed() {
@@ -351,6 +373,7 @@ public class Cat extends Drawable {
         slowDraw(new Canvas(result), 0, 0, w, h);
         return result;
     }
+
     private Bitmap createIconBitmap(int w, int h) {
         Bitmap result = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(result);
@@ -446,15 +469,6 @@ public class Cat extends Drawable {
     public String getStatus() {
         return mStatus;
     }
-    public int getHatValue() {
-        return mHat;
-    }
-    public void setHatValue(int hat) {
-        this.mHat = hat;
-    }
-	public boolean getBowTie() {
-        return mBowTie;
-	}
     public String getShortcutId() {
         return ALL_CATS_IN_ONE_CONVERSATION
                 ? GLOBAL_SHORTCUT_ID
@@ -462,8 +476,6 @@ public class Cat extends Drawable {
     }
 
     public static class CatParts {
-
-        public Drawable hat;
         public Drawable leftEar;
         public Drawable rightEar;
         public Drawable rightEarInside;
@@ -495,7 +507,6 @@ public class Cat extends Drawable {
         public Drawable[] drawingOrder;
 
         public CatParts(Context context) {
-        //    hat = setHatDrawable(context, 1);
             body = AppCompatResources.getDrawable(context, R.drawable.body);
             head = AppCompatResources.getDrawable(context, R.drawable.head);
             leg1 = AppCompatResources.getDrawable(context, R.drawable.leg1);
@@ -526,16 +537,6 @@ public class Cat extends Drawable {
             bowtie = AppCompatResources.getDrawable(context, R.drawable.bowtie);
             drawingOrder = getDrawingOrder();
         }
-
-        public static Drawable setHatDrawable(Context context, int hatCustomValue) {
-            Drawable hat = null;
-            switch (hatCustomValue) {
-                case 0 -> hat = AppCompatResources.getDrawable(context, R.drawable.nothing);
-                case 1 -> hat = AppCompatResources.getDrawable(context, R.drawable.hat_1);
-            }
-            return hat;
-        }
-
         private Drawable[] getDrawingOrder() {
             return new Drawable[]{
             //        hat,

@@ -19,8 +19,9 @@ package ru.dimon6018.neko11.ui.fragments;
 
 import static android.Manifest.permission.MANAGE_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static ru.dimon6018.neko11.controls.CatControlsFragment.randomfood;
 import static ru.dimon6018.neko11.ui.activities.NekoSettingsActivity.SETTINGS;
-import static ru.dimon6018.neko11.workers.Cat.CatParts.setHatDrawable;
+import static ru.dimon6018.neko11.workers.NekoWorker.isWorkScheduled;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -37,9 +38,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DiffUtil;
@@ -48,6 +52,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
@@ -59,10 +64,12 @@ import java.io.OutputStream;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import ru.dimon6018.neko11.NekoGeneralActivity;
 import ru.dimon6018.neko11.R;
 import ru.dimon6018.neko11.workers.Cat;
+import ru.dimon6018.neko11.workers.NekoWorker;
 import ru.dimon6018.neko11.workers.PrefState;
 
 public class NekoLandFragment extends Fragment implements PrefState.PrefsListener {
@@ -76,14 +83,12 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
     private CatAdapter mAdapter;
     private Cat mPendingShareCat;
 	
-	private int numCats;
-	
-	private MaterialTextView counter;
+    int numCats;
+    int numCatsP;
+
 	public SharedPreferences nekoprefs;
 	private RecyclerView recyclerView;
-
-    RecyclerView.RecycledViewPool Pool = new RecyclerView.RecycledViewPool();
-
+    private LinearLayout loadHolder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,19 +97,17 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {	
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.neko_activity_content, container, false);
 		nekoprefs = requireContext().getSharedPreferences(SETTINGS, Context.MODE_PRIVATE);
+        recyclerView = view.findViewById(R.id.holder);
+        loadHolder = view.findViewById(R.id.loadHolderView);
         mPrefs.setListener(this);
-        return inflater.inflate(R.layout.neko_activity_content, container, false);
+        return view;
     }
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-	 	counter = view.findViewById(R.id.counter);
-		recyclerView = view.findViewById(R.id.holder);
-        recyclerView.setRecycledViewPool(Pool);
         recyclerView.setAdapter(mAdapter = new CatAdapter());
-		updateLM();
-	    numCats = updateCats();	
     }
     @Override
     public void onDestroy() {
@@ -112,47 +115,52 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
         super.onDestroy();
     }
     public int updateCats() {
-	Cat[] cats;
-	List<Cat> list = mPrefs.getCats();	
-	//See https://github.com/chris-blay/AndroidNougatEasterEgg/blob/master/workspace/src/com/covertbagel/neko/NekoLand.java
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        switch (mPrefs.getSortState()) {
-            //by color
-            case 1:
-                final float[] hsv = new float[3];
-                list.sort((cat, cat2) -> {
-                    Color.colorToHSV(cat.getBodyColor(), hsv);
-                    float bodyH1 = hsv[0];
-                    Color.colorToHSV(cat2.getBodyColor(), hsv);
-                    float bodyH2 = hsv[0];
-                    return Float.compare(bodyH1, bodyH2);
-                });
-                break;
-            //by name
-            case 2:
-                list.sort(Comparator.comparing(Cat::getName));
-                break;
-            //off
-            case 0:
-                break;
-        }
-    }
-	cats = list.toArray(new Cat[0]);
-	int catsNum = cats.length;
-	updateCounter(catsNum);
-	mAdapter.setCats(cats);
-	return catsNum;
+            new Thread(() -> {
+                List<Cat> list = mPrefs.getCats();
+                Cat[] cats;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    //See https://github.com/chris-blay/AndroidNougatEasterEgg/blob/master/workspace/src/com/covertbagel/neko/NekoLand.java
+                    switch (mPrefs.getSortState()) {
+                        //by color
+                        case 1:
+                            final float[] hsv = new float[3];
+                            list.sort((cat, cat2) -> {
+                                Color.colorToHSV(cat.getBodyColor(), hsv);
+                                float bodyH1 = hsv[0];
+                                Color.colorToHSV(cat2.getBodyColor(), hsv);
+                                float bodyH2 = hsv[0];
+                                return Float.compare(bodyH1, bodyH2);
+                            });
+                            break;
+                        //by name
+                        case 2:
+                            list.sort(Comparator.comparing(Cat::getName));
+                            break;
+                        //off
+                        case 0:
+                            break;
+                    }
+                }
+                cats = list.toArray(new Cat[0]);
+                numCatsP = cats.length;
+                recyclerView.post(() -> {
+                    mAdapter.setCats(cats);
+                    updateLM();
+                    updateCounter(numCatsP);
+                    System.gc();
+                }
+                );
+            }).start();
+            return numCatsP;
 }
 	private void updateLM() {
-    GridLayoutManager grid = new GridLayoutManager(getContext(), mPrefs.getCatsInLineLimit());
-    grid.setInitialPrefetchItemCount(24);
-	recyclerView.setLayoutManager(grid);
+	recyclerView.setLayoutManager( new GridLayoutManager(getContext(), mPrefs.getCatsInLineLimit()));
 	}
   private void updateCounter(int catsNum) {
-    counter.setText(getString(R.string.cat_counter, catsNum));
 	SharedPreferences.Editor editor = nekoprefs.edit();
 	editor.putInt("num", catsNum);
     editor.apply();
+    loadHolder.setVisibility(View.GONE);
 }
     private void onCatClick(Cat cat) {
 	 Context context = requireContext();
@@ -165,15 +173,13 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
 	 EditText catEditor = bottomSheetInternal.findViewById(R.id.catEditName);
 	 ImageView catico = bottomSheetInternal.findViewById(R.id.cat_icon);
      int size = context.getResources().getDimensionPixelSize(R.dimen.neko_display_size);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            catico.setImageIcon(cat.createIcon(size, size));
-        } else {
-            catico.setImageBitmap(cat.createBitmap(size, size));
-        }
+     catico.setImageIcon(cat.createIcon(size, size));
      MaterialTextView status = bottomSheetInternal.findViewById(R.id.status_title);
 	 MaterialTextView age = bottomSheetInternal.findViewById(R.id.cat_age);
+     MaterialTextView mood = bottomSheetInternal.findViewById(R.id.mood_title);
 
 	 age.setText(getString(R.string.cat_age, cat.getAge()));
+     mood.setText(getString(R.string.mood, mPrefs.getMoodPref(cat)));
      status.setText(getString(R.string.cat_status_string, cat.getStatus()));
      catEditor.setText(cat.getName());
 
@@ -182,30 +188,142 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
 	    showCatRemoveDialog(cat, context);
 	});
      textLayout.setEndIconOnClickListener(v -> {
-     NekoGeneralActivity.showSnackBar(getString(R.string.name_changed), 3, bottomSheetInternal);
+                 new MaterialAlertDialogBuilder(context)
+                         .setIcon(cat.createIcon(size, size).loadDrawable(context))
+                         .setTitle(R.string.rename_title)
+                         .setMessage(R.string.name_changed)
+                         .setNegativeButton(android.R.string.ok, null)
+                         .show();
      bottomsheet.dismiss();
      cat.setName(catEditor.getText().toString().trim());
      mPrefs.addCat(cat);	 
 	});
-     catico.setOnClickListener(v -> {
+    catico.setOnClickListener(v -> {
 		 bottomsheet.dismiss();
 	     showCatFull(cat);	
 	});
-        bottomSheetInternal.findViewById(R.id.save_sheet).setOnClickListener(v -> {
+    bottomSheetInternal.findViewById(R.id.save_sheet).setOnClickListener(v -> {
 	  bottomsheet.dismiss();
          checkPerms(cat, context);
 	 });
+     bottomSheetInternal.findViewById(R.id.boosters_sheet).setOnClickListener(view -> {
+         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(context);
+         View v = this.getLayoutInflater().inflate(R.layout.cat_boosters_dialog, null);
+         dialog.setView(v);
+         MaterialTextView counter0 = v.findViewById(R.id.counter0);
+         MaterialTextView counter1 = v.findViewById(R.id.counter1);
+         MaterialCardView item0 = v.findViewById(R.id.moodBooster);
+         MaterialCardView item1 = v.findViewById(R.id.luckyBooster);
+
+         counter0.setText(getString(R.string.booster_items, mPrefs.getMoodBoosters()));
+         counter1.setText(getString(R.string.booster_items, mPrefs.getLuckyBoosters()));
+         item0.setEnabled(mPrefs.getMoodBoosters() != 0);
+         item1.setEnabled(mPrefs.getLuckyBoosters() != 0);
+         dialog.setCancelable(true);
+         dialog.setNegativeButton(android.R.string.cancel, null);
+         AlertDialog alertd = dialog.create();
+         item0.setOnClickListener(view1 -> {
+             mPrefs.removeMoodBooster(1);
+             mPrefs.setMood(cat, getString(R.string.mood5));
+             bottomsheet.dismiss();
+             alertd.dismiss();
+         });
+         item1.setOnClickListener(view1 -> {
+             if(!PrefState.isLuckyBoosterActive) {
+                 mPrefs.removeLuckyBooster(1);
+                 PrefState.isLuckyBoosterActive = true;
+                 if (isWorkScheduled) {
+                     NekoWorker.stopFoodWork(getContext());
+                     NekoWorker.scheduleFoodWork(getContext(), randomfood / 4);
+                     PrefState.isLuckyBoosterActive = false;
+                 }
+                 alertd.dismiss();
+             } else {
+                 new MaterialAlertDialogBuilder(context)
+                         .setIcon(cat.createIcon(size, size).loadDrawable(context))
+                         .setTitle(R.string.ops)
+                         .setMessage("Усилитель уже работает.")
+                         .setNegativeButton(android.R.string.ok, null)
+                         .show();
+             }
+         });
+         alertd.show();
+     });
     bottomSheetInternal.findViewById(R.id.wash_cat_sheet).setOnClickListener(view -> {
-         NekoGeneralActivity.showSnackBar("вы искупали кота", 3, bottomSheetInternal);
+        Random r = new Random();
+        int result = r.nextInt((5) + 1);
+        if(result != 1) {
+            String[] statusArray = context.getResources().getStringArray(R.array.toy_messages);
+            String a = statusArray[r.nextInt(context.getResources().getStringArray(R.array.toy_messages).length)];
+
+            String[] moods = {getString(R.string.mood3) ,getString(R.string.mood4)};
+            String b = moods[r.nextInt(moods.length)];
+            mPrefs.setMood(cat, b);
+            NekoGeneralActivity.showSnackBar(a, Toast.LENGTH_SHORT, bottomSheetInternal);
+            NekoWorker.notifyCat(requireContext(), cat, getResources().getString(R.string.meow));
+        } else {
+            NekoWorker.notifyCat(requireContext(), cat, getResources().getString(R.string.shh));
+
+            String[] moods = {getString(R.string.mood1) ,getString(R.string.mood2)};
+            String b = moods[r.nextInt(moods.length)];
+
+            mPrefs.setMood(cat, b);
+            new MaterialAlertDialogBuilder(context)
+                    .setIcon(cat.createIcon(size, size).loadDrawable(context))
+                    .setTitle(R.string.ops)
+                    .setMessage("Вашему коту не понравилось купаться. Попробуйте позже.")
+                    .setNegativeButton(android.R.string.ok, null)
+                    .show();
+        }
+        mood.setText(getString(R.string.mood, mPrefs.getMoodPref(cat)));
      });
     bottomSheetInternal.findViewById(R.id.caress_cat_sheet).setOnClickListener(view -> {
-         NekoGeneralActivity.showSnackBar("вы погладили кота", 3, bottomSheetInternal);
+        Random r = new Random();
+        int result = r.nextInt((5) + 1);
+        if(result != 1) {
+            String[] moods = {getString(R.string.mood4) ,getString(R.string.mood5)};
+            String b = moods[r.nextInt(moods.length)];
+            mPrefs.setMood(cat, b);
+            NekoGeneralActivity.showSnackBar("❤️", Toast.LENGTH_SHORT, bottomSheetInternal);
+            NekoWorker.notifyCat(requireContext(), cat, getResources().getString(R.string.meow));
+        } else {
+            NekoWorker.notifyCat(requireContext(), cat, getResources().getString(R.string.shh));
+            String[] moods = {getString(R.string.mood1), getString(R.string.mood2), getString(R.string.mood3)};
+            String b = moods[r.nextInt(moods.length)];
+            mPrefs.setMood(cat, b);
+                new MaterialAlertDialogBuilder(context)
+                        .setIcon(cat.createIcon(size, size).loadDrawable(context))
+                        .setTitle(R.string.ops)
+                        .setMessage("Ваш кот не очень любит, когда его гладят")
+                        .setNegativeButton(android.R.string.ok, null)
+                        .show();
+        }
+        mood.setText(getString(R.string.mood, mPrefs.getMoodPref(cat)));
      });
    bottomSheetInternal.findViewById(R.id.touch_cat_sheet).setOnClickListener(view -> {
-         NekoGeneralActivity.showSnackBar("вы потрогали кота", 3, bottomSheetInternal);
+       Random r = new Random();
+       int result = r.nextInt((5) + 1);
+       if(result != 1) {
+           String[] moods = {getString(R.string.mood4) ,getString(R.string.mood5)};
+           String b = moods[r.nextInt(moods.length)];
+           mPrefs.setMood(cat, b);
+           String[] statusArray = context.getResources().getStringArray(R.array.toy_messages);
+           String a = statusArray[r.nextInt(context.getResources().getStringArray(R.array.toy_messages).length)];
+           NekoWorker.notifyCat(requireContext(), cat, a);
+       } else {
+           String[] moods = {getString(R.string.mood1), getString(R.string.mood2), getString(R.string.mood3)};
+           String b = moods[r.nextInt(moods.length)];
+           mPrefs.setMood(cat, b);
+           NekoWorker.notifyCat(requireContext(), cat, getResources().getString(R.string.shh));
+               new MaterialAlertDialogBuilder(context)
+                       .setIcon(cat.createIcon(size, size).loadDrawable(context))
+                       .setTitle(R.string.ops)
+                       .setMessage(R.string.touch_cat_error)
+                       .setNegativeButton(android.R.string.ok, null)
+                       .show();
+       }
+       mood.setText(getString(R.string.mood, mPrefs.getMoodPref(cat)));
      });
-   bottomSheetInternal.findViewById(R.id.skins_sheet).setOnClickListener(view -> {
-   });
 	 bottomsheet.show();
     }
     private void checkPerms(Cat cat, Context context) {
@@ -233,29 +351,20 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
             }
 	private void showCatRemoveDialog(Cat cat, Context context) {
         final int size = context.getResources().getDimensionPixelSize(android.R.dimen.app_icon_size);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             new MaterialAlertDialogBuilder(context)
                     .setIcon(cat.createIcon(size, size).loadDrawable(context))
                     .setTitle(R.string.delete_cat_title)
                     .setMessage(R.string.delete_cat_message)
-                    .setPositiveButton(R.string.delete_cat, (dialog, id) -> onCatRemove(cat))
+                    .setPositiveButton(R.string.delete_cat_title, (dialog, id) -> onCatRemove(cat))
                     .setNegativeButton(android.R.string.cancel, null)
                     .show();
-        } else {
-            new MaterialAlertDialogBuilder(context)
-                    .setIcon(R.drawable.ic_fullcat_icon)
-                    .setTitle(R.string.delete_cat_title)
-                    .setMessage(R.string.delete_cat_message)
-                    .setPositiveButton(R.string.delete_cat, (dialog, id) -> onCatRemove(cat))
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .show();
-        }
     }
     private void onCatRemove(Cat cat) {
+         Random random = new Random(cat.getSeed());
 		 mPrefs.removeCat(cat);
+         mPrefs.addNCoins(random.nextInt(50 - 10) + 5);
     }
-	private void showCatFull(Cat cat) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+    private void showCatFull(Cat cat) {
             final Context context = new ContextThemeWrapper(getContext(),
                     requireActivity().getTheme());
             View view = LayoutInflater.from(context).inflate(R.layout.cat_fullscreen_view, null);
@@ -265,19 +374,9 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
                     .setView(view)
                     .setPositiveButton(android.R.string.ok, null)
                     .show();
-        } else {
-            View view = LayoutInflater.from(getContext()).inflate(R.layout.cat_fullscreen_view, null);
-            final ImageView ico = view.findViewById(R.id.cat_ico);
-            ico.setImageBitmap(cat.createBitmap(EXPORT_BITMAP_SIZE, EXPORT_BITMAP_SIZE));
-            new MaterialAlertDialogBuilder(getContext())
-                    .setView(view)
-                    .setPositiveButton(android.R.string.ok, null)
-                    .show();
-        }
     }
     @Override
     public void onPrefsChanged() {
-		updateLM();
 		updateCats();
     }
 
@@ -300,14 +399,9 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
         }
         @Override
         public void onBindViewHolder(@NonNull final CatHolder holder, int position) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                holder.imageView.setImageIcon(mCats[position].createIcon(mPrefs.getCatIconSize(), mPrefs.getCatIconSize()));
-            } else {
-                holder.imageView.setImageBitmap(mCats[position].createBitmap(mPrefs.getCatIconSize(), mPrefs.getCatIconSize()));
-            }
+            holder.imageView.setImageIcon(mCats[position].createIcon(mPrefs.getCatIconSize(), mPrefs.getCatIconSize()));
             holder.textView.setText(mCats[position].getName());
-            holder.itemView.setOnClickListener(v ->
-			onCatClick(mCats[holder.getAbsoluteAdapterPosition()]));
+            holder.itemView.setOnClickListener(v -> onCatClick(mCats[holder.getAbsoluteAdapterPosition()]));
 	}
         @Override
         public int getItemCount() {
@@ -393,8 +487,7 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
         public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
             Cat oldCats = oldCatsList.get(oldItemPosition);
             Cat newCats = newCatsList.get(newItemPosition);
-            return oldCats.getName().equals(newCats.getName())
-                    && oldCats.getSeed() == newCats.getSeed();
+            return oldCats.getName().equals(newCats.getName());
         }
     }
     private static class CatHolder extends RecyclerView.ViewHolder {
@@ -409,9 +502,9 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
     }
 	@Override
 	public void onResume() {
+    super.onResume();
     mPrefs.setListener(this);
-    updateCats();
-	super.onResume();
+    numCats = updateCats();
 }
 	@Override
 	public void onPause() {

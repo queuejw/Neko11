@@ -93,8 +93,8 @@ public class NekoActivationActivity extends AppCompatActivity {
         layout.addView(mDialView, FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT);
         setContentView(layout);
+        Snackbar.make(layout, R.string.activation_tip, Toast.LENGTH_LONG).show();
         checkAndroid();
-		Snackbar.make(layout, R.string.activation_tip, Snackbar.LENGTH_LONG).show();
     }
     private void toastUp() {
         Toast toast = Toast.makeText(this, "\uD83D\uDC31", Toast.LENGTH_SHORT);

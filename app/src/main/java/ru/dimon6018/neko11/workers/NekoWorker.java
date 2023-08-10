@@ -27,8 +27,10 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.Worker;
@@ -51,6 +53,7 @@ public class NekoWorker extends Worker {
     public static float INTERVAL_JITTER_FRAC = 0.251f;
 
     public static String title_message;
+    public static boolean isWorkScheduled;
 
     public NekoWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
@@ -81,6 +84,8 @@ public class NekoWorker extends Worker {
                 state = Result.failure();
             }
             stopFoodWork(context);
+            isWorkScheduled = false;
+            PrefState.isLuckyBoosterActive = false;
             return state;
     }
     private static void triggerFoodResponse(Context context) {
@@ -115,8 +120,12 @@ public class NekoWorker extends Worker {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             final Notification.Builder builder = cat.buildNotificationP(context);
             noman.notify(cat.getShortcutId(), CAT_NOTIFICATION, builder.build());
-        } else {
+        }
+        else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             final Notification.Builder builder = cat.buildNotificationO(context);
+            noman.notify(cat.getShortcutId(), CAT_NOTIFICATION, builder.build());
+        } else {
+            final NotificationCompat.Builder builder = cat.buildNotificationN(context);
             noman.notify(cat.getShortcutId(), CAT_NOTIFICATION, builder.build());
         }
 
@@ -126,7 +135,7 @@ public class NekoWorker extends Worker {
         final Cat cat = Cat.create(context);
 		Random random = new Random(cat.getSeed());	
         prefs.addCat(cat);
-	 	prefs.addNCoins(random.nextInt(75 - 10) + 5);
+	 	prefs.addNCoins(random.nextInt(80 - 9) + 5);
         return cat;
     }
 
@@ -152,8 +161,11 @@ public class NekoWorker extends Worker {
                         .setInitialDelay(interval / MINUTES, TimeUnit.MINUTES)
                         .build();
         WorkManager.getInstance(context).enqueue(workFoodRequest);
+        Log.w("FOOD_TIME", String.valueOf(interval / MINUTES));
+        isWorkScheduled = true;
     }
     public static void stopFoodWork(Context context) {
         WorkManager.getInstance(context).cancelAllWorkByTag("FOODWORK");
+        isWorkScheduled = false;
     }
 }

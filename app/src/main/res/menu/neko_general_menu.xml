@@ -16,18 +16,16 @@
  -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
-
+	<item
+		android:title="@string/my_stats"
+		android:icon="@drawable/ic_info"
+		android:id="@+id/myInfoMenuId"
+		app:showAsAction="ifRoom"
+		app:itemTextAppearance="@font/opensans_regular"/>
     <item 
 	    android:title="@string/settings"
         android:icon="@drawable/ic_settings"
         android:id="@+id/settingsMenuId"
-		app:showAsAction="ifRoom"
-	    app:itemTextAppearance="@font/opensans_regular"/>
-
-    <item
-        android:id="@+id/checkUpdateId"
-        android:icon="@drawable/ic_updates"
-        android:title="@string/check_updates" 
 	    app:itemTextAppearance="@font/opensans_regular"/>
     <item 
     	android:title="@string/achievements"

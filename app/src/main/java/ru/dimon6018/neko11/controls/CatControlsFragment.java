@@ -61,6 +61,8 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
     MaterialTextView foodsub;
     MaterialTextView waterstatesub;
     MaterialTextView waterstatetxt;
+
+    MaterialTextView booster_actived_sub;
 	
     private PrefState mPrefs;
 	SharedPreferences nekoprefs;
@@ -105,6 +107,7 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
         toysub = view.findViewById(R.id.toy_state_sub);
         foodsub = view.findViewById(R.id.foodsub);
         waterstatesub = view.findViewById(R.id.water_state_sub);
+        booster_actived_sub = view.findViewById(R.id.booster_actived_sub);
 		if(state == 2) {
 		createTipDialog();	
 		}
@@ -119,7 +122,11 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
 			startAnim(foodcard);
             int currentstate = mPrefs.getFoodState();
             if (currentstate == 0) {
-                NekoWorker.scheduleFoodWork(context, randomfood);
+                if(mPrefs.isLuckyBoosterActive) {
+                    NekoWorker.scheduleFoodWork(context, randomfood / 4);
+                } else {
+                    NekoWorker.scheduleFoodWork(context, randomfood);
+                }
                 mPrefs.setFoodState(foodstaterandom);
             } else {
                 mPrefs.setFoodState(0);
@@ -162,32 +169,37 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
             foodstatusimg.setImageDrawable(AppCompatResources.getDrawable(requireActivity(), R.drawable.ic_bowl));
             foodstatetxt.setText(R.string.control_food_status_empty);
             foodsub.setVisibility(View.VISIBLE);
-            foodcard.setCardBackgroundColor((requireActivity()).getColor(R.color.foodbg2));
+            foodcard.setCardBackgroundColor(getResources().getColor(R.color.foodbg2));
         } else {
             foodstatusimg.setImageDrawable(AppCompatResources.getDrawable(requireActivity(), R.drawable.ic_foodbowl_filled));
             foodstatetxt.setText(R.string.control_food_status_full);
             foodsub.setVisibility(View.INVISIBLE);
-            foodcard.setCardBackgroundColor((requireActivity()).getColor(R.color.foodbg));
+            foodcard.setCardBackgroundColor(getResources().getColor(R.color.foodbg));
+        }
+        if(PrefState.isLuckyBoosterActive) {
+            booster_actived_sub.setVisibility(View.VISIBLE);
+        } else {
+            booster_actived_sub.setVisibility(View.GONE);
         }
 		//update water card
         float waterml = Math.round(mPrefs.getWaterState());
         waterstatetxt.setText(getResources().getString(R.string.water_state_ml, waterml));
         if (waterml >= 100f) {
-            watercard.setCardBackgroundColor((requireActivity()).getColor(R.color.waterbg));
+            watercard.setCardBackgroundColor(getResources().getColor(R.color.waterbg));
             waterstatusimg.setImageDrawable(AppCompatResources.getDrawable(requireActivity(), R.drawable.ic_water_filled));
             waterstatesub.setVisibility(View.INVISIBLE);
         } else {
-            watercard.setCardBackgroundColor((requireActivity()).getColor(R.color.waterbg2));
+            watercard.setCardBackgroundColor(getResources().getColor(R.color.waterbg2));
             waterstatusimg.setImageDrawable(AppCompatResources.getDrawable(requireActivity(), R.drawable.ic_water));
             waterstatesub.setVisibility(View.VISIBLE);
         }
 		//update toy card
         if(mPrefs.getToyState() == 1) {
-            toycard.setCardBackgroundColor(requireActivity().getColor(R.color.toybg));
+            toycard.setCardBackgroundColor(getResources().getColor(R.color.toybg));
             toystatus.setVisibility(View.VISIBLE);
             toysub.setVisibility(View.INVISIBLE);
         } else {
-            toycard.setCardBackgroundColor(requireActivity().getColor(R.color.toybg2));
+            toycard.setCardBackgroundColor(getResources().getColor(R.color.toybg2));
             toystatus.setVisibility(View.INVISIBLE);
             toysub.setVisibility(View.VISIBLE);
         }
