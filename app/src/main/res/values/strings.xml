@@ -105,7 +105,7 @@
 	<string name="cat_size_title">Sets the size of the cat icon.</string>
 	<string name="open_controls_tip">Open Cat Controls.</string>
 	<string name="fill_tiles_tip">Fill all tiles.</string>
-	<string name="welcome_dialog_part2">Here are your first cats :3 By clicking on the cat you can rename it, delete, save or zoom in on it.</string>
+	<string name="welcome_dialog_part2">Here are your first cats :3 Click on the cat to bring up a menu where you can control it.</string>
 	<string name="welcome_dialog_part3">To fill a tile, click on it. You can then close the app. You will receive a notification when the cat comes to you. That\'s basically it. Good luck =)</string>
 
     <string name="backup_restore">Restore my data</string>

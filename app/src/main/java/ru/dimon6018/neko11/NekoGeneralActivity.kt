@@ -81,10 +81,10 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                 setupState()
                 setupDarkMode()
                 setTheme(NekoApplication.getNekoTheme(this))
-                checkAndroid()
             runOnUiThread {
                 setupNavbarListener()
                 if(needWelcomeDialog) welcomeDialog()
+                checkAndroid()
             }
             }.start()
             super.onCreate(savedInstanceState)

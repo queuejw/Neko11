@@ -109,6 +109,9 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
         waterstatesub = view.findViewById(R.id.water_state_sub);
         booster_actived_sub = view.findViewById(R.id.booster_actived_sub);
 		if(state == 2) {
+        SharedPreferences.Editor editor = nekoprefs.edit();
+        editor.putInt("state", 0);
+        editor.apply();
 		createTipDialog();	
 		}
         return view;
@@ -122,7 +125,7 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
 			startAnim(foodcard);
             int currentstate = mPrefs.getFoodState();
             if (currentstate == 0) {
-                if(mPrefs.isLuckyBoosterActive) {
+                if(PrefState.isLuckyBoosterActive) {
                     NekoWorker.scheduleFoodWork(context, randomfood / 4);
                 } else {
                     NekoWorker.scheduleFoodWork(context, randomfood);
@@ -132,7 +135,7 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
                 mPrefs.setFoodState(0);
                 NekoWorker.stopFoodWork(context);
             }
-            updateTiles(view);
+            updateTiles();
         });
         toycard.setOnClickListener(v -> {
 			startAnim(toycard);
@@ -143,27 +146,28 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
                 mPrefs.setToyState(0);
                 NekoToyWorker.stopToyWork(context);
             }
-            updateTiles(view);
+            updateTiles();
         });
         watercard.setOnClickListener(v -> {
 			startAnim(watercard);
             mPrefs.setWaterState(200f);
-            updateTiles(view);
+            updateTiles();
 		});
         watercard.setOnLongClickListener(v -> {
 			    startAnim(watercard);
                 mPrefs.setWaterState(0f);
-                updateTiles(view);
+                updateTiles();
                 return true;
         });
-        updateTiles(view);
+        updateTiles();
     }
 
     @Override
     public void onPrefsChanged() {
+        updateTiles();
     }
 
-    private void updateTiles(View view) {  
+    private void updateTiles() {
      //update food card
         if (mPrefs.getFoodState() == 0) {
             foodstatusimg.setImageDrawable(AppCompatResources.getDrawable(requireActivity(), R.drawable.ic_bowl));

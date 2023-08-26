@@ -90,6 +90,8 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
 	private RecyclerView recyclerView;
     private LinearLayout loadHolder;
 
+    private MaterialTextView counter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 		mPrefs = new PrefState(getContext());
@@ -101,6 +103,8 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
         View view = inflater.inflate(R.layout.neko_activity_content, container, false);
 		nekoprefs = requireContext().getSharedPreferences(SETTINGS, Context.MODE_PRIVATE);
         recyclerView = view.findViewById(R.id.holder);
+        counter = view.findViewById(R.id.catCounter);
+        recyclerView.setItemAnimator(null);
         loadHolder = view.findViewById(R.id.loadHolderView);
         mPrefs.setListener(this);
         return view;
@@ -161,6 +165,7 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
 	editor.putInt("num", catsNum);
     editor.apply();
     loadHolder.setVisibility(View.GONE);
+    counter.setText(getString(R.string.cat_counter, catsNum));
 }
     private void onCatClick(Cat cat) {
 	 Context context = requireContext();

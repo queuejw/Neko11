@@ -77,7 +77,7 @@
     <string name="email">Отправь мне смешную SMS: dimon6018t@gmail.com</string>
 	<string name="get_prize">Получить</string>
 	<string name="welcome_dialog">Добро пожаловать в Neko11. Давай я научу тебя основам игры. Для начала забери подарок (бесплатно).</string>
-	<string name="welcome_dialog_part2">Вот твои первые котики :3 Нажав на кота ты можешь переименовать его, удалить, сохранить или приблизить его.</string>
+	<string name="welcome_dialog_part2">Вот твои первые котики :3 Нажми на кота, чтобы появилось меню, где ты сможешь управлять им.</string>
     <string name="achievements">Достижения</string>
 	<string name="save_title">Сохранить</string>
 	<string name="del_title">Убрать</string>

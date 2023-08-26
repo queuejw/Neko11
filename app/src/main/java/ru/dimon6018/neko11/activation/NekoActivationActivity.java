@@ -94,20 +94,10 @@ public class NekoActivationActivity extends AppCompatActivity {
                 FrameLayout.LayoutParams.MATCH_PARENT);
         setContentView(layout);
         Snackbar.make(layout, R.string.activation_tip, Toast.LENGTH_LONG).show();
-        checkAndroid();
     }
     private void toastUp() {
         Toast toast = Toast.makeText(this, "\uD83D\uDC31", Toast.LENGTH_SHORT);
         toast.show();
-    }
-    private void checkAndroid() {
-        if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1) {
-            new AlertDialog.Builder(this)
-                    .setIcon(R.drawable.ic_warning)
-                    .setMessage(R.string.unsupported_android)
-                    .setNegativeButton(android.R.string.ok, null)
-                    .show();
-        }
     }
     private void launchNextStage() {
         SharedPreferences nekoprefs = getSharedPreferences(SETTINGS, Context.MODE_PRIVATE);
