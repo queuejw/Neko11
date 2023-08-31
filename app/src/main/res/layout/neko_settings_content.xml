@@ -17,7 +17,7 @@
   <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-	  android:layout_width="match_parent"
+	android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 	<androidx.constraintlayout.widget.ConstraintLayout
@@ -274,7 +274,7 @@
 			app:layout_constraintHorizontal_bias="0.948"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/opensettingsbtn"
-			app:layout_constraintVertical_bias="0.166" />
+			app:layout_constraintVertical_bias="0.083" />
 
 		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/sorttitle"
@@ -313,6 +313,49 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:orientation="horizontal"
-			app:layout_constraintGuide_begin="1080dp" />
+			app:layout_constraintGuide_begin="1272dp" />
+
+		<com.google.android.material.card.MaterialCardView
+			android:layout_width="match_parent"
+			android:layout_height="165dp"
+			app:cardCornerRadius="0dp"
+			app:cardBackgroundColor="?attr/colorPrimaryVariant"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/get_neko_info">
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical">
+				<com.google.android.material.textview.MaterialTextView
+					android:layout_width="wrap_content"
+					android:textColor="@color/white"
+					android:textSize="13sp"
+					android:layout_marginTop="14dp"
+					android:layout_marginStart="28dp"
+					android:layout_marginEnd="28dp"
+					android:layout_height="wrap_content"
+					android:text="@string/AD_metrolnchr"/>
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="horizontal">
+
+				<com.google.android.material.button.MaterialButton
+					app:strokeColor="@color/white"
+					android:id="@+id/ad_btn"
+					app:strokeWidth="2dp"
+					app:backgroundTint="?attr/colorPrimaryDark"
+					android:textColor="@color/white"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentEnd="true"
+					android:layout_marginEnd="36dp"
+					android:text="@string/AD_try"
+					app:cornerRadius="0dp" />
+			</RelativeLayout>
+			</LinearLayout>
+		</com.google.android.material.card.MaterialCardView>
 	</androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

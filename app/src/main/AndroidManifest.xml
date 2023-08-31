@@ -67,10 +67,6 @@
             android:name=".ui.activities.NekoWarning"
             android:exported="true">
         </activity>
-        <activity
-            android:name=".ui.activities.NekoHelpActivity"
-            android:exported="true">
-        </activity>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="ru.dimon6018.neko11.fileprovider"

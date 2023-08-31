@@ -1,6 +1,7 @@
 package ru.dimon6018.neko11.ui.activities;
 
 import static ru.dimon6018.neko11.NekoGeneralActivity.showSnackBar;
+import static ru.dimon6018.neko11.ui.activities.NekoAboutActivity.openWeb;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -88,6 +89,9 @@ public class NekoSettingsActivity extends AppCompatActivity implements PrefState
 
 	   ConstraintLayout cord;
 
+	   //remove in future
+	MaterialButton ad;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(NekoApplication.getNekoTheme(this));
@@ -118,6 +122,7 @@ public class NekoSettingsActivity extends AppCompatActivity implements PrefState
 	
 	@Override
     public void onPrefsChanged() {
+
     }
 	
 	private void setupClickListeners() {
@@ -228,6 +233,7 @@ public class NekoSettingsActivity extends AppCompatActivity implements PrefState
 				.setNegativeButton(android.R.string.ok, null)
                 .show();
 		});
+	ad.setOnClickListener(view -> openWeb(this, "https://github.com/queuejw/MetroPhoneLauncher"));
 }
 	public void startRecovery(Context context) {
 		isSave = false;
@@ -562,6 +568,7 @@ public class NekoSettingsActivity extends AppCompatActivity implements PrefState
 		cat_resizer = findViewById(R.id.cat_size_slider);	
 		details = findViewById(R.id.get_neko_info);
 		recovery = findViewById(R.id.recovery_btn);
+		ad = findViewById(R.id.ad_btn);
 	int THEME = nekoprefs.getInt("theme", 0);	
 	int DARK_ENABLE = nekoprefs.getInt("darktheme", 0);	
 	boolean LINEAR_CONTROL = nekoprefs.getBoolean("linear_control", false);	

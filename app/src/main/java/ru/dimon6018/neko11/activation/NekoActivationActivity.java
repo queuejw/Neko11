@@ -62,7 +62,6 @@ import ru.dimon6018.neko11.R;
 import ru.dimon6018.neko11.workers.NekoWorker;
 
 public class NekoActivationActivity extends AppCompatActivity {
-    private static final String R_EGG_UNLOCK_SETTING = "egg_mode_r";
     private static final int UNLOCK_TRIES = 3;
     BigDialView mDialView;
 
@@ -82,19 +81,19 @@ public class NekoActivationActivity extends AppCompatActivity {
         final ActionBar ab = getActionBar();
         if (ab != null) ab.hide();
         mDialView = new BigDialView(this, null);
-        if (Settings.System.getLong(getContentResolver(),
-                R_EGG_UNLOCK_SETTING, 0) == 0) {
-            mDialView.setUnlockTries(UNLOCK_TRIES);
-        } else {
-            mDialView.setUnlockTries(0);
-        }
+        mDialView.setUnlockTries(UNLOCK_TRIES);
         final FrameLayout layout = new FrameLayout(this);
         layout.setBackgroundColor(0xFFFF0000);
         layout.addView(mDialView, FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT);
         setContentView(layout);
-        Snackbar.make(layout, R.string.activation_tip, Toast.LENGTH_LONG).show();
+        showSnack(layout);
     }
+
+    private void showSnack(View v) {
+        Snackbar.make(v, R.string.activation_tip, Toast.LENGTH_LONG).show();
+    }
+
     private void toastUp() {
         Toast toast = Toast.makeText(this, "\uD83D\uDC31", Toast.LENGTH_SHORT);
         toast.show();
@@ -109,7 +108,7 @@ public class NekoActivationActivity extends AppCompatActivity {
             editor.apply();
             startActivity(new Intent(this, NekoGeneralActivity.class)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                            | Intent.FLAG_ACTIVITY_CLEAR_TASK));;
+                            | Intent.FLAG_ACTIVITY_CLEAR_TASK));
         } catch (ActivityNotFoundException ex) {
             new AlertDialog.Builder(this)
                     .setIcon(R.drawable.ic_warning)

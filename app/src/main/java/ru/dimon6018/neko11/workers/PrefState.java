@@ -37,10 +37,15 @@ public class PrefState implements OnSharedPreferenceChangeListener {
 	private static final String NCOINS = "nCoins";
     public static final String TOY_STATE = "toy";
     public static final String WATER_STATE = "water";
+    public static final String WATER_ML = "water_alltime";
     public static final String CAT_KEY_PREFIX = "cat:";
+    public static final String CAT_ACTIONS_ALLTIME = "catActionsAllTime";
+    public static final String CATS_ALLTIME = "cats";
+    public static final String CAT_INTERACT_KEY_PREFIX = "catInteract:";
     public static final String CAT_KEY_PREFIX_MOOD = "mood:";
     public static final String MOOD_BOOSTER = "mood_booster";
     public static final String LUCKY_BOOSTER = "lucky_booster";
+    public static final String BOOSTERS_ALLTIME = "boosters";
     private final Context mContext;
     private final SharedPreferences mPrefs;
     private PrefsListener mListener;
@@ -85,6 +90,16 @@ public class PrefState implements OnSharedPreferenceChangeListener {
             }
         }
         return cats;
+    }
+    public void clearActionsBlock() {
+        Map<String, ?> map = mPrefs.getAll();
+        for (String key : map.keySet()) {
+            if (key.startsWith(CAT_INTERACT_KEY_PREFIX)) {
+                long seed = Long.parseLong(key.substring(CAT_INTERACT_KEY_PREFIX.length()));
+                Cat cat = new Cat(mContext, seed, String.valueOf(map.get(key)));
+                setCanInteract(cat, 6);
+            }
+        }
     }
     public String getMoodPref(Cat cat) {
         return mPrefs.getString(CAT_KEY_PREFIX_MOOD + cat.getSeed(), "");
@@ -175,6 +190,36 @@ public class PrefState implements OnSharedPreferenceChangeListener {
         int currentBoosters = getLuckyBoosters();
         int newBoosters = currentBoosters - boosters;
         mPrefs.edit().putInt(LUCKY_BOOSTER, newBoosters).apply();
+    }
+    public int CanInteract(Cat cat) {
+        return mPrefs.getInt(CAT_INTERACT_KEY_PREFIX + cat.getSeed(), 6);
+    }
+    public void setCanInteract(Cat cat, int i) {
+        mPrefs.edit().putInt(CAT_INTERACT_KEY_PREFIX + cat.getSeed(), i).apply();
+    }
+    public int WaterMl() {
+        return mPrefs.getInt(WATER_ML, 0);
+    }
+    public void addWaterMl(int ml) {
+        mPrefs.edit().putInt(WATER_ML, WaterMl() + ml).apply();
+    }
+    public int CatsAllTime() {
+        return mPrefs.getInt(CATS_ALLTIME, 0);
+    }
+    public void addCatsAllTime(int cats) {
+        mPrefs.edit().putInt(CATS_ALLTIME, CatsAllTime() + cats).apply();
+    }
+    public int boostersUseAllTime() {
+        return mPrefs.getInt(BOOSTERS_ALLTIME, 0);
+    }
+    public void addboostersUseAllTime(int boosters) {
+        mPrefs.edit().putInt(BOOSTERS_ALLTIME, boostersUseAllTime() + boosters).apply();
+    }
+    public int catActionsUseAllTime() {
+        return mPrefs.getInt(CAT_ACTIONS_ALLTIME, 0);
+    }
+    public void addcatActionsUseAllTime(int i) {
+        mPrefs.edit().putInt(CAT_ACTIONS_ALLTIME, catActionsUseAllTime() + i).apply();
     }
 	public int getCatIconSize() {
         return mPrefs.getInt(ICON_SIZE, 150);

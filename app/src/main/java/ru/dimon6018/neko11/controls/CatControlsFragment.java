@@ -109,9 +109,6 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
         waterstatesub = view.findViewById(R.id.water_state_sub);
         booster_actived_sub = view.findViewById(R.id.booster_actived_sub);
 		if(state == 2) {
-        SharedPreferences.Editor editor = nekoprefs.edit();
-        editor.putInt("state", 0);
-        editor.apply();
 		createTipDialog();	
 		}
         return view;
@@ -150,11 +147,13 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
         });
         watercard.setOnClickListener(v -> {
 			startAnim(watercard);
+            mPrefs.addWaterMl(Math.round(mPrefs.getWaterState()));
             mPrefs.setWaterState(200f);
             updateTiles();
 		});
         watercard.setOnLongClickListener(v -> {
 			    startAnim(watercard);
+                mPrefs.addWaterMl(Math.round(mPrefs.getWaterState()));
                 mPrefs.setWaterState(0f);
                 updateTiles();
                 return true;

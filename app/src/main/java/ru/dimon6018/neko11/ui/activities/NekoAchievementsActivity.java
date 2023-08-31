@@ -252,6 +252,7 @@ public class NekoAchievementsActivity extends AppCompatActivity implements PrefS
 					for (int i = 0; i >= cycles; i++) {
 						Cat cat = NekoWorker.newRandomCat(this, mPrefs);
 						mPrefs.addCat(cat);
+						mPrefs.addcatActionsUseAllTime(1);
 					}
 					mPrefs.addMoodBooster(mb);
 					s = getString(R.string.box_win3, cycles, mb);
@@ -259,6 +260,7 @@ public class NekoAchievementsActivity extends AppCompatActivity implements PrefS
 				case 4 -> {
 					Cat cat = NekoWorker.newRandomCat(this, mPrefs);
 					mPrefs.addCat(cat);
+					mPrefs.addcatActionsUseAllTime(1);
 					int lb = r.nextInt(5) + 1;
 					mPrefs.addLuckyBooster(lb);
 					s = getString(R.string.box_win4, lb);
@@ -266,6 +268,7 @@ public class NekoAchievementsActivity extends AppCompatActivity implements PrefS
 				case 5 -> {
 					Cat cat = NekoWorker.newRandomCat(this, mPrefs);
 					mPrefs.addCat(cat);
+					mPrefs.addcatActionsUseAllTime(1);
 					int coins = r.nextInt((777) + 100);
 					int lb = r.nextInt(5) + 1;
 					int mb = r.nextInt(4) + 1;

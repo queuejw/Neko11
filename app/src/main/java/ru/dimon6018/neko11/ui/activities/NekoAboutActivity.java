@@ -2,6 +2,7 @@ package ru.dimon6018.neko11.ui.activities;
 
 import static ru.dimon6018.neko11.ui.fragments.NekoLandFragment.EXPORT_BITMAP_SIZE;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,19 +37,20 @@ public class NekoAboutActivity extends AppCompatActivity {
 
 		MaterialButton github = findViewById(R.id.github_button);
 		MaterialButton tg = findViewById(R.id.telegram_button);
-		github.setOnClickListener(v -> openWeb("https://github.com/queuejw/Neko11"));
-		tg.setOnClickListener(v -> openWeb("https://t.me/nekoapp_news"));
+		github.setOnClickListener(v -> openWeb(this,"https://github.com/queuejw/Neko11"));
+		tg.setOnClickListener(v -> openWeb(this,"https://t.me/nekoapp_news"));
 		setupCatImage();
 		CoordinatorLayout cord = findViewById(R.id.coordinatorabout);
 		ViewCompat.setOnApplyWindowInsetsListener(cord, (v, insets) -> {
-			int pB = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).top;
-			v.setPadding(0, 0, 0, pB);
+			int tB = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top;
+			int pB = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
+			v.setPadding(0, tB, 0, pB);
 			return WindowInsetsCompat.CONSUMED;
 		});
     }
-	private void openWeb(String link) {
+	public static void openWeb(Activity activity, String link) {
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
-		startActivity(intent);
+		activity.startActivity(intent);
 	}
 	public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

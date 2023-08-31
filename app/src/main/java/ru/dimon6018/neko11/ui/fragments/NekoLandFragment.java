@@ -152,6 +152,7 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
                     updateLM();
                     updateCounter(numCatsP);
                     System.gc();
+
                 }
                 );
             }).start();
@@ -166,8 +167,12 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
     editor.apply();
     loadHolder.setVisibility(View.GONE);
     counter.setText(getString(R.string.cat_counter, catsNum));
+      if(nekoprefs.getBoolean("iCanEnterCatCount", true)) {
+          mPrefs.addcatActionsUseAllTime(catsNum);
+          nekoprefs.edit().putBoolean("iCanEnterCatCount", false).apply();
+      }
 }
-    private void onCatClick(Cat cat) {
+     private void onCatClick(Cat cat) {
 	 Context context = requireContext();
      BottomSheetDialog bottomsheet = new BottomSheetDialog(context);
      bottomsheet.setContentView(R.layout.neko_cat_bottomsheet);
@@ -182,12 +187,18 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
      MaterialTextView status = bottomSheetInternal.findViewById(R.id.status_title);
 	 MaterialTextView age = bottomSheetInternal.findViewById(R.id.cat_age);
      MaterialTextView mood = bottomSheetInternal.findViewById(R.id.mood_title);
+     MaterialTextView actionsLimit = bottomSheetInternal.findViewById(R.id.actionsLimitTip);
+
+     MaterialCardView wash = bottomSheetInternal.findViewById(R.id.wash_cat_sheet);
+     MaterialCardView caress = bottomSheetInternal.findViewById(R.id.caress_cat_sheet);
+     MaterialCardView touch = bottomSheetInternal.findViewById(R.id.touch_cat_sheet);
 
 	 age.setText(getString(R.string.cat_age, cat.getAge()));
      mood.setText(getString(R.string.mood, mPrefs.getMoodPref(cat)));
      status.setText(getString(R.string.cat_status_string, cat.getStatus()));
      catEditor.setText(cat.getName());
-
+     mPrefs.addcatActionsUseAllTime(1);
+     updateCatActions(cat, wash, caress, touch, actionsLimit);
      bottomSheetInternal.findViewById(R.id.delete_sheet).setOnClickListener(v -> {
 		bottomsheet.dismiss(); 
 	    showCatRemoveDialog(cat, context);
@@ -227,13 +238,16 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
          dialog.setCancelable(true);
          dialog.setNegativeButton(android.R.string.cancel, null);
          AlertDialog alertd = dialog.create();
+         updateCatActions(cat, wash, caress, touch, actionsLimit);
          item0.setOnClickListener(view1 -> {
+             mPrefs.addboostersUseAllTime(1);
              mPrefs.removeMoodBooster(1);
              mPrefs.setMood(cat, getString(R.string.mood5));
              bottomsheet.dismiss();
              alertd.dismiss();
          });
          item1.setOnClickListener(view1 -> {
+             mPrefs.addboostersUseAllTime(1);
              if(!PrefState.isLuckyBoosterActive) {
                  mPrefs.removeLuckyBooster(1);
                  PrefState.isLuckyBoosterActive = true;
@@ -254,7 +268,9 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
          });
          alertd.show();
      });
-    bottomSheetInternal.findViewById(R.id.wash_cat_sheet).setOnClickListener(view -> {
+        wash.setOnClickListener(view -> {
+            mPrefs.setCanInteract(cat, mPrefs.CanInteract(cat) - 1);
+            updateCatActions(cat, wash, caress, touch, actionsLimit);
         Random r = new Random();
         int result = r.nextInt((5) + 1);
         if(result != 1) {
@@ -282,7 +298,9 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
         }
         mood.setText(getString(R.string.mood, mPrefs.getMoodPref(cat)));
      });
-    bottomSheetInternal.findViewById(R.id.caress_cat_sheet).setOnClickListener(view -> {
+    caress.setOnClickListener(view -> {
+        mPrefs.setCanInteract(cat, mPrefs.CanInteract(cat) - 1);
+        updateCatActions(cat, wash, caress, touch, actionsLimit);
         Random r = new Random();
         int result = r.nextInt((5) + 1);
         if(result != 1) {
@@ -305,7 +323,9 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
         }
         mood.setText(getString(R.string.mood, mPrefs.getMoodPref(cat)));
      });
-   bottomSheetInternal.findViewById(R.id.touch_cat_sheet).setOnClickListener(view -> {
+  touch.setOnClickListener(view -> {
+      mPrefs.setCanInteract(cat, mPrefs.CanInteract(cat) - 1);
+      updateCatActions(cat, wash, caress, touch, actionsLimit);
        Random r = new Random();
        int result = r.nextInt((5) + 1);
        if(result != 1) {
@@ -330,6 +350,17 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
        mood.setText(getString(R.string.mood, mPrefs.getMoodPref(cat)));
      });
 	 bottomsheet.show();
+    }
+    private void updateCatActions(Cat cat, View wash, View caress, View touch, View actionsLimit) {
+        if(mPrefs.CanInteract(cat) <= 0) {
+            wash.setEnabled(false);
+            wash.setAlpha(0.5f);
+            caress.setEnabled(false);
+            caress.setAlpha(0.5f);
+            touch.setEnabled(false);
+            touch.setAlpha(0.5f);
+            actionsLimit.setVisibility(View.VISIBLE);
+        }
     }
     private void checkPerms(Cat cat, Context context) {
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

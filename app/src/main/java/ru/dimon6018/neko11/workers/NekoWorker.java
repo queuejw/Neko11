@@ -79,6 +79,9 @@ public class NekoWorker extends Worker {
         Context context = getApplicationContext();
             try {
                 triggerFoodResponse(context);
+                final PrefState prefs = new PrefState(context);
+                prefs.addCatsAllTime(1);
+                prefs.clearActionsBlock();
                 state = Result.success();
             } catch (Exception e) {
                 state = Result.failure();

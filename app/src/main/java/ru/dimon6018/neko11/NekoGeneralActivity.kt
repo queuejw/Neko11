@@ -44,11 +44,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.elevation.SurfaceColors
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textview.MaterialTextView
 import ru.dimon6018.neko11.activation.NekoActivationActivity
 import ru.dimon6018.neko11.controls.CatControlsFragment
 import ru.dimon6018.neko11.ui.activities.NekoAboutActivity
 import ru.dimon6018.neko11.ui.activities.NekoAchievementsActivity
-import ru.dimon6018.neko11.ui.activities.NekoHelpActivity
 import ru.dimon6018.neko11.ui.activities.NekoSettingsActivity
 import ru.dimon6018.neko11.ui.activities.NekoWarning
 import ru.dimon6018.neko11.ui.fragments.NekoLandFragment
@@ -77,8 +77,8 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                             or Intent.FLAG_ACTIVITY_CLEAR_TASK))
             finish()
         } else {
+            setupState()
             Thread {
-                setupState()
                 setupDarkMode()
                 setTheme(NekoApplication.getNekoTheme(this))
             runOnUiThread {
@@ -135,6 +135,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         return super.onCreateOptionsMenu(menu)
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.aboutMenuId -> {
@@ -150,7 +151,6 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                 }
                 return true
             }
-
             R.id.achievementsMenuId -> {
                 startActivity(Intent(this@NekoGeneralActivity, NekoAchievementsActivity::class.java))
                 return true
@@ -165,13 +165,25 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                 startActivity(Intent(this@NekoGeneralActivity, NekoSettingsActivity::class.java))
                 return true
             }
-
-            R.id.helpMenuId -> {
-                startActivity(Intent(this@NekoGeneralActivity, NekoHelpActivity::class.java))
-                navbar!!.selectedItemId = 0
+            R.id.myInfoMenuId -> {
+                val context: Context = ContextThemeWrapper(this, theme)
+                val view = LayoutInflater.from(context).inflate(R.layout.neko_stats_dialog, null)
+                val stat1: MaterialTextView = view.findViewById(R.id.cat_count_stat)
+                stat1.text = getString(R.string.stat_1, mPrefs?.CatsAllTime())
+                val stat2: MaterialTextView = view.findViewById(R.id.booster_count_stat)
+                stat2.text = getString(R.string.stat_2, mPrefs?.boostersUseAllTime())
+                val stat3: MaterialTextView = view.findViewById(R.id.water_stat)
+                stat3.text = getString(R.string.stat_3, mPrefs?.WaterMl())
+                val stat4: MaterialTextView = view.findViewById(R.id.cat_actions_use_count)
+                stat4.text = getString(R.string.stat_4, mPrefs?.catActionsUseAllTime())
+                MaterialAlertDialogBuilder(context)
+                        .setTitle(R.string.my_stats)
+                        .setIcon(R.drawable.ic_help)
+                        .setView(view)
+                        .setNegativeButton(android.R.string.ok, null)
+                        .show()
                 return true
             }
-
             else -> return super.onOptionsItemSelected(item)
         }
     }
@@ -208,7 +220,6 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                 }
             }
-
             else -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     val uimanager = getSystemService(UI_MODE_SERVICE) as UiModeManager
@@ -293,6 +304,10 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
             }
         } else if (promo == "hello") {
             showSnackBar("Hi!", Snackbar.LENGTH_SHORT, navbar)
+        } else if (promo == "null" || promo == "none" || promo == "") {
+            showSnackBar("no.", Snackbar.LENGTH_SHORT, navbar)
+        } else if (promo == "how are you") {
+            showSnackBar("please help me!!!!", Snackbar.LENGTH_SHORT, navbar)
         } else {
             showSnackBar(getString(R.string.wrong_code), Snackbar.LENGTH_LONG, navbar)
         }
@@ -310,6 +325,9 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                     navbar?.animate()?.translationY(0f)?.setDuration(200);
                 } else {
                     viewPager!!.currentItem = 1
+                    val editor = nekoprefs!!.edit()
+                    editor.putInt("state", 0)
+                    editor.apply()
                     navbar?.animate()?.translationY(0f)?.setDuration(200);
                     MaterialAlertDialogBuilder(this)
                             .setTitle(R.string.app_name_neko)
@@ -321,6 +339,9 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                                 setCurrentTheme(0)
                             }.show()
                 }
+                val editor = nekoprefs!!.edit()
+                editor.putInt("state", 0)
+                editor.apply()
                 return@setOnItemSelectedListener true
             }
             false
@@ -364,7 +385,8 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
             var cat: Cat?
             for (i in 0..6) {
                 cat = NekoWorker.newRandomCat(this, mPrefs)
-                mPrefs!!.addCat(cat)
+                mPrefs?.addCat(cat)
+                mPrefs?.addCatsAllTime(1)
             }
             setCurrentTheme(-1)
             MaterialAlertDialogBuilder(this)
