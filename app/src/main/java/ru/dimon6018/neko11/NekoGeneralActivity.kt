@@ -84,7 +84,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
             runOnUiThread {
                 setupNavbarListener()
                 if(needWelcomeDialog) welcomeDialog()
-                checkAndroid()
+                if(getAndroidV()) androidVDialog()
             }
             }.start()
             super.onCreate(savedInstanceState)
@@ -115,15 +115,15 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
             }
         })
     }
-
-    private fun checkAndroid() {
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1) {
+    private fun getAndroidV(): Boolean {
+        return (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1)
+    }
+    private fun androidVDialog() {
             MaterialAlertDialogBuilder(this)
                     .setIcon(R.drawable.ic_warning)
                     .setMessage(R.string.unsupported_android)
                     .setNegativeButton(android.R.string.ok, null)
                     .show()
-        }
     }
 
     override fun onPrefsChanged() {}

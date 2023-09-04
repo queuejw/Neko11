@@ -199,9 +199,11 @@
     <string name="stat_1">Всего ты собрал %d котов</string>
     <string name="stat_2">Ты использовал %d усилителей</string>
     <string name="stat_3">Ты налил %d Мл. воды</string>
-    <string name="stat_4">Ты пробовал взаимодействовать с котами %d раз</string>
+    <string name="stat_4">Ты пробовал взаимодействовать с котами %d раза</string>
     <string name="AD_metrolnchr">Хотите получить опыт использования Windows Phone 8.1 на своём устройстве?\n Попробуйте мой новый MetroPhoneLauncher* \n * - название не финальное, приложение в разработке. Следите за новостями.</string>
     <string name="AD_try">Попробовать</string>
+    <string name="action1_fail">Кот укусил тебя при попытке его искупать. Попробуй ещё раз =)</string>
+    <string name="action2_fail">Коту не понравилось, что его гладят и он укусил тебя. Попробуй ещё раз =)</string>
 
     <integer-array name="food_intervals">
         <item>0</item>

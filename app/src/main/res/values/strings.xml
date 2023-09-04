@@ -201,6 +201,8 @@
     <string name="stat_4">You\'ve tried interacting with cats %d times</string>
     <string name="AD_metrolnchr">Want to get Windows Phone 8.1 experience on your device? \n Try my new MetroPhoneLauncher* \n * - the title is not final, the application is under development. Stay tuned.</string>
     <string name="AD_try">Try</string>
+    <string name="action1_fail">The cat bit you while trying to bathe him. Try again =)</string>
+    <string name="action2_fail">The cat didn\'t like being stroked and bit you. Try again =)</string>
     <integer-array name="food_intervals">
         <item>0</item>
         <item>15</item>

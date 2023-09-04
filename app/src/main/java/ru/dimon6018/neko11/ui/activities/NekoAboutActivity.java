@@ -17,6 +17,7 @@ import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.elevation.SurfaceColors;
 
 import ru.dimon6018.neko11.NekoApplication;
 import ru.dimon6018.neko11.R;
@@ -34,7 +35,7 @@ public class NekoAboutActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+		getWindow().setNavigationBarColor(SurfaceColors.SURFACE_2.getColor(this));
 		MaterialButton github = findViewById(R.id.github_button);
 		MaterialButton tg = findViewById(R.id.telegram_button);
 		github.setOnClickListener(v -> openWeb(this,"https://github.com/queuejw/Neko11"));
@@ -42,8 +43,8 @@ public class NekoAboutActivity extends AppCompatActivity {
 		setupCatImage();
 		CoordinatorLayout cord = findViewById(R.id.coordinatorabout);
 		ViewCompat.setOnApplyWindowInsetsListener(cord, (v, insets) -> {
-			int tB = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top;
 			int pB = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
+			int tB = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top;
 			v.setPadding(0, tB, 0, pB);
 			return WindowInsetsCompat.CONSUMED;
 		});

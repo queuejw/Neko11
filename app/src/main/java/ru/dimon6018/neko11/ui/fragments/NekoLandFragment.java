@@ -261,7 +261,7 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
                  new MaterialAlertDialogBuilder(context)
                          .setIcon(cat.createIcon(size, size).loadDrawable(context))
                          .setTitle(R.string.ops)
-                         .setMessage("Усилитель уже работает.")
+                         .setMessage(R.string.booster_actived_sub)
                          .setNegativeButton(android.R.string.ok, null)
                          .show();
              }
@@ -282,6 +282,7 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
             mPrefs.setMood(cat, b);
             NekoGeneralActivity.showSnackBar(a, Toast.LENGTH_SHORT, bottomSheetInternal);
             NekoWorker.notifyCat(requireContext(), cat, getResources().getString(R.string.meow));
+            mPrefs.addNCoins(26);
         } else {
             NekoWorker.notifyCat(requireContext(), cat, getResources().getString(R.string.shh));
 
@@ -292,7 +293,7 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
             new MaterialAlertDialogBuilder(context)
                     .setIcon(cat.createIcon(size, size).loadDrawable(context))
                     .setTitle(R.string.ops)
-                    .setMessage("Вашему коту не понравилось купаться. Попробуйте позже.")
+                    .setMessage(R.string.action1_fail)
                     .setNegativeButton(android.R.string.ok, null)
                     .show();
         }
@@ -309,6 +310,7 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
             mPrefs.setMood(cat, b);
             NekoGeneralActivity.showSnackBar("❤️", Toast.LENGTH_SHORT, bottomSheetInternal);
             NekoWorker.notifyCat(requireContext(), cat, getResources().getString(R.string.meow));
+            mPrefs.addNCoins(31);
         } else {
             NekoWorker.notifyCat(requireContext(), cat, getResources().getString(R.string.shh));
             String[] moods = {getString(R.string.mood1), getString(R.string.mood2), getString(R.string.mood3)};
@@ -317,7 +319,7 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
                 new MaterialAlertDialogBuilder(context)
                         .setIcon(cat.createIcon(size, size).loadDrawable(context))
                         .setTitle(R.string.ops)
-                        .setMessage("Ваш кот не очень любит, когда его гладят")
+                        .setMessage(R.string.action2_fail)
                         .setNegativeButton(android.R.string.ok, null)
                         .show();
         }
@@ -335,6 +337,7 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
            String[] statusArray = context.getResources().getStringArray(R.array.toy_messages);
            String a = statusArray[r.nextInt(context.getResources().getStringArray(R.array.toy_messages).length)];
            NekoWorker.notifyCat(requireContext(), cat, a);
+           mPrefs.addNCoins(16);
        } else {
            String[] moods = {getString(R.string.mood1), getString(R.string.mood2), getString(R.string.mood3)};
            String b = moods[r.nextInt(moods.length)];

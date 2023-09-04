@@ -31,8 +31,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="28dp"
-			android:layout_marginEnd="40dp"
-			android:layout_marginStart="15dp"
+			android:layout_marginEnd="24dp"
 			android:text="@string/dark_theme"
 			android:textSize="18sp"
 			app:layout_constraintEnd_toEndOf="parent"
@@ -45,12 +44,11 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="16dp"
-			android:layout_marginEnd="40dp"
-			android:layout_marginStart="15dp"
+			android:layout_marginEnd="24dp"
 			android:text="@string/dark_theme_auto"
 			android:textSize="18sp"
 			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintHorizontal_bias="0.254"
+			app:layout_constraintHorizontal_bias="1.0"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/white_switch" />
 
@@ -60,12 +58,13 @@
 			android:layout_height="41dp"
 			android:layout_marginTop="48dp"
 			android:layout_marginBottom="49dp"
+			android:gravity="start"
 			android:text="@string/dark_theme_auto_sub"
 			android:textSize="12sp"
 			app:fontFamily="@font/opensans_regular"
 			app:layout_constraintBottom_toBottomOf="@+id/linear_controls_enable"
 			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintHorizontal_bias="0.35"
+			app:layout_constraintHorizontal_bias="0.166"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="@+id/white_switch_auto"
 			app:layout_constraintVertical_bias="0.0" />
@@ -74,9 +73,8 @@
 			android:id="@+id/linear_controls_enable"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginEnd="40dp"
-			android:layout_marginStart="15dp"
 			android:layout_marginTop="60dp"
+			android:layout_marginEnd="24dp"
 			android:text="@string/compact_view"
 			android:textSize="18sp"
 			app:layout_constraintEnd_toEndOf="parent"
@@ -89,10 +87,9 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="16dp"
+			android:layout_marginEnd="24dp"
 			android:text="@string/controls_first"
 			android:textSize="18sp"
-			android:layout_marginEnd="40dp"
-			android:layout_marginStart="15dp"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0.254"
 			app:layout_constraintStart_toStartOf="parent"
@@ -101,8 +98,9 @@
 
 		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/is_first_controls_sub"
-			android:layout_width="331dp"
-			android:layout_height="49dp"
+			android:layout_width="match_parent"
+			android:gravity="start"
+			android:layout_height="wrap_content"
 			android:layout_marginTop="4dp"
 			android:text="@string/controls_first_sub"
 			android:textSize="12sp"
@@ -169,8 +167,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="108dp"
-			android:layout_marginEnd="40dp"
-			android:layout_marginStart="15dp"
+			android:layout_marginEnd="24dp"
 			android:text="@string/dynamic_color"
 			android:textSize="18sp"
 			app:layout_constraintEnd_toEndOf="parent"
@@ -180,8 +177,9 @@
 
 		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/dyncolor_sub"
-			android:layout_width="339dp"
-			android:layout_height="53dp"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="start"
 			android:text="@string/dynamic_color_sub"
 			android:textSize="12sp"
 			app:fontFamily="@font/opensans_regular"
@@ -193,10 +191,10 @@
 		<com.google.android.material.slider.Slider
 			android:id="@+id/max_cat_line_slider"
 			android:layout_width="match_parent"
-			android:layout_height="48dp"
-			android:layout_marginEnd="10dp"
+			android:layout_height="wrap_content"
 			android:layout_marginStart="10dp"
 			android:layout_marginTop="24dp"
+			android:layout_marginEnd="10dp"
 			android:stepSize="1.0"
 			android:valueFrom="2.0"
 			android:valueTo="4.0"
@@ -207,9 +205,9 @@
 
 		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/max_cat_line_title"
-			android:layout_width="0dp"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:gravity="center"
+			android:gravity="start"
 			android:text="@string/max_cat_line_title"
 			android:textSize="14sp"
 			app:fontFamily="@font/opensans_regular"
@@ -221,9 +219,9 @@
 		<com.google.android.material.slider.Slider
 			android:id="@+id/cat_size_slider"
 			android:layout_width="match_parent"
-			android:layout_height="48dp"
-			android:layout_marginEnd="10dp"
+			android:layout_height="wrap_content"
 			android:layout_marginStart="10dp"
+			android:layout_marginEnd="10dp"
 			android:stepSize="10.0"
 			android:valueFrom="100.0"
 			android:valueTo="200.0"
@@ -233,11 +231,11 @@
 
 		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/cat_size_title"
-			android:layout_width="0dp"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="1dp"
 			android:layout_marginBottom="56dp"
-			android:gravity="center"
+			android:gravity="start"
 			android:text="@string/cat_size_title"
 			android:textSize="14sp"
 			app:fontFamily="@font/opensans_regular"
@@ -252,11 +250,11 @@
 			android:id="@+id/opensettingsbtn"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="24dp"
+			android:layout_marginTop="4dp"
 			android:text="@string/open_settings"
 			app:icon="@drawable/ic_open_in"
 			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintHorizontal_bias="0.914"
+			app:layout_constraintHorizontal_bias="0.909"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/recovery_btn" />
 
@@ -264,17 +262,17 @@
 			android:id="@+id/get_neko_info"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="8dp"
+			android:layout_marginTop="9dp"
 			android:text="@string/details"
 			android:textSize="14sp"
 			app:fontFamily="@font/opensans_regular"
 			app:icon="@drawable/ic_info"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintHorizontal_bias="0.948"
+			app:layout_constraintHorizontal_bias="0.498"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/opensettingsbtn"
-			app:layout_constraintVertical_bias="0.083" />
+			app:layout_constraintVertical_bias="0.025" />
 
 		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/sorttitle"
@@ -295,8 +293,8 @@
 			android:id="@+id/recovery_btn"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="212dp"
 			android:layout_marginTop="8dp"
+			android:layout_marginBottom="212dp"
 			android:text="@string/backup_title"
 			android:textSize="14sp"
 			app:fontFamily="@font/opensans_regular"
@@ -306,56 +304,61 @@
 			app:layout_constraintHorizontal_bias="0.944"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/sortgroup"
-			app:layout_constraintVertical_bias="0.0" />
+			app:layout_constraintVertical_bias="0.046" />
 
 		<androidx.constraintlayout.widget.Guideline
 			android:id="@+id/guideline7"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:orientation="horizontal"
-			app:layout_constraintGuide_begin="1272dp" />
+			app:layout_constraintGuide_begin="1180dp" />
 
 		<com.google.android.material.card.MaterialCardView
 			android:layout_width="match_parent"
 			android:layout_height="165dp"
+			app:cardBackgroundColor="?attr/colorPrimary"
 			app:cardCornerRadius="0dp"
-			app:cardBackgroundColor="?attr/colorPrimaryVariant"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.0"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/get_neko_info">
+			app:layout_constraintTop_toBottomOf="@+id/get_neko_info"
+			app:layout_constraintVertical_bias="0.263">
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
 				android:orientation="vertical">
+
 				<com.google.android.material.textview.MaterialTextView
 					android:layout_width="wrap_content"
-					android:textColor="@color/white"
-					android:textSize="13sp"
-					android:layout_marginTop="14dp"
+					android:layout_height="wrap_content"
 					android:layout_marginStart="28dp"
+					android:layout_marginTop="14dp"
 					android:layout_marginEnd="28dp"
-					android:layout_height="wrap_content"
-					android:text="@string/AD_metrolnchr"/>
-			<RelativeLayout
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:orientation="horizontal">
-
-				<com.google.android.material.button.MaterialButton
-					app:strokeColor="@color/white"
-					android:id="@+id/ad_btn"
-					app:strokeWidth="2dp"
-					app:backgroundTint="?attr/colorPrimaryDark"
+					android:text="@string/AD_metrolnchr"
 					android:textColor="@color/white"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_alignParentEnd="true"
-					android:layout_marginEnd="36dp"
-					android:text="@string/AD_try"
-					app:cornerRadius="0dp" />
-			</RelativeLayout>
+					android:textSize="13sp" />
+
+				<RelativeLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:orientation="horizontal">
+
+					<com.google.android.material.button.MaterialButton
+						android:id="@+id/ad_btn"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_alignParentEnd="true"
+						android:layout_marginEnd="36dp"
+						android:text="@string/AD_try"
+						android:textColor="@color/white"
+						app:backgroundTint="?attr/colorPrimary"
+						app:cornerRadius="0dp"
+						app:strokeColor="@color/white"
+						app:strokeWidth="2dp" />
+				</RelativeLayout>
 			</LinearLayout>
+
 		</com.google.android.material.card.MaterialCardView>
 	</androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

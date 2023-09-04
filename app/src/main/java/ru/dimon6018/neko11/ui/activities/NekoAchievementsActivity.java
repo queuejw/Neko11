@@ -23,6 +23,7 @@ import androidx.core.view.WindowCompat;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.elevation.SurfaceColors;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -72,7 +73,7 @@ public class NekoAchievementsActivity extends AppCompatActivity implements PrefS
 		progressSetup();
 
 		WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
-
+		getWindow().setNavigationBarColor(SurfaceColors.SURFACE_2.getColor(this));
 		Toolbar toolbar = findViewById(R.id.toolbarachiev);
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayUseLogoEnabled(true);
@@ -252,9 +253,9 @@ public class NekoAchievementsActivity extends AppCompatActivity implements PrefS
 					for (int i = 0; i >= cycles; i++) {
 						Cat cat = NekoWorker.newRandomCat(this, mPrefs);
 						mPrefs.addCat(cat);
-						mPrefs.addcatActionsUseAllTime(1);
 					}
 					mPrefs.addMoodBooster(mb);
+					mPrefs.addcatActionsUseAllTime(cycles);
 					s = getString(R.string.box_win3, cycles, mb);
 				}
 				case 4 -> {
@@ -279,6 +280,7 @@ public class NekoAchievementsActivity extends AppCompatActivity implements PrefS
 				}
 				case 6 -> {
 					Cat cat = NekoWorker.newRandomCat(this, mPrefs);
+					mPrefs.addcatActionsUseAllTime(1);
 					mPrefs.addCat(cat);
 					s = getString(R.string.box_win6);
 				}

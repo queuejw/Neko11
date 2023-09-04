@@ -38,6 +38,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.color.MaterialColors;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.elevation.SurfaceColors;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.Snackbar;
@@ -106,6 +107,7 @@ public class NekoSettingsActivity extends AppCompatActivity implements PrefState
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+		getWindow().setNavigationBarColor(SurfaceColors.SURFACE_2.getColor(this));
 	    nekoprefs = getSharedPreferences(SETTINGS, MODE_PRIVATE);
 		
 		new Thread(() -> {

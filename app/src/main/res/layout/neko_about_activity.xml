@@ -27,23 +27,15 @@
         android:id="@+id/appbarlayoutabout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-		android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            style="?attr/collapsingToolbarLayoutMediumStyle"
-            android:id="@+id/collapsingtoolbarlayoutabout"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbarabout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/collapsingToolbarLayoutMediumSize"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            android:layout_height="?attr/actionBarSize"
+            android:fitsSystemWindows="true"
+            app:title="@string/about_neko" />
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbarabout"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:elevation="0dp"
-                app:layout_collapseMode="pin"
-                app:title="@string/about_neko" />
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
