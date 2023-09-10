@@ -50,7 +50,6 @@ import ru.dimon6018.neko11.controls.CatControlsFragment
 import ru.dimon6018.neko11.ui.activities.NekoAboutActivity
 import ru.dimon6018.neko11.ui.activities.NekoAchievementsActivity
 import ru.dimon6018.neko11.ui.activities.NekoSettingsActivity
-import ru.dimon6018.neko11.ui.activities.NekoWarning
 import ru.dimon6018.neko11.ui.fragments.NekoLandFragment
 import ru.dimon6018.neko11.workers.Cat
 import ru.dimon6018.neko11.workers.NekoWorker
@@ -71,12 +70,6 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val nekoprefs = getSharedPreferences(NekoSettingsActivity.SETTINGS, MODE_PRIVATE)
-        if (!nekoprefs.getBoolean("backupFinished", false) && mPrefs?.cats != null) {
-            startActivity(Intent(this, NekoWarning::class.java)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                            or Intent.FLAG_ACTIVITY_CLEAR_TASK))
-            finish()
-        } else {
             setupState()
             Thread {
                 setupDarkMode()
@@ -107,7 +100,6 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
             } else {
                 navbar?.selectedItemId = R.id.controls
             }
-        }
         viewPager?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
