@@ -204,6 +204,10 @@
     <string name="AD_try">Попробовать</string>
     <string name="action1_fail">Кот укусил тебя при попытке его искупать. Попробуй ещё раз =)</string>
     <string name="action2_fail">Коту не понравилось, что его гладят и он укусил тебя. Попробуй ещё раз =)</string>
+    <string name="ncoins_err">Не хватает NCoins. Поймайте котов, чтобы получать их</string>
+    <string name="new_cat_shop">Новый котик теперь живёт у вас. Проверьте его в коллекции</string>
+    <string name="save_all_cats_done">Все ваши котики были сохранены в виде картинок. Посмотрите их в галерее.</string>
+    <string name="save_title_all">Сохр. всех</string>
 
     <integer-array name="food_intervals">
         <item>0</item>

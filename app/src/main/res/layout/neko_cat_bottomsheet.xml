@@ -169,6 +169,41 @@
 				android:layout_weight="1" />
 
 			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/save_sheet_all"
+				style="?attr/materialCardViewFilledStyle"
+				android:layout_width="80dp"
+				android:layout_height="74dp"
+				android:alpha="0.86"
+				app:cardCornerRadius="16dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:orientation="vertical">
+
+					<ImageView
+						android:layout_width="match_parent"
+						android:layout_height="53dp"
+						android:src="@drawable/ic_save" />
+
+					<com.google.android.material.textview.MaterialTextView
+						android:id="@+id/title_save_all"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center"
+						android:text="@string/save_title_all"
+						android:textSize="13sp" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+			<Space
+				android:layout_width="80dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1" />
+
+			<com.google.android.material.card.MaterialCardView
 				android:id="@+id/boosters_sheet"
 				style="?attr/materialCardViewFilledStyle"
 				android:layout_width="80dp"

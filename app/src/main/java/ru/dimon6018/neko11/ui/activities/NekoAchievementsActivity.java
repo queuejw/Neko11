@@ -203,14 +203,14 @@ public class NekoAchievementsActivity extends AppCompatActivity implements PrefS
 		String mes;
 		Drawable ico;
 		if (mPrefs.getNCoins() < 150) {
-			mes = "Не хватает NCoins. Поймайте котов, чтобы получать их";
+			 mes = getString(R.string.ncoins_err);
 			 ico = AppCompatResources.getDrawable(this, R.drawable.key);
 		} else {
 			Cat cat = Cat.create(this);
 			mPrefs.addCat(cat);
 			mPrefs.removeNCoins(150);
 			ico = new BitmapDrawable(getResources(), cat.createBitmap(24,24));
-			mes = "Новый котик теперь живёт у вас. Проверьте его в коллекции";
+			mes = getString(R.string.new_cat_shop);
 		}
 		new MaterialAlertDialogBuilder(this)
 				.setTitle(R.string.achievements)
@@ -223,7 +223,7 @@ public class NekoAchievementsActivity extends AppCompatActivity implements PrefS
 		if (mPrefs.getNCoins() < 300) {
 			new MaterialAlertDialogBuilder(this)
 					.setTitle(R.string.achievements)
-					.setMessage("Не хватает NCoins. Поймайте котов, чтобы получать их")
+					.setMessage(R.string.ncoins_err)
 					.setIcon(R.drawable.key)
 					.setNegativeButton(android.R.string.ok, null
 					).show();
@@ -250,7 +250,7 @@ public class NekoAchievementsActivity extends AppCompatActivity implements PrefS
 				case 3 -> {
 					int cycles = r.nextInt(3);
 					int mb = r.nextInt(3) + 1;
-					for (int i = 0; i >= cycles; i++) {
+					for (int i = 0; i <= cycles; i++) {
 						Cat cat = NekoWorker.newRandomCat(this, mPrefs);
 						mPrefs.addCat(cat);
 					}

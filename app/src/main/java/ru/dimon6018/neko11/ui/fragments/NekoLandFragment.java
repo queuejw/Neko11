@@ -220,8 +220,12 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
 	});
     bottomSheetInternal.findViewById(R.id.save_sheet).setOnClickListener(v -> {
 	  bottomsheet.dismiss();
-         checkPerms(cat, context);
+      checkPerms(cat, context, false);
 	 });
+    bottomSheetInternal.findViewById(R.id.save_sheet_all).setOnClickListener(v -> {
+        bottomsheet.dismiss();
+        checkPerms(cat, context, true);
+    });
      bottomSheetInternal.findViewById(R.id.boosters_sheet).setOnClickListener(view -> {
          MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(context);
          View v = this.getLayoutInflater().inflate(R.layout.cat_boosters_dialog, null);
@@ -325,7 +329,7 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
         }
         mood.setText(getString(R.string.mood, mPrefs.getMoodPref(cat)));
      });
-  touch.setOnClickListener(view -> {
+   touch.setOnClickListener(view -> {
       mPrefs.setCanInteract(cat, mPrefs.CanInteract(cat) - 1);
       updateCatActions(cat, wash, caress, touch, actionsLimit);
        Random r = new Random();
@@ -365,7 +369,7 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
             actionsLimit.setVisibility(View.VISIBLE);
         }
     }
-    private void checkPerms(Cat cat, Context context) {
+    private void checkPerms(Cat cat, Context context, boolean iNeedSaveAllCats) {
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 if (ActivityCompat.checkSelfPermission(context, MANAGE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
@@ -375,7 +379,6 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
                             STORAGE_PERM_REQUEST);
                     return;
                 }
-                shareCat(cat);
             } else {
                     if (ActivityCompat.checkSelfPermission(context, WRITE_EXTERNAL_STORAGE)
                             != PackageManager.PERMISSION_GRANTED) {
@@ -385,10 +388,32 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
                                 STORAGE_PERM_REQUEST);
                         return;
                     }
-                    shareCat(cat);
-                }
             }
-	private void showCatRemoveDialog(Cat cat, Context context) {
+        if(!iNeedSaveAllCats) {
+            shareCat(cat, true);
+        } else {
+            saveAllCatsToGallery();
+        }
+    }
+
+    private void saveAllCatsToGallery() {
+        List<Cat> allCats = mPrefs.getCats();
+        new Thread(() -> {
+        for(int i = 0; i <= allCats.size() - 1; i++) {
+            Cat cat = mPrefs.getCats().get(i);
+            shareCat(cat, false);
+        }
+        recyclerView.post(() ->
+                 new MaterialAlertDialogBuilder(getContext())
+                .setIcon(getContext().getDrawable(R.drawable.ic_success))
+                .setTitle(R.string.save_title)
+                .setMessage(R.string.save_all_cats_done)
+                .setPositiveButton(android.R.string.ok, null)
+                .show());
+        }).start();
+    }
+
+    private void showCatRemoveDialog(Cat cat, Context context) {
         final int size = context.getResources().getDimensionPixelSize(android.R.dimen.app_icon_size);
             new MaterialAlertDialogBuilder(context)
                     .setIcon(cat.createIcon(size, size).loadDrawable(context))
@@ -449,7 +474,7 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
     }
 
 //save cat as PNG
-    private void shareCat(Cat cat) {
+    private void shareCat(Cat cat, boolean iShouldShowDialog) {
         final File dir = new File(
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
                 "Cats");
@@ -468,19 +493,23 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
                         new String[]{png.toString()},
                         new String[]{"image/png"},
                         null);
-                new MaterialAlertDialogBuilder(requireActivity())
-                        .setTitle(R.string.app_name_neko)
-                        .setIcon(R.drawable.ic_success)
-                        .setMessage(getString(R.string.picture_saved_successful, cat.getName()))              
-                        .setNegativeButton(android.R.string.ok, null)
-                        .show();
+                if(iShouldShowDialog) {
+                    new MaterialAlertDialogBuilder(requireActivity())
+                            .setTitle(R.string.app_name_neko)
+                            .setIcon(R.drawable.ic_success)
+                            .setMessage(getString(R.string.picture_saved_successful, cat.getName()))
+                            .setNegativeButton(android.R.string.ok, null)
+                            .show();
+                }
             } catch (IOException e) {
-                new MaterialAlertDialogBuilder(requireActivity())
-                        .setTitle(R.string.app_name_neko)
-                        .setIcon(R.drawable.ic_warning)
-                        .setMessage(R.string.permission_denied)
-                        .setNegativeButton(android.R.string.ok, null)
-                        .show();
+                if(iShouldShowDialog) {
+                    new MaterialAlertDialogBuilder(requireActivity())
+                            .setTitle(R.string.app_name_neko)
+                            .setIcon(R.drawable.ic_warning)
+                            .setMessage(R.string.permission_denied)
+                            .setNegativeButton(android.R.string.ok, null)
+                            .show();
+                }
             }
         }
     }
@@ -490,7 +519,7 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
                                            @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == STORAGE_PERM_REQUEST) {
             if (mPendingShareCat != null) {
-                shareCat(mPendingShareCat);
+                shareCat(mPendingShareCat, true);
                 mPendingShareCat = null;
             }
         }

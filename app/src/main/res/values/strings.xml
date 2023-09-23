@@ -203,6 +203,10 @@
     <string name="AD_try">Try</string>
     <string name="action1_fail">The cat bit you while trying to bathe him. Try again =)</string>
     <string name="action2_fail">The cat didn\'t like being stroked and bit you. Try again =)</string>
+    <string name="ncoins_err">You don\'t have enough NCoins. Catch cats to get them</string>
+    <string name="new_cat_shop">A new cat is now living with you. Check him out in the collection</string>
+    <string name="save_all_cats_done">All your cat\'s have been saved as pictures. Check them out in the gallery.</string>
+    <string name="save_title_all">Save all</string>
     <integer-array name="food_intervals">
         <item>0</item>
         <item>15</item>

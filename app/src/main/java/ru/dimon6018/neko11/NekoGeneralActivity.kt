@@ -69,7 +69,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
     private var needWelcomeDialog = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val nekoprefs = getSharedPreferences(NekoSettingsActivity.SETTINGS, MODE_PRIVATE)
+            val nekoprefs = getSharedPreferences(NekoSettingsActivity.SETTINGS, MODE_PRIVATE)
             setupState()
             Thread {
                 setupDarkMode()
@@ -233,7 +233,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                 .setIcon(R.drawable.key)
                 .setView(view)
                 .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(android.R.string.ok) { dialog: DialogInterface?, which: Int ->
+                .setPositiveButton(android.R.string.ok) { _: DialogInterface?, _: Int ->
                     promo = text.text.toString()
                     checkPromo(promo!!)
                 }.show()
@@ -249,7 +249,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         if (promo == nekoprefs!!.getString("code1", "")) {
             if (code1availability) {
                 showSnackBar(getString(R.string.code_is_true), Snackbar.LENGTH_LONG, navbar)
-                mPrefs!!.addNCoins(202)
+                mPrefs!!.addNCoins(301)
                 mPrefs!!.addLuckyBooster(1)
                 mPrefs!!.addMoodBooster(1)
                 editor.putBoolean("code1availability", false)
@@ -259,7 +259,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         } else if (promo == nekoprefs!!.getString("code2", "")) {
             if (code2availability) {
                 showSnackBar(getString(R.string.code_is_true), Snackbar.LENGTH_LONG, navbar)
-                mPrefs!!.addNCoins(400)
+                mPrefs!!.addNCoins(650)
                 mPrefs!!.addMoodBooster(3)
                 mPrefs!!.addLuckyBooster(5)
                 editor.putBoolean("code2availability", false)
@@ -269,7 +269,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         } else if (promo == nekoprefs!!.getString("code3", "")) {
             if (code3availability) {
                 showSnackBar(getString(R.string.code_is_true), Snackbar.LENGTH_LONG, navbar)
-                mPrefs!!.addNCoins(1000)
+                mPrefs!!.addNCoins(1500)
                 mPrefs!!.addMoodBooster(6)
                 mPrefs!!.addLuckyBooster(7)
                 editor.putBoolean("code3availability", false)
@@ -326,7 +326,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                             .setIcon(R.drawable.ic_fullcat_icon)
                             .setMessage(R.string.welcome_dialog_part3)
                             .setCancelable(false)
-                            .setPositiveButton(android.R.string.ok) { dialog: DialogInterface?, id: Int ->
+                            .setPositiveButton(android.R.string.ok) { _: DialogInterface?, _: Int ->
                                 showSnackBar(getString(R.string.welcome_dialog_final), Snackbar.LENGTH_LONG, navbar)
                                 setCurrentTheme(0)
                             }.show()
@@ -369,7 +369,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                 .setCancelable(false)
                 .setMessage(R.string.welcome_dialog)
                 .setPositiveButton(R.string.get_prize
-                ) { dialog: DialogInterface?, id: Int -> gift }.show()
+                ) { _: DialogInterface?, _: Int -> gift }.show()
     }
 
     private val gift: Unit
@@ -387,7 +387,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                     .setMessage(R.string.welcome_dialog_part2)
                     .setCancelable(false)
                     .setPositiveButton(android.R.string.ok
-                    ) { dialog: DialogInterface?, id: Int -> showSnackBar(getString(R.string.open_controls_tip), Snackbar.LENGTH_LONG, navbar) }.show()
+                    ) { _: DialogInterface?, _: Int -> showSnackBar(getString(R.string.open_controls_tip), Snackbar.LENGTH_LONG, navbar) }.show()
         }
 
     private fun setCurrentTheme(state: Int) {
