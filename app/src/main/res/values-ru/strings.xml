@@ -208,6 +208,7 @@
     <string name="new_cat_shop">Новый котик теперь живёт у вас. Проверьте его в коллекции</string>
     <string name="save_all_cats_done">Все ваши котики были сохранены в виде картинок. Посмотрите их в галерее.</string>
     <string name="save_title_all">Сохр. всех</string>
+    <string name="save_all_cats_q">Вы уверены, что хотите сохранить ВСЕХ котов в виде картинок?</string>
 
     <integer-array name="food_intervals">
         <item>0</item>

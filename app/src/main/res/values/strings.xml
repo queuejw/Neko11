@@ -207,6 +207,7 @@
     <string name="new_cat_shop">A new cat is now living with you. Check him out in the collection</string>
     <string name="save_all_cats_done">All your cat\'s have been saved as pictures. Check them out in the gallery.</string>
     <string name="save_title_all">Save all</string>
+    <string name="save_all_cats_q">Are you sure you want to keep ALL the cats as pictures?</string>
     <integer-array name="food_intervals">
         <item>0</item>
         <item>15</item>

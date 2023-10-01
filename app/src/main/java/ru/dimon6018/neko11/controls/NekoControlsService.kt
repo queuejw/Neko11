@@ -186,12 +186,12 @@ class NekoControlsService : ControlsProviderService(), PrefState.PrefsListener {
             }
             CONTROL_ID_TOY -> {
                 controls[CONTROL_ID_TOY] =
-                if (prefs.getToyState() == 0) {
-                    prefs.setToyState(1)
+                if (prefs.toyState == 0) {
+                    prefs.toyState = 1
                     NekoToyWorker.scheduleToyWork(this)
                     makeToyControl(currentToyIcon(), true)
                 } else {
-                    prefs.setToyState(0)
+                    prefs.toyState = 0
                     NekoToyWorker.stopToyWork(this)
                     makeToyControl(currentToyIcon(), false)
                 }
@@ -211,7 +211,7 @@ class NekoControlsService : ControlsProviderService(), PrefState.PrefsListener {
     }
 
     private fun pushControlChanges() {
-        Thread() {
+        Thread {
             publishers.forEach { it.refresh() }
         }.start()
     }

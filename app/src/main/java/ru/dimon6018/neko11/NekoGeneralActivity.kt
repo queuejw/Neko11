@@ -314,13 +314,13 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
             } else if (item.itemId == R.id.controls) {
                 if (checkState() != -1) {
                     viewPager!!.currentItem = 1
-                    navbar?.animate()?.translationY(0f)?.setDuration(200);
+                    navbar?.animate()?.translationY(0f)?.setDuration(200)
                 } else {
                     viewPager!!.currentItem = 1
                     val editor = nekoprefs!!.edit()
                     editor.putInt("state", 0)
                     editor.apply()
-                    navbar?.animate()?.translationY(0f)?.setDuration(200);
+                    navbar?.animate()?.translationY(0f)?.setDuration(200)
                     MaterialAlertDialogBuilder(this)
                             .setTitle(R.string.app_name_neko)
                             .setIcon(R.drawable.ic_fullcat_icon)

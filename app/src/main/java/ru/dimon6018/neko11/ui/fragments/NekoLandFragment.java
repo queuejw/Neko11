@@ -223,8 +223,16 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
       checkPerms(cat, context, false);
 	 });
     bottomSheetInternal.findViewById(R.id.save_sheet_all).setOnClickListener(v -> {
-        bottomsheet.dismiss();
-        checkPerms(cat, context, true);
+        new MaterialAlertDialogBuilder(context)
+                        .setIcon(cat.createIcon(size, size).loadDrawable(context))
+                        .setTitle(R.string.save_title_all)
+                        .setMessage(R.string.save_all_cats_q)
+                        .setPositiveButton(android.R.string.yes, ((dialogInterface, i) -> {
+                            bottomsheet.dismiss();
+                            checkPerms(cat, context, true);
+                        }))
+                        .setNegativeButton(android.R.string.no, null)
+                        .show();
     });
      bottomSheetInternal.findViewById(R.id.boosters_sheet).setOnClickListener(view -> {
          MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(context);
@@ -355,8 +363,7 @@ public class NekoLandFragment extends Fragment implements PrefState.PrefsListene
                        .show();
        }
        mood.setText(getString(R.string.mood, mPrefs.getMoodPref(cat)));
-     });
-	 bottomsheet.show();
+     }); bottomsheet.show();
     }
     private void updateCatActions(Cat cat, View wash, View caress, View touch, View actionsLimit) {
         if(mPrefs.CanInteract(cat) <= 0) {
