@@ -184,12 +184,12 @@
     <string name="booster1_sub">Increases a cat\'s happiness level to maximum</string>
     <string name="booster2_title">Lucky pill</string>
     <string name="booster2_sub">Cats bring happiness into the home. Now the new cat will come faster</string>
-    <string name="box_win1">You opened the box and you got: %d NCoins, %d Lucky pills</string>
-    <string name="box_win2">You opened the box and you got: %d NCoins, %d Vitamin of happiness.</string>
-    <string name="box_win3">You opened the box and you got: %d new cats, %d Vitamin of happiness.</string>
-    <string name="box_win4">You opened the box and you got: 1 new cat, %d Lucky pill.</string>
+    <string name="box_win1">You opened the box, and you got: %d NCoins, %d Lucky pills</string>
+    <string name="box_win2">You opened the box, and you got: %d NCoins, %d Vitamin of happiness.</string>
+    <string name="box_win3">You opened the box, and you got: %d new cats, %d Vitamin of happiness.</string>
+    <string name="box_win4">You opened the box, and you got: 1 new cat, %d Lucky pill.</string>
     <string name="box_win5">Jackpot! You got: 1 new cat, %d NCoins, %d Lucky pill and %d Vitamin of happiness.</string>
-    <string name="box_win6">You opened the box and you got: 1 new cat.</string>
+    <string name="box_win6">You opened the box, and you got: 1 new cat.</string>
     <string name="box_error">We were unable to open this box. We\'ve returned 300 NCoins</string>
     <string name="telegram">Our channel in Telegram</string>
     <string name="my_stats">Stats</string>
@@ -208,6 +208,8 @@
     <string name="save_all_cats_done">All your cat\'s have been saved as pictures. Check them out in the gallery.</string>
     <string name="save_title_all">Save all</string>
     <string name="save_all_cats_q">Are you sure you want to keep ALL the cats as pictures?</string>
+    <string name="hello">Hello!</string>
+    <string name="activation_tip_new">Hi! Activate the game to continue (scroll the circle 3 times). =)</string>
     <integer-array name="food_intervals">
         <item>0</item>
         <item>15</item>

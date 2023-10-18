@@ -17,10 +17,6 @@
 
 package ru.dimon6018.neko11.workers;
 
-import static ru.dimon6018.neko11.controls.CatControlsFragment.randomWater;
-import static ru.dimon6018.neko11.ui.fragments.NekoLandFragment.CHAN_ID;
-import static ru.dimon6018.neko11.workers.Cat.PURR;
-
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -28,19 +24,21 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
+import ru.dimon6018.neko11.R;
 
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import ru.dimon6018.neko11.R;
+import static ru.dimon6018.neko11.controls.CatControlsFragment.randomWater;
+import static ru.dimon6018.neko11.ui.fragments.NekoLandFragment.CHAN_ID;
+import static ru.dimon6018.neko11.workers.Cat.PURR;
 
 public class NekoWorker extends Worker {
 

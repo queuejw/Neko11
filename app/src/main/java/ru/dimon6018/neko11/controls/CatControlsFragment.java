@@ -16,8 +16,6 @@
 
 package ru.dimon6018.neko11.controls;
 
-import static ru.dimon6018.neko11.ui.activities.NekoSettingsActivity.SETTINGS;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -27,33 +25,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
-
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
-
-import java.util.Random;
-
 import ru.dimon6018.neko11.R;
 import ru.dimon6018.neko11.workers.NekoToyWorker;
 import ru.dimon6018.neko11.workers.NekoWorker;
 import ru.dimon6018.neko11.workers.PrefState;
+
+import java.util.Random;
+
+import static ru.dimon6018.neko11.ui.activities.NekoSettingsActivity.SETTINGS;
 
 public class CatControlsFragment extends Fragment implements PrefState.PrefsListener {
 
     MaterialCardView foodcard;
     MaterialCardView watercard;
     MaterialCardView toycard;
-
     ImageView foodstatusimg;
     ImageView toystatusimg;
     ImageView waterstatusimg;
-
     MaterialTextView foodstatetxt;
     MaterialTextView toystatus;
     MaterialTextView toystatetxt;
@@ -61,19 +56,17 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
     MaterialTextView foodsub;
     MaterialTextView waterstatesub;
     MaterialTextView waterstatetxt;
-
     MaterialTextView booster_actived_sub;
-	
     private PrefState mPrefs;
-	SharedPreferences nekoprefs;
-	
-    public final static int randomfood = new Random().nextInt((244 - 10) + 1) + 10;
+    public static boolean showTipAgain = true;
+    SharedPreferences nekoprefs;
+    public final static int randomfood = new Random().nextInt((248 - 10) + 1) + 10;
     public final static int foodstaterandom = new Random().nextInt((11 - 1) + 1) + 1;
-    public final static int randomWater = new Random().nextInt((121 - 12) + 1) + 5;
+    public final static int randomWater = new Random().nextInt((150 - 12) + 1) + 5;
 
     static int[] TOY_ICONS = {R.drawable.ic_toy_ball, R.drawable.ic_toy_fish, R.drawable.ic_toy_mouse, R.drawable.ic_toy_laser};
     static int toyiconint = TOY_ICONS[new Random().nextInt(TOY_ICONS.length)];
-	
+
     @SuppressLint("SuspiciousIndentation")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -81,12 +74,15 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
         nekoprefs = requireActivity().getSharedPreferences(SETTINGS, Context.MODE_PRIVATE);
 
         boolean LINEAR_CONTROL = nekoprefs.getBoolean("linear_control", false);
-		int state = nekoprefs.getInt("state", 1);
         int layout;
         if (LINEAR_CONTROL) {
             layout = R.layout.fragment_cat_controls_linear;
         } else {
             layout = R.layout.fragment_cat_controls;
+        }
+        if (nekoprefs.getInt("state", 1) == 2) {
+            showTipAgain = false;
+            createTipDialog(getContext());
         }
         View view = inflater.inflate(layout, container, false);
         mPrefs = new PrefState(getContext());
@@ -96,8 +92,8 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
         toystatusimg.setImageResource(toyiconint);
         foodcard = view.findViewById(R.id.card_food);
         watercard = view.findViewById(R.id.card_water);
-        toycard = view.findViewById(R.id.card_toy);	
-	    foodstatusimg = view.findViewById(R.id.food_state_view);
+        toycard = view.findViewById(R.id.card_toy);
+        foodstatusimg = view.findViewById(R.id.food_state_view);
         toystatusimg = view.findViewById(R.id.toy_state_img);
         toystatus = view.findViewById(R.id.toy_status);
         waterstatusimg = view.findViewById(R.id.water_state_view);
@@ -108,9 +104,6 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
         foodsub = view.findViewById(R.id.foodsub);
         waterstatesub = view.findViewById(R.id.water_state_sub);
         booster_actived_sub = view.findViewById(R.id.booster_actived_sub);
-		if(state == 2) {
-		createTipDialog();	
-		}
         return view;
     }
 
@@ -118,11 +111,15 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Context context = getContext();
+        setupTiles(context);
+        updateTiles();
+    }
+    private void setupTiles(Context context) {
         foodcard.setOnClickListener(v -> {
-			startAnim(foodcard);
+            startAnim(foodcard);
             int currentstate = mPrefs.getFoodState();
             if (currentstate == 0) {
-                if(PrefState.isLuckyBoosterActive) {
+                if (PrefState.isLuckyBoosterActive) {
                     NekoWorker.scheduleFoodWork(context, randomfood / 4);
                 } else {
                     NekoWorker.scheduleFoodWork(context, randomfood);
@@ -135,10 +132,10 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
             updateTiles();
         });
         toycard.setOnClickListener(v -> {
-			startAnim(toycard);
+            startAnim(toycard);
             if (mPrefs.getToyState() == 0) {
-                  mPrefs.setToyState(1);
-                  NekoToyWorker.scheduleToyWork(context);
+                mPrefs.setToyState(1);
+                NekoToyWorker.scheduleToyWork(context);
             } else {
                 mPrefs.setToyState(0);
                 NekoToyWorker.stopToyWork(context);
@@ -146,26 +143,23 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
             updateTiles();
         });
         watercard.setOnClickListener(v -> {
-			startAnim(watercard);
+            startAnim(watercard);
             mPrefs.addWaterMl(Math.round(mPrefs.getWaterState()));
             mPrefs.setWaterState(200f);
             updateTiles();
-		});
-        watercard.setOnLongClickListener(v -> {
-			    startAnim(watercard);
-                mPrefs.addWaterMl(Math.round(mPrefs.getWaterState()));
-                mPrefs.setWaterState(0f);
-                updateTiles();
-                return true;
         });
-        updateTiles();
+        watercard.setOnLongClickListener(v -> {
+            startAnim(watercard);
+            mPrefs.addWaterMl(Math.round(mPrefs.getWaterState()));
+            mPrefs.setWaterState(0f);
+            updateTiles();
+            return true;
+        });
     }
-
     @Override
     public void onPrefsChanged() {
         updateTiles();
     }
-
     private void updateTiles() {
      //update food card
         if (mPrefs.getFoodState() == 0) {
@@ -211,11 +205,13 @@ public class CatControlsFragment extends Fragment implements PrefState.PrefsList
 	view.startAnimation(AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_out));
 	view.startAnimation(AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in));
 	}
-	private void createTipDialog() {
-	new MaterialAlertDialogBuilder(getContext())
+	private void createTipDialog(Context context) {
+        if(!showTipAgain) {
+            new MaterialAlertDialogBuilder(context)
                     .setTitle(R.string.app_name_neko)
                     .setIcon(R.drawable.ic_bowl)
                     .setMessage(R.string.welcome_dialog_part3)
                     .setPositiveButton(android.R.string.ok, null).show();
+        }
 	}
 }

@@ -23,11 +23,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
-import android.view.ContextThemeWrapper
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -47,6 +43,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
 import ru.dimon6018.neko11.activation.NekoActivationActivity
 import ru.dimon6018.neko11.controls.CatControlsFragment
+import ru.dimon6018.neko11.controls.CatControlsFragment.showTipAgain
 import ru.dimon6018.neko11.ui.activities.NekoAboutActivity
 import ru.dimon6018.neko11.ui.activities.NekoAchievementsActivity
 import ru.dimon6018.neko11.ui.activities.NekoSettingsActivity
@@ -103,7 +100,12 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         viewPager?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                if (position == 0) navbar?.selectedItemId = R.id.collection else navbar?.selectedItemId = R.id.controls
+                if (position == 0) {
+                    navbar?.selectedItemId = R.id.collection
+                } else {
+                    checkTwoState()
+                    navbar?.selectedItemId = R.id.controls
+                }
             }
         })
     }
@@ -203,7 +205,6 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 }
             }
-
             2 -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     val uimanager = getSystemService(UI_MODE_SERVICE) as UiModeManager
@@ -298,8 +299,6 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
             showSnackBar("Hi!", Snackbar.LENGTH_SHORT, navbar)
         } else if (promo == "null" || promo == "none" || promo == "") {
             showSnackBar("no.", Snackbar.LENGTH_SHORT, navbar)
-        } else if (promo == "how are you") {
-            showSnackBar("please help me!!!!", Snackbar.LENGTH_SHORT, navbar)
         } else {
             showSnackBar(getString(R.string.wrong_code), Snackbar.LENGTH_LONG, navbar)
         }
@@ -344,24 +343,29 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
             WindowInsetsCompat.CONSUMED
         }
     }
-
+    fun checkTwoState() {
+        if (nekoprefs?.getInt("state", 1) == 2) {
+            nekoprefs?.edit()?.putInt("state", 0)?.apply()
+            showTipAgain = false
+        }
+    }
     private fun setupState() {
         when (checkState()) {
             0 -> {}
-            1 -> startActivity(Intent(this, NekoActivationActivity::class.java)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                            or Intent.FLAG_ACTIVITY_CLEAR_TASK))
+            1 -> {
+                startActivity(Intent(this, NekoActivationActivity::class.java)
+                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                or Intent.FLAG_ACTIVITY_CLEAR_TASK))
+            }
 
             2 -> needWelcomeDialog = true
         }
     }
-
     private fun checkState(): Int {
         nekoprefs = getSharedPreferences(NekoSettingsActivity.SETTINGS, MODE_PRIVATE)
         state = nekoprefs!!.getInt("state", 1)
         return state
     }
-
     private fun welcomeDialog() {
         MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.app_name_neko)
@@ -408,6 +412,9 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
     }
 
     class NekoAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
+
+        private var nekoprefs: SharedPreferences? = NekoApplication.nekoContext?.getSharedPreferences(NekoSettingsActivity.SETTINGS, MODE_PRIVATE)
+
         override fun getItemCount(): Int = 2
 
         override fun createFragment(position: Int): Fragment {

@@ -21,12 +21,11 @@ package ru.dimon6018.neko11.workers;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import ru.dimon6018.neko11.R;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import ru.dimon6018.neko11.R;
 
 public class PrefState implements OnSharedPreferenceChangeListener {
     public static final String FILE_NAME = "mPrefs";

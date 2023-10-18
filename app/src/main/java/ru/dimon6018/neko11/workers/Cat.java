@@ -18,11 +18,6 @@
 
 package ru.dimon6018.neko11.workers;
 
-import static android.os.Build.VERSION_CODES.O;
-import static android.os.Build.VERSION_CODES.P;
-import static ru.dimon6018.neko11.ui.fragments.NekoLandFragment.CHAN_ID;
-import static ru.dimon6018.neko11.workers.NekoWorker.title_message;
-
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -32,29 +27,27 @@ import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.Paint;
-import android.graphics.PixelFormat;
+import android.graphics.*;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
-
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.NotificationCompat;
 import androidx.core.graphics.drawable.IconCompat;
+import ru.dimon6018.neko11.NekoGeneralActivity;
+import ru.dimon6018.neko11.R;
 
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Random;
 
-import ru.dimon6018.neko11.NekoGeneralActivity;
-import ru.dimon6018.neko11.R;
+import static android.os.Build.VERSION_CODES.O;
+import static android.os.Build.VERSION_CODES.P;
+import static ru.dimon6018.neko11.ui.fragments.NekoLandFragment.CHAN_ID;
+import static ru.dimon6018.neko11.workers.NekoWorker.title_message;
 
 /** It's a cat. */
 public class Cat extends Drawable {

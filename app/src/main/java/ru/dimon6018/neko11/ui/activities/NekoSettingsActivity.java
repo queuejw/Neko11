@@ -1,8 +1,5 @@
 package ru.dimon6018.neko11.ui.activities;
 
-import static ru.dimon6018.neko11.NekoGeneralActivity.showSnackBar;
-import static ru.dimon6018.neko11.ui.activities.NekoAboutActivity.openWeb;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.UiModeManager;
@@ -23,7 +20,6 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-
 import androidx.annotation.MenuRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -31,7 +27,6 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.WindowCompat;
-
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
@@ -43,22 +38,18 @@ import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textview.MaterialTextView;
-
 import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
 import ru.dimon6018.neko11.BuildConfig;
 import ru.dimon6018.neko11.NekoApplication;
+import ru.dimon6018.neko11.NekoGeneralActivity;
 import ru.dimon6018.neko11.R;
 import ru.dimon6018.neko11.workers.BackupParser;
 import ru.dimon6018.neko11.workers.PrefState;
+
+import java.io.*;
+
+import static ru.dimon6018.neko11.NekoGeneralActivity.showSnackBar;
+import static ru.dimon6018.neko11.ui.activities.NekoAboutActivity.openWeb;
 
 public class NekoSettingsActivity extends AppCompatActivity implements PrefState.PrefsListener {
 
@@ -92,6 +83,7 @@ public class NekoSettingsActivity extends AppCompatActivity implements PrefState
 
 	   //remove in future
 	MaterialButton ad;
+	static int item = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -503,55 +495,46 @@ public class NekoSettingsActivity extends AppCompatActivity implements PrefState
 	private void showMenu(View v, @MenuRes int menuRes) {
     PopupMenu popup = new PopupMenu(this, v);
     popup.getMenuInflater().inflate(menuRes, popup.getMenu());
+	SharedPreferences.Editor editor = nekoprefs.edit();
     popup.setOnMenuItemClickListener(
         menuItem -> {
-			SharedPreferences.Editor editor = nekoprefs.edit();
 			if(menuItem.getItemId() == R.id.pink_theme) {
-				  editor.putInt("theme", 1);
-				  editor.apply();
-				  themeChanged(v);
+				item = 1;
+				editor.putInt("theme", item);
 			}
 			else if(menuItem.getItemId() == R.id.red_theme) {
-				  editor.putInt("theme", 2);
-				  editor.apply(); 
-				  themeChanged(v);
+				item = 2;
+				editor.putInt("theme", item);
 	        }
 			else if(menuItem.getItemId() == R.id.orange_theme) {
-				  editor.putInt("theme", 3);
-				  editor.apply();
-				  themeChanged(v);
+				item = 3;
+				editor.putInt("theme", item);
 			}
 			else if(menuItem.getItemId() == R.id.green_theme) {
-				  editor.putInt("theme", 4);
-				  editor.apply(); 
-				  themeChanged(v);
+				item = 4;
+				editor.putInt("theme", item);
 			}
 			else if(menuItem.getItemId() == R.id.lime_theme) {
-				  editor.putInt("theme", 5);
-				  editor.apply(); 
-				  themeChanged(v);
+				item = 5;
+				editor.putInt("theme", item);
 			}
 			else if(menuItem.getItemId() == R.id.aqua_theme) {
-				  editor.putInt("theme", 6);
-				  editor.apply(); 
-				  themeChanged(v);
+				item = 6;
+				editor.putInt("theme", item);
  			}
 			else if(menuItem.getItemId() == R.id.blue_theme) {
-				  editor.putInt("theme", 7);
-				  editor.apply();   
-				  themeChanged(v);
+				item = 7;
+				editor.putInt("theme", item);
 			}
 			else if(menuItem.getItemId() == R.id.purple_theme) {
-				  editor.putInt("theme", 0);
-				  editor.apply();
- 				  themeChanged(v);
-			}	
+				item = 0;
+				editor.putInt("theme", item);
+			}
+			editor.apply();
+			NekoGeneralActivity.showSnackBar(getString(R.string.themeChanged), Snackbar.LENGTH_LONG, v);
           return true;
         });
     popup.show();
-	  }
-	  private void themeChanged(View view) {
-      Snackbar.make(view, R.string.themeChanged, Snackbar.LENGTH_SHORT).show();
 	  }
 	@SuppressLint("SuspiciousIndentation")
 	private void setupScreen() {

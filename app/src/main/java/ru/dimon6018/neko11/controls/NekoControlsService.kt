@@ -42,7 +42,7 @@ import ru.dimon6018.neko11.workers.Cat
 import ru.dimon6018.neko11.workers.NekoToyWorker
 import ru.dimon6018.neko11.workers.NekoWorker
 import ru.dimon6018.neko11.workers.PrefState
-import java.util.Random
+import java.util.*
 import java.util.concurrent.Flow
 import java.util.function.Consumer
 

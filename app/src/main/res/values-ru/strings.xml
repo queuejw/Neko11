@@ -209,6 +209,8 @@
     <string name="save_all_cats_done">Все ваши котики были сохранены в виде картинок. Посмотрите их в галерее.</string>
     <string name="save_title_all">Сохр. всех</string>
     <string name="save_all_cats_q">Вы уверены, что хотите сохранить ВСЕХ котов в виде картинок?</string>
+    <string name="hello">Здравствуйте!</string>
+    <string name="activation_tip_new">Привет! Активируй игру, чтобы продолжить (прокрути круг 3 раза). =)</string>
 
     <integer-array name="food_intervals">
         <item>0</item>

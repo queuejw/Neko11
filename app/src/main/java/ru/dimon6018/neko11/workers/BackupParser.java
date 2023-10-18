@@ -15,19 +15,18 @@
  */
 package ru.dimon6018.neko11.workers;
 
-import static android.content.Context.MODE_PRIVATE;
-import static ru.dimon6018.neko11.workers.PrefState.FILE_NAME;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.util.Xml;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import static android.content.Context.MODE_PRIVATE;
+import static ru.dimon6018.neko11.workers.PrefState.FILE_NAME;
 
 public class BackupParser {
     private static final String ns = null;

@@ -1,10 +1,5 @@
 package ru.dimon6018.neko11.ui.activities;
 
-import static ru.dimon6018.neko11.ui.activities.NekoSettingsActivity.SETTINGS;
-import static ru.dimon6018.neko11.ui.fragments.NekoLandFragment.EXPORT_BITMAP_SIZE;
-import static ru.dimon6018.neko11.workers.PrefState.CAT_KEY_PREFIX_MOOD;
-import static ru.dimon6018.neko11.workers.PrefState.FILE_NAME;
-
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -14,27 +9,29 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.WindowCompat;
-
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.elevation.SurfaceColors;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.textview.MaterialTextView;
-
-import java.util.Map;
-import java.util.Random;
-
 import ru.dimon6018.neko11.NekoApplication;
 import ru.dimon6018.neko11.R;
 import ru.dimon6018.neko11.workers.Cat;
 import ru.dimon6018.neko11.workers.NekoWorker;
 import ru.dimon6018.neko11.workers.PrefState;
+
+import java.util.Map;
+import java.util.Random;
+
+import static ru.dimon6018.neko11.ui.activities.NekoSettingsActivity.SETTINGS;
+import static ru.dimon6018.neko11.ui.fragments.NekoLandFragment.EXPORT_BITMAP_SIZE;
+import static ru.dimon6018.neko11.workers.PrefState.CAT_KEY_PREFIX_MOOD;
+import static ru.dimon6018.neko11.workers.PrefState.FILE_NAME;
 
 public class NekoAchievementsActivity extends AppCompatActivity implements PrefState.PrefsListener {
 

@@ -17,17 +17,15 @@
 package ru.dimon6018.neko11.workers;
 
 import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
+import ru.dimon6018.neko11.R;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
-import ru.dimon6018.neko11.R;
 
 public class NekoToyWorker extends Worker {
 	

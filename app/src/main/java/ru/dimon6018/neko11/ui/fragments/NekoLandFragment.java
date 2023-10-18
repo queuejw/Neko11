@@ -17,12 +17,6 @@
 
 package ru.dimon6018.neko11.ui.fragments;
 
-import static android.Manifest.permission.MANAGE_EXTERNAL_STORAGE;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import static ru.dimon6018.neko11.controls.CatControlsFragment.randomfood;
-import static ru.dimon6018.neko11.ui.activities.NekoSettingsActivity.SETTINGS;
-import static ru.dimon6018.neko11.workers.NekoWorker.isWorkScheduled;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -36,12 +30,7 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
@@ -49,13 +38,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
+import ru.dimon6018.neko11.NekoGeneralActivity;
+import ru.dimon6018.neko11.R;
+import ru.dimon6018.neko11.workers.Cat;
+import ru.dimon6018.neko11.workers.NekoWorker;
+import ru.dimon6018.neko11.workers.PrefState;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -66,11 +59,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import ru.dimon6018.neko11.NekoGeneralActivity;
-import ru.dimon6018.neko11.R;
-import ru.dimon6018.neko11.workers.Cat;
-import ru.dimon6018.neko11.workers.NekoWorker;
-import ru.dimon6018.neko11.workers.PrefState;
+import static android.Manifest.permission.MANAGE_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static ru.dimon6018.neko11.controls.CatControlsFragment.randomfood;
+import static ru.dimon6018.neko11.ui.activities.NekoSettingsActivity.SETTINGS;
+import static ru.dimon6018.neko11.workers.NekoWorker.isWorkScheduled;
 
 public class NekoLandFragment extends Fragment implements PrefState.PrefsListener {
     public static String CHAN_ID = "NEKO";

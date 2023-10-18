@@ -17,8 +17,6 @@
 
 package ru.dimon6018.neko11.activation;
 
-import static ru.dimon6018.neko11.ui.activities.NekoSettingsActivity.SETTINGS;
-
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -26,14 +24,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.LinearGradient;
-import android.graphics.Paint;
-import android.graphics.PixelFormat;
-import android.graphics.Rect;
-import android.graphics.Shader;
+import android.graphics.*;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -41,29 +32,26 @@ import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.animation.PathInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
-
-import com.google.android.material.snackbar.Snackbar;
-
 import org.json.JSONObject;
-
 import ru.dimon6018.neko11.NekoGeneralActivity;
 import ru.dimon6018.neko11.R;
 import ru.dimon6018.neko11.workers.NekoWorker;
 
+import static ru.dimon6018.neko11.ui.activities.NekoSettingsActivity.SETTINGS;
+
 public class NekoActivationActivity extends AppCompatActivity {
     private static final int UNLOCK_TRIES = 3;
     BigDialView mDialView;
+    FrameLayout layout;
 
     @Override
     protected void onPause() {
@@ -79,18 +67,20 @@ public class NekoActivationActivity extends AppCompatActivity {
         if (ab != null) ab.hide();
         mDialView = new BigDialView(this, null);
         mDialView.setUnlockTries();
-        final FrameLayout layout = new FrameLayout(this);
+        layout = new FrameLayout(this);
         layout.setBackgroundColor(0xFFFF0000);
         layout.addView(mDialView, FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT);
         setContentView(layout);
-        showSnack(layout);
     }
-
-    private void showSnack(View v) {
-        Snackbar.make(v, R.string.activation_tip, Toast.LENGTH_LONG).show();
+    private void dialog() {
+        new AlertDialog.Builder(this)
+                .setIcon(R.drawable.ic_fullcat_icon)
+                .setTitle(R.string.hello)
+                .setMessage(R.string.activation_tip_new)
+                .setNegativeButton(android.R.string.ok, null)
+                .show();
     }
-
     private void toastUp() {
         Toast toast = Toast.makeText(this, "\uD83D\uDC31", Toast.LENGTH_SHORT);
         toast.show();
@@ -145,6 +135,7 @@ public class NekoActivationActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         syncTouchPressure();
+        dialog();
     }
     @Override
     public void onStop() {
