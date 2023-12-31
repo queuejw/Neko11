@@ -20,7 +20,9 @@ package ru.dimon6018.neko11.controls
 
 import android.annotation.SuppressLint
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.graphics.drawable.Icon
 import android.service.controls.Control
@@ -37,18 +39,21 @@ import android.text.style.ForegroundColorSpan
 import androidx.annotation.RequiresApi
 import ru.dimon6018.neko11.NekoGeneralActivity
 import ru.dimon6018.neko11.R
-import ru.dimon6018.neko11.controls.CatControlsFragment.foodstaterandom
+import ru.dimon6018.neko11.controls.CatControlsFragment.Companion.foodstaterandom
+import ru.dimon6018.neko11.ui.activities.NekoSettingsActivity
 import ru.dimon6018.neko11.workers.Cat
+import ru.dimon6018.neko11.workers.NekoToiletWorker
 import ru.dimon6018.neko11.workers.NekoToyWorker
 import ru.dimon6018.neko11.workers.NekoWorker
 import ru.dimon6018.neko11.workers.PrefState
-import java.util.*
+import java.util.Random
 import java.util.concurrent.Flow
 import java.util.function.Consumer
 
 const val CONTROL_ID_WATER = "water"
 const val CONTROL_ID_FOOD = "food"
 const val CONTROL_ID_TOY = "toy"
+const val CONTROL_ID_TOILET = "toilet"
 
 const val COLOR_FOOD_FG = 0xFFFF8000.toInt()
 const val COLOR_FOOD_BG = COLOR_FOOD_FG and 0x40FFFFFF
@@ -56,6 +61,8 @@ const val COLOR_WATER_FG = 0xFF0080FF.toInt()
 const val COLOR_WATER_BG = COLOR_WATER_FG and 0x40FFFFFF
 const val COLOR_TOY_FG = 0xFFFF4080.toInt()
 const val COLOR_TOY_BG = COLOR_TOY_FG and 0x40FFFFFF
+const val COLOR_TOILET_FG = 0x99807977.toInt()
+const val COLOR_TOILET_BG = COLOR_TOILET_FG and 0x99DFD3
 
 val P_TOY_ICONS = intArrayOf(
         1, R.drawable.ic_toy_mouse,
@@ -73,13 +80,14 @@ class NekoControlsService : ControlsProviderService(), PrefState.PrefsListener {
     private var lastToyIcon: Icon? = null
 
     private lateinit var prefs: PrefState
+    private var nekoprefs: SharedPreferences? = null
 
     override fun onCreate() {
         super.onCreate()
 
         prefs = PrefState(this)
         prefs.setListener(this)
-
+        nekoprefs = getSharedPreferences(NekoSettingsActivity.SETTINGS, Context.MODE_PRIVATE)
         createDefaultControls()
     }
     override fun onPrefsChanged() {
@@ -93,6 +101,9 @@ class NekoControlsService : ControlsProviderService(), PrefState.PrefsListener {
         controls[CONTROL_ID_WATER] = makeWaterBowlControl(water)
         controls[CONTROL_ID_FOOD] = makeFoodBowlControl(foodState != 0)
         controls[CONTROL_ID_TOY] = makeToyControl(currentToyIcon(), false)
+        if(nekoprefs!!.getBoolean("legacyGameplay", false)) {
+            controls[CONTROL_ID_TOILET] = makeToiletControl(false)
+        }
     }
 
     private fun currentToyIcon(): Icon {
@@ -120,6 +131,21 @@ class NekoControlsService : ControlsProviderService(), PrefState.PrefsListener {
                 .setStatusText(colorize(
                         if (thrown) getString(R.string.control_toy_status) else "",
                         COLOR_TOY_FG))
+                .setControlTemplate(StatelessTemplate("toy"))
+                .setStatus(Control.STATUS_OK)
+                .setSubtitle(if (thrown) "" else getString(R.string.control_toy_subtitle))
+                .setAppIntent(getAppIntent())
+                .build()
+    }
+    private fun makeToiletControl(thrown: Boolean): Control {
+        return Control.StatefulBuilder(CONTROL_ID_TOILET, getPendingIntent())
+                .setDeviceType(DeviceTypes.TYPE_UNKNOWN)
+                .setCustomIcon(Icon.createWithResource(this, R.drawable.ic_toilet))
+                .setCustomColor(ColorStateList.valueOf(COLOR_TOY_BG))
+                .setTitle(colorize(getString(R.string.toilet), COLOR_TOILET_FG))
+                .setStatusText(colorize(
+                        if (thrown) getString(R.string.control_water_subtitle) else "",
+                        COLOR_TOILET_FG))
                 .setControlTemplate(StatelessTemplate("toy"))
                 .setStatus(Control.STATUS_OK)
                 .setSubtitle(if (thrown) "" else getString(R.string.control_toy_subtitle))
@@ -195,6 +221,18 @@ class NekoControlsService : ControlsProviderService(), PrefState.PrefsListener {
                     NekoToyWorker.stopToyWork(this)
                     makeToyControl(currentToyIcon(), false)
                 }
+            }
+            CONTROL_ID_TOILET -> {
+                controls[CONTROL_ID_TOILET] =
+                        if (prefs.getToiletState() == 0) {
+                            prefs.setToiletState(1)
+                            NekoToiletWorker.scheduleToiletWork(this)
+                            makeToiletControl( true)
+                        } else {
+                            prefs.setToiletState(0)
+                            NekoToiletWorker.stopToiletWork(this)
+                            makeToiletControl( false)
+                        }
             }
             CONTROL_ID_WATER -> {
                 if (action is FloatAction) {

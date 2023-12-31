@@ -17,26 +17,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
 	<item
-		android:title="@string/my_stats"
-		android:icon="@drawable/ic_info"
-		android:id="@+id/myInfoMenuId"
-		app:showAsAction="ifRoom"
-		app:itemTextAppearance="@font/opensans_regular"/>
-	<item
 		android:title="@string/achievements"
 		android:icon="@drawable/ic_game"
 		android:id="@+id/achievementsMenuId"
+		app:showAsAction="ifRoom"
+		app:itemTextAppearance="@font/opensans_regular"/>
+	<item
+		android:title="@string/settings"
+		android:icon="@drawable/ic_settings"
+		android:id="@+id/settingsMenuId"
 		app:itemTextAppearance="@font/opensans_regular"/>
 	<item 
 	     android:title="@string/promo"
         android:icon="@drawable/key"
         android:id="@+id/promoMenuId"  
 	    app:itemTextAppearance="@font/opensans_regular"/>
-	<item
-		android:title="@string/settings"
-		android:icon="@drawable/ic_settings"
-		android:id="@+id/settingsMenuId"
-		app:itemTextAppearance="@font/opensans_regular"/>
     <item 
 	    android:title="@string/about_neko"
         android:icon="@drawable/ic_11"

@@ -19,6 +19,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/control_background"
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
@@ -28,7 +29,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="24dp"
         android:checkable="true"
-        app:cardBackgroundColor="@color/tiles"
+        app:strokeWidth="0dp"
         app:cardCornerRadius="12dp">
 
         <RelativeLayout
@@ -86,7 +87,7 @@
         android:layout_width="190dp"
         android:layout_height="120dp"
         android:layout_gravity="center"
-        app:cardBackgroundColor="@color/tiles"
+        app:strokeWidth="0dp"
         app:cardCornerRadius="12dp">
 
         <RelativeLayout
@@ -150,7 +151,7 @@
         android:layout_width="190dp"
         android:layout_height="120dp"
         android:layout_gravity="center"
-        android:checkable="true"
+        app:strokeWidth="0dp"
         app:cardCornerRadius="12dp"
         app:cardBackgroundColor="@color/tiles">
 
@@ -187,6 +188,49 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/water_state_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="70dp"
+                android:text="@string/control_water_subtitle"
+                app:fontFamily="@font/opensans_regular" />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_weight="0" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/toilet_card"
+        android:layout_width="190dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:checkable="true"
+        app:cardCornerRadius="12dp"
+        app:strokeWidth="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="bottom"
+                android:src="@drawable/ic_toilet" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="50dp"
+                android:text="@string/toilet"
+                app:fontFamily="@font/opensans_medium" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/toilet_state_sub"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"

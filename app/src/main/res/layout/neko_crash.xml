@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_medium"
+        android:text="@string/error" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoLink="web|email"
+        android:fontFamily="@font/opensans_medium"
+        android:text="@string/critical_error_tip" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonRecoveryInfo"
+        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:text="@string/details" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonRecoveryClear"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:text="@string/crash_clear_settings" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonRecoveryRestart"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:text="@string/crash_restart" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonRecoverySettings"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:text="@string/crash_settings" />
+
+</LinearLayout>

@@ -28,8 +28,8 @@
     android:paddingBottom="8dp"
     android:background="?android:attr/selectableItemBackgroundBorderless"
     android:gravity="center_horizontal"
+    android:elevation="4dp"
     android:clipToPadding="false">
-
     <FrameLayout
         android:layout_width="125dp"
         android:layout_height="wrap_content">

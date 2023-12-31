@@ -17,6 +17,8 @@
 
 package ru.dimon6018.neko11.activation;
 
+import static ru.dimon6018.neko11.ui.activities.NekoSettingsActivity.SETTINGS;
+
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -24,7 +26,14 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.*;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.LinearGradient;
+import android.graphics.Paint;
+import android.graphics.PixelFormat;
+import android.graphics.Rect;
+import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,28 +45,27 @@ import android.view.animation.PathInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
+
 import org.json.JSONObject;
+
 import ru.dimon6018.neko11.NekoGeneralActivity;
 import ru.dimon6018.neko11.R;
 import ru.dimon6018.neko11.workers.NekoWorker;
-
-import static ru.dimon6018.neko11.ui.activities.NekoSettingsActivity.SETTINGS;
 
 public class NekoActivationActivity extends AppCompatActivity {
     private static final int UNLOCK_TRIES = 3;
     BigDialView mDialView;
     FrameLayout layout;
-
     @Override
     protected void onPause() {
         super.onPause();
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

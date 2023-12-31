@@ -36,10 +36,12 @@
     <color name="foodbg">#99FF8000</color>
     <color name="foodbg2">#33FF8000</color>
     <color name="waterbg">#990080FF</color>
-    <color name="waterbg2">#340080FF</color>
+    <color name="waterbg2">#4D0080FF</color>
     <color name="waterbg3">#140080FF</color>
     <color name="toybg">#99FF4080</color>
     <color name="toybg2">#33FF4080</color>
+	<color name="toiletbg">#99DFD3D0</color>
+	<color name="toiletbg2">#99807977</color>
 	
 	<color name="pink_theme_primary">#a43462</color>
 	<color name="pink_theme_sec">#74565f</color>

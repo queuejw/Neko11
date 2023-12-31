@@ -21,39 +21,27 @@
 	 android:layout_width="match_parent"
 	 android:layout_height="match_parent">
 
-	<androidx.constraintlayout.widget.ConstraintLayout
+	<LinearLayout
 		android:id="@+id/linearLayout"
 		android:layout_width="match_parent"
+		android:orientation="vertical"
 		android:layout_height="wrap_content">
-
-		<androidx.constraintlayout.widget.Guideline
-			android:id="@+id/guideline10"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal"
-			app:layout_constraintGuide_begin="845dp" />
 
 		<ImageView
 			android:id="@+id/imageViewCat"
 			android:layout_width="84dp"
-			android:layout_height="100dp"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent" />
+			android:layout_gravity="center"
+			android:layout_height="100dp" />
 
 		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/abouttitle"
-			android:layout_width="0dp"
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_gravity="center"
 			android:gravity="center"
 			android:text="@string/app_name"
 			android:textSize="22sp"
-			app:fontFamily="@font/opensans_medium"
-			app:layout_constraintBottom_toTopOf="@+id/abouttext"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintHorizontal_bias="0.0"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/imageViewCat" />
+			app:fontFamily="@font/opensans_medium"/>
 
 		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/abouttext"
@@ -63,46 +51,39 @@
 			android:gravity="center"
 			android:text="@string/about_text"
 			android:textSize="18sp"
-			app:fontFamily="@font/opensans_regular"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintHorizontal_bias="0.0"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/imageViewCat" />
+			app:fontFamily="@font/opensans_regular" />
 
 		<include
 			android:id="@+id/include"
 			layout="@layout/authors"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="24dp"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintHorizontal_bias="0.0"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/abouttext" />
+			android:layout_marginTop="24dp" />
 
 		<com.google.android.material.button.MaterialButton
 			android:id="@+id/github_button"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_gravity="center"
 			android:layout_marginBottom="11dp"
 			android:text="@string/github"
-			app:icon="@drawable/ic_neko_version_code"
-			app:layout_constraintBottom_toTopOf="@+id/telegram_button"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/include"
-			app:layout_constraintVertical_bias="1.0" />
+			app:icon="@drawable/ic_neko_version_code" />
 
 		<com.google.android.material.button.MaterialButton
 			android:id="@+id/telegram_button"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_gravity="center"
 			android:layout_marginBottom="16dp"
 			android:text="@string/telegram"
-			app:icon="@drawable/ic_plane"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintHorizontal_bias="0.497"
-			app:layout_constraintStart_toStartOf="parent" />
-	</androidx.constraintlayout.widget.ConstraintLayout>
+			app:icon="@drawable/ic_plane"/>
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/save_all_cats"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:layout_marginBottom="11dp"
+			android:text="@string/save_title_all"
+			app:icon="@drawable/ic_fullcat_icon" />
+	</LinearLayout>
 </ScrollView>

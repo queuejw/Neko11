@@ -46,13 +46,12 @@
     <string name="control_food_status_empty">Empty</string>
     <string name="settings">Settings</string>
     <string name="cat_counter">You collect %d cat\'s!</string>
-    <string name="check_updates">Check for update\'s</string>
     <string name="about_neko">About Neko</string>
     <string name="help">Help</string>
 	<string name="achievements">Achievements</string>
     <string name="help_message">Welcome to Neko! For start play click «Cat Controls» on bottom bar and fill all tiles. Then close app. If cat arrive, I send you notification. After you cat send cat your friends, or continue collect cats. Do not forget check tiles, because after arrive cat\'s eat your food and drink water. Good luck!  </string>
     <string name="update_message">You can download update from GitHub.</string>
-    <string name="themechanged">Theme successfully changed, but you need to restart the application for the changes to take effect.</string>
+    <string name="background_changed">Restart the application</string>
     <string name="later">Later</string>
     <string name="restart">Restart</string>
     <string name="success">Success</string>
@@ -89,7 +88,7 @@
 	<string name="gift_not_enabled">Retrieved</string>
 	<string name="delete_cat_message">Do you really want delete this cat?</string>
 	<string name="delete_cat_title">Delete cat</string>
-	<string name="max_cat_line_title">Responsible for the number of cats in one line</string>
+	<string name="max_cat_line_title">Sets the number of cats in one line</string>
 	<string name="cat_age">Cat age: %d y.o.</string>
 	<string name="themeChanged">Restart Neko11 to apply the theme</string>
 	<string name="name_changed">Cat name changed!</string>
@@ -199,17 +198,75 @@
     <string name="stat_2">You used %d boosters</string>
     <string name="stat_3">You poured %d mL of water</string>
     <string name="stat_4">You\'ve tried interacting with cats %d times</string>
-    <string name="AD_metrolnchr">Want to get Windows Phone 8.1 experience on your device? \n Try my new MetroPhoneLauncher* \n * - the title is not final, the application is under development. Stay tuned.</string>
+    <string name="AD_metrolnchr">Want to get Windows Phone 8 experience on your device? \n Try my new MetroPhoneLauncher* \n * - the application is under development. Stay tuned.</string>
     <string name="AD_try">Try</string>
     <string name="action1_fail">The cat bit you while trying to bathe him. Try again =)</string>
     <string name="action2_fail">The cat didn\'t like being stroked and bit you. Try again =)</string>
     <string name="ncoins_err">You don\'t have enough NCoins. Catch cats to get them</string>
     <string name="new_cat_shop">A new cat is now living with you. Check him out in the collection</string>
     <string name="save_all_cats_done">All your cat\'s have been saved as pictures. Check them out in the gallery.</string>
-    <string name="save_title_all">Save all</string>
+    <string name="save_title_all">Save all the cats</string>
     <string name="save_all_cats_q">Are you sure you want to keep ALL the cats as pictures?</string>
     <string name="hello">Hello!</string>
     <string name="activation_tip_new">Hi! Activate the game to continue (scroll the circle 3 times). =)</string>
+    <string name="qvakteam">qvakteam is a fun group of friends focused on creating fun and engaging games and apps. Our goal is to bring you joy and pleasure through creative projects filled with fun and innovation. Join us in the exciting world of entertainment!</string>
+    <string name="people">People:</string>
+    <string name="sloths_testers">Sloths (Testers):</string>
+    <string name="choose_background_picture">Choose background picture</string>
+    <string name="remove_background"><u>Click here to remove background picture</u></string>
+    <string name="skins">Skins</string>
+    <string name="allow_cat_run">Allow cats to run away from you</string>
+    <string name="background_setup_tip">Don\'t forget to restart the app</string>
+    <string name="cat_run_message">One of your cats escaped due to lack of attention.</string>
+    <string name="cat_run_tip">If the cat is sad a lot, he will run away from you. Forever. Turn it off if you don\'t want to lose them.</string>
+    <string name="error">Error</string>
+    <string name="error_message">Something went wrong. %s</string>
+    <string name="suit">Choose a suit</string>
+    <string name="hat">Choose a hat</string>
+    <string name="nothing">nothing</string>
+    <string name="cat_background_none">None</string>
+    <string name="cat_background_circle">Circle</string>
+    <string name="cat_background_square">Square</string>
+    <string name="cat_background_setting_title">Background of the cat icon</string>
+    <string name="toilet">Toilet</string>
+    <string name="poop">💩💩💩💩</string>
+    <string name="text_matches_theme">Make the text the same color as the accent</string>
+    <string name="text_matches_theme_sub">If enabled, the text color in the game menu will match the current accent color (e.g. purple)</string>
+<!-- SKINS -->
+    <string name="suit_1">Christmas costume</string>
+    <string name="suit_2">Nice clothes</string>
+    <string name="suit_3">A business suit</string>
+    <string name="suit_4">A very businesslike suit</string>
+    <string name="suit_5">Axolotl sweater</string>
+    <string name="suit_6">Cheap suit</string>
+    <string name="suit_7">Dinosaur costume</string>
+    <string name="suit_8">Frog costume</string>
+    <string name="suit_9">Roentgen</string>
+    <string name="suit_10">Pajamas With Dinosaurs</string>
+
+    <string name="hat_1">Christmas hat</string>
+    <string name="hat_2">Business hat</string>
+    <string name="hat_3">A very businesslike hat</string>
+    <string name="hat_4">Cap</string>
+    <string name="hat_5">Panama with dinosaurs</string>
+    <string name="hat_6">Deer antlers</string>
+    <string name="hat_7">Scary horns</string>
+    <string name="hat_8">Funny hat</string>
+    <string name="hat_9">Rabbit ears</string>
+    <string name="hat_10">Golden Crown</string>
+    <string name="hat_11">Holiday hat</string>
+
+<!-- SKINS END -->
+    <string name="skin_preview">Preview</string>
+    <string name="compact_controls_tip">You may need to restart the application</string>
+    <string name="legacy_controls_tip">Turn it on if you want classic gameplay</string>
+    <string name="legacy_controls">Disable the toilet</string>
+    <string name="yes">Yes</string>
+    <string name="skins_purchase_dialog">Do you really want to buy %s for %d NCoins ?</string>
+    <string name="critical_error_tip">A critical error occurred during operation. Perhaps you should just restart the application. You can help fix this bug. \nClick Details and then send us the information: github.com/queuejw/neko11/issues (GitHub) \nOR t.me/neko_app (Telegram) \nOR dimon6018t@gmail.com (Email).</string>
+    <string name="crash_clear_settings">Clear settings (This won\'t affect your cats)</string>
+    <string name="crash_restart">Restart Neko11</string>
+    <string name="crash_settings">Open settings</string>
     <integer-array name="food_intervals">
         <item>0</item>
         <item>15</item>
@@ -275,5 +332,6 @@
         <item>Meeeeoooooow.</item>
 		<item>Meow</item>
         <item>Purr</item>
+        <item>Mrrrrrr</item>
     </string-array>
 </resources>

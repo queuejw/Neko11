@@ -21,14 +21,22 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
-import android.view.*
+import android.view.ContextThemeWrapper
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.widget.Toolbar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -40,10 +48,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.elevation.SurfaceColors
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textview.MaterialTextView
 import ru.dimon6018.neko11.activation.NekoActivationActivity
 import ru.dimon6018.neko11.controls.CatControlsFragment
-import ru.dimon6018.neko11.controls.CatControlsFragment.showTipAgain
+import ru.dimon6018.neko11.controls.CatControlsFragment.Companion.showTipAgain
 import ru.dimon6018.neko11.ui.activities.NekoAboutActivity
 import ru.dimon6018.neko11.ui.activities.NekoAchievementsActivity
 import ru.dimon6018.neko11.ui.activities.NekoSettingsActivity
@@ -52,7 +59,6 @@ import ru.dimon6018.neko11.workers.Cat
 import ru.dimon6018.neko11.workers.NekoWorker
 import ru.dimon6018.neko11.workers.PrefState
 import ru.dimon6018.neko11.workers.PrefState.PrefsListener
-
 
 class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
 
@@ -64,39 +70,60 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
     private var viewPager: ViewPager2? = null
     private var pagerAdapter: FragmentStateAdapter? = null
     private var needWelcomeDialog = false
+    private var cord: CoordinatorLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-            val nekoprefs = getSharedPreferences(NekoSettingsActivity.SETTINGS, MODE_PRIVATE)
-            setupState()
-            Thread {
-                setupDarkMode()
-                setTheme(NekoApplication.getNekoTheme(this))
+        nekoprefs = getSharedPreferences(NekoSettingsActivity.SETTINGS, MODE_PRIVATE)
+        setupState()
+        if(state == 3) {
+            finish()
+        }
+        setupDarkMode()
+        setTheme(NekoApplication.getNekoTheme(this))
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.neko_activity)
+        mPrefs = PrefState(this)
+        viewPager = findViewById(R.id.pager)
+        cord = findViewById(R.id.coordinator)
+        navbar = findViewById(R.id.navigation)
+        Runnable {
+            pagerAdapter = NekoAdapter(this)
             runOnUiThread {
                 setupNavbarListener()
-                if(needWelcomeDialog) welcomeDialog()
-                if(getAndroidV()) androidVDialog()
+                if (needWelcomeDialog) welcomeDialog()
+                if (getAndroidV()) androidVDialog()
             }
-            }.start()
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.neko_activity)
-            viewPager = findViewById(R.id.pager)
-            pagerAdapter = NekoAdapter(this)
-            viewPager?.adapter = pagerAdapter
-            mPrefs = PrefState(this)
-            mPrefs!!.setListener(this)
-            WindowCompat.setDecorFitsSystemWindows(window, false)
-            val toolbar = findViewById<Toolbar>(R.id.toolbar)
-            setSupportActionBar(toolbar)
-            if (supportActionBar != null) {
-                supportActionBar!!.setDisplayUseLogoEnabled(true)
+        }.run()
+        mPrefs!!.setListener(this)
+        viewPager?.adapter = pagerAdapter
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        if (supportActionBar != null) {
+            supportActionBar!!.setDisplayUseLogoEnabled(true)
+        }
+        Thread {
+            if (mPrefs!!.backgroundPath != "") {
+                try {
+                    val bmp = BitmapFactory.decodeFile(mPrefs!!.backgroundPath)
+                    val bmpNew = Bitmap.createBitmap(bmp, viewPager!!.x.toInt(), viewPager!!.y.toInt(), bmp.width, bmp.height, null, true)
+                    cord!!.background = bmpNew.toDrawable(resources)
+                } catch (ex: Exception) {
+                    cord!!.background = null
+                    cord!!.post {
+                        showSnackBar(ex.toString(), Snackbar.LENGTH_LONG, cord)
+                    }
+                }
+                WindowCompat.setDecorFitsSystemWindows(window, false)
+                window!!.navigationBarColor = SurfaceColors.SURFACE_2.getColor(this)
             }
-            navbar = findViewById(R.id.navigation)
-            window.navigationBarColor = SurfaceColors.SURFACE_2.getColor(this)
-            if (!nekoprefs!!.getBoolean("controlsFirst", false)) {
-                navbar?.selectedItemId = R.id.collection
-            } else {
-                navbar?.selectedItemId = R.id.controls
-            }
+        }.start()
+        if (!nekoprefs!!.getBoolean("controlsFirst", false)) {
+            viewPager!!.currentItem = 0
+            navbar?.selectedItemId = R.id.collection
+        } else {
+            viewPager!!.currentItem = 1
+            navbar?.selectedItemId = R.id.controls
+        }
         viewPager?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
@@ -119,7 +146,6 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                     .setNegativeButton(android.R.string.ok, null)
                     .show()
     }
-
     override fun onPrefsChanged() {}
 
     @SuppressLint("RestrictedApi")
@@ -133,12 +159,12 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.aboutMenuId -> {
-                if (!debug) {
+                if (!DEBUG) {
                     startActivity(Intent(this@NekoGeneralActivity, NekoAboutActivity::class.java))
                 } else {
                     var cat: Cat?
                     for (i in 0..10) {
-                        cat = NekoWorker.newRandomCat(this, mPrefs)
+                        cat = NekoWorker.newRandomCat(this, mPrefs!!, true)
                         mPrefs!!.addCat(cat)
                         mPrefs!!.addNCoins(666)
                     }
@@ -157,25 +183,6 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
 
             R.id.settingsMenuId -> {
                 startActivity(Intent(this@NekoGeneralActivity, NekoSettingsActivity::class.java))
-                return true
-            }
-            R.id.myInfoMenuId -> {
-                val context: Context = ContextThemeWrapper(this, theme)
-                val view = LayoutInflater.from(context).inflate(R.layout.neko_stats_dialog, null)
-                val stat1: MaterialTextView = view.findViewById(R.id.cat_count_stat)
-                stat1.text = getString(R.string.stat_1, mPrefs?.CatsAllTime())
-                val stat2: MaterialTextView = view.findViewById(R.id.booster_count_stat)
-                stat2.text = getString(R.string.stat_2, mPrefs?.boostersUseAllTime())
-                val stat3: MaterialTextView = view.findViewById(R.id.water_stat)
-                stat3.text = getString(R.string.stat_3, mPrefs?.WaterMl())
-                val stat4: MaterialTextView = view.findViewById(R.id.cat_actions_use_count)
-                stat4.text = getString(R.string.stat_4, mPrefs?.catActionsUseAllTime())
-                MaterialAlertDialogBuilder(context)
-                        .setTitle(R.string.my_stats)
-                        .setIcon(R.drawable.ic_help)
-                        .setView(view)
-                        .setNegativeButton(android.R.string.ok, null)
-                        .show()
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
@@ -250,7 +257,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         if (promo == nekoprefs!!.getString("code1", "")) {
             if (code1availability) {
                 showSnackBar(getString(R.string.code_is_true), Snackbar.LENGTH_LONG, navbar)
-                mPrefs!!.addNCoins(301)
+                mPrefs!!.addNCoins(500)
                 mPrefs!!.addLuckyBooster(1)
                 mPrefs!!.addMoodBooster(1)
                 editor.putBoolean("code1availability", false)
@@ -260,7 +267,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         } else if (promo == nekoprefs!!.getString("code2", "")) {
             if (code2availability) {
                 showSnackBar(getString(R.string.code_is_true), Snackbar.LENGTH_LONG, navbar)
-                mPrefs!!.addNCoins(650)
+                mPrefs!!.addNCoins(1000)
                 mPrefs!!.addMoodBooster(3)
                 mPrefs!!.addLuckyBooster(5)
                 editor.putBoolean("code2availability", false)
@@ -270,7 +277,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         } else if (promo == nekoprefs!!.getString("code3", "")) {
             if (code3availability) {
                 showSnackBar(getString(R.string.code_is_true), Snackbar.LENGTH_LONG, navbar)
-                mPrefs!!.addNCoins(1500)
+                mPrefs!!.addNCoins(2500)
                 mPrefs!!.addMoodBooster(6)
                 mPrefs!!.addLuckyBooster(7)
                 editor.putBoolean("code3availability", false)
@@ -290,15 +297,13 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         } else if (promo == nekoprefs!!.getString("code5", "")) {
             if (code5availability) {
                 showSnackBar(getString(R.string.code_is_true), Snackbar.LENGTH_LONG, navbar)
-                mPrefs!!.addNCoins(700)
+                mPrefs!!.addNCoins(1000)
                 editor.putBoolean("code5availability", false)
             } else {
                 showSnackBar(getString(R.string.code_is_false), Snackbar.LENGTH_LONG, navbar)
             }
-        } else if (promo == "hello") {
+        } else if (promo == "hello" || promo == "Hello") {
             showSnackBar("Hi!", Snackbar.LENGTH_SHORT, navbar)
-        } else if (promo == "null" || promo == "none" || promo == "") {
-            showSnackBar("no.", Snackbar.LENGTH_SHORT, navbar)
         } else {
             showSnackBar(getString(R.string.wrong_code), Snackbar.LENGTH_LONG, navbar)
         }
@@ -306,7 +311,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
     }
 
     private fun setupNavbarListener() {
-        navbar!!.setOnItemSelectedListener { item: MenuItem ->
+        navbar?.setOnItemSelectedListener { item: MenuItem ->
             if (item.itemId == R.id.collection) {
                 viewPager!!.currentItem = 0
                 return@setOnItemSelectedListener true
@@ -362,7 +367,6 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         }
     }
     private fun checkState(): Int {
-        nekoprefs = getSharedPreferences(NekoSettingsActivity.SETTINGS, MODE_PRIVATE)
         state = nekoprefs!!.getInt("state", 1)
         return state
     }
@@ -380,9 +384,8 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         get() {
             var cat: Cat?
             for (i in 0..6) {
-                cat = NekoWorker.newRandomCat(this, mPrefs)
+                cat = NekoWorker.newRandomCat(this, mPrefs!!, true)
                 mPrefs?.addCat(cat)
-                mPrefs?.addCatsAllTime(1)
             }
             setCurrentTheme(-1)
             MaterialAlertDialogBuilder(this)
@@ -401,7 +404,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
     }
 
     companion object {
-        private const val debug = false
+        private const val DEBUG = false
 
         @JvmStatic
         fun showSnackBar(text: String?, time: Int, view: View?) {
@@ -412,8 +415,6 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
     }
 
     class NekoAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
-
-        private var nekoprefs: SharedPreferences? = NekoApplication.nekoContext?.getSharedPreferences(NekoSettingsActivity.SETTINGS, MODE_PRIVATE)
 
         override fun getItemCount(): Int = 2
 

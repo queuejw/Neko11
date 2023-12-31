@@ -1,0 +1,69 @@
+/*
+ * Copyright (C) 2023 Dmitry Frolkov <dimon6018t@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package ru.dimon6018.neko11.workers
+
+import android.content.Context
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
+import androidx.work.Worker
+import androidx.work.WorkerParameters
+import ru.dimon6018.neko11.R
+import java.util.Random
+import java.util.concurrent.TimeUnit
+
+class NekoToiletWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
+    override fun doWork(): Result {
+        val state: Result
+        val context = applicationContext
+        val prefs = PrefState(context)
+        val meowArray = context.resources.getStringArray(R.array.toy_messages)
+        val result = meowArray[Random().nextInt(meowArray.size)] + context.getString(R.string.poop)
+        state = try {
+            val cat = NekoWorker.getExistingCat(prefs)
+            if (cat != null) {
+                NekoWorker.notifyCat(context, cat, result)
+                prefs.setMood(cat, 5)
+            }
+            Result.success()
+        } catch (e: Exception) {
+            Result.failure()
+        }
+        prefs.toyState = 0
+        return state
+    }
+
+    companion object {
+        fun scheduleToiletWork(context: Context?) {
+            val toiletmin = 30
+            val toiletmax = 150
+            val catSize = PrefState(context!!).cats.size
+            var toiletDelay = Random().nextInt((toiletmax - toiletmin + 3) / catSize)
+            if (toiletDelay < 10) {
+                toiletDelay += 10
+            }
+            val workToyRequest: OneTimeWorkRequest = OneTimeWorkRequest.Builder(NekoToyWorker::class.java)
+                    .addTag("TOILETWORK")
+                    .setInitialDelay(toiletDelay.toLong(), TimeUnit.MINUTES)
+                    .build()
+            WorkManager.getInstance(context).enqueue(workToyRequest)
+        }
+
+        @JvmStatic
+        fun stopToiletWork(context: Context?) {
+            WorkManager.getInstance(context!!).cancelAllWorkByTag("TOILETWORK")
+        }
+    }
+}

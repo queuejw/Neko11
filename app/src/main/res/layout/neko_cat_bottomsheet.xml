@@ -17,7 +17,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/drawer"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -51,16 +50,14 @@
 
 	<com.google.android.material.textfield.TextInputLayout
 		android:id="@+id/catNameField"
-		android:layout_width="260dp"
+		android:layout_width="350dp"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="20dp"
 		app:endIconDrawable="@drawable/ic_success"
 		app:endIconMode="custom"
-		app:layout_constraintHorizontal_bias="0.496"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/cat_icon"
-		app:layout_constraintVertical_bias="0.0">
+		app:layout_constraintTop_toBottomOf="@+id/cat_icon">
 
 		<com.google.android.material.textfield.TextInputEditText
 			android:id="@+id/catEditName"
@@ -169,11 +166,10 @@
 				android:layout_weight="1" />
 
 			<com.google.android.material.card.MaterialCardView
-				android:id="@+id/save_sheet_all"
+				android:id="@+id/skins_sheet"
 				style="?attr/materialCardViewFilledStyle"
 				android:layout_width="80dp"
 				android:layout_height="74dp"
-				android:alpha="0.86"
 				app:cardCornerRadius="16dp">
 
 				<LinearLayout
@@ -184,14 +180,14 @@
 					<ImageView
 						android:layout_width="match_parent"
 						android:layout_height="53dp"
-						android:src="@drawable/ic_save" />
+						android:src="@drawable/ic_skins" />
 
 					<com.google.android.material.textview.MaterialTextView
-						android:id="@+id/title_save_all"
+						android:id="@+id/title_skins"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:gravity="center"
-						android:text="@string/save_title_all"
+						android:text="@string/skins"
 						android:textSize="13sp" />
 
 				</LinearLayout>

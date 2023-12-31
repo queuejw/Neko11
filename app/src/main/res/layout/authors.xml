@@ -30,6 +30,23 @@
         app:fontFamily="@font/opensans_regular" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/about_qvak"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/qvakteam"
+        app:fontFamily="@font/opensans_regular" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/about_people"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="4dp"
+        android:text="@string/people"
+        app:fontFamily="@font/opensans_medium" />
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/about_dev1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,6 +69,15 @@
         android:layout_marginTop="24dp"
         android:text="@string/about_dev3"
         app:fontFamily="@font/opensans_regular" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/about_testers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="4dp"
+        android:text="@string/sloths_testers"
+        app:fontFamily="@font/opensans_medium" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/about_dev4"

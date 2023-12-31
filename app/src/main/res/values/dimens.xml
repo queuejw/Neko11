@@ -16,6 +16,7 @@
   limitations under the License.
  -->
     <dimen name="neko_display_size">84dp</dimen>
-    <dimen name="bottomsheet">800dp</dimen>
+    <dimen name="bottomsheet">500dp</dimen>
+    <dimen name="bottomsheet_skins">700dp</dimen>
 	<dimen name="neko_display_size_full">150dp</dimen>
 </resources>

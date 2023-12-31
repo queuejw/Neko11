@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    android:id="@+id/card"
+    app:contentPadding="1dp"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    app:cardElevation="2dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/price_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textSize="12sp"
+            android:text="price"
+            android:layout_gravity="top|end"
+            app:fontFamily="@font/opensans_regular"/>
+        <ImageView
+            android:id="@+id/skin_image"
+            android:layout_width="56dp"
+            android:layout_gravity="center"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:layout_marginBottom="4dp"
+            android:layout_height="56dp"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/skin_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="text"
+            android:layout_gravity="center|bottom"
+            app:fontFamily="@font/opensans_regular"/>
+</com.google.android.material.card.MaterialCardView>

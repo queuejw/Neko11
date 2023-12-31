@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:backgroundTint="?attr/colorPrimary"
+    app:behavior_hideable="true"
+    app:enableEdgeToEdge="true"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+        android:id="@+id/draghandle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/catSkinPreview"
+        android:layout_gravity="center"
+        android:layout_width="125dp"
+        android:layout_height="125dp"/>
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_gravity="center"
+        android:text="@string/skin_preview"
+        android:textSize="17sp"
+        app:fontFamily="@font/opensans_medium" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/skinCoinsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_gravity="center"
+        android:text="@string/coins"
+        android:textSize="17sp"
+        app:fontFamily="@font/opensans_medium" />
+    <LinearLayout
+        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_gravity="center"
+            android:text="@string/hat"
+            android:textSize="24sp"
+            app:fontFamily="@font/opensans_medium" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewHats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_gravity="center"
+            android:text="@string/suit"
+            android:textSize="24sp"
+            app:fontFamily="@font/opensans_medium" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewSuits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="32dp"/>
+</LinearLayout>
