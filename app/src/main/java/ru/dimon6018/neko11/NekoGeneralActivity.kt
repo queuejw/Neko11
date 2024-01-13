@@ -304,6 +304,16 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
             }
         } else if (promo == "hello" || promo == "Hello") {
             showSnackBar("Hi!", Snackbar.LENGTH_SHORT, navbar)
+        } else if (promo == "give me 1000 cats please") {
+            Thread {
+                for (i in 0..1000) {
+                    val cat: Cat = NekoWorker.newRandomCat(this, mPrefs!!, true)
+                    mPrefs?.addCat(cat)
+                }
+                runOnUiThread {
+                    showSnackBar("enjoy =)", Snackbar.LENGTH_LONG, navbar)
+                }
+            }.start()
         } else {
             showSnackBar(getString(R.string.wrong_code), Snackbar.LENGTH_LONG, navbar)
         }

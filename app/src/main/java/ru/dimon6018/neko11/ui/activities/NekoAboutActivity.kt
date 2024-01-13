@@ -114,8 +114,10 @@ class NekoAboutActivity : AppCompatActivity() {
         val mPrefs = PrefState(context)
         Thread {
             var pos = 0
-            while (pos != PrefState(context).cats.size) {
-                val cat = mPrefs.cats[pos]
+            val max = PrefState(context).cats.size
+            val list =  mPrefs.cats
+            while (pos != max) {
+                val cat = list[pos]
                 shareCat(this, cat, false)
                 pos += 1
             }

@@ -73,12 +73,13 @@ class Cat(context: Context, seed: Long, name: String?) : Drawable() {
 
     init {
         d = CatParts(context, seed)
+        val prefs = PrefState(context)
         val res = context.resources
         this.seed = seed
         this.name = name
         val nsr = notSoRandom(seed)
         // age
-        age = nsr.nextInt(17 + 1)
+        age = prefs.getCatAge(seed)
         // set funny status
         status = res.getStringArray(R.array.cat_status)[nsr.nextInt(res.getStringArray(R.array.cat_status).size)]
         // body color

@@ -118,11 +118,16 @@ class NekoWorker(context: Context, workerParams: WorkerParameters) : Worker(cont
         fun newRandomCat(context: Context, prefs: PrefState, giftMode: Boolean?): Cat {
             val nekoprefs = context.getSharedPreferences(NekoSettingsActivity.SETTINGS, Context.MODE_PRIVATE)
             val cat = create(context)
+            var age = Random().nextInt(5)
+            if(age == 0) {
+                age = 1
+            }
+            prefs.setAge(cat, age)
             val cats = prefs.cats
             var a = cats.size
             val random = Random(cat.seed)
             prefs.addCat(cat)
-            prefs.addNCoins(random.nextInt(100))
+            prefs.addNCoins(random.nextInt(125))
             if (!giftMode!!) {
                 while (a != 0) {
                     a -= 1

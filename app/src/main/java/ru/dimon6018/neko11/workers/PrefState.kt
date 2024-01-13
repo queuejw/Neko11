@@ -45,6 +45,11 @@ class PrefState(private val mContext: Context) : OnSharedPreferenceChangeListene
                 .putInt(CAT_KEY_PREFIX_MOOD + cat.seed, mood)
                 .apply()
     }
+    fun setAge(cat: Cat, age: Int) {
+        mPrefs.edit()
+                .putInt(CAT_AGE + cat.seed, age)
+                .apply()
+    }
     val cats: List<Cat>
         get() {
             val cats = ArrayList<Cat>()
@@ -138,6 +143,9 @@ class PrefState(private val mContext: Context) : OnSharedPreferenceChangeListene
 
     fun getMoodPref(cat: Cat): Int {
         return mPrefs.getInt(CAT_KEY_PREFIX_MOOD + cat.seed, 3)
+    }
+    fun getCatAge(seed: Long): Int {
+        return mPrefs.getInt(CAT_AGE + seed, 2)
     }
     var toyState: Int
         get() = mPrefs.getInt(TOY_STATE, 0)
@@ -261,22 +269,18 @@ class PrefState(private val mContext: Context) : OnSharedPreferenceChangeListene
     fun setCatHat(hat: Int, seed: Long) {
         mPrefs.edit().putInt(CAT_HAT_PREFIX + seed, hat).apply()
     }
-
     fun getCatHatCode(seed: Long): Int {
         return mPrefs.getInt(CAT_HAT_PREFIX + seed, 0)
     }
-
     fun setCatSuit(suit: Int, seed: Long) {
         mPrefs.edit().putInt(CAT_SUIT_PREFIX + seed, suit).apply()
     }
-
     fun getCatSuitCode(seed: Long): Int {
         return mPrefs.getInt(CAT_SUIT_PREFIX + seed, 0)
     }
     fun setCatDirty(bool: Boolean, seed: Long) {
         mPrefs.edit().putBoolean(CAT_DIRTY_PREFIX + seed, bool).apply()
     }
-
     fun getCatDirty(seed: Long): Boolean {
         return mPrefs.getBoolean(CAT_DIRTY_PREFIX + seed, false)
     }
@@ -314,6 +318,7 @@ class PrefState(private val mContext: Context) : OnSharedPreferenceChangeListene
         const val CAT_KEY_PREFIX = "cat:"
         const val CAT_HAT_PREFIX = "catHat:"
         const val CAT_DIRTY_PREFIX = "catDirty:"
+        const val CAT_AGE = "catAge:"
         const val CAT_SUIT_PREFIX = "catSuit:"
         const val CAT_INTERACT_KEY_PREFIX = "catInteract:"
         const val CAT_KEY_PREFIX_MOOD = "mood:"

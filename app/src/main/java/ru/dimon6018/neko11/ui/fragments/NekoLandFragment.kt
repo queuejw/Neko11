@@ -634,10 +634,10 @@ class NekoLandFragment : Fragment(), PrefsListener {
         const val EXPORT_BITMAP_SIZE = 700
 
         const val SUITS = 11
-        const val HATS = 12
+        const val HATS = 13
 
         private var iconSize: Int? = null
-        private var hatPricesArray: IntArray = intArrayOf(0, 1, 100, 250, 150, 300, 200, 666, 200, 250, 1000, 50)
+        private var hatPricesArray: IntArray = intArrayOf(0, 1, 100, 250, 150, 300, 200, 666, 200, 250, 1000, 50, 250)
         private var suitPricesArray: IntArray = intArrayOf(0, 1, 150, 200, 300, 500, 300, 250, 200, 250, 300)
         private var suitList: ArrayList<Skinitems>? = null
         private var hatList: ArrayList<Skinitems>? = null
