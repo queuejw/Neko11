@@ -43,6 +43,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
@@ -209,14 +210,14 @@ class NekoLandFragment : Fragment(), PrefsListener {
             skins = bottomSheetInternal!!.findViewById(R.id.skins_sheet)
             try {
                 mood!!.text = context.getString(R.string.mood, NekoApplication.getCatMood(context, cat))
+                age!!.text = getString(R.string.cat_age, cat.age)
+                status!!.text = getString(R.string.cat_status_string, cat.status)
+                catEditor!!.setText(cat.name)
             } catch (e: ClassCastException) {
                 mood!!.text = getString(R.string.error)
                 mPrefs!!.setMood(cat, 3)
                 mood!!.text = context.getString(R.string.mood, NekoApplication.getCatMood(context, cat))
             }
-            age!!.text = getString(R.string.cat_age, cat.age)
-            status!!.text = getString(R.string.cat_status_string, cat.status)
-            catEditor!!.setText(cat.name)
             requireActivity().runOnUiThread {
                 catImage?.setImageIcon(icon)
             }
@@ -481,22 +482,13 @@ class NekoLandFragment : Fragment(), PrefsListener {
         }
     }
 
-    private fun checkPerms(cat: Cat, context: Context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            if (ActivityCompat.checkSelfPermission(context, permission.MANAGE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                mPendingShareCat = cat
-                requestPermissions(arrayOf(permission.MANAGE_EXTERNAL_STORAGE),
-                        STORAGE_PERM_REQUEST)
-                return
-            }
-        } else {
-            if (ActivityCompat.checkSelfPermission(context, permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                mPendingShareCat = cat
-                requestPermissions(arrayOf(permission.WRITE_EXTERNAL_STORAGE),
-                        STORAGE_PERM_REQUEST)
-                return
+    private fun checkPerms(cat: Cat, activity: Activity) {
+
+        if (ContextCompat.checkSelfPermission(activity, permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(activity, permission.MANAGE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                ActivityCompat.requestPermissions(activity, arrayOf(permission.WRITE_EXTERNAL_STORAGE, permission.READ_EXTERNAL_STORAGE, permission.MANAGE_EXTERNAL_STORAGE), 1)
+            } else {
+                ActivityCompat.requestPermissions(activity, arrayOf(permission.WRITE_EXTERNAL_STORAGE, permission.READ_EXTERNAL_STORAGE), 1)
             }
         }
         shareCat(requireActivity(), cat, true)
@@ -633,12 +625,12 @@ class NekoLandFragment : Fragment(), PrefsListener {
         const val STORAGE_PERM_REQUEST = 123
         const val EXPORT_BITMAP_SIZE = 700
 
-        const val SUITS = 11
+        const val SUITS = 12
         const val HATS = 13
 
         private var iconSize: Int? = null
         private var hatPricesArray: IntArray = intArrayOf(0, 1, 100, 250, 150, 300, 200, 666, 200, 250, 1000, 50, 250)
-        private var suitPricesArray: IntArray = intArrayOf(0, 1, 150, 200, 300, 500, 300, 250, 200, 250, 300)
+        private var suitPricesArray: IntArray = intArrayOf(0, 1, 150, 200, 300, 500, 300, 250, 200, 250, 300, 400)
         private var suitList: ArrayList<Skinitems>? = null
         private var hatList: ArrayList<Skinitems>? = null
         fun refreshBottomSheetIcon(cat: Cat, catPreview: ImageView, mPrefs: PrefState) {

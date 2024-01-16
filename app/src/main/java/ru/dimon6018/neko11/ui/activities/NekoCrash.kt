@@ -17,7 +17,7 @@ import kotlin.system.exitProcess
 class NekoCrash: AppCompatActivity()  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.Theme_Neko11_Green)
+        setTheme(R.style.Theme_Neko11_Red)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.neko_crash)
         val model = "Model: " + Build.MODEL + "\n"

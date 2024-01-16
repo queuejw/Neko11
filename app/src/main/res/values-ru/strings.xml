@@ -244,6 +244,7 @@
     <string name="suit_8">Костюм лягушонка</string>
     <string name="suit_9">Рентген</string>
     <string name="suit_10">Пижама с динозаврами</string>
+    <string name="suit_11">Слизарин</string>
 
     <string name="hat_1">Новогодняя шляпа</string>
     <string name="hat_2">Деловая шляпа</string>
@@ -256,7 +257,7 @@
     <string name="hat_9">Ушки кролика</string>
     <string name="hat_10">Золотая корона</string>
     <string name="hat_11">Праздничная шляпа</string>
-    <string name="hat_12">Очень очень деловая шляпа</string>
+    <string name="hat_12">Слизарин</string>
     <!-- SKINS END -->
     <string name="skin_preview">Предпросмотр</string>
     <string name="compact_controls_tip">Возможно, понадобится перезапустить приложение</string>

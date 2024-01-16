@@ -50,7 +50,7 @@ class NekoToiletWorker(context: Context, workerParams: WorkerParameters) : Worke
             val toiletmin = 30
             val toiletmax = 150
             val catSize = PrefState(context!!).cats.size
-            var toiletDelay = Random().nextInt((toiletmax - toiletmin + 3) / catSize)
+            var toiletDelay = Random().nextInt((toiletmax - toiletmin + 3) - catSize)
             if (toiletDelay < 10) {
                 toiletDelay += 10
             }

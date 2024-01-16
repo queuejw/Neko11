@@ -243,6 +243,7 @@
     <string name="suit_8">Frog costume</string>
     <string name="suit_9">Roentgen</string>
     <string name="suit_10">Pajamas With Dinosaurs</string>
+    <string name="suit_11">Slytherin</string>
 
     <string name="hat_1">Christmas hat</string>
     <string name="hat_2">Business hat</string>
@@ -255,7 +256,7 @@
     <string name="hat_9">Rabbit ears</string>
     <string name="hat_10">Golden Crown</string>
     <string name="hat_11">Holiday hat</string>
-    <string name="hat_12">A very much businesslike hat</string>
+    <string name="hat_12">Slytherin hat</string>
 
 <!-- SKINS END -->
     <string name="skin_preview">Preview</string>

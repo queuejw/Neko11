@@ -46,6 +46,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -176,6 +177,7 @@ public class NekoActivationActivity extends AppCompatActivity {
         double toPositiveDegrees(double rad) {
             return (Math.toDegrees(rad) + 360 - 90) % 360;
         }
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouchEvent(MotionEvent ev) {
             super.onTouchEvent(ev);
@@ -253,7 +255,7 @@ public class NekoActivationActivity extends AppCompatActivity {
             public void setValue(float v) {
                 // until the dial is "unlocked", you can't turn it all the way to 11
                 final float max = isLocked() ? 1f - 1f / STEPS : 1f;
-                mValue = v < 0f ? 0f : v > max ? max : v;
+                mValue = v < 0f ? 0f : Math.min(v, max);
                 invalidateSelf();
             }
             public float getValue() {
@@ -266,6 +268,7 @@ public class NekoActivationActivity extends AppCompatActivity {
                 setValue(getValue() + ((float) i) / STEPS);
             }
 
+            @Keep
             public void setElevenAnim(float f) {
                 if (mElevenAnim != f) {
                     mElevenAnim = f;
@@ -306,14 +309,13 @@ public class NekoActivationActivity extends AppCompatActivity {
                     canvas.restore();
                 }
                 if (mElevenAnim > 0f) {
-                    final int color = COLOR_ORANGE;
                     final int size2 = (int) ((0.5 + 0.5f * mElevenAnim) * w / 14);
                     final float cx11 = cx + size2 / 4f;
                     mEleven.setBounds((int) cx11 - size2, (int) h2 - size2,
                             (int) cx11 + size2, (int) h2 + size2);
                     final int alpha = 0xFFFFFF | ((int) clamp(0xFF * 2 * mElevenAnim, 0, 0xFF)
                             << 24);
-                    mEleven.setTint(alpha & color);
+                    mEleven.setTint(alpha & COLOR_ORANGE);
                     mEleven.draw(canvas);
                 }
                 // don't want to use the rounded value here since the quantization will be visible
@@ -325,7 +327,7 @@ public class NekoActivationActivity extends AppCompatActivity {
                 canvas.drawCircle(w - radius - dimple * 2, h2, dimple, mPaint);
             }
             float clamp(float x, float a, float b) {
-                return x < a ? a : x > b ? b : x;
+                return x < a ? a : Math.min(x, b);
             }
             float angleToValue(float a) {
                 return 1f - clamp(a / (360 - 45), 0f, 1f);

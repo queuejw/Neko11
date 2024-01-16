@@ -110,7 +110,7 @@ class PrefState(private val mContext: Context) : OnSharedPreferenceChangeListene
         var count = 0
         while (count != NekoLandFragment.HATS) {
             if(count == 0) {
-                mPrefs.edit().putBoolean("is_hat_purchased_$count", true).apply()
+                mPrefs.edit().putBoolean("is_hat_purchased_0", true).apply()
                 count += 1
                 continue
             }
@@ -122,7 +122,7 @@ class PrefState(private val mContext: Context) : OnSharedPreferenceChangeListene
         var count = 0
         while (count != NekoLandFragment.SUITS) {
             if(count == 0) {
-                mPrefs.edit().putBoolean("is_suit_purchased_$count", true).apply()
+                mPrefs.edit().putBoolean("is_suit_purchased_0", true).apply()
                 count += 1
                 continue
             }
@@ -170,15 +170,12 @@ class PrefState(private val mContext: Context) : OnSharedPreferenceChangeListene
             mPrefs.unregisterOnSharedPreferenceChangeListener(this)
         }
     }
-
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
         mListener!!.onPrefsChanged()
     }
-
     interface PrefsListener {
         fun onPrefsChanged()
     }
-
     var sortState: Int
         get() = mPrefs.getInt(SORT_STATE, 1)
         set(sortState) {
