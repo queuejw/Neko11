@@ -45,12 +45,11 @@
     <string name="control_food_status_full">Full</string>
     <string name="control_food_status_empty">Empty</string>
     <string name="settings">Settings</string>
-    <string name="cat_counter">You collect %d cat\'s!</string>
+    <string name="cat_counter">Collected cats: %d</string>
     <string name="about_neko">About Neko</string>
     <string name="help">Help</string>
 	<string name="achievements">Achievements</string>
-    <string name="help_message">Welcome to Neko! For start play click «Cat Controls» on bottom bar and fill all tiles. Then close app. If cat arrive, I send you notification. After you cat send cat your friends, or continue collect cats. Do not forget check tiles, because after arrive cat\'s eat your food and drink water. Good luck!  </string>
-    <string name="update_message">You can download update from GitHub.</string>
+    <string name="help_message">Welcome to Neko! For start play click «Cat Controls» on bottom bar and fill all tiles. Then close app. If cat arrive, I send you notification. After you cat send cat your friends, or continue collect cats. Do not forget check tiles, because after arrive cat\'s eat your food and drink water. Good luck! </string>
     <string name="background_changed">Restart the application</string>
     <string name="later">Later</string>
     <string name="restart">Restart</string>
@@ -175,7 +174,6 @@
     <string name="mood3">Good</string>
     <string name="mood4">Very good</string>
     <string name="mood5">Great</string>
-    <string name="please_make_backup">Neko11 detected that you have updated the application to a version with new gameplay. To prevent data corruption, the load has been interrupted. Please make a Backup of all your cats. This is very important. In any you can continue downloading further.</string>
     <string name="boosters_title">Boosters</string>
     <string name="booster_items">You have: %d</string>
     <string name="choose_booster">Choose boosters</string>
@@ -191,7 +189,6 @@
     <string name="box_win6">You opened the box, and you got: 1 new cat.</string>
     <string name="box_error">We were unable to open this box. We\'ve returned 300 NCoins</string>
     <string name="telegram">Our channel in Telegram</string>
-    <string name="my_stats">Stats</string>
     <string name="booster_actived_sub">Booster is active</string>
     <string name="cat_zoom_title">Click on the cat to zoom in on it</string>
     <string name="stat_1">You\'ve collected a total of %d cats</string>
@@ -248,7 +245,7 @@
     <string name="hat_1">Christmas hat</string>
     <string name="hat_2">Business hat</string>
     <string name="hat_3">A very businesslike hat</string>
-    <string name="hat_4">Cap</string>
+    <string name="hat_4">Cool hat</string>
     <string name="hat_5">Panama with dinosaurs</string>
     <string name="hat_6">Deer antlers</string>
     <string name="hat_7">Scary horns</string>
@@ -256,7 +253,6 @@
     <string name="hat_9">Rabbit ears</string>
     <string name="hat_10">Golden Crown</string>
     <string name="hat_11">Holiday hat</string>
-    <string name="hat_12">Slytherin hat</string>
 
 <!-- SKINS END -->
     <string name="skin_preview">Preview</string>
@@ -269,6 +265,8 @@
     <string name="crash_clear_settings">Clear settings (This won\'t affect your cats)</string>
     <string name="crash_restart">Restart Neko11</string>
     <string name="crash_settings">Open settings</string>
+    <string name="box_tip">By opening this mystery box you can get some of these things: Random Cat, NCoins, Boosters.</string>
+    <string name="cat_tip">Are you sure you want to buy a new cat?</string>
     <integer-array name="food_intervals">
         <item>0</item>
         <item>15</item>

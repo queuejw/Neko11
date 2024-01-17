@@ -157,7 +157,7 @@ class NekoAchievementsActivity : AppCompatActivity(), PrefsListener {
         mystery.setOnClickListener {
             MaterialAlertDialogBuilder(this)
                     .setTitle(R.string.achievements)
-                    .setMessage("Открывая этот загадочный кейс вы можете получить что-то из этих вещей: Случайный кот, NCoins, Усилители.")
+                    .setMessage(getString(R.string.box_tip))
                     .setIcon(R.drawable.key)
                     .setNegativeButton(android.R.string.cancel, null
                     ).setPositiveButton(R.string.open
@@ -166,7 +166,7 @@ class NekoAchievementsActivity : AppCompatActivity(), PrefsListener {
         cat.setOnClickListener {
             MaterialAlertDialogBuilder(this)
                     .setTitle(R.string.achievements)
-                    .setMessage("Вы точно хотите купить нового котика?")
+                    .setMessage(getString(R.string.cat_tip))
                     .setIcon(R.drawable.key)
                     .setNegativeButton(android.R.string.cancel, null
                     ).setPositiveButton(R.string.yes

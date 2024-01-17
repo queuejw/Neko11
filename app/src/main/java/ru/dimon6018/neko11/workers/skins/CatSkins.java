@@ -25,7 +25,6 @@ public class CatSkins {
             case 9 -> result = AppCompatResources.getDrawable(context, R.mipmap.hat_9);
             case 10 -> result = AppCompatResources.getDrawable(context, R.mipmap.hat_10);
             case 11 -> result = AppCompatResources.getDrawable(context, R.mipmap.hat_11);
-            case 12 -> result = AppCompatResources.getDrawable(context, R.mipmap.hat_12);
             default -> result = AppCompatResources.getDrawable(context, R.drawable.nothing);
         }
         return result;

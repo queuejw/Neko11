@@ -109,18 +109,20 @@ class NekoLandFragment : Fragment(), PrefsListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         iconSize = requireContext().resources.getDimensionPixelSize(R.dimen.neko_display_size)
-        recyclerView!!.setAdapter(CatAdapter().also { mAdapter = it })
         bottomsheet = BottomSheetDialog(requireContext())
         skinsSheet = BottomSheetDialog(requireContext())
         Thread {
+            mAdapter = CatAdapter()
             if (nekoprefs!!.getBoolean("skinsConfigured", false)) {
                 nekoprefs!!.edit().putBoolean("skinsConfigured", true).apply()
                 mPrefs!!.setupHats()
                 mPrefs!!.setupSuits()
             }
+            requireActivity().runOnUiThread {
+                recyclerView!!.setAdapter(mAdapter)
+            }
         }.start()
     }
-
     override fun onDestroy() {
         mPrefs!!.setListener(null)
         super.onDestroy()
@@ -148,8 +150,8 @@ class NekoLandFragment : Fragment(), PrefsListener {
             }
             val cats: Array<Cat> = list.toTypedArray<Cat>()
             numCatsP = cats.size
-            recyclerView!!.post {
-                mAdapter!!.setCats(cats)
+            recyclerView?.post {
+                mAdapter?.setCats(cats)
                 updateLM()
                 updateCounter(numCatsP)
             }
@@ -626,7 +628,7 @@ class NekoLandFragment : Fragment(), PrefsListener {
         const val EXPORT_BITMAP_SIZE = 700
 
         const val SUITS = 12
-        const val HATS = 13
+        const val HATS = 12
 
         private var iconSize: Int? = null
         private var hatPricesArray: IntArray = intArrayOf(0, 1, 100, 250, 150, 300, 200, 666, 200, 250, 1000, 50, 250)

@@ -45,11 +45,10 @@
     <string name="control_food_status_full">Полная</string>
     <string name="control_food_status_empty">Пустая</string>
     <string name="settings">Настройки</string>
-    <string name="cat_counter">Вы собрали %d кота(ов)!</string>
+    <string name="cat_counter">Собрано котов: %d</string>
     <string name="about_neko">Про Neko11</string>
     <string name="help">Помощь</string>
     <string name="help_message">Добро пожаловать в Neko! Чтобы начать играть, перейдите во вкладку «Управление» на нижней полоске и заполните все плитки, затем просто закройте приложение. Когда к вам прибудет кот, вам будет отправлено уведомление. После этого Вы сможете поделиться изображением кота с друзьями или продолжить коллекционировать. Но не забывайте заглядывать во вкладку «Управление». Когда прибывает кот, то он съедает еду и выпивает воду. ВАЖНО! Если забудете положить в миску еду, не будете привлекать котов игрушкой, то новые коты не придут!</string>
-    <string name="update_message">Загрузите новый релиз из GitHub.</string>
     <string name="background_changed">Перезапустите приложение.</string>
     <string name="later">Чуть позже</string>
     <string name="restart">Перезапустить</string>
@@ -160,7 +159,7 @@
     <string name="wash_cat_title">Искупать</string>
     <string name="caress_cat_title">Ласкать</string>
     <string name="touch_cat_title">Потрогать</string>
-    <string name="aosp">Наша игра основана на другой игре из Android 11 и я хочу выразить благодарность её оригинальным разработчикам, они дали мне вдохновение доработать игру и сделать её еще комфортнее. Спасибо! Ознакомьтесь здесь: https://source.android.com/</string>
+    <string name="aosp">Наша игра основана на другой игре из Android 11, и я хочу выразить благодарность её оригинальным разработчикам, они дали мне вдохновение доработать игру и сделать её еще комфортнее. Спасибо! Ознакомьтесь здесь: https://source.android.com/</string>
     <string name="about_dev6">SuperRofler - помощь в поиске багов, выявление критических ошибок, моральная поддержка</string>
     <string name="open">Открыть</string>
     <string name="mystery_box">Загадочный ящик</string>
@@ -176,7 +175,6 @@
     <string name="mood3">Хорошее</string>
     <string name="mood4">Очень хорошее</string>
     <string name="mood5">Отличное</string>
-    <string name="please_make_backup">Neko11 обнаружил, что вы обновили приложение до версии с новым геймплеем. Чтобы предотвратить повреждение данных, загрузка была прервана. Пожалуйста, сделайте Backup всех ваших котиков. Это очень важно. В любом вы можете продолжить загрузку дальше.</string>
     <string name="boosters_title">Усилители</string>
     <string name="booster_items">У вас осталось: %d</string>
     <string name="choose_booster">Выбери усилители.</string>
@@ -192,7 +190,6 @@
     <string name="box_win6">Вы открыли ящик и получили: 1 новый кот.</string>
     <string name="box_error">Нам не удалось открыть этот ящик. Мы вернули вам 300 NCoins</string>
     <string name="telegram">Наш канал в Telegram</string>
-    <string name="my_stats">Статистика</string>
     <string name="booster_actived_sub">Усилитель активен</string>
     <string name="cat_zoom_title">Нажми на кота, чтобы приблизить его</string>
     <string name="stat_1">Всего ты собрал %d котов</string>
@@ -249,7 +246,7 @@
     <string name="hat_1">Новогодняя шляпа</string>
     <string name="hat_2">Деловая шляпа</string>
     <string name="hat_3">Очень деловая шляпа</string>
-    <string name="hat_4">Кепка</string>
+    <string name="hat_4">Крутая шляпа</string>
     <string name="hat_5">Панама с динозаврами</string>
     <string name="hat_6">Рога оленя</string>
     <string name="hat_7">Страшные рога</string>
@@ -257,7 +254,6 @@
     <string name="hat_9">Ушки кролика</string>
     <string name="hat_10">Золотая корона</string>
     <string name="hat_11">Праздничная шляпа</string>
-    <string name="hat_12">Слизарин</string>
     <!-- SKINS END -->
     <string name="skin_preview">Предпросмотр</string>
     <string name="compact_controls_tip">Возможно, понадобится перезапустить приложение</string>
@@ -269,6 +265,8 @@
     <string name="crash_clear_settings">Очистить настройки (Это не затронет ваших котиков)</string>
     <string name="crash_restart">Перезапустить</string>
     <string name="crash_settings">Открыть настройки</string>
+    <string name="box_tip">Открывая этот загадочный ящик вы можете получить что-то из этих вещей: Случайный кот, NCoins, Усилители.</string>
+    <string name="cat_tip">Вы точно хотите купить нового котика?</string>
 
     <integer-array name="food_intervals">
         <item>0</item>

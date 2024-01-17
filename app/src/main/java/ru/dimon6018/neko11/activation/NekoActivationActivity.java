@@ -105,10 +105,10 @@ public class NekoActivationActivity extends AppCompatActivity {
             startActivity(new Intent(this, NekoGeneralActivity.class)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                             | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-        } catch (ActivityNotFoundException ex) {
+        } catch (ActivityNotFoundException e) {
             new AlertDialog.Builder(this)
                     .setIcon(R.drawable.ic_warning)
-                    .setMessage("something went wrong. " + ex)
+                    .setMessage("something went wrong. " + e)
                     .setNegativeButton(android.R.string.ok, null)
                     .show();
         }
