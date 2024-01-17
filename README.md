@@ -5,10 +5,8 @@ Neko11 - is a game about cat collecting
 Neko11 - is a game that will allow you to collect cats. There is a similar game on Android 7, but my version uses mechanics from the Android 11 version and has some changes, including support for both older Android versions and newer ones, Material You support and other features.
 
 ## Screenshots 📸
- ![](/screenshots/Screenshot_20230420_154547.jpg?raw=true)
- ![](/screenshots/Screenshot_20230420_154722.jpg?raw=true)
- ![](/screenshots/Screenshot_20230420_154744.jpg?raw=true)
- ![](/screenshots/Screenshot_20230420_154654.jpg?raw=true)
+<img src='/screenshots/photo_2024-01-16_16-13-44.jpg' width='300'> <img src='/screenshots/photo_2024-01-16_16-48-15.jpg' width='300'> <img src='/screenshots/photo_2024-01-16_16-49-28.jpg' width='300'>
+<img src='/screenshots/photo_2024-01-16_16-56-34 (2).jpg' width='300'> <img src='/screenshots/photo_2024-01-16_16-56-34.jpg' width='300'> <img src='/screenshots/photo_2024-01-16_16-56-34 (3).jpg' width='300'>
  
 More screenshots in /screenshots folder 📷
 
@@ -24,16 +22,19 @@ More screenshots in /screenshots folder 📷
  
 ° Cat sorting
 
-° Customised icon and grid size
+° Customised icons and grid
 
  • Achievements
+
+ ° Cat skins
 
 ° Include promocode system
 
  • Sync with Device controls (Android 11+)
 
+ ° Toilet..?
 
-///AND OTHER 37180 COOL FEATURES 
+///AND OTHER 1499 COOL FEATURES 
 
 ## Downloads 📲
  Download latest release: https://github.com/queuejw/Neko11/releases
