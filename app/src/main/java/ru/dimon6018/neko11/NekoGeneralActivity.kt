@@ -23,6 +23,9 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.media.AudioAttributes
+import android.media.AudioManager
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.view.ContextThemeWrapper
@@ -48,6 +51,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.elevation.SurfaceColors
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import ru.dimon6018.neko11.activation.NekoActivationActivity
 import ru.dimon6018.neko11.controls.CatControlsFragment
 import ru.dimon6018.neko11.controls.CatControlsFragment.Companion.showTipAgain
@@ -59,6 +65,7 @@ import ru.dimon6018.neko11.workers.Cat
 import ru.dimon6018.neko11.workers.NekoWorker
 import ru.dimon6018.neko11.workers.PrefState
 import ru.dimon6018.neko11.workers.PrefState.PrefsListener
+
 
 class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
 
@@ -101,7 +108,9 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         if (supportActionBar != null) {
             supportActionBar!!.setDisplayUseLogoEnabled(true)
         }
-        Thread {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        window!!.navigationBarColor = SurfaceColors.SURFACE_2.getColor(this)
+        CoroutineScope(Dispatchers.Default).launch {
             if (mPrefs!!.backgroundPath != "") {
                 try {
                     val bmp = BitmapFactory.decodeFile(mPrefs!!.backgroundPath)
@@ -113,10 +122,8 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                         showSnackBar(ex.toString(), Snackbar.LENGTH_LONG, cord)
                     }
                 }
-                WindowCompat.setDecorFitsSystemWindows(window, false)
-                window!!.navigationBarColor = SurfaceColors.SURFACE_2.getColor(this)
             }
-        }.start()
+        }
         if (!nekoprefs!!.getBoolean("controlsFirst", false)) {
             viewPager!!.currentItem = 0
             navbar?.selectedItemId = R.id.collection
@@ -135,6 +142,20 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                 }
             }
         })
+        mediaPlayer = MediaPlayer()
+        if(mPrefs!!.isMusicEnabled()) {
+            val afd = getResources().assets.openFd("music/music1.mp3")
+            mediaPlayer!!.isLooping = true
+            mediaPlayer!!.setDataSource(afd.fileDescriptor, afd.startOffset, afd.getLength())
+            mediaPlayer!!.setAudioAttributes(
+                    AudioAttributes.Builder()
+                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                            .build())
+            mediaPlayer!!.prepare()
+            mediaPlayer!!.start()
+            isMusicPlaying = true
+
+        }
     }
     private fun getAndroidV(): Boolean {
         return (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1)
@@ -188,12 +209,14 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
             else -> return super.onOptionsItemSelected(item)
         }
     }
-
     public override fun onDestroy() {
         mPrefs!!.setListener(null)
         super.onDestroy()
+        if(mPrefs!!.isMusicEnabled()) {
+            isMusicPlaying = false
+            mediaPlayer?.release()
+        }
     }
-
     public override fun onPause() {
         super.onPause()
     }
@@ -201,7 +224,6 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
     public override fun onResume() {
         super.onResume()
     }
-
     private fun setupDarkMode() {
         when (nekoprefs!!.getInt("darktheme", 0)) {
             1 -> {
@@ -415,6 +437,8 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
 
     companion object {
         private const val DEBUG = false
+        var isMusicPlaying = false
+        var mediaPlayer: MediaPlayer? = null
 
         @JvmStatic
         fun showSnackBar(text: String?, time: Int, view: View?) {

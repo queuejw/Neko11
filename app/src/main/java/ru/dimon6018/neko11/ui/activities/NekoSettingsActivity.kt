@@ -45,6 +45,10 @@ import com.google.android.material.textview.MaterialTextView
 import org.xmlpull.v1.XmlPullParserException
 import ru.dimon6018.neko11.BuildConfig
 import ru.dimon6018.neko11.NekoApplication.Companion.getNekoTheme
+import ru.dimon6018.neko11.NekoApplication.Companion.playMusic
+import ru.dimon6018.neko11.NekoGeneralActivity
+import ru.dimon6018.neko11.NekoGeneralActivity.Companion.isMusicPlaying
+import ru.dimon6018.neko11.NekoGeneralActivity.Companion.mediaPlayer
 import ru.dimon6018.neko11.NekoGeneralActivity.Companion.showSnackBar
 import ru.dimon6018.neko11.R
 import ru.dimon6018.neko11.workers.BackupParser
@@ -85,6 +89,7 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
     private var autowhiteswitch: MaterialSwitch? = null
     private var controlsFirst: MaterialSwitch? = null
     private var allowCatRun: MaterialSwitch? = null
+    private var musicSwitch: MaterialSwitch? = null
     private var textMatch: MaterialSwitch? = null
     private var legacyControls: MaterialSwitch? = null
     private var sortGroup: MaterialButtonToggleGroup? = null
@@ -256,6 +261,15 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
             val editor = nekoprefs!!.edit()
             editor.putBoolean("controlsFirst", isChecked)
             editor.apply()
+        }
+        musicSwitch!!.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+           mPrefs!!.setMusic(isChecked)
+            if(!isChecked) {
+                mediaPlayer?.release()
+                isMusicPlaying = false
+            } else {
+                restart()
+            }
         }
         limitSlider!!.addOnChangeListener(Slider.OnChangeListener { _: Slider?, value: Float, _: Boolean ->
             val valueNew = Math.round(value)
@@ -596,7 +610,11 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
         }
         popup.show()
     }
-
+    private fun restart() {
+        val intent = Intent(this, NekoGeneralActivity::class.java)
+        this.startActivity(intent)
+        finishAffinity()
+    }
     @SuppressLint("SuspiciousIndentation")
     private fun setupScreen() {
         opensettingsbtn = findViewById(R.id.opensettingsbtn)
@@ -623,6 +641,7 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
         removeBack = findViewById(R.id.remove_background)
         textMatch = findViewById(R.id.text_matches_theme)
         legacyControls = findViewById(R.id.legacy_controls)
+        musicSwitch = findViewById(R.id.musicController)
         val theme = nekoprefs!!.getInt("theme", 0)
         val darkenabled = nekoprefs!!.getInt("darktheme", 0)
         val isControlsLinear = nekoprefs!!.getBoolean("linear_control", false)
@@ -639,6 +658,7 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
         dyncolor!!.isChecked = theme == 8
         legacyControls!!.isChecked = legacyGameplay
         controlsFirst!!.isChecked = isControlsFirst
+        musicSwitch!!.isChecked = mPrefs!!.isMusicEnabled()
         allowCatRun!!.isChecked = isCatCanRun
         textMatch!!.isChecked = coloredText
         limitSlider!!.value = mPrefs!!.catsInLineLimit.toFloat()

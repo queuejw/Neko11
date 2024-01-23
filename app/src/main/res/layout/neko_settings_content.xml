@@ -52,6 +52,15 @@
 			app:fontFamily="@font/opensans_regular" />
 
 		<com.google.android.material.materialswitch.MaterialSwitch
+			android:id="@+id/musicController"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:layout_marginEnd="24dp"
+			android:text="Включать музыку"
+			android:textSize="18sp" />
+
+		<com.google.android.material.materialswitch.MaterialSwitch
 			android:id="@+id/linear_controls_enable"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"

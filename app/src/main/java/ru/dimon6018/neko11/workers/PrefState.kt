@@ -299,6 +299,12 @@ class PrefState(private val mContext: Context) : OnSharedPreferenceChangeListene
     fun isDialogEnabled(): Boolean {
         return mPrefs.getBoolean(CAT_DIALOG, false)
     }
+    fun setMusic(bool: Boolean) {
+        mPrefs.edit().putBoolean(MUSIC, bool).apply()
+    }
+    fun isMusicEnabled(): Boolean {
+        return mPrefs.getBoolean(MUSIC, true)
+    }
 
     companion object {
         const val FILE_NAME = "mPrefs"
@@ -309,6 +315,7 @@ class PrefState(private val mContext: Context) : OnSharedPreferenceChangeListene
         const val ICON_SIZE = "size"
         const val ICON_BACKGROUND = "background"
         const val CAT_DIALOG = "catDialogEnabled"
+        const val MUSIC = "musicEnabled"
         private const val NCOINS = "nCoins"
         const val TOY_STATE = "toy"
         const val WATER_STATE = "water"

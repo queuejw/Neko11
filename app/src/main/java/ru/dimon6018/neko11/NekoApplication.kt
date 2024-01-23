@@ -18,6 +18,9 @@ package ru.dimon6018.neko11
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import android.content.res.Resources
+import android.media.AudioAttributes
+import android.media.MediaPlayer
 import ru.dimon6018.neko11.ui.activities.NekoSettingsActivity
 import ru.dimon6018.neko11.workers.Cat
 import ru.dimon6018.neko11.workers.ExceptionHandler
@@ -80,6 +83,23 @@ class NekoApplication : Application() {
             } else {
                 // Default to "unknown" if the selected color is out of bounds
                 android.R.color.white
+            }
+        }
+        fun playMusic(mPrefs: PrefState, resources: Resources) {
+            if(NekoGeneralActivity.mediaPlayer == null) {
+                NekoGeneralActivity.mediaPlayer = MediaPlayer()
+            }
+            val afd = resources.assets.openFd("music/music1.mp3")
+            NekoGeneralActivity.mediaPlayer!!.isLooping = true
+            NekoGeneralActivity.mediaPlayer!!.setDataSource(afd.fileDescriptor, afd.startOffset, afd.getLength())
+            NekoGeneralActivity.mediaPlayer!!.setAudioAttributes(
+                    AudioAttributes.Builder()
+                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                            .build())
+            if(mPrefs.isMusicEnabled()) {
+                NekoGeneralActivity.mediaPlayer!!.prepare()
+                NekoGeneralActivity.mediaPlayer!!.start()
+                NekoGeneralActivity.isMusicPlaying = true
             }
         }
     }
