@@ -134,16 +134,18 @@ class NekoWorker(context: Context, workerParams: WorkerParameters) : Worker(cont
                     if (cat == cats[a]) {
                         continue
                     }
-                    val cat2 = cats[a]
-                    val mood = prefs.getMoodPref(cat2)
-                    prefs.setMood(cat2, mood - 1)
-                    if (prefs.getMoodPref(cat2) <= 1) {
-                        prefs.setCatDirty(true, cat2.seed)
-                    }
-                    if (prefs.getMoodPref(cat2) <= -3 && nekoprefs.getBoolean("gameplayFeature1", true)) {
-                        prefs.setCatDirty(true, cat2.seed)
-                        prefs.removeCat(cat2)
-                        prefs.setRunDialog(true)
+                    if (Random().nextInt(10) < 5) {
+                        val cat2 = cats[a]
+                        val mood = prefs.getMoodPref(cat2)
+                        prefs.setMood(cat2, mood - 1)
+                        if (prefs.getMoodPref(cat2) <= 1) {
+                            prefs.setCatDirty(true, cat2.seed)
+                        }
+                        if (prefs.getMoodPref(cat2) <= -3 && nekoprefs.getBoolean("gameplayFeature1", true)) {
+                            prefs.setCatDirty(true, cat2.seed)
+                            prefs.removeCat(cat2)
+                            prefs.setRunDialog(true)
+                        }
                     }
                 }
             }

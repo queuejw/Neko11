@@ -50,9 +50,9 @@ class PrefState(private val mContext: Context) : OnSharedPreferenceChangeListene
                 .putInt(CAT_AGE + cat.seed, age)
                 .apply()
     }
-    val cats: List<Cat>
+    val cats: MutableList<Cat>
         get() {
-            val cats = ArrayList<Cat>()
+            val cats = mutableListOf<Cat>()
             val map = mPrefs.all
             for (key in map.keys) {
                 if (key.startsWith(CAT_KEY_PREFIX)) {
@@ -305,31 +305,43 @@ class PrefState(private val mContext: Context) : OnSharedPreferenceChangeListene
     fun isMusicEnabled(): Boolean {
         return mPrefs.getBoolean(MUSIC, true)
     }
-
+    fun setLegacyFood(bool: Boolean) {
+        mPrefs.edit().putBoolean(LEGACY_FOOD, bool).apply()
+    }
+    fun isLegacyFoodEnabled(): Boolean {
+        return mPrefs.getBoolean(LEGACY_FOOD, true)
+    }
+    fun setWaterType(level: Int) {
+        mPrefs.edit().putInt(WATER_TYPE, level).apply()
+    }
+    fun getWaterType(): Int {
+        return mPrefs.getInt(WATER_TYPE, 0)
+    }
     companion object {
-        const val FILE_NAME = "mPrefs"
-        private const val FOOD_STATE = "food"
-        private const val SORT_STATE = "sort"
-        private const val TOILET_STATE = "toilet"
-        private const val CATS_LIMIT = "limit"
-        const val ICON_SIZE = "size"
-        const val ICON_BACKGROUND = "background"
-        const val CAT_DIALOG = "catDialogEnabled"
-        const val MUSIC = "musicEnabled"
-        private const val NCOINS = "nCoins"
-        const val TOY_STATE = "toy"
-        const val WATER_STATE = "water"
-        const val CAT_KEY_PREFIX = "cat:"
-        const val CAT_HAT_PREFIX = "catHat:"
-        const val CAT_DIRTY_PREFIX = "catDirty:"
-        const val CAT_AGE = "catAge:"
-        const val CAT_SUIT_PREFIX = "catSuit:"
-        const val CAT_INTERACT_KEY_PREFIX = "catInteract:"
-        const val CAT_KEY_PREFIX_MOOD = "mood:"
-        const val MOOD_BOOSTER = "mood_booster"
-        const val LUCKY_BOOSTER = "lucky_booster"
-        const val LAUNCHER_CUSTOM_BACKGRD = "LAUNCHER_CUSTOM_BACKGROUND"
-        @JvmField
-        var isLuckyBoosterActive = false
+         const val FILE_NAME = "mPrefs"
+         const val FOOD_STATE = "food"
+         const val SORT_STATE = "sort"
+         const val TOILET_STATE = "toilet"
+         const val CATS_LIMIT = "limit"
+         const val ICON_SIZE = "size"
+         const val ICON_BACKGROUND = "background"
+         const val CAT_DIALOG = "catDialogEnabled"
+         const val MUSIC = "musicEnabled"
+         const val LEGACY_FOOD = "legacyFood"
+         const val NCOINS = "nCoins"
+         const val TOY_STATE = "toy"
+         const val WATER_STATE = "water"
+         const val WATER_TYPE = "waterType"
+         const val CAT_KEY_PREFIX = "cat:"
+         const val CAT_HAT_PREFIX = "catHat:"
+         const val CAT_DIRTY_PREFIX = "catDirty:"
+         const val CAT_AGE = "catAge:"
+         const val CAT_SUIT_PREFIX = "catSuit:"
+         const val CAT_INTERACT_KEY_PREFIX = "catInteract:"
+         const val CAT_KEY_PREFIX_MOOD = "mood:"
+         const val MOOD_BOOSTER = "mood_booster"
+         const val LUCKY_BOOSTER = "lucky_booster"
+         const val LAUNCHER_CUSTOM_BACKGRD = "LAUNCHER_CUSTOM_BACKGROUND"
+         var isLuckyBoosterActive = false
     }
 }

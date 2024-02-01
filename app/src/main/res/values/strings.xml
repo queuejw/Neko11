@@ -267,6 +267,18 @@
     <string name="crash_settings">Open settings</string>
     <string name="box_tip">By opening this mystery box you can get some of these things: Random Cat, NCoins, Boosters.</string>
     <string name="cat_tip">Are you sure you want to buy a new cat?</string>
+    <string name="legacy_food">Manual food control</string>
+    <string name="legacy_food_tip">Turn on if you want to manually select food and drink for your cat</string>
+    <string name="food_croissant">Croissant</string>
+    <string name="food_drumstick">Drumstick</string>
+    <string name="food_pasta">Pasta</string>
+    <string name="food_peanut">Peanut</string>
+    <string name="food_hot_dog">Hot Dog</string>
+    <string name="food_steak">Steak</string>
+    <string name="choose_food">Choose food</string>
+    <string name="choose_drink">Choose drink</string>
+    <string name="drink_water">Water</string>
+    <string name="drink_milk">Milk</string>
     <integer-array name="food_intervals">
         <item>0</item>
         <item>15</item>

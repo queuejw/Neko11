@@ -56,6 +56,9 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textview.MaterialTextView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import ru.dimon6018.neko11.NekoApplication
 import ru.dimon6018.neko11.NekoGeneralActivity.Companion.showSnackBar
 import ru.dimon6018.neko11.R
@@ -70,7 +73,6 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
-import java.util.LinkedList
 import java.util.Random
 
 class NekoLandFragment : Fragment(), PrefsListener {
@@ -89,12 +91,11 @@ class NekoLandFragment : Fragment(), PrefsListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         mPrefs = PrefState(requireContext())
+        nekoprefs = requireContext().getSharedPreferences(NekoSettingsActivity.SETTINGS, Context.MODE_PRIVATE)
         super.onCreate(savedInstanceState)
     }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.neko_activity_content, container, false)
-        nekoprefs = requireContext().getSharedPreferences(NekoSettingsActivity.SETTINGS, Context.MODE_PRIVATE)
         coloredText = nekoprefs!!.getBoolean("coloredText", false)
         recyclerView = view.findViewById(R.id.holder)
         counter = view.findViewById(R.id.catCounter)
@@ -103,15 +104,14 @@ class NekoLandFragment : Fragment(), PrefsListener {
         }
         recyclerView!!.setItemAnimator(null)
         loadHolder = view.findViewById(R.id.loadHolderView)
-        mPrefs!!.setListener(this)
+        mPrefs?.setListener(this)
         return view
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         iconSize = requireContext().resources.getDimensionPixelSize(R.dimen.neko_display_size)
         bottomsheet = BottomSheetDialog(requireContext())
         skinsSheet = BottomSheetDialog(requireContext())
-        Thread {
+        CoroutineScope(Dispatchers.Default).launch {
             mAdapter = CatAdapter()
             if (nekoprefs!!.getBoolean("skinsConfigured", false)) {
                 nekoprefs!!.edit().putBoolean("skinsConfigured", true).apply()
@@ -121,13 +121,12 @@ class NekoLandFragment : Fragment(), PrefsListener {
             requireActivity().runOnUiThread {
                 recyclerView!!.setAdapter(mAdapter)
             }
-        }.start()
+        }
     }
     override fun onDestroy() {
-        mPrefs!!.setListener(null)
+        mPrefs?.setListener(null)
         super.onDestroy()
     }
-
     private fun updateCats(): Int {
         Thread {
             val list: MutableList<Cat> = mPrefs!!.cats.toMutableList()
@@ -148,10 +147,9 @@ class NekoLandFragment : Fragment(), PrefsListener {
                     0 -> {}
                 }
             }
-            val cats: Array<Cat> = list.toTypedArray<Cat>()
-            numCatsP = cats.size
+            numCatsP = list.size
             recyclerView?.post {
-                mAdapter?.setCats(cats)
+                mAdapter?.setCats(list)
                 updateLM()
                 updateCounter(numCatsP)
             }
@@ -160,14 +158,14 @@ class NekoLandFragment : Fragment(), PrefsListener {
     }
 
     private fun updateLM() {
-        recyclerView!!.setLayoutManager(GridLayoutManager(context, mPrefs!!.catsInLineLimit))
+        recyclerView?.setLayoutManager(GridLayoutManager(context, mPrefs!!.catsInLineLimit))
     }
 
     private fun updateCounter(catsNum: Int) {
         val editor = nekoprefs!!.edit()
         editor.putInt("num", catsNum)
         editor.apply()
-        loadHolder!!.visibility = View.GONE
+        loadHolder?.visibility = View.GONE
         counter!!.text = getString(R.string.cat_counter, catsNum)
     }
 
@@ -529,11 +527,13 @@ class NekoLandFragment : Fragment(), PrefsListener {
     }
 
     private inner class CatAdapter : RecyclerView.Adapter<CatHolder>() {
-        private lateinit var mCats: Array<Cat>
-        fun setCats(cats: Array<Cat>) {
+
+        private lateinit var mCats: MutableList<Cat>
+        private lateinit var mCatsReserved: MutableList<Cat>
+        fun setCats(cats: MutableList<Cat>) {
             mCats = cats
-            val catList: List<Cat> = LinkedList()
-            val diffUtilCallback = DiffUtilCallback(mPrefs!!.cats, catList)
+            mCatsReserved = cats
+            val diffUtilCallback = DiffUtilCallback(mCatsReserved, mCats)
             val diffResult = DiffUtil.calculateDiff(diffUtilCallback, false)
             diffResult.dispatchUpdatesTo(mAdapter!!)
         }
@@ -567,7 +567,7 @@ class NekoLandFragment : Fragment(), PrefsListener {
         }
     }
 
-    class DiffUtilCallback(private val oldCatsList: List<Cat>, private val newCatsList: List<Cat>) : DiffUtil.Callback() {
+    class DiffUtilCallback(private val oldCatsList: MutableList<Cat>, private val newCatsList: MutableList<Cat>) : DiffUtil.Callback() {
         override fun getOldListSize(): Int {
             return oldCatsList.size
         }

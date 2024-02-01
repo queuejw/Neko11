@@ -41,7 +41,10 @@
     <color name="toybg">#99FF4080</color>
     <color name="toybg2">#33FF4080</color>
 	<color name="toiletbg">#99DFD3D0</color>
-	<color name="toiletbg2">#99807977</color>
+	<color name="toiletbg2">#A6807977</color>
+	<color name="milkbg">#D7D3D3D3</color>
+	<color name="milkbg2">#D1A3A3A3</color>
+	<color name="milkbg3">#BE858585</color>
 	
 	<color name="pink_theme_primary">#a43462</color>
 	<color name="pink_theme_sec">#74565f</color>

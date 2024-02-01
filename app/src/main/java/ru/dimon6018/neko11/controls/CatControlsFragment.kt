@@ -18,6 +18,7 @@ package ru.dimon6018.neko11.controls
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,8 @@ import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textview.MaterialTextView
@@ -53,6 +56,7 @@ class CatControlsFragment : Fragment(), PrefsListener {
     private var toysub: MaterialTextView? = null
     private var foodsub: MaterialTextView? = null
     private var waterstatesub: MaterialTextView? = null
+    private var waterDrinkTip: MaterialTextView? = null
     private var toiletStatesub: MaterialTextView? = null
     private var waterstatetxt: MaterialTextView? = null
     private var boosterActivedSub: MaterialTextView? = null
@@ -91,6 +95,7 @@ class CatControlsFragment : Fragment(), PrefsListener {
         waterstatesub = view.findViewById(R.id.water_state_sub)
         toiletStatesub = view.findViewById(R.id.toilet_state_sub)
         boosterActivedSub = view.findViewById(R.id.booster_actived_sub)
+        waterDrinkTip = view.findViewById(R.id.drink_tip)
         return view
     }
 
@@ -117,12 +122,16 @@ class CatControlsFragment : Fragment(), PrefsListener {
             startAnim(foodCard)
             val currentstate = mPrefs!!.foodState
             if (currentstate == 0) {
-                if (PrefState.isLuckyBoosterActive) {
-                    NekoWorker.scheduleFoodWork(context, randomfood / 4)
+                if(!mPrefs!!.isLegacyFoodEnabled()) {
+                    if (PrefState.isLuckyBoosterActive) {
+                        NekoWorker.scheduleFoodWork(context, randomfood / 4)
+                    } else {
+                        NekoWorker.scheduleFoodWork(context, randomfood)
+                    }
+                    mPrefs!!.foodState = foodstaterandom
                 } else {
-                    NekoWorker.scheduleFoodWork(context, randomfood)
+                    foodDialog()
                 }
-                mPrefs!!.foodState = foodstaterandom
             } else {
                 mPrefs!!.foodState = 0
                 NekoWorker.stopFoodWork(context)
@@ -153,7 +162,11 @@ class CatControlsFragment : Fragment(), PrefsListener {
         }
         waterCard!!.setOnClickListener {
             startAnim(waterCard)
-            mPrefs!!.waterState = 200f
+            if (mPrefs!!.isLegacyFoodEnabled()) {
+                waterDialog()
+            } else {
+                mPrefs!!.waterState = 200f
+            }
             updateTiles()
         }
         waterCard!!.setOnLongClickListener {
@@ -163,23 +176,157 @@ class CatControlsFragment : Fragment(), PrefsListener {
             true
         }
     }
-
+    private fun getCurrentFoodIco(context: Context): Drawable? {
+        if(!mPrefs!!.isLegacyFoodEnabled()) {
+            return if(mPrefs!!.foodState != 0) {
+                AppCompatResources.getDrawable(context, R.drawable.ic_foodbowl_filled)
+            } else {
+                AppCompatResources.getDrawable(context, R.drawable.ic_bowl)
+            }
+        } else {
+            return when(mPrefs!!.foodState) {
+                0 -> AppCompatResources.getDrawable(context, R.drawable.ic_bowl)
+                1 -> AppCompatResources.getDrawable(context, R.drawable.food_steak)
+                2 -> AppCompatResources.getDrawable(context, R.drawable.food_hot_dog)
+                3 -> AppCompatResources.getDrawable(context, R.drawable.food_peanut)
+                4 -> AppCompatResources.getDrawable(context, R.drawable.food_pasta)
+                5 -> AppCompatResources.getDrawable(context, R.drawable.food_drumstick)
+                6 -> AppCompatResources.getDrawable(context, R.drawable.food_croissant)
+                else -> AppCompatResources.getDrawable(context, R.drawable.ic_bowl)
+            }
+        }
+    }
+    private fun getCurrentWaterIco(context: Context): Drawable? {
+        val waterml = Math.round(mPrefs!!.waterState).toFloat()
+        return if(!mPrefs!!.isLegacyFoodEnabled()) {
+            if(waterml <= 25f) {
+                AppCompatResources.getDrawable(context, R.drawable.ic_water)
+            } else {
+                AppCompatResources.getDrawable(context, R.drawable.ic_water_filled)
+            }
+        } else {
+            when(mPrefs!!.getWaterType()) {
+                0 -> AppCompatResources.getDrawable(context, R.drawable.ic_water_filled)
+                1 -> AppCompatResources.getDrawable(context, R.drawable.drink_milk)
+                else -> AppCompatResources.getDrawable(context, R.drawable.ic_water_filled)
+            }
+        }
+    }
+    private fun foodDialog() {
+        val foodSheet = BottomSheetDialog(requireActivity())
+        foodSheet.setContentView(R.layout.food_dialog)
+        foodSheet.dismissWithAnimation = true
+        val bottomSheetInternal = foodSheet.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+        BottomSheetBehavior.from(bottomSheetInternal!!).peekHeight = requireActivity().resources.getDimensionPixelSize(R.dimen.bottomsheet)
+        val food0 = bottomSheetInternal.findViewById<MaterialCardView>(R.id.food_0)
+        val food1 = bottomSheetInternal.findViewById<MaterialCardView>(R.id.food_1)
+        val food2 = bottomSheetInternal.findViewById<MaterialCardView>(R.id.food_2)
+        val food3 = bottomSheetInternal.findViewById<MaterialCardView>(R.id.food_3)
+        val food4 = bottomSheetInternal.findViewById<MaterialCardView>(R.id.food_4)
+        val food5 = bottomSheetInternal.findViewById<MaterialCardView>(R.id.food_5)
+        food0.setOnClickListener {
+            mPrefs!!.foodState = 1
+            if(!mPrefs!!.isLegacyFoodEnabled()) {
+                if (PrefState.isLuckyBoosterActive) {
+                    NekoWorker.scheduleFoodWork(context, randomfood / 4)
+                } else {
+                    NekoWorker.scheduleFoodWork(context, randomfood)
+                }
+            }
+            foodSheet.dismiss()
+        }
+        food1.setOnClickListener {
+            mPrefs!!.foodState = 2
+            if(!mPrefs!!.isLegacyFoodEnabled()) {
+                if (PrefState.isLuckyBoosterActive) {
+                    NekoWorker.scheduleFoodWork(context, randomfood / 4)
+                } else {
+                    NekoWorker.scheduleFoodWork(context, randomfood)
+                }
+            }
+            foodSheet.dismiss()
+        }
+        food2.setOnClickListener {
+            mPrefs!!.foodState = 3
+            if(!mPrefs!!.isLegacyFoodEnabled()) {
+                if (PrefState.isLuckyBoosterActive) {
+                    NekoWorker.scheduleFoodWork(context, randomfood / 4)
+                } else {
+                    NekoWorker.scheduleFoodWork(context, randomfood)
+                }
+            }
+            foodSheet.dismiss()
+        }
+        food3.setOnClickListener {
+            mPrefs!!.foodState = 4
+            if(!mPrefs!!.isLegacyFoodEnabled()) {
+                if (PrefState.isLuckyBoosterActive) {
+                    NekoWorker.scheduleFoodWork(context, randomfood / 4)
+                } else {
+                    NekoWorker.scheduleFoodWork(context, randomfood)
+                }
+            }
+            foodSheet.dismiss()
+        }
+        food4.setOnClickListener {
+            mPrefs!!.foodState = 5
+            if(!mPrefs!!.isLegacyFoodEnabled()) {
+                if (PrefState.isLuckyBoosterActive) {
+                    NekoWorker.scheduleFoodWork(context, randomfood / 4)
+                } else {
+                    NekoWorker.scheduleFoodWork(context, randomfood)
+                }
+            }
+            foodSheet.dismiss()
+        }
+        food5.setOnClickListener {
+            mPrefs!!.foodState = 6
+            if(!mPrefs!!.isLegacyFoodEnabled()) {
+                if (PrefState.isLuckyBoosterActive) {
+                    NekoWorker.scheduleFoodWork(context, randomfood / 4)
+                } else {
+                    NekoWorker.scheduleFoodWork(context, randomfood)
+                }
+            }
+            foodSheet.dismiss()
+        }
+        foodSheet.show()
+    }
+    private fun waterDialog() {
+        val waterSheet = BottomSheetDialog(requireActivity())
+        waterSheet.setContentView(R.layout.water_dialog)
+        waterSheet.dismissWithAnimation = true
+        val bottomSheetInternal = waterSheet.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+        BottomSheetBehavior.from(bottomSheetInternal!!).peekHeight = requireActivity().resources.getDimensionPixelSize(R.dimen.bottomsheet)
+        val drink0 = bottomSheetInternal.findViewById<MaterialCardView>(R.id.drink_0)
+        val drink1 = bottomSheetInternal.findViewById<MaterialCardView>(R.id.drink_1)
+        drink0.setOnClickListener {
+            mPrefs!!.setWaterType(0)
+            mPrefs!!.waterState = 200f
+            waterSheet.dismiss()
+        }
+        drink1.setOnClickListener {
+            mPrefs!!.setWaterType(1)
+            mPrefs!!.waterState = 200f
+            waterSheet.dismiss()
+        }
+        waterSheet.show()
+    }
     override fun onPrefsChanged() {
         updateTiles()
     }
     private fun updateTiles() {
         //update food card
         if (mPrefs!!.foodState == 0) {
-            foodstatusimg!!.setImageDrawable(AppCompatResources.getDrawable(requireActivity(), R.drawable.ic_bowl))
             foodstatetxt!!.setText(R.string.control_food_status_empty)
             foodsub!!.visibility = View.VISIBLE
             foodCard!!.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.foodbg2))
         } else {
-            foodstatusimg!!.setImageDrawable(AppCompatResources.getDrawable(requireActivity(), R.drawable.ic_foodbowl_filled))
             foodstatetxt!!.setText(R.string.control_food_status_full)
             foodsub!!.visibility = View.INVISIBLE
             foodCard!!.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.foodbg))
         }
+        foodstatusimg!!.setImageDrawable(getCurrentFoodIco(requireContext()))
         if (PrefState.isLuckyBoosterActive) {
             boosterActivedSub!!.visibility = View.VISIBLE
         } else {
@@ -189,19 +336,33 @@ class CatControlsFragment : Fragment(), PrefsListener {
         val waterml = Math.round(mPrefs!!.waterState).toFloat()
         waterstatetxt!!.text = resources.getString(R.string.water_state_ml, waterml)
         if (waterml >= 100f) {
-            waterCard!!.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.waterbg))
-            waterstatusimg!!.setImageDrawable(AppCompatResources.getDrawable(requireActivity(), R.drawable.ic_water_filled))
+            when(mPrefs!!.getWaterType()) {
+                0 -> waterCard!!.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.waterbg))
+                1 -> waterCard!!.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.milkbg))
+            }
             waterstatesub!!.visibility = View.INVISIBLE
         } else {
-            waterCard!!.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.waterbg2))
-            waterstatusimg!!.setImageDrawable(AppCompatResources.getDrawable(requireActivity(), R.drawable.ic_water))
+            when(mPrefs!!.getWaterType()) {
+                0 -> waterCard!!.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.waterbg2))
+                1 -> waterCard!!.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.milkbg2))
+            }
             waterstatesub!!.visibility = View.VISIBLE
         }
         if (waterml <= 25f) {
-            waterCard!!.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.waterbg3))
-            waterstatusimg!!.setImageDrawable(AppCompatResources.getDrawable(requireActivity(), R.drawable.ic_water))
+            when(mPrefs!!.getWaterType()) {
+                0 -> waterCard!!.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.waterbg3))
+                1 -> waterCard!!.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.milkbg3))
+            }
             waterstatesub!!.visibility = View.VISIBLE
         }
+        when(mPrefs!!.getWaterType()) {
+            0 -> waterDrinkTip!!.text = getString(R.string.control_water_title)
+            1 -> {
+                waterDrinkTip!!.text = getString(R.string.drink_milk)
+                waterDrinkTip!!.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_light2))
+            }
+        }
+        waterstatusimg!!.setImageDrawable(getCurrentWaterIco(requireContext()))
         //update toy card
         if (mPrefs!!.toyState == 1) {
             toyCard!!.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.toybg))

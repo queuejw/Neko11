@@ -45,10 +45,6 @@ import com.google.android.material.textview.MaterialTextView
 import org.xmlpull.v1.XmlPullParserException
 import ru.dimon6018.neko11.BuildConfig
 import ru.dimon6018.neko11.NekoApplication.Companion.getNekoTheme
-import ru.dimon6018.neko11.NekoApplication.Companion.playMusic
-import ru.dimon6018.neko11.NekoGeneralActivity
-import ru.dimon6018.neko11.NekoGeneralActivity.Companion.isMusicPlaying
-import ru.dimon6018.neko11.NekoGeneralActivity.Companion.mediaPlayer
 import ru.dimon6018.neko11.NekoGeneralActivity.Companion.showSnackBar
 import ru.dimon6018.neko11.R
 import ru.dimon6018.neko11.workers.BackupParser
@@ -92,6 +88,7 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
     private var musicSwitch: MaterialSwitch? = null
     private var textMatch: MaterialSwitch? = null
     private var legacyControls: MaterialSwitch? = null
+    private var legacyFood: MaterialSwitch? = null
     private var sortGroup: MaterialButtonToggleGroup? = null
     private var backgroundGroup: MaterialButtonToggleGroup? = null
     private var removeBack: MaterialTextView? = null
@@ -115,20 +112,18 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.neko_settings_activity)
         mPrefs = PrefState(this)
+        nekoprefs = getSharedPreferences(SETTINGS, MODE_PRIVATE)
         mPrefs!!.setListener(this)
         val toolbar = findViewById<Toolbar>(R.id.toolbarset)
         cord = findViewById(R.id.cord)
         chooseBackg = findViewById(R.id.chooseBackground)
         setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayUseLogoEnabled(true)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayUseLogoEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         window.navigationBarColor = SurfaceColors.SURFACE_2.getColor(this)
-        nekoprefs = getSharedPreferences(SETTINGS, MODE_PRIVATE)
-        Thread {
-            setupScreen()
-            setupClickListeners()
-        }.start()
+        setupScreen()
+        setupClickListeners()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -264,12 +259,9 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
         }
         musicSwitch!!.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
            mPrefs!!.setMusic(isChecked)
-            if(!isChecked) {
-                mediaPlayer?.release()
-                isMusicPlaying = false
-            } else {
-                restart()
-            }
+        }
+        legacyFood!!.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            mPrefs!!.setLegacyFood(isChecked)
         }
         limitSlider!!.addOnChangeListener(Slider.OnChangeListener { _: Slider?, value: Float, _: Boolean ->
             val valueNew = Math.round(value)
@@ -610,12 +602,6 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
         }
         popup.show()
     }
-    private fun restart() {
-        val intent = Intent(this, NekoGeneralActivity::class.java)
-        this.startActivity(intent)
-        finishAffinity()
-    }
-    @SuppressLint("SuspiciousIndentation")
     private fun setupScreen() {
         opensettingsbtn = findViewById(R.id.opensettingsbtn)
         whiteswitch = findViewById(R.id.white_switch)
@@ -642,6 +628,7 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
         textMatch = findViewById(R.id.text_matches_theme)
         legacyControls = findViewById(R.id.legacy_controls)
         musicSwitch = findViewById(R.id.musicController)
+        legacyFood = findViewById(R.id.legacy_food)
         val theme = nekoprefs!!.getInt("theme", 0)
         val darkenabled = nekoprefs!!.getInt("darktheme", 0)
         val isControlsLinear = nekoprefs!!.getBoolean("linear_control", false)
@@ -659,21 +646,22 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
         legacyControls!!.isChecked = legacyGameplay
         controlsFirst!!.isChecked = isControlsFirst
         musicSwitch!!.isChecked = mPrefs!!.isMusicEnabled()
+        legacyFood!!.isChecked = mPrefs!!.isLegacyFoodEnabled()
         allowCatRun!!.isChecked = isCatCanRun
         textMatch!!.isChecked = coloredText
         limitSlider!!.value = mPrefs!!.catsInLineLimit.toFloat()
         catResizer!!.value = mPrefs!!.catIconSize.toFloat()
         when (darkenabled) {
             0 -> {
-                whiteswitch!!.setChecked(false)
-                autowhiteswitch!!.setEnabled(true)
+                whiteswitch?.isChecked = false
+                autowhiteswitch?.isChecked = true
             }
-            1 -> whiteswitch!!.setChecked(true)
+            1 -> whiteswitch?.isChecked = true
             2 -> {
-                autowhiteswitch!!.setChecked(true)
-                whiteswitch!!.setEnabled(false)
+                autowhiteswitch?.isChecked = true
+                whiteswitch?.isChecked = false
             }
-            else -> whiteswitch!!.setChecked(false)
+            else -> whiteswitch?.isChecked = false
         }
         when (mPrefs!!.sortState) {
             2 -> namesort!!.isChecked = true

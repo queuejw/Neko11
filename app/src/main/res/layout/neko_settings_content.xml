@@ -92,6 +92,22 @@
 			app:fontFamily="@font/opensans_regular" />
 
 		<com.google.android.material.materialswitch.MaterialSwitch
+			android:id="@+id/legacy_food"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:layout_marginEnd="24dp"
+			android:text="@string/legacy_food"
+			android:textSize="18sp" />
+		<com.google.android.material.textview.MaterialTextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="start"
+			android:text="@string/legacy_food_tip"
+			android:textSize="12sp"
+			app:fontFamily="@font/opensans_regular" />
+
+		<com.google.android.material.materialswitch.MaterialSwitch
 			android:id="@+id/allow_cat_delete"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -338,6 +354,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="165dp"
 			app:cardBackgroundColor="?attr/colorPrimary"
+			app:strokeWidth="0dp"
 			app:cardCornerRadius="0dp">
 			<LinearLayout
 				android:layout_width="match_parent"

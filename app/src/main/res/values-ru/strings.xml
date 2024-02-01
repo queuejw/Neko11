@@ -267,6 +267,18 @@
     <string name="crash_settings">Открыть настройки</string>
     <string name="box_tip">Открывая этот загадочный ящик вы можете получить что-то из этих вещей: Случайный кот, NCoins, Усилители.</string>
     <string name="cat_tip">Вы точно хотите купить нового котика?</string>
+    <string name="legacy_food">Ручное управление едой</string>
+    <string name="legacy_food_tip">Включите, если хотите вручную выбирать еду и напиток для кота</string>
+    <string name="food_croissant">Круассан</string>
+    <string name="food_drumstick">Голень</string>
+    <string name="food_pasta">Макароны</string>
+    <string name="food_peanut">Арахис</string>
+    <string name="food_hot_dog">Хот-дог</string>
+    <string name="food_steak">Стейк</string>
+    <string name="choose_food">Выберите еду</string>
+    <string name="choose_drink">Выберите напиток</string>
+    <string name="drink_water">Вода</string>
+    <string name="drink_milk">Молоко</string>
 
     <integer-array name="food_intervals">
         <item>0</item>

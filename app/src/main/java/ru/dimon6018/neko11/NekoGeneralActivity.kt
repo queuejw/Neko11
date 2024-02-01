@@ -24,7 +24,6 @@ import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.AudioAttributes
-import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
@@ -82,8 +81,9 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         nekoprefs = getSharedPreferences(NekoSettingsActivity.SETTINGS, MODE_PRIVATE)
         setupState()
-        if(state == 3) {
+        if (state == 3) {
             finish()
+            return
         }
         setupDarkMode()
         setTheme(NekoApplication.getNekoTheme(this))
@@ -93,15 +93,9 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         viewPager = findViewById(R.id.pager)
         cord = findViewById(R.id.coordinator)
         navbar = findViewById(R.id.navigation)
-        Runnable {
-            pagerAdapter = NekoAdapter(this)
-            runOnUiThread {
-                setupNavbarListener()
-                if (needWelcomeDialog) welcomeDialog()
-                if (getAndroidV()) androidVDialog()
-            }
-        }.run()
+        setupNavbarListener()
         mPrefs!!.setListener(this)
+        pagerAdapter = NekoAdapter(this)
         viewPager?.adapter = pagerAdapter
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -115,7 +109,9 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                 try {
                     val bmp = BitmapFactory.decodeFile(mPrefs!!.backgroundPath)
                     val bmpNew = Bitmap.createBitmap(bmp, viewPager!!.x.toInt(), viewPager!!.y.toInt(), bmp.width, bmp.height, null, true)
-                    cord!!.background = bmpNew.toDrawable(resources)
+                    runOnUiThread {
+                        cord!!.background = bmpNew.toDrawable(resources)
+                    }
                 } catch (ex: Exception) {
                     cord!!.background = null
                     cord!!.post {
@@ -124,11 +120,11 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                 }
             }
         }
-        if (!nekoprefs!!.getBoolean("controlsFirst", false)) {
-            viewPager!!.currentItem = 0
+        if (!nekoprefs?.getBoolean("controlsFirst", false)!!) {
+            viewPager?.currentItem = 0
             navbar?.selectedItemId = R.id.collection
         } else {
-            viewPager!!.currentItem = 1
+            viewPager?.currentItem = 1
             navbar?.selectedItemId = R.id.controls
         }
         viewPager?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -142,20 +138,25 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                 }
             }
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
         mediaPlayer = MediaPlayer()
+        val afd = getResources().assets.openFd("music/music1.mp3")
+        mediaPlayer!!.isLooping = true
+        mediaPlayer!!.setDataSource(afd.fileDescriptor, afd.startOffset, afd.getLength())
+        mediaPlayer!!.setAudioAttributes(
+                AudioAttributes.Builder()
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .build())
         if(mPrefs!!.isMusicEnabled()) {
-            val afd = getResources().assets.openFd("music/music1.mp3")
-            mediaPlayer!!.isLooping = true
-            mediaPlayer!!.setDataSource(afd.fileDescriptor, afd.startOffset, afd.getLength())
-            mediaPlayer!!.setAudioAttributes(
-                    AudioAttributes.Builder()
-                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                            .build())
             mediaPlayer!!.prepare()
             mediaPlayer!!.start()
             isMusicPlaying = true
-
         }
+        if (getAndroidV()) androidVDialog()
+        if (needWelcomeDialog) welcomeDialog()
     }
     private fun getAndroidV(): Boolean {
         return (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1)
@@ -210,7 +211,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         }
     }
     public override fun onDestroy() {
-        mPrefs!!.setListener(null)
+        mPrefs?.setListener(null)
         super.onDestroy()
         if(mPrefs!!.isMusicEnabled()) {
             isMusicPlaying = false
@@ -219,10 +220,18 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
     }
     public override fun onPause() {
         super.onPause()
+        if(isMusicPlaying) {
+            mediaPlayer?.pause()
+            isMusicPlaying = false
+        }
     }
 
     public override fun onResume() {
         super.onResume()
+        if(!isMusicPlaying && mPrefs!!.isMusicEnabled()) {
+            mediaPlayer?.start()
+            isMusicPlaying = true
+        }
     }
     private fun setupDarkMode() {
         when (nekoprefs!!.getInt("darktheme", 0)) {
@@ -327,15 +336,15 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         } else if (promo == "hello" || promo == "Hello") {
             showSnackBar("Hi!", Snackbar.LENGTH_SHORT, navbar)
         } else if (promo == "give me 1000 cats please") {
-            Thread {
+            CoroutineScope(Dispatchers.Default).launch {
                 for (i in 0..1000) {
-                    val cat: Cat = NekoWorker.newRandomCat(this, mPrefs!!, true)
+                    val cat: Cat = NekoWorker.newRandomCat(this@NekoGeneralActivity, mPrefs!!, true)
                     mPrefs?.addCat(cat)
                 }
                 runOnUiThread {
                     showSnackBar("enjoy =)", Snackbar.LENGTH_LONG, navbar)
                 }
-            }.start()
+            }
         } else {
             showSnackBar(getString(R.string.wrong_code), Snackbar.LENGTH_LONG, navbar)
         }
@@ -364,7 +373,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                             .setCancelable(false)
                             .setPositiveButton(android.R.string.ok) { _: DialogInterface?, _: Int ->
                                 showSnackBar(getString(R.string.welcome_dialog_final), Snackbar.LENGTH_LONG, navbar)
-                                setCurrentTheme(0)
+                                setCurrentState(0)
                             }.show()
                 }
                 val editor = nekoprefs!!.edit()
@@ -394,7 +403,6 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                                 or Intent.FLAG_ACTIVITY_CLEAR_TASK))
             }
-
             2 -> needWelcomeDialog = true
         }
     }
@@ -403,6 +411,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         return state
     }
     private fun welcomeDialog() {
+        needWelcomeDialog = false
         MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.app_name_neko)
                 .setIcon(R.drawable.ic_bowl)
@@ -419,7 +428,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                 cat = NekoWorker.newRandomCat(this, mPrefs!!, true)
                 mPrefs?.addCat(cat)
             }
-            setCurrentTheme(-1)
+            setCurrentState(-1)
             MaterialAlertDialogBuilder(this)
                     .setTitle(R.string.app_name_neko)
                     .setIcon(R.drawable.ic_fullcat_icon)
@@ -429,7 +438,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                     ) { _: DialogInterface?, _: Int -> showSnackBar(getString(R.string.open_controls_tip), Snackbar.LENGTH_LONG, navbar) }.show()
         }
 
-    private fun setCurrentTheme(state: Int) {
+    private fun setCurrentState(state: Int) {
         val editor = nekoprefs!!.edit()
         editor.putInt("state", state)
         editor.apply()
