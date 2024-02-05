@@ -147,7 +147,8 @@ class NekoAchievementsActivity : AppCompatActivity(), PrefsListener {
                 gift4!!.setText(R.string.gift_not_enabled)
             }
         }
-        if (progress5dstatus >= 100) {
+        if (progress5dstatus >= 100 || !nekoprefs!!.getBoolean("code5availability", true)) {
+            progress5dstatus = 100
             gift5!!.setEnabled(true)
             if (!gift5Enabled) {
                 gift5!!.setText(R.string.gift_not_enabled)

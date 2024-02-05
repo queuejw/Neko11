@@ -263,8 +263,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
     }
 
     private fun showPromoDialog() {
-        val context: Context
-        context = ContextThemeWrapper(this, theme)
+        val context: Context = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) ContextThemeWrapper(this, theme) else this
         val view = LayoutInflater.from(context).inflate(R.layout.edit_text_promo, null)
         val text = view.findViewById<EditText>(R.id.editpromo)
         MaterialAlertDialogBuilder(context)

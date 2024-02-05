@@ -272,7 +272,7 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
             mPrefs!!.catIconSize = valueNew
         })
         details!!.setOnClickListener {
-            val context: Context = ContextThemeWrapper(this, getTheme())
+            val context: Context = if(VERSION.SDK_INT >= Build.VERSION_CODES.M) ContextThemeWrapper(this, getTheme()) else this
             val view = LayoutInflater.from(context).inflate(R.layout.neko_info_dialog, null)
             val androidtxt = view.findViewById<MaterialTextView>(R.id.neko_info_android_ver)
             val codetxt = view.findViewById<MaterialTextView>(R.id.neko_info_ver_code)

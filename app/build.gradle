@@ -13,10 +13,10 @@ android {
     }
     defaultConfig {
         applicationId "ru.dimon6018.neko11"
-        minSdk 23
+        minSdk 21
         targetSdk = 34
-        versionCode 8
-        versionName '2.3_08'
+        versionCode 9
+        versionName '2.3_10'
         multiDexEnabled false
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

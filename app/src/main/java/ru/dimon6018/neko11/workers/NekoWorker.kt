@@ -22,6 +22,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.net.Uri
 import android.os.Build
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import androidx.work.Worker
@@ -102,16 +103,16 @@ class NekoWorker(context: Context, workerParams: WorkerParameters) : Worker(cont
 
         fun notifyCat(context: Context, cat: Cat?, message: String?) {
             title_message = message
-            val noman = context.getSystemService(NotificationManager::class.java)
+            val noman = getSystemService(context, NotificationManager::class.java)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 val builder = cat!!.buildNotificationP(context)
-                noman.notify(cat.shortcutId, CAT_NOTIFICATION, builder.build())
+                noman?.notify(cat.shortcutId, CAT_NOTIFICATION, builder.build())
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val builder = cat!!.buildNotificationO(context)
-                noman.notify(cat.shortcutId, CAT_NOTIFICATION, builder.build())
-            } else {
-                val builder = cat!!.buildNotificationN(context)
-                noman.notify(cat.shortcutId, CAT_NOTIFICATION, builder.build())
+                noman?.notify(cat.shortcutId, CAT_NOTIFICATION, builder.build())
+            } else if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+                val builder = cat!!.buildNotificationM(context)
+                noman?.notify(cat.shortcutId, CAT_NOTIFICATION, builder.build())
             }
         }
 
@@ -127,7 +128,7 @@ class NekoWorker(context: Context, workerParams: WorkerParameters) : Worker(cont
             var a = cats.size
             val random = Random(cat.seed)
             prefs.addCat(cat)
-            prefs.addNCoins(random.nextInt(125))
+            prefs.addNCoins(random.nextInt(150))
             if (!giftMode!!) {
                 while (a != 0) {
                     a -= 1

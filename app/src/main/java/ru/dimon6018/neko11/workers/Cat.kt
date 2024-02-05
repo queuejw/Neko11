@@ -38,7 +38,6 @@ import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.NotificationCompat
-import androidx.core.graphics.drawable.IconCompat
 import ru.dimon6018.neko11.NekoGeneralActivity
 import ru.dimon6018.neko11.R
 import ru.dimon6018.neko11.ui.fragments.NekoLandFragment
@@ -48,6 +47,7 @@ import java.lang.reflect.InvocationTargetException
 import java.util.Random
 import kotlin.math.abs
 import kotlin.math.min
+
 
 /** It's a cat.  */
 class Cat(context: Context, seed: Long, name: String?) : Drawable() {
@@ -199,27 +199,20 @@ class Cat(context: Context, seed: Long, name: String?) : Drawable() {
                 .addExtras(extras)
     }
 
-    fun buildNotificationN(context: Context): NotificationCompat.Builder {
+    fun buildNotificationM(context: Context): NotificationCompat.Builder {
         val extras = Bundle()
-        extras.putString("android.substName", context.getString(R.string.notification_name))
-        val notificationIcon = createNotificationLargeIcon(context)
+        extras.putString("android.substName", context.getString(R.string.app_name))
         val intent = Intent(Intent.ACTION_MAIN)
                 .setClass(context, NekoGeneralActivity::class.java)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         return NotificationCompat.Builder(context, NekoLandFragment.CHAN_ID)
-                .setSmallIcon(IconCompat.createWithResource(context, R.drawable.stat_icon))
-                .setLargeIcon(notificationIcon)
-                .setColor(bodyColor)
+                .setSmallIcon(R.drawable.stat_icon)
                 .setContentTitle(NekoWorker.title_message + mFirstMessage)
-                .setShowWhen(true)
-                .setCategory(Notification.CATEGORY_STATUS)
                 .setContentText(name)
-                .setContentIntent(
-                        PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE))
+                .setContentIntent(PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE))
                 .setAutoCancel(true)
-                .addExtras(extras)
+                .setVibrate(PURR)
     }
-
     override fun draw(canvas: Canvas) {
         val w = min(getBounds().width(), getBounds().height())
         if (mBitmap == null || mBitmap!!.getWidth() != w || mBitmap!!.getHeight() != w) {
@@ -266,6 +259,7 @@ class Cat(context: Context, seed: Long, name: String?) : Drawable() {
         return result
     }
 
+    @RequiresApi(VERSION_CODES.M)
     private fun createNotificationLargeIcon(context: Context): Icon? {
         return if (Build.VERSION.SDK_INT >= VERSION_CODES.P) {
             recompressIconP(createIcon(context.resources.getDimensionPixelSize(android.R.dimen.notification_large_icon_width), context.resources.getDimensionPixelSize(android.R.dimen.notification_large_icon_height), PrefState(context).getIconBackground()))
@@ -274,10 +268,12 @@ class Cat(context: Context, seed: Long, name: String?) : Drawable() {
         }
     }
 
+    @RequiresApi(VERSION_CODES.M)
     private fun createShortcutIcon(context: Context): Icon {
         return createIcon(context.resources.getDimensionPixelSize(android.R.dimen.notification_large_icon_width), context.resources.getDimensionPixelSize(android.R.dimen.notification_large_icon_height), PrefState(context).getIconBackground())
     }
 
+    @RequiresApi(VERSION_CODES.M)
     fun createIcon(w: Int, h: Int, icon: Int): Icon {
         val result = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(result)
@@ -495,6 +491,7 @@ class Cat(context: Context, seed: Long, name: String?) : Drawable() {
             }
         }
 
+        @RequiresApi(VERSION_CODES.M)
         fun recompressIconO(bitmap: Bitmap): Icon? {
             val ostream = ByteArrayOutputStream(
                     bitmap.getWidth() * bitmap.getHeight() * 2) // guess 50% compression

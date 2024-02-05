@@ -101,13 +101,17 @@ class NekoAboutActivity : AppCompatActivity() {
                 return
             }
         } else {
-            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                        NekoLandFragment.STORAGE_PERM_REQUEST)
-                return
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                            NekoLandFragment.STORAGE_PERM_REQUEST)
+                    return
+                }
+                saveAllCatsToGalleryContinue(context)
+            } else {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), 1)
             }
-            saveAllCatsToGalleryContinue(context)
         }
     }
     private fun saveAllCatsToGalleryContinue(context: Context) {
