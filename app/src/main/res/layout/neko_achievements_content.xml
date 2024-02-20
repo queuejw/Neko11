@@ -208,7 +208,7 @@
 			android:id="@+id/shop_title"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="148dp"
+			android:layout_marginTop="36dp"
 			android:gravity="center"
 			android:text="NShop"
 			android:textSize="25sp"
@@ -216,7 +216,7 @@
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0.498"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/get_prize_4" />
+			app:layout_constraintTop_toBottomOf="@+id/get_prize_6" />
 
 		<com.google.android.material.textview.MaterialTextView
 			android:id="@+id/coins"
@@ -355,6 +355,50 @@
 			app:layout_constraintHorizontal_bias="0.947"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/achiev_5_sub"
+			app:layout_constraintVertical_bias="0.0" />
+
+		<com.google.android.material.textview.MaterialTextView
+			android:id="@+id/achiev_6"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/a6"
+			android:textSize="24sp"
+			app:fontFamily="@font/opensans_medium"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/get_prize_5" />
+
+		<com.google.android.material.progressindicator.LinearProgressIndicator
+			android:id="@+id/achiev_6_progress"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/achiev_6" />
+
+		<TextView
+			android:id="@+id/achiev_6_sub"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="4dp"
+			android:text="@string/a6sub"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.0"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/achiev_6_progress" />
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/get_prize_6"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="4dp"
+			android:enabled="false"
+			android:text="@string/get_prize"
+			app:layout_constraintBottom_toTopOf="@+id/shop_title"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.947"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/achiev_6_sub"
 			app:layout_constraintVertical_bias="0.0" />
 
 	</androidx.constraintlayout.widget.ConstraintLayout>

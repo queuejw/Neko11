@@ -21,6 +21,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -64,11 +65,12 @@ import ru.dimon6018.neko11.NekoGeneralActivity.Companion.showSnackBar
 import ru.dimon6018.neko11.R
 import ru.dimon6018.neko11.controls.CatControlsFragment
 import ru.dimon6018.neko11.ui.activities.NekoSettingsActivity
+import ru.dimon6018.neko11.ui.activities.minigames.NekoMinigameM
 import ru.dimon6018.neko11.workers.Cat
 import ru.dimon6018.neko11.workers.NekoWorker
 import ru.dimon6018.neko11.workers.PrefState
 import ru.dimon6018.neko11.workers.PrefState.PrefsListener
-import ru.dimon6018.neko11.workers.skins.Skinitems
+import ru.dimon6018.neko11.workers.skins.SkinItems
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -168,7 +170,6 @@ class NekoLandFragment : Fragment(), PrefsListener {
         loadHolder?.visibility = View.GONE
         counter!!.text = getString(R.string.cat_counter, catsNum)
     }
-
     private fun onCatClick(cat: Cat) {
         val context = requireActivity()
         val icon: Drawable?
@@ -183,37 +184,37 @@ class NekoLandFragment : Fragment(), PrefsListener {
         val caress: MaterialCardView?
         val touch: MaterialCardView?
         val skins: MaterialCardView?
-
         var catMood: Int = mPrefs!!.getMoodPref(cat)
-            if (bottomsheet == null) {
-                bottomsheet = BottomSheetDialog(context)
-            }
-            bottomsheet!!.setContentView(R.layout.neko_cat_bottomsheet)
-            bottomsheet!!.dismissWithAnimation = true
+
+        if (bottomsheet == null) {
+            bottomsheet = BottomSheetDialog(context)
+        }
+        bottomsheet!!.setContentView(R.layout.neko_cat_bottomsheet)
+        bottomsheet!!.dismissWithAnimation = true
         val bottomSheetInternal: View? = bottomsheet!!.findViewById(com.google.android.material.R.id.design_bottom_sheet)
-            BottomSheetBehavior.from(bottomSheetInternal!!).peekHeight = resources.getDimensionPixelSize(R.dimen.bottomsheet)
-            icon = cat.createIconBitmap(iconSize!!, iconSize!!, mPrefs!!.getIconBackground()).toDrawable(resources)
-            textLayout = bottomSheetInternal.findViewById(R.id.catNameField)
-            catEditor = bottomSheetInternal.findViewById(R.id.catEditName)
-            catImage = bottomSheetInternal.findViewById(R.id.cat_icon)
-            status = bottomSheetInternal.findViewById(R.id.status_title)
-            age = bottomSheetInternal.findViewById(R.id.cat_age)
-            mood = bottomSheetInternal.findViewById(R.id.mood_title)
-            actionsLimit = bottomSheetInternal.findViewById(R.id.actionsLimitTip)
-            wash = bottomSheetInternal.findViewById(R.id.wash_cat_sheet)
-            caress = bottomSheetInternal.findViewById(R.id.caress_cat_sheet)
-            touch = bottomSheetInternal.findViewById(R.id.touch_cat_sheet)
-            skins = bottomSheetInternal.findViewById(R.id.skins_sheet)
-            try {
-                mood!!.text = context.getString(R.string.mood, NekoApplication.getCatMood(context, cat))
-                age!!.text = getString(R.string.cat_age, cat.age)
-                status!!.text = getString(R.string.cat_status_string, cat.status)
-                catEditor!!.setText(cat.name)
-            } catch (e: ClassCastException) {
-                mood!!.text = getString(R.string.error)
-                mPrefs!!.setMood(cat, 3)
-                mood.text = context.getString(R.string.mood, NekoApplication.getCatMood(context, cat))
-            }
+        BottomSheetBehavior.from(bottomSheetInternal!!).peekHeight = resources.getDimensionPixelSize(R.dimen.bottomsheet)
+        icon = cat.createIconBitmap(iconSize!!, iconSize!!, mPrefs!!.getIconBackground()).toDrawable(resources)
+        textLayout = bottomSheetInternal.findViewById(R.id.catNameField)
+        catEditor = bottomSheetInternal.findViewById(R.id.catEditName)
+        catImage = bottomSheetInternal.findViewById(R.id.cat_icon)
+        status = bottomSheetInternal.findViewById(R.id.status_title)
+        age = bottomSheetInternal.findViewById(R.id.cat_age)
+        mood = bottomSheetInternal.findViewById(R.id.mood_title)
+        actionsLimit = bottomSheetInternal.findViewById(R.id.actionsLimitTip)
+        wash = bottomSheetInternal.findViewById(R.id.wash_cat_sheet)
+        caress = bottomSheetInternal.findViewById(R.id.caress_cat_sheet)
+        touch = bottomSheetInternal.findViewById(R.id.touch_cat_sheet)
+        skins = bottomSheetInternal.findViewById(R.id.skins_sheet)
+        try {
+            mood!!.text = context.getString(R.string.mood, NekoApplication.getCatMood(context, cat))
+            age!!.text = getString(R.string.cat_age, cat.age)
+            status!!.text = getString(R.string.cat_status_string, cat.status)
+            catEditor!!.setText(cat.name)
+        } catch (e: ClassCastException) {
+            mood!!.text = getString(R.string.error)
+            mPrefs!!.setMood(cat, 3)
+            mood.text = context.getString(R.string.mood, NekoApplication.getCatMood(context, cat))
+        }
         catImage?.setImageDrawable(icon)
         if (coloredText!!) {
             age!!.setTextColor(NekoApplication.getTextColor(context))
@@ -245,6 +246,10 @@ class NekoLandFragment : Fragment(), PrefsListener {
         bottomSheetInternal.findViewById<View>(R.id.save_sheet).setOnClickListener {
             bottomsheet!!.dismiss()
             checkPerms(cat, context)
+        }
+        bottomSheetInternal.findViewById<View>(R.id.games_sheet).setOnClickListener {
+            NekoMinigameM.setCat(cat)
+            startActivity(Intent(requireActivity(), NekoMinigameM::class.java))
         }
         bottomSheetInternal.findViewById<View>(R.id.boosters_sheet).setOnClickListener {
             val dialog = MaterialAlertDialogBuilder(context)
@@ -407,7 +412,7 @@ class NekoLandFragment : Fragment(), PrefsListener {
         suitList = ArrayList()
         var count = 0
         while (count != SUITS) {
-            val suit = Skinitems()
+            val suit = SkinItems()
             if (count == 0) {
                 suit.text = getString(R.string.nothing)
                 count += 1
@@ -438,7 +443,7 @@ class NekoLandFragment : Fragment(), PrefsListener {
         hatList = ArrayList()
         var count = 0
         while (count != HATS) {
-            val suit = Skinitems()
+            val suit = SkinItems()
             if (count == 0) {
                 suit.text = getString(R.string.nothing)
                 count += 1
@@ -481,10 +486,8 @@ class NekoLandFragment : Fragment(), PrefsListener {
         if (ContextCompat.checkSelfPermission(activity, permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(activity, permission.MANAGE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 ActivityCompat.requestPermissions(activity, arrayOf(permission.WRITE_EXTERNAL_STORAGE, permission.READ_EXTERNAL_STORAGE, permission.MANAGE_EXTERNAL_STORAGE), 1)
-                return
             } else {
                 ActivityCompat.requestPermissions(activity, arrayOf(permission.WRITE_EXTERNAL_STORAGE, permission.READ_EXTERNAL_STORAGE), 1)
-                return
             }
         }
         shareCat(requireActivity(), cat, true)
@@ -632,8 +635,8 @@ class NekoLandFragment : Fragment(), PrefsListener {
         private var iconSize: Int? = null
         private var hatPricesArray: IntArray = intArrayOf(0, 1, 100, 250, 150, 300, 200, 666, 200, 250, 1000, 50, 250)
         private var suitPricesArray: IntArray = intArrayOf(0, 1, 150, 200, 300, 500, 300, 250, 200, 250, 300, 400)
-        private var suitList: ArrayList<Skinitems>? = null
-        private var hatList: ArrayList<Skinitems>? = null
+        private var suitList: ArrayList<SkinItems>? = null
+        private var hatList: ArrayList<SkinItems>? = null
         fun refreshBottomSheetIcon(cat: Cat, catPreview: ImageView, mPrefs: PrefState) {
             val newCat = mPrefs.catBySeed(cat.seed)
             Thread {
@@ -680,7 +683,7 @@ class NekoLandFragment : Fragment(), PrefsListener {
         }
     }
 
-    class SkinSuitsAdapter(private val dataSet: ArrayList<Skinitems>, val context: Context, private val cat: Cat, private val catPreview: ImageView, private val coins: MaterialTextView) :
+    class SkinSuitsAdapter(private val dataSet: ArrayList<SkinItems>, val context: Context, private val cat: Cat, private val catPreview: ImageView, private val coins: MaterialTextView) :
             RecyclerView.Adapter<SkinSuitsAdapter.ViewHolder>() {
 
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -763,7 +766,7 @@ class NekoLandFragment : Fragment(), PrefsListener {
         override fun getItemCount() = dataSet.size
     }
 
-    class SkinHatsAdapter(private val dataSet: ArrayList<Skinitems>, val context: Context, private val cat: Cat, private val catPreview: ImageView, private val coins: MaterialTextView) :
+    class SkinHatsAdapter(private val dataSet: ArrayList<SkinItems>, val context: Context, private val cat: Cat, private val catPreview: ImageView, private val coins: MaterialTextView) :
             RecyclerView.Adapter<SkinHatsAdapter.ViewHolder>() {
 
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

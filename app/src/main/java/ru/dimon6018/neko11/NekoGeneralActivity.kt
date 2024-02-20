@@ -283,6 +283,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         val code3availability = nekoprefs!!.getBoolean("code3availability", true)
         val code4availability = nekoprefs!!.getBoolean("code4availability", true)
         val code5availability = nekoprefs!!.getBoolean("code5availability", true)
+        val code6availability = nekoprefs!!.getBoolean("code6availability", true)
         val editor = nekoprefs!!.edit()
         if (promo == nekoprefs!!.getString("code1", "")) {
             if (code1availability) {
@@ -332,16 +333,26 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
             } else {
                 showSnackBar(getString(R.string.code_is_false), Snackbar.LENGTH_LONG, navbar)
             }
-        } else if (promo == "hello" || promo == "Hello") {
+        } else if (promo == nekoprefs!!.getString("code6", "")) {
+            if (code6availability) {
+                showSnackBar(getString(R.string.code_is_true), Snackbar.LENGTH_LONG, navbar)
+                mPrefs!!.addNCoins(5555)
+                mPrefs!!.addMoodBooster(15)
+                mPrefs!!.addLuckyBooster(15)
+                editor.putBoolean("code6availability", false)
+            } else {
+                showSnackBar(getString(R.string.code_is_false), Snackbar.LENGTH_LONG, navbar)
+            }
+        } else if (promo == "hello" || promo == "Hello" || promo == "hi") {
             showSnackBar("Hi!", Snackbar.LENGTH_SHORT, navbar)
         } else if (promo == "give me 1000 cats please") {
             CoroutineScope(Dispatchers.Default).launch {
+                runOnUiThread {
+                    showSnackBar("enjoy =)", Snackbar.LENGTH_LONG, navbar)
+                }
                 for (i in 0..1000) {
                     val cat: Cat = NekoWorker.newRandomCat(this@NekoGeneralActivity, mPrefs!!, true)
                     mPrefs?.addCat(cat)
-                }
-                runOnUiThread {
-                    showSnackBar("enjoy =)", Snackbar.LENGTH_LONG, navbar)
                 }
             }
         } else {

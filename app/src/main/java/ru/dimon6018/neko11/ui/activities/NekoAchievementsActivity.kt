@@ -38,16 +38,19 @@ class NekoAchievementsActivity : AppCompatActivity(), PrefsListener {
     private var progress3: LinearProgressIndicator? = null
     private var progress4: LinearProgressIndicator? = null
     private var progress5: LinearProgressIndicator? = null
+    private var progress6: LinearProgressIndicator? = null
     private var progress1dstatus = 0
     private var progress2dstatus = 0
     private var progress3dstatus = 0
     private var progress4dstatus = 0
     private var progress5dstatus = 0
+    private var progress6dstatus = 0
     private var gift1: MaterialButton? = null
     private var gift2: MaterialButton? = null
     private var gift3: MaterialButton? = null
     private var gift4: MaterialButton? = null
     private var gift5: MaterialButton? = null
+    private var gift6: MaterialButton? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getNekoTheme(this))
         super.onCreate(savedInstanceState)
@@ -101,21 +104,25 @@ class NekoAchievementsActivity : AppCompatActivity(), PrefsListener {
         progress3dstatus = numCats
         progress4dstatus = numCats / 10
         progress5dstatus = a5level * 4
+        progress6dstatus = mPrefs!!.getJumperScore()
         progress1 = findViewById(R.id.achiev_1_progress)
         progress2 = findViewById(R.id.achiev_2_progress)
         progress3 = findViewById(R.id.achiev_3_progress)
         progress4 = findViewById(R.id.achiev_4_progress)
         progress5 = findViewById(R.id.achiev_5_progress)
+        progress6 = findViewById(R.id.achiev_6_progress)
         progress1!!.progress = progress1dstatus
         progress2!!.progress = progress2dstatus
         progress3!!.progress = progress3dstatus
         progress4!!.progress = progress4dstatus
         progress5!!.progress = progress5dstatus
+        progress6!!.progress = progress6dstatus
         gift1 = findViewById(R.id.get_prize_1)
         gift2 = findViewById(R.id.get_prize_2)
         gift3 = findViewById(R.id.get_prize_3)
         gift4 = findViewById(R.id.get_prize_4)
         gift5 = findViewById(R.id.get_prize_5)
+        gift6 = findViewById(R.id.get_prize_6)
         val mystery = findViewById<MaterialCardView>(R.id.mystery_box_card)
         val cat = findViewById<MaterialCardView>(R.id.random_cat_card)
         val gift1Enabled = nekoprefs!!.getBoolean("gift1_enabled", true)
@@ -123,6 +130,7 @@ class NekoAchievementsActivity : AppCompatActivity(), PrefsListener {
         val gift3Enabled = nekoprefs!!.getBoolean("gift3_enabled", true)
         val gift4Enabled = nekoprefs!!.getBoolean("gift4_enabled", true)
         val gift5Enabled = nekoprefs!!.getBoolean("gift5_enabled", true)
+        val gift6Enabled = nekoprefs!!.getBoolean("gift6_enabled", true)
         if (progress1dstatus >= 100) {
             gift1!!.setEnabled(true)
             if (!gift1Enabled) {
@@ -147,11 +155,19 @@ class NekoAchievementsActivity : AppCompatActivity(), PrefsListener {
                 gift4!!.setText(R.string.gift_not_enabled)
             }
         }
-        if (progress5dstatus >= 100 || !nekoprefs!!.getBoolean("code5availability", true)) {
-            progress5dstatus = 100
+        if (progress5dstatus >= 100 || !gift5Enabled) {
+            if(!gift5Enabled) {
+                progress5!!.progress = progress5dstatus
+            }
             gift5!!.setEnabled(true)
             if (!gift5Enabled) {
                 gift5!!.setText(R.string.gift_not_enabled)
+            }
+        }
+        if (progress6dstatus >= 100) {
+            gift6!!.setEnabled(true)
+            if (!gift6Enabled) {
+                gift6!!.setText(R.string.gift_not_enabled)
             }
         }
         checkGift()
@@ -278,6 +294,7 @@ class NekoAchievementsActivity : AppCompatActivity(), PrefsListener {
         val gift3Enabled = nekoprefs!!.getBoolean("gift3_enabled", true)
         val gift4Enabled = nekoprefs!!.getBoolean("gift4_enabled", true)
         val gift5Enabled = nekoprefs!!.getBoolean("gift5_enabled", true)
+        val gift6Enabled = nekoprefs!!.getBoolean("gift6_enabled", true)
         gift1!!.setOnClickListener {
             if (gift1Enabled) {
                 genCode(1)
@@ -311,6 +328,13 @@ class NekoAchievementsActivity : AppCompatActivity(), PrefsListener {
                 genCode(5)
             } else {
                 getCode(5)
+            }
+        }
+        gift6!!.setOnClickListener {
+            if (gift6Enabled) {
+                genCode(6)
+            } else {
+                getCode(6)
             }
         }
     }
@@ -356,6 +380,10 @@ class NekoAchievementsActivity : AppCompatActivity(), PrefsListener {
                 editor.putString("code5", code)
                 editor.putBoolean("gift5_enabled", false)
             }
+            6 -> {
+                editor.putString("code6", code)
+                editor.putBoolean("gift6_enabled", false)
+            }
         }
         editor.apply()
         progressSetup()
@@ -368,6 +396,7 @@ class NekoAchievementsActivity : AppCompatActivity(), PrefsListener {
             3 -> nekoprefs!!.getString("code3", "")!!
             4 -> nekoprefs!!.getString("code4", "")!!
             5 -> nekoprefs!!.getString("code5", "")!!
+            6 -> nekoprefs!!.getString("code6", "")!!
             else -> ""
         }
         val message = getString(R.string.get_old_code, currentCode)

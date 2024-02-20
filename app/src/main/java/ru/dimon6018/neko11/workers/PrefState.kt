@@ -317,6 +317,14 @@ class PrefState(private val mContext: Context) : OnSharedPreferenceChangeListene
     fun getWaterType(): Int {
         return mPrefs.getInt(WATER_TYPE, 0)
     }
+
+    fun getJumperScore(): Int {
+        return mPrefs.getInt(JUMPER_SCORE, 0)
+    }
+    fun setJumperScore(value: Int) {
+        mPrefs.edit().putInt(JUMPER_SCORE, value).apply()
+    }
+
     companion object {
          const val FILE_NAME = "mPrefs"
          const val FOOD_STATE = "food"
@@ -329,6 +337,7 @@ class PrefState(private val mContext: Context) : OnSharedPreferenceChangeListene
          const val MUSIC = "musicEnabled"
          const val LEGACY_FOOD = "legacyFood"
          const val NCOINS = "nCoins"
+         const val JUMPER_SCORE = "jumperScore"
          const val TOY_STATE = "toy"
          const val WATER_STATE = "water"
          const val WATER_TYPE = "waterType"

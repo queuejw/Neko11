@@ -138,7 +138,9 @@
 	<string name="a3sub">Собери 100 котов</string>
 	<string name="a4sub">Собери 1000 котов</string>
     <string name="a5">Счастливый хозяин</string>
-    <string name="a5sub">Получите максимальный уровень \nнастроения у 25 котов</string>
+    <string name="a5sub">Получи максимальный уровень \nнастроения у 25 котов</string>
+    <string name="a6">Геймер</string>
+    <string name="a6sub">Набери 100 очков в игре Прыгун за 1 раз</string>
 		
 	<string name="details">Подробности</string>
 	<string name="neko_info_ver_name">Версия Neko11: %s</string>
@@ -279,6 +281,9 @@
     <string name="choose_drink">Выберите напиток</string>
     <string name="drink_water">Вода</string>
     <string name="drink_milk">Молоко</string>
+    <string name="music_bool">Включать музыку</string>
+    <string name="games">Игры</string>
+    <string name="minigameNCoins_tip">Вы получили: %d NCoins</string>
 
     <integer-array name="food_intervals">
         <item>0</item>

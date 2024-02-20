@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2020 The Android Open Source Project
+  Copyright (C) 2023 Dmitry Frolkov <dimon6018t@gmail.com>
+ 
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ -->
+<resources>
+    <string name="dynamic_color">动态颜色</string>
+    <string name="app_name_neko">Neko11</string>
+    <string name="dynamic_color_sub">根据您的壁纸颜色自动选择强调颜色。仅在Android 12+上工作。</string>
+    <string name="save_changes">更改已成功保存</string>
+    <string name="choosetheme">选择强调颜色</string>
+    <string name="dark_theme_auto">自动深色主题</string>
+    <string name="dark_theme_auto_sub">如果您的设备启用了深色主题，应用将自动适应。</string>
+    <string name="back">返回</string>
+    <string name="notification_name">Neko 11</string>
+    <string name="promo">促销代码</string>
+    <string name="notification_channel_name">新猫咪</string>
+    <string name="default_tile_name">\????</string>
+    <string name="notification_title">猫咪来了。</string>
+    <string name="notification_title_return">猫咪回来了。</string>
+    <string name="default_cat_name">猫咪 #%s</string>
+    <string name="directory_name">猫咪</string>
+    <string name="cat_controls">猫咪控制</string>
+    <string name="collection">收藏</string>
+    <string name="control_toy_title">玩具</string>
+    <string name="control_toy_subtitle">点击使用</string>
+    <string name="control_toy_status">猫咪被吸引了！</string>
+    <string name="control_water_title">水泡机</string>
+    <string name="control_water_subtitle">点击填充</string>
+    <string name="control_food_title">食物碗</string>
+    <string name="control_food_subtitle">点击重新填充</string>
+    <string name="control_food_status_full">满</string>
+    <string name="control_food_status_empty">空</string>
+    <string name="settings">设置</string>
+    <string name="cat_counter">收集的猫咪：%d</string>
+    <string name="about_neko">关于Neko</string>
+    <string name="help">帮助</string>
+    <string name="achievements">成就</string>
+    <string name="help_message">欢迎来到Neko！要开始游戏，请点击底部栏上的“猫咪控制”并填满所有瓷砖。然后关闭应用程序。如果猫咪到达，我会发送通知给您。然后，您可以将猫咪发送给您的朋友，或者继续收集更多的猫咪。不要忘记检查瓷砖，因为猫咪到达后会吃您的食物并喝水。祝您好运！</string>
+    <string name="background_changed">重新启动应用程序</string>
+    <string name="later">稍后</string>
+    <string name="restart">重新启动</string>
+    <string name="success">成功</string>
+    <string name="water_state_ml">%.0f 毫升</string>
+    <string name="dark_theme">启用深色主题</string>
+    <string name="compact_view">在猫咪控制中使用紧凑视图</string>
+    <string name="accent_choose">选择强调颜色</string>
+    <string name="open_settings">在系统中打开设置</string>
+    <string name="meow_meow">喵喵。</string>
+    <string name="permission_denied">我无法保存图片，因为权限被拒绝。请重试。</string>
+    <string name="picture_saved_successful">图片“%s”已保存在/Pictures/Cats/中。您可以在相册应用中查看它。</string>
+    <string name="about_text">Neko11是一个关于猫咪的游戏，由一个小团队在业余时间开发。我们希望您喜欢这个应用程序。</string>
+    <string name="about_dev1">dimon6018 (queuejw) - 可能是最大的贡献者</string>
+    <string name="about_dev2">AlertKaput - 帮助找到错误</string>
+    <string name="about_dev3">MG30 - 出色的创意，帮助找到错误，以及测试第一个alpha版本</string>
+    <string name="about_dev4">ZaCCCP- 帮助找到错误，以及测试动态颜色</string>
+    <string name="about_dev5">DarkFox - 測試首個版本和首次收集100隻貓</string>
+    <string name="about_you">還有你 &#10084;</string>
+    <string name="rename_cat_title">重命名這隻貓！</string>
+    <string name="input_sub">在這裡輸入名稱</string>
+    <string name="openurl">打開 GitHub</string>
+    <string name="update_toast">下載更新，如果有的話</string>
+    <string name="return_to_collection">返回收藏</string>
+    <string name="email">發送有趣的短信給我：dimon6018t@gmail.com</string>
+    <string name="get_prize">獲得獎品</string>
+    <string name="welcome_dialog">歡迎來到Neko11。讓我教你遊戲的基本知識。首先，拿起你的禮物（免費的）。</string>
+    <string name="save_title">保存</string>
+    <string name="del_title">刪除</string>
+    <string name="rename_title">重命名</string>
+    <string name="cat_status_string">貓的狀態：%s</string>
+    <string name="input_sub_promo">輸入促銷代碼</string>
+    <string name="activation_tip">試著旋轉這個3次 =)</string>
+    <string name="github">Neko11在GitHub上（源代碼）</string>
+    <string name="gift_not_enabled">已領取</string>
+    <string name="delete_cat_message">你真的想刪除這隻貓嗎？</string>
+    <string name="delete_cat_title">刪除貓</string>
+    <string name="max_cat_line_title">設置一行中的貓的數量</string>
+    <string name="cat_age">貓的年齡：%d 歲</string>
+    <string name="themeChanged">重新啟動Neko11以應用主題</string>
+    <string name="name_changed">貓的名字已更改！</string>
+    <string name="new_code_generated">恭喜！您已成功完成此成就。作為獎勵，保留此代碼：<b><i>%s</i></b>。您可以在菜單中選擇“促銷代碼”來激活它。</string>
+    <string name="get_old_code">您已經獲得了獎勵。如果您忘記了代碼，這是：<b><i>%s</i></b> </string>
+    <string name="wrong_code">代碼錯誤，請重試</string>
+    <string name="copy">複製</string>
+    <string name="coins"><b>你有：%d NCoins</b></string>
+    <string name="code_is_true">代碼已接受。獎勵已收到。</string>
+    <string name="code_is_false">此代碼已被使用。</string>
+    <string name="controls_first">首先打開«Cat Controls»</string>
+    <string name="controls_first_sub">允許您在打開Neko11時立即看到“Cat Controls”。如果您擁有很多貓，這可以加快應用程序的啟動速度。</string>
+    <string name="cat_size_title">設置貓圖標的大小。</string>
+    <string name="open_controls_tip">打開Cat Controls。</string>
+    <string name="fill_tiles_tip">填滿所有瓷磚。</string>
+    <string name="welcome_dialog_part2">這是你的第一批貓 :3 點擊貓可以彈出一個菜單，您可以在其中進行控制。</string>
+    <string name="welcome_dialog_part3">要填滿一個瓷磚，點擊它。然後您可以關閉應用程序。當貓來找您時，您將收到通知。基本上就是這樣。祝你好運 =)</string>
+
+
+
+    <string name="backup_restore">還原我的數據</string>
+    <string name="backup_save">保存我的數據</string>
+    <string name="backup_title">還原</string>
+    <string name="backup_wipe_cats">刪除我的數據</string>
+    <string name="backup_done">還原成功完成。文件Neko11mBackup.xml已保存到設備上。</string>
+    <string name="restore_failed">糟糕。出了些問題。無法還原您的數據。抱歉 =(</string>
+    <string name="restore_done">您的數據恢復成功完成。</string>
+    <string name="backup_failed">糟糕。出了些問題。無法保存您的數據。也許應用程序沒有獲得所有權限。</string>
+
+    <string name="sort_standart">按顏色排序</string>
+    <string name="sort_name">按名稱排序</string>
+    <string name="sort_title">貓排序</string>
+    <string name="sort_off">關閉</string>
+
+    <string name="pink">粉紅</string>
+    <string name="red">紅色</string>
+    <string name="orange">橙色</string>
+    <string name="green">綠色</string>
+    <string name="lime">酸橙色</string>
+    <string name="aqua">青綠色</string>
+    <string name="blue">藍色</string>
+    <string name="purple">紫色</string>
+
+    <string name="a1">我喜欢猫咪！</string>
+    <string name="a2">我是专业人士</string>
+    <string name="a3">猫之主</string>
+    <string name="a4">不可能是可能的！</string>
+    <string name="a1sub">收集10只猫咪</string>
+    <string name="a2sub">收集50只猫咪</string>
+    <string name="a3sub">收集100只猫咪</string>
+    <string name="a4sub">收集1000只猫咪</string>
+    <string name="a5">快乐的主人</string>
+    <string name="a5sub">使25只猫咪的心情达到最大水平。</string>
+
+    <string name="details">详细信息</string>
+    <string name="neko_info_ver_name">Neko11 版本：%s</string>
+    <string name="neko_info_ver_code">版本代码：%d</string>
+    <string name="neko_info_android_ver">Android 版本（API）：%d</string>
+
+    <string name="unsupported_android">您的 Android 版本缺少一些应用程序正常运行所需的重要功能。您仍然可以继续游戏，但某些功能可能不可用或出现问题。</string>
+    <string name="next">下一步</string>
+    <string name="backup_action_choose">您想要做什么？</string>
+    <string name="select">选择</string>
+    <string name="select_backup_file">选择备份文件</string>
+    <string name="saving_cats">正在保存您的数据…</string>
+    <string name="moment">请稍等…</string>
+    <string name="working">任务正在进行中…</string>
+    <string name="force_get_perms">强制获取权限</string>
+    <string name="task_success">操作完成。</string>
+    <string name="welcome_dialog_final">玩得开心！</string>
+    <string name="wash_cat_title">洗澡</string>
+    <string name="caress_cat_title">抚摸</string>
+    <string name="touch_cat_title">触摸</string>
+    <string name="aosp">我们的游戏基于 Android 11 的另一款游戏，我要感谢原始开发者，他们给了我重新思考游戏并使其更加舒适的灵感。谢谢！查看这里：https://source.android.com/</string>
+    <string name="about_dev6">SuperRofler - 帮助查找错误、识别关键错误、道义支持</string>
+    <string name="open">打开</string>
+    <string name="mystery_box">神秘盒子</string>
+    <string name="random_cat">随机猫咪</string>
+    <string name="meow">喵喵</string>
+    <string name="shh">嘘……</string>
+    <string name="ops">糟糕！</string>
+    <string name="touch_cat_error">猫咪不喜欢你触摸它，咬了你 =)</string>
+    <string name="mood">心情：%s</string>
+    <string name="mood1">非常难过</string>
+    <string name="mood2">难过</string>
+    <string name="mood3">好</string>
+    <string name="mood4">非常好</string>
+    <string name="mood5">很棒</string>
+
+    <string name="boosters_title">助推器</string>
+    <string name="booster_items">你有：%d</string>
+    <string name="choose_booster">选择助推器</string>
+    <string name="booster1_title">幸福维生素</string>
+    <string name="booster1_sub">将猫的幸福水平提高到最大</string>
+    <string name="booster2_title">幸运药丸</string>
+    <string name="booster2_sub">猫带来了家中的幸福。现在新猫咪会更快地到来</string>
+    <string name="box_win1">你打开了盒子，你得到了：%d NCoins，%d 幸运药丸</string>
+    <string name="box_win2">你打开了盒子，你得到了：%d NCoins，%d 幸福维生素</string>
+    <string name="box_win3">你打开了盒子，你得到了：%d 只新猫，%d 幸福维生素</string>
+    <string name="box_win4">你打开了盒子，你得到了：1只新猫，%d 幸运药丸</string>
+    <string name="box_win5">大奖！你得到了：1只新猫，%d NCoins，%d 幸运药丸和 %d 幸福维生素</string>
+    <string name="box_win6">你打开了盒子，你得到了：1只新猫</string>
+    <string name="box_error">我们无法打开这个盒子。我们已经退还了 300 NCoins</string>
+    <string name="telegram">我们在Telegram的频道</string>
+    <string name="booster_actived_sub">助推器已激活</string>
+    <string name="cat_zoom_title">点击猫进行放大</string>
+    <string name="stat_1">你总共收集了 %d 只猫</string>
+    <string name="stat_2">你使用了 %d 个助推器</string>
+    <string name="stat_3">你倒入了 %d 毫升的水</string>
+    <string name="stat_4">你尝试与猫互动了 %d 次</string>
+    <string name="AD_metrolnchr">想要在您的设备上体验 Windows Phone 8 的感觉吗？\n试试我的新 MetroPhoneLauncher*。\n* - 应用程序正在开发中。 敬请关注。</string>
+    <string name="AD_try">尝试</string>
+    <string name="action1_fail">试图给猫洗澡时，猫咬了你。再试一次 =）</string>
+    <string name="action2_fail">猫不喜欢被抚摸，咬了你。再试一次 =）</string>
+    <string name="ncoins_err">你的 NCoins 不够。捉猫以获得它们</string>
+    <string name="new_cat_shop">一只新猫现在和你一起生活。在收藏中查看它。</string>
+    <string name="save_all_cats_done">所有你的猫都已保存为图片。在画廊中查看它们。</string>
+    <string name="save_title_all">保存所有猫</string>
+    <string name="save_all_cats_q">您确定要将所有猫都保存为图片吗？</string>
+    <string name="hello">你好！</string>
+    <string name="activation_tip_new">嗨！激活游戏以继续（将圆圈滚动3次）。=）</string>
+    <string name="qvakteam">qvakteam是一群专注于创建有趣而引人入胜的游戏和应用程序的朋友。我们的目标是通过充满乐趣和创新的创意项目，为您带来愉悦和快乐。加入我们，进入充满刺激的娱乐世界！</string>
+    <string name="people">人员：</string>
+    <string name="sloths_testers">懒惰的人（测试员）：</string>
+    <string name="choose_background_picture">选择背景图片</string>
+    <string name="remove_background"><u>单击此处删除背景图片</u></string>
+    <string name="skins">皮肤</string>
+    <string name="allow_cat_run">允许猫远离你</string>
+    <string name="background_setup_tip">不要忘记重新启动应用程序</string>
+    <string name="cat_run_message">由于缺乏关注，你的其中一只猫已经逃走了。</string>
+    <string name="cat_run_tip">如果猫感到很难过，它将远离你。永远。如果你不想失去它们，请关闭此选项。</string>
+    <string name="error">错误</string>
+    <string name="error_message">出了些问题。%s</string>
+    <string name="suit">选择套装</string>
+    <string name="hat">选择帽子</string>
+    <string name="nothing">什么都没有</string>
+    <string name="cat_background_none">无</string>
+    <string name="cat_background_circle">圆形</string>
+    <string name="cat_background_square">方形</string>
+    <string name="cat_background_setting_title">猫图标的背景</string>
+    <string name="toilet">厕所</string>
+    <string name="poop">💩💩💩💩</string>
+    <string name="text_matches_theme">使文本与强调色相同</string>
+    <string name="text_matches_theme_sub">如果启用，游戏菜单中的文本颜色将与当前强调色相匹配（例如紫色）</string>
+
+    <!--SKINS-->
+    <string name="suit_1">圣诞装</string>
+    <string name="suit_2">漂亮的衣服</string>
+    <string name="suit_3">商务套装</string>
+    <string name="suit_4">非常商务的套装</string>
+    <string name="suit_5">蝾螈毛衣</string>
+    <string name="suit_6">便宜的套装</string>
+    <string name="suit_7">恐龙装</string>
+    <string name="suit_8">青蛙装</string>
+    <string name="suit_9">X光服</string>
+    <string name="suit_10">带恐龙的睡衣</string>
+    <string name="suit_11">斯莱特林</string>
+
+    <string name="hat_1">圣诞帽</string>
+    <string name="hat_2">商务帽</string>
+    <string name="hat_3">非常商务的帽子</string>
+    <string name="hat_4">酷帽</string>
+    <string name="hat_5">带恐龙的巴拿马帽</string>
+    <string name="hat_6">鹿角</string>
+    <string name="hat_7">吓人的角</string>
+    <string name="hat_8">有趣的帽子</string>
+    <string name="hat_9">兔耳朵</string>
+    <string name="hat_10">金冠</string>
+    <string name="hat_11">节日帽</string>
+
+    <!-- 服装结束 -->
+    <string name="skin_preview">预览</string>
+    <string name="compact_controls_tip">你可能需要重新启动应用程序</string>
+    <string name="legacy_controls_tip">如果你想要经典的游戏体验，请打开它</string>
+    <string name="legacy_controls">禁用厕所</string>
+    <string name="yes">是的</string>
+    <string name="skins_purchase_dialog">你真的想花 %d NCoins 购买 %s 吗？</string>
+    <string name="critical_error_tip">操作期间发生了严重错误。也许你应该重新启动应用程序。 你可以帮助解决这个错误。\n点击详细信息，然后将信息发送给我们：github.com/queuejw/neko11/issues (GitHub)\n或 t.me/neko_app (Telegram)\n或 dimon6018t@gmail.com (电子邮件)。</string>
+    <string name="crash_clear_settings">清除设置（这不会影响你的猫）</string>
+    <string name="crash_restart">重新启动 Neko11</string>
+    <string name="crash_settings">打开设置</string>
+    <string name="box_tip">通过打开这个神秘盒子，你可以获得一些东西：随机猫、NCoins、助推器。</string>
+    <string name="cat_tip">你确定要购买一只新猫吗？</string>
+    <string name="legacy_food">手动食物控制</string>
+    <string name="legacy_food_tip">如果你想手动为你的猫选择食物和饮料，请打开它</string>
+    <string name="food_croissant">羊角面包</string>
+    <string name="food_drumstick">鸡腿</string>
+    <string name="food_pasta">意大利面</string>
+    <string name="food_peanut">花生</string>
+    <string name="food_hot_dog">热狗</string>
+    <string name="food_steak">牛排</string>
+    <string name="choose_food">选择食物</string>
+    <string name="choose_drink">选择饮料</string>
+    <string name="drink_water">水</string>
+    <string name="drink_milk">牛奶</string>
+    <string name="app_name">Neko11\n</string>
+    <string name="music_bool">播放音乐</string>
+    <string name="games">Игры</string>
+    <string name="minigameNCoins_tip">Вы получили: %d NCoins</string>
+    <string name="a6">Геймер</string>
+    <string name="a6sub">Набери 100 очков в игре Прыгун за 1 раз</string>
+    <integer-array name="food_intervals">
+        <item>0</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>120</item>
+    </integer-array>
+    <integer-array name="food_new_cat_prob">
+        <item>0</item>
+        <item>5</item>
+        <item>35</item>
+        <item>65</item>
+        <item>90</item>
+    </integer-array>
+    <string-array name="cat_messages">
+        <item>😸</item>
+        <item>😹</item>
+        <item>😺</item>
+        <item>😻</item>
+        <item>😼</item>
+        <item>😽</item>
+        <item>😾</item>
+        <item>😿</item>
+        <item>👀</item>
+        <item>🙀</item>
+        <item>💩</item>
+        <item>🐁</item>
+        <item>🐭</item>
+    </string-array>
+    <string-array name="rare_cat_messages">
+        <item>🍩</item>
+        <item>🍭</item>
+        <item>🍫</item>
+        <item>🍨</item>
+        <item>🔔</item>
+        <item>🐝</item>
+        <item>🍪</item>
+        <item>🥧</item>
+        <item>🍼</item>
+        <item>🥨</item>
+    </string-array>
+	<string-array name="cat_status">
+        <item>普通</item>
+        <item>欺负者</item>
+        <item>亲爱的</item>
+        <item>贪吃鬼</item>
+        <item>爱玩的</item>
+        <item>懒惰的</item>
+        <item>野性的</item>
+        <item>滑稽的</item>
+    </string-array>
+    <string-array name="cat_moods">
+        <item>非常悲伤</item>
+        <item>悲伤</item>
+        <item>好</item>
+        <item>很好</item>
+        <item>非常好</item>
+        <item>正常</item>
+    </string-array>
+	<string-array name="toy_messages">
+        <item>喵喵喵。</item>
+        <item>*呼噜呼噜*</item>
+        <item>喵喵喵喵。</item>
+        <item>喵</item>
+        <item>呼噜</item>
+        <item>嗯嗯嗯</item>
+    </string-array>
+</resources>

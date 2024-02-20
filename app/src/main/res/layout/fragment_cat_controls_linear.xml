@@ -178,6 +178,7 @@
                 app:fontFamily="@font/opensans_medium" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/drink_tip"
                 android:layout_width="match_parent"
                 android:layout_height="29dp"
                 android:layout_marginStart="10dp"

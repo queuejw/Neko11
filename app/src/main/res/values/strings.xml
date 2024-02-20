@@ -139,6 +139,8 @@
 	<string name="a4sub">Collect 1000 cat\'s</string>
     <string name="a5">Happy owner</string>
     <string name="a5sub">Get the maximum mood \n level of 25 cats.</string>
+    <string name="a6">Gamer</string>
+    <string name="a6sub">Score 100 points in the Jumper game at 1 time</string>
 	
 	<string name="details">Details</string>
 	<string name="neko_info_ver_name">Neko11 version: %s</string>
@@ -279,6 +281,9 @@
     <string name="choose_drink">Choose drink</string>
     <string name="drink_water">Water</string>
     <string name="drink_milk">Milk</string>
+    <string name="music_bool">Play music</string>
+    <string name="games">Игры</string>
+    <string name="minigameNCoins_tip">You got: %d NCoins</string>
     <integer-array name="food_intervals">
         <item>0</item>
         <item>15</item>
