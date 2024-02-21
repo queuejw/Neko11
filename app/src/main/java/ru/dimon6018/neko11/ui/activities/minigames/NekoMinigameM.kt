@@ -44,7 +44,7 @@ class NekoMinigameM : Activity() {
         val n = mLand!!.numPlayers
         val minus = findViewById<View>(R.id.player_minus_button)
         val plus = findViewById<View>(R.id.player_plus_button)
-        if (n == 1) {
+        if(n == 1) {
             minus.visibility = View.INVISIBLE
             plus.visibility = View.VISIBLE
             plus.requestFocus()

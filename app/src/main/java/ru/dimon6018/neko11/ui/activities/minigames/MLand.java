@@ -134,7 +134,7 @@ public class MLand extends FrameLayout {
     private ViewGroup mScoreFields;
     static final ArrayList<Player> mPlayers = new ArrayList<>();
     private final ArrayList<Obstacle> mObstaclesInPlay = new ArrayList<>();
-    private float t, dt;
+    private float t;
     private float mLastPipeTime; // in sec
     private int mCurrentPipeId; // basically, equivalent to the current score
     private int mWidth, mHeight;
@@ -442,10 +442,11 @@ public class MLand extends FrameLayout {
     public void start(boolean startPlaying) {
         L("start(startPlaying=%s)", startPlaying ? "true" : "false");
         if (startPlaying && mCountdown <= 0) {
+            new PrefState(getContext()).setMood(NekoMinigameM.Companion.getCat(), 5);
             showSplash();
             mSplash.findViewById(R.id.play_button).setEnabled(false);
             final View playImage = mSplash.findViewById(R.id.play_button_image);
-            final TextView playText = (TextView) mSplash.findViewById(R.id.play_button_text);
+            final TextView playText = mSplash.findViewById(R.id.play_button_text);
             playImage.animate().alpha(0f);
             playText.animate().alpha(1f);
             mCountdown = 3;
@@ -546,7 +547,7 @@ public class MLand extends FrameLayout {
     }
     private void step(long t_ms, long dt_ms) {
         t = t_ms / 1000f; // seconds
-        dt = dt_ms / 1000f;
+        float dt = dt_ms / 1000f;
         if (DEBUG) {
             t *= DEBUG_SPEED_MULTIPLIER;
             dt *= DEBUG_SPEED_MULTIPLIER;
@@ -934,7 +935,7 @@ public class MLand extends FrameLayout {
                     0xFF9E9E9E,
             };
             color = sColors[(sNextColor++% sColors.length)];
-            if(mPlayers.size() == 1) {
+            if(mPlayers.size() >= 2) {
                 getBackground().setTint(color);
             }
             setOutlineProvider(new ViewOutlineProvider() {

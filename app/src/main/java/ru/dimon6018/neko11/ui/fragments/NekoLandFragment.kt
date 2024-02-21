@@ -185,7 +185,6 @@ class NekoLandFragment : Fragment(), PrefsListener {
         val touch: MaterialCardView?
         val skins: MaterialCardView?
         var catMood: Int = mPrefs!!.getMoodPref(cat)
-
         if (bottomsheet == null) {
             bottomsheet = BottomSheetDialog(context)
         }
@@ -213,7 +212,6 @@ class NekoLandFragment : Fragment(), PrefsListener {
         } catch (e: ClassCastException) {
             mood!!.text = getString(R.string.error)
             mPrefs!!.setMood(cat, 3)
-            mood.text = context.getString(R.string.mood, NekoApplication.getCatMood(context, cat))
         }
         catImage?.setImageDrawable(icon)
         if (coloredText!!) {
