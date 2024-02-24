@@ -192,6 +192,7 @@ class NekoLandFragment : Fragment(), PrefsListener {
         bottomsheet!!.dismissWithAnimation = true
         val bottomSheetInternal: View? = bottomsheet!!.findViewById(com.google.android.material.R.id.design_bottom_sheet)
         BottomSheetBehavior.from(bottomSheetInternal!!).peekHeight = resources.getDimensionPixelSize(R.dimen.bottomsheet)
+        BottomSheetBehavior.from(bottomSheetInternal).state = BottomSheetBehavior.STATE_HALF_EXPANDED
         icon = cat.createIconBitmap(iconSize!!, iconSize!!, mPrefs!!.getIconBackground()).toDrawable(resources)
         textLayout = bottomSheetInternal.findViewById(R.id.catNameField)
         catEditor = bottomSheetInternal.findViewById(R.id.catEditName)
@@ -211,6 +212,7 @@ class NekoLandFragment : Fragment(), PrefsListener {
             catEditor!!.setText(cat.name)
         } catch (e: ClassCastException) {
             mood!!.text = getString(R.string.error)
+            mPrefs!!.removeMood(cat)
             mPrefs!!.setMood(cat, 3)
         }
         catImage?.setImageDrawable(icon)
@@ -233,7 +235,7 @@ class NekoLandFragment : Fragment(), PrefsListener {
                     .setMessage(R.string.name_changed)
                     .setNegativeButton(android.R.string.ok, null)
                     .show()
-            cat.name = catEditor!!.getText().toString().trim { it <= ' ' }
+            cat.name = catEditor!!.text.toString().trim { it <= ' ' }
             bottomsheet = null
             mPrefs!!.addCat(cat)
         }
@@ -259,8 +261,8 @@ class NekoLandFragment : Fragment(), PrefsListener {
             val item1 = v.findViewById<MaterialCardView>(R.id.luckyBooster)
             counter0.text = getString(R.string.booster_items, mPrefs!!.moodBoosters)
             counter1.text = getString(R.string.booster_items, mPrefs!!.luckyBoosters)
-            item0.setEnabled(mPrefs!!.moodBoosters != 0)
-            item1.setEnabled(mPrefs!!.luckyBoosters != 0)
+            item0.isEnabled = mPrefs!!.moodBoosters != 0
+            item1.isEnabled = mPrefs!!.luckyBoosters != 0
             dialog.setCancelable(true)
             dialog.setNegativeButton(android.R.string.cancel, null)
             val alertd = dialog.create()
@@ -469,12 +471,12 @@ class NekoLandFragment : Fragment(), PrefsListener {
 
     private fun updateCatActions(cat: Cat, wash: View, caress: View, touch: View, actionsLimit: View) {
         if (mPrefs!!.isCanInteract(cat) <= 0) {
-            wash.setEnabled(false)
-            wash.setAlpha(0.5f)
-            caress.setEnabled(false)
-            caress.setAlpha(0.5f)
-            touch.setEnabled(false)
-            touch.setAlpha(0.5f)
+            wash.isEnabled = false
+            wash.alpha = 0.5f
+            caress.isEnabled = false
+            caress.alpha = 0.5f
+            touch.isEnabled = false
+            touch.alpha = 0.5f
             actionsLimit.visibility = View.VISIBLE
         }
     }
@@ -508,7 +510,7 @@ class NekoLandFragment : Fragment(), PrefsListener {
     }
 
     private fun showCatFull(cat: Cat) {
-        val context: Context = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) ContextThemeWrapper(context, requireActivity().getTheme()) else requireActivity()
+        val context: Context = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) ContextThemeWrapper(context, requireActivity().theme) else requireActivity()
         val view = LayoutInflater.from(context).inflate(R.layout.cat_fullscreen_view, null)
         val ico = view.findViewById<ImageView>(R.id.cat_ico)
         ico.setImageBitmap(cat.createIconBitmap(EXPORT_BITMAP_SIZE, EXPORT_BITMAP_SIZE, 0))

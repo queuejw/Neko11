@@ -56,7 +56,7 @@ class NekoApplication : Application() {
         @JvmStatic
         fun getCatMood(context: Context, cat: Cat): String {
             val prefs = PrefState(context)
-            val result = when (prefs.getMoodPref(cat)) {
+            return when (prefs.getMoodPref(cat)) {
                 1 -> context.getString(R.string.mood1)
                 2 -> context.getString(R.string.mood2)
                 3 -> context.getString(R.string.mood3)
@@ -64,7 +64,6 @@ class NekoApplication : Application() {
                 5 -> context.getString(R.string.mood5)
                 else -> context.getString(R.string.mood1)
             }
-            return result
         }
 
         @JvmStatic

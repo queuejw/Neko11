@@ -20,6 +20,7 @@ package ru.dimon6018.neko11.workers
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import ru.dimon6018.neko11.ui.activities.NekoSettingsActivity
 import ru.dimon6018.neko11.ui.fragments.NekoLandFragment
@@ -43,6 +44,11 @@ class PrefState(private val mContext: Context) : OnSharedPreferenceChangeListene
     fun setMood(cat: Cat, mood: Int) {
         mPrefs.edit()
                 .putInt(CAT_KEY_PREFIX_MOOD + cat.seed, mood)
+                .apply()
+    }
+    fun removeMood(cat: Cat) {
+        mPrefs.edit()
+                .remove(CAT_KEY_PREFIX_MOOD + cat.seed)
                 .apply()
     }
     fun setAge(cat: Cat, age: Int) {
@@ -142,7 +148,13 @@ class PrefState(private val mContext: Context) : OnSharedPreferenceChangeListene
     }
 
     fun getMoodPref(cat: Cat): Int {
-        return mPrefs.getInt(CAT_KEY_PREFIX_MOOD + cat.seed, 3)
+        return try {
+            mPrefs.getInt(CAT_KEY_PREFIX_MOOD + cat.seed, 3)
+        } catch (e: ClassCastException) {
+            removeMood(cat)
+            setMood(cat, 3)
+            3
+        }
     }
     fun getCatAge(seed: Long): Int {
         return mPrefs.getInt(CAT_AGE + seed, 2)
