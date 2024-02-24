@@ -16,11 +16,10 @@
   limitations under the License.
  -->
 <resources>
-    <string name="app_name">Neko 11</string>
-    <string name="app_name_neko">Neko 11</string>
+    <string name="app_name">Neko11</string>
+    <string name="app_name_neko">Neko11</string>
     <string name="dynamic_color">Dynamic colors</string>
     <string name="dynamic_color_sub">Automatically select an accent color based on the color of your wallpaper. Work only on Android 12+</string>
-	<string name="save_changes">Changes successfully saved</string>
 	<string name="choosetheme">Choose accent color</string>
 	<string name="dark_theme_auto">Auto dark theme</string>
 	<string name="dark_theme_auto_sub">If dark theme is enabled on your device, the app will adapt automatically</string>
@@ -50,7 +49,6 @@
     <string name="help">Help</string>
 	<string name="achievements">Achievements</string>
     <string name="help_message">Welcome to Neko! For start play click «Cat Controls» on bottom bar and fill all tiles. Then close app. If cat arrive, I send you notification. After you cat send cat your friends, or continue collect cats. Do not forget check tiles, because after arrive cat\'s eat your food and drink water. Good luck! </string>
-    <string name="background_changed">Restart the application</string>
     <string name="later">Later</string>
     <string name="restart">Restart</string>
     <string name="success">Success</string>
@@ -63,10 +61,10 @@
     <string name="permission_denied">I can\'t save picture, because permission denied. Please try again.</string>
     <string name="picture_saved_successful">Picture «%s» saved in /Pictures/Cats/. You can see it in gallery app.</string>
     <string name="about_text">Neko11 is a game about cats, which is developed by a small team in their spare time. We hope you enjoyed this app.</string>
-	<string name="about_dev1">dimon6018 (queuejw) - probably did the biggest job</string>
+	<string name="about_dev1">queuejw - probably did the biggest job</string>
 	<string name="about_dev2">AlertKaput - help finding bugs</string>
-	<string name="about_dev3">MG30 - cool ideas, help finding bugs, and test first alpha versions</string>
-	<string name="about_dev4">ZaCCCP- help finding bugs, аnd test dynamic colors</string>
+	<string name="about_dev3">MG30 - cool ideas, help finding bugs, test first alpha versions</string>
+	<string name="about_dev4">ZaCCCP- help finding bugs, test dynamic colors</string>
 	<string name="about_dev5">DarkFox - testing first versions and first collect 100 cats</string>
 	<string name="about_you">And you &#10084;</string>
 	<string name="rename_cat_title">Rename this cat!</string>

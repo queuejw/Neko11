@@ -22,11 +22,12 @@ class NekoCrash: AppCompatActivity()  {
         setContentView(R.layout.neko_crash)
         val model = "Model: " + Build.MODEL + "\n"
         val name = "Neko11 Ver: " + BuildConfig.VERSION_NAME + "\n"
+        val brand = "Brand: " + Build.BRAND + "\n"
         val info: MaterialButton = findViewById(R.id.buttonRecoveryInfo)
         val restart: MaterialButton = findViewById(R.id.buttonRecoveryRestart)
         val clear: MaterialButton = findViewById(R.id.buttonRecoveryClear)
         val settings: MaterialButton = findViewById(R.id.buttonRecoverySettings)
-        val error = "Detected critical error.\n " + model + name + intent.extras?.getString("stacktrace")
+        val error = "Detected critical error.\n " + model + brand + name + intent.extras?.getString("stacktrace")
         info.setOnClickListener {
             MaterialAlertDialogBuilder(this)
                     .setIcon(R.drawable.ic_warning)

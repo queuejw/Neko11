@@ -214,8 +214,8 @@ class Cat(context: Context, seed: Long, name: String?) : Drawable() {
                 .setVibrate(PURR)
     }
     override fun draw(canvas: Canvas) {
-        val w = min(getBounds().width(), getBounds().height())
-        if (mBitmap == null || mBitmap!!.getWidth() != w || mBitmap!!.getHeight() != w) {
+        val w = min(bounds.width(), bounds.height())
+        if (mBitmap == null || mBitmap!!.width != w || mBitmap!!.height != w) {
             mBitmap = Bitmap.createBitmap(w, w, Bitmap.Config.ARGB_8888)
             val bitCanvas = Canvas(mBitmap!!)
             slowDraw(bitCanvas, 0, 0, w, w)
@@ -247,7 +247,7 @@ class Cat(context: Context, seed: Long, name: String?) : Drawable() {
         val hsv = FloatArray(3)
         Color.colorToHSV(bodyColor, hsv)
         hsv[2] = if (hsv[2] > 0.5f) hsv[2] - 0.25f else hsv[2] + 0.25f
-        pt.setColor(Color.HSVToColor(hsv))
+        pt.color = Color.HSVToColor(hsv)
         val r = (w / 2).toFloat()
         when (icon) {
             0 -> {}
@@ -281,7 +281,7 @@ class Cat(context: Context, seed: Long, name: String?) : Drawable() {
         val hsv = FloatArray(3)
         Color.colorToHSV(bodyColor, hsv)
         hsv[2] = if (hsv[2] > 0.5f) hsv[2] - 0.25f else hsv[2] + 0.25f
-        pt.setColor(Color.HSVToColor(hsv))
+        pt.color = Color.HSVToColor(hsv)
         val r = (w / 2).toFloat()
         when (icon) {
             0 -> {}
@@ -479,7 +479,7 @@ class Cat(context: Context, seed: Long, name: String?) : Drawable() {
             return if (bitmapIcon.type != Icon.TYPE_BITMAP) bitmapIcon else try {
                 @SuppressLint("DiscouragedPrivateApi") val bits = Icon::class.java.getDeclaredMethod("getBitmap").invoke(bitmapIcon) as Bitmap
                 val ostream = ByteArrayOutputStream(
-                        bits.getWidth() * bits.getHeight() * 2) // guess 50% compression
+                        bits.width * bits.height * 2) // guess 50% compression
                 val ok = bits.compress(Bitmap.CompressFormat.PNG, 95, ostream)
                 if (!ok) null else Icon.createWithData(ostream.toByteArray(), 0, ostream.size())
             } catch (ex: NoSuchMethodException) {
@@ -490,11 +490,10 @@ class Cat(context: Context, seed: Long, name: String?) : Drawable() {
                 bitmapIcon
             }
         }
-
         @RequiresApi(VERSION_CODES.M)
         fun recompressIconO(bitmap: Bitmap): Icon? {
             val ostream = ByteArrayOutputStream(
-                    bitmap.getWidth() * bitmap.getHeight() * 2) // guess 50% compression
+                    bitmap.width * bitmap.height * 2) // guess 50% compression
             val ok = bitmap.compress(Bitmap.CompressFormat.PNG, 100, ostream)
             return if (ok) Icon.createWithData(ostream.toByteArray(), 0, ostream.size()) else null
         }

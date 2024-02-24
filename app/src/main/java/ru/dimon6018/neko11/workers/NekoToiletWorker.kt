@@ -50,9 +50,9 @@ class NekoToiletWorker(context: Context, workerParams: WorkerParameters) : Worke
             val toiletmin = 30
             val toiletmax = 150
             val catSize = PrefState(context!!).cats.size
-            var toiletDelay = Random().nextInt((toiletmax - toiletmin + 3) - catSize)
-            if (toiletDelay < 10) {
-                toiletDelay += 10
+            var toiletDelay = Random().nextInt((toiletmax - toiletmin + 3) - catSize / 2)
+            if (toiletDelay < 25) {
+                toiletDelay += 25
             }
             val workToyRequest: OneTimeWorkRequest = OneTimeWorkRequest.Builder(NekoToyWorker::class.java)
                     .addTag("TOILETWORK")
@@ -60,8 +60,6 @@ class NekoToiletWorker(context: Context, workerParams: WorkerParameters) : Worke
                     .build()
             WorkManager.getInstance(context).enqueue(workToyRequest)
         }
-
-        @JvmStatic
         fun stopToiletWork(context: Context?) {
             WorkManager.getInstance(context!!).cancelAllWorkByTag("TOILETWORK")
         }

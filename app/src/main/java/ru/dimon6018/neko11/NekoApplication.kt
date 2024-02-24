@@ -25,8 +25,9 @@ import ru.dimon6018.neko11.workers.PrefState
 
 class NekoApplication : Application() {
     override fun onCreate() {
-        ExceptionHandler.setContext(applicationContext)
-        Thread.setDefaultUncaughtExceptionHandler(ExceptionHandler())
+        val crashHandler = ExceptionHandler()
+        crashHandler.setContext(applicationContext)
+        Thread.setDefaultUncaughtExceptionHandler(crashHandler)
         super.onCreate()
     }
 

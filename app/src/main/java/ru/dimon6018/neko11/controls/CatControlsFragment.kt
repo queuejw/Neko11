@@ -166,6 +166,7 @@ class CatControlsFragment : Fragment(), PrefsListener {
                 waterDialog()
             } else {
                 mPrefs!!.waterState = 200f
+                mPrefs!!.setWaterType(0)
             }
             updateTiles()
         }

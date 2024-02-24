@@ -19,12 +19,11 @@
     <string name="dynamic_color">动态颜色</string>
     <string name="app_name_neko">Neko11</string>
     <string name="dynamic_color_sub">根据您的壁纸颜色自动选择强调颜色。仅在Android 12+上工作。</string>
-    <string name="save_changes">更改已成功保存</string>
     <string name="choosetheme">选择强调颜色</string>
     <string name="dark_theme_auto">自动深色主题</string>
     <string name="dark_theme_auto_sub">如果您的设备启用了深色主题，应用将自动适应。</string>
     <string name="back">返回</string>
-    <string name="notification_name">Neko 11</string>
+    <string name="notification_name">Neko11</string>
     <string name="promo">促销代码</string>
     <string name="notification_channel_name">新猫咪</string>
     <string name="default_tile_name">\????</string>
@@ -49,7 +48,6 @@
     <string name="help">帮助</string>
     <string name="achievements">成就</string>
     <string name="help_message">欢迎来到Neko！要开始游戏，请点击底部栏上的“猫咪控制”并填满所有瓷砖。然后关闭应用程序。如果猫咪到达，我会发送通知给您。然后，您可以将猫咪发送给您的朋友，或者继续收集更多的猫咪。不要忘记检查瓷砖，因为猫咪到达后会吃您的食物并喝水。祝您好运！</string>
-    <string name="background_changed">重新启动应用程序</string>
     <string name="later">稍后</string>
     <string name="restart">重新启动</string>
     <string name="success">成功</string>
@@ -62,7 +60,7 @@
     <string name="permission_denied">我无法保存图片，因为权限被拒绝。请重试。</string>
     <string name="picture_saved_successful">图片“%s”已保存在/Pictures/Cats/中。您可以在相册应用中查看它。</string>
     <string name="about_text">Neko11是一个关于猫咪的游戏，由一个小团队在业余时间开发。我们希望您喜欢这个应用程序。</string>
-    <string name="about_dev1">dimon6018 (queuejw) - 可能是最大的贡献者</string>
+    <string name="about_dev1">queuejw - 可能是最大的贡献者</string>
     <string name="about_dev2">AlertKaput - 帮助找到错误</string>
     <string name="about_dev3">MG30 - 出色的创意，帮助找到错误，以及测试第一个alpha版本</string>
     <string name="about_dev4">ZaCCCP- 帮助找到错误，以及测试动态颜色</string>
@@ -284,10 +282,10 @@
     <string name="drink_milk">牛奶</string>
     <string name="app_name">Neko11\n</string>
     <string name="music_bool">播放音乐</string>
-    <string name="games">Игры</string>
-    <string name="minigameNCoins_tip">Вы получили: %d NCoins</string>
-    <string name="a6">Геймер</string>
-    <string name="a6sub">Набери 100 очков в игре Прыгун за 1 раз</string>
+    <string name="games">游戏</string>
+    <string name="minigameNCoins_tip">您获得了：%d NCoins</string>
+    <string name="a6">游戏玩家</string>
+    <string name="a6sub">在跳跃游戏中一次性获得100分</string>
     <integer-array name="food_intervals">
         <item>0</item>
         <item>15</item>

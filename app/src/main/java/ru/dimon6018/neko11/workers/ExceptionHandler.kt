@@ -1,6 +1,5 @@
 package ru.dimon6018.neko11.workers
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -9,6 +8,12 @@ import kotlin.system.exitProcess
 
 
 class ExceptionHandler : Thread.UncaughtExceptionHandler {
+
+    private var cntxt: Context? = null
+
+    fun setContext(context: Context?) {
+        cntxt = context
+    }
     override fun uncaughtException(t: Thread, e: Throwable) {
         Log.e("Neko11", "Detected critical error. See: ${e.stackTraceToString()}")
         openErrorActivity(e)
@@ -18,14 +23,7 @@ class ExceptionHandler : Thread.UncaughtExceptionHandler {
         startAppIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startAppIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startAppIntent.putExtra("stacktrace",e.stackTraceToString())
-        cntxt!!.startActivity(startAppIntent)
+        cntxt?.startActivity(startAppIntent)
         exitProcess(1)
-    }
-    companion object {
-        @SuppressLint("StaticFieldLeak")
-        var cntxt: Context? = null
-        fun setContext(context: Context?) {
-            cntxt = context
-        }
     }
 }

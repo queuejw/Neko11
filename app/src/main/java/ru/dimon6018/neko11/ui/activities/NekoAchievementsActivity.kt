@@ -132,25 +132,25 @@ class NekoAchievementsActivity : AppCompatActivity(), PrefsListener {
         val gift5Enabled = nekoprefs!!.getBoolean("gift5_enabled", true)
         val gift6Enabled = nekoprefs!!.getBoolean("gift6_enabled", true)
         if (progress1dstatus >= 100) {
-            gift1!!.setEnabled(true)
+            gift1!!.isEnabled = true
             if (!gift1Enabled) {
                 gift1!!.setText(R.string.gift_not_enabled)
             }
         }
         if (progress2dstatus >= 100) {
-            gift2!!.setEnabled(true)
+            gift2!!.isEnabled = true
             if (!gift2Enabled) {
                 gift2!!.setText(R.string.gift_not_enabled)
             }
         }
         if (progress3dstatus >= 100) {
-            gift3!!.setEnabled(true)
+            gift3!!.isEnabled = true
             if (!gift3Enabled) {
                 gift3!!.setText(R.string.gift_not_enabled)
             }
         }
         if (progress4dstatus >= 100) {
-            gift4!!.setEnabled(true)
+            gift4!!.isEnabled = true
             if (!gift4Enabled) {
                 gift4!!.setText(R.string.gift_not_enabled)
             }
@@ -159,13 +159,13 @@ class NekoAchievementsActivity : AppCompatActivity(), PrefsListener {
             if(!gift5Enabled) {
                 progress5!!.progress = progress5dstatus
             }
-            gift5!!.setEnabled(true)
+            gift5!!.isEnabled = true
             if (!gift5Enabled) {
                 gift5!!.setText(R.string.gift_not_enabled)
             }
         }
         if (progress6dstatus >= 100) {
-            gift6!!.setEnabled(true)
+            gift6!!.isEnabled = true
             if (!gift6Enabled) {
                 gift6!!.setText(R.string.gift_not_enabled)
             }
@@ -272,13 +272,11 @@ class NekoAchievementsActivity : AppCompatActivity(), PrefsListener {
                     mPrefs!!.addMoodBooster(mb)
                     s = getString(R.string.box_win5, coins, lb, mb)
                 }
-
                 6 -> {
                     val cat = NekoWorker.newRandomCat(this, mPrefs!!, true)
                     mPrefs!!.addCat(cat)
                     s = getString(R.string.box_win6)
                 }
-
                 else -> {
                     s = getString(R.string.box_error)
                     mPrefs!!.addNCoins(300)

@@ -16,18 +16,17 @@
   limitations under the License.
  -->
 <resources>
-    <string name="app_name">Neko 11</string>
-    <string name="app_name_neko">Neko 11</string>
+    <string name="app_name">Neko11</string>
+    <string name="app_name_neko">Neko11</string>
     <string name="dynamic_color">Динамичные цвета</string>
     <string name="dynamic_color_sub">Автоматический выбор цвета акцента в зависимости от цвета ваших обоев. Работает только на Android 12+</string>
 	<string name="choosetheme">Выбрать цвет акцента</string>
 	<string name="dark_theme_auto">Автоматическая темная тема</string>
 	<string name="dark_theme_auto_sub">Если на вашем устройстве включена темная тема, то приложение будет адаптироваться автоматически</string>
     <string name="back">Назад</string>
-	<string name="save_changes">Изменения успешно сохранены</string>
     <string name="promo">Промокоды</string>
     <string name="notification_name">Neko 11</string>
-    <string name="notification_channel_name">Новые коты</string>
+    <string name="notification_channel_name">Новые котики</string>
     <string name="default_tile_name">\????</string>
     <string name="notification_title">К вам пришёл новый котик!</string>
     <string name="notification_title_return">Котик вернулся.</string>
@@ -49,30 +48,26 @@
     <string name="about_neko">Про Neko11</string>
     <string name="help">Помощь</string>
     <string name="help_message">Добро пожаловать в Neko! Чтобы начать играть, перейдите во вкладку «Управление» на нижней полоске и заполните все плитки, затем просто закройте приложение. Когда к вам прибудет кот, вам будет отправлено уведомление. После этого Вы сможете поделиться изображением кота с друзьями или продолжить коллекционировать. Но не забывайте заглядывать во вкладку «Управление». Когда прибывает кот, то он съедает еду и выпивает воду. ВАЖНО! Если забудете положить в миску еду, не будете привлекать котов игрушкой, то новые коты не придут!</string>
-    <string name="background_changed">Перезапустите приложение.</string>
     <string name="later">Чуть позже</string>
     <string name="restart">Перезапустить</string>
     <string name="success">Успешно!</string>
     <string name="water_state_ml">%.0f Мл</string>
     <string name="dark_theme">Включить темную тему</string>
-    <string name="compact_view">Компактный вид в меню Управления</string>
+    <string name="compact_view">Компактный вид экрана Управления</string>
     <string name="accent_choose">Выбрать цвет акцента</string>
     <string name="open_settings">Открыть настройки в системе</string>
     <string name="meow_meow">Мяу мяу.</string>
     <string name="permission_denied">Не получилось сохранить картинку, т.к. у меня нет на это разрешения. Попробуйте еще раз, или откройте настройки и выдайте разрешение вручную.</string>
     <string name="picture_saved_successful">Картинка «%s» сохранена в /Pictures/Cats/. Вы можете посмотреть её в приложении галереи.</string>
     <string name="about_text">Neko11 - игра про котов, которая разрабатывается небольшой командой в свободное время. Мы надеемся, что вам понравилось это приложение.</string>
-	<string name="about_dev1">dimon6018 (queuejw) - возможно, делал самую большую работу</string>
+	<string name="about_dev1">queuejw - возможно, делал самую большую работу</string>
 	<string name="about_dev2">AlertKaput - помощь в поиске багов, помощь в разработке</string>
-	<string name="about_dev3">MG30 - крутые идеи, помощь в поиске багов, а также тест ранних версий</string>
-	<string name="about_dev4">ZaCCCP- помощь в поиске багов, а также тест динамичных цветов</string>
-    <string name="about_dev5">DarkFox - тестирование первых версий, первый собрал 100 котов</string>
+	<string name="about_dev3">MG30 - крутые идеи, помощь в поиске багов, тест ранних версий</string>
+	<string name="about_dev4">ZaCCCP- помощь в поиске багов, тестирование первых версий</string>
+    <string name="about_dev5">DarkFox - тестирование первых версий, собрал 100 котов</string>
 	<string name="rename_cat_title">Переименование</string>
     <string name="input_sub">Введите имя</string>
 	<string name="openurl">Открыть GitHub</string>
-    <string name="update_toast">Скачайте обновление, если оно доступно</string>
-    <string name="return_to_collection">Вернуться к коллекции</string>
-    <string name="email">Отправь мне смешную SMS: dimon6018t@gmail.com</string>
 	<string name="get_prize">Получить</string>
 	<string name="welcome_dialog">Добро пожаловать в Neko11. Давай я научу тебя основам игры. Для начала забери подарок (бесплатно).</string>
 	<string name="welcome_dialog_part2">Вот твои первые котики :3 Нажми на кота, чтобы появилось меню, где ты сможешь управлять им.</string>
@@ -87,8 +82,8 @@
 	<string name="github">Neko11 в GitHub (Исходники)</string>	
 	<string name="gift_not_enabled">Получено</string>
 	<string name="delete_cat_message">Вы правда хотите удалить этого кота?</string>
-	<string name="delete_cat_title">Удаление кота</string>	
-	<string name="max_cat_line_title">Отвечает за количество котов в одной линии</string>
+	<string name="delete_cat_title">Удалить кота</string>
+	<string name="max_cat_line_title">Ширина списка котов</string>
 	<string name="cat_age">Возраст кота: %d лет</string>
 	<string name="themeChanged">Перезапустите Neko11 для применения темы.</string>	
 	<string name="name_changed">Имя кота изменено!</string>
@@ -273,7 +268,7 @@
     <string name="legacy_food_tip">Включите, если хотите вручную выбирать еду и напиток для кота</string>
     <string name="food_croissant">Круассан</string>
     <string name="food_drumstick">Голень</string>
-    <string name="food_pasta">Макароны</string>
+    <string name="food_pasta">Спагетти</string>
     <string name="food_peanut">Арахис</string>
     <string name="food_hot_dog">Хот-дог</string>
     <string name="food_steak">Стейк</string>

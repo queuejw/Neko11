@@ -293,7 +293,7 @@
 			android:id="@+id/max_cat_line_title"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:gravity="start"
+			android:gravity="center"
 			android:text="@string/max_cat_line_title"
 			android:textSize="14sp"
 			app:fontFamily="@font/opensans_regular" />
@@ -314,7 +314,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="1dp"
-			android:gravity="start"
+			android:gravity="center"
 			android:text="@string/cat_size_title"
 			android:textSize="14sp"
 			app:fontFamily="@font/opensans_regular" />
