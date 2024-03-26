@@ -46,3 +46,5 @@ More screenshots in /screenshots folder 📷
 🧦Telegram channel (🇷🇺): https://t.me/nekoapp_news
  
 🎃Telegram chat (🇷🇺): https://t.me/neko_app
+
+Also check Neko7: https://github.com/queuejw/Neko7
