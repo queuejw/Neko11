@@ -130,7 +130,7 @@ class NekoLandFragment : Fragment(), PrefsListener {
         super.onDestroy()
     }
     private fun updateCats(): Int {
-        Thread {
+        CoroutineScope(Dispatchers.Default).launch {
             val list: MutableList<Cat> = mPrefs!!.cats.toMutableList()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 //See https://github.com/chris-blay/AndroidNougatEasterEgg/blob/master/workspace/src/com/covertbagel/neko/NekoLand.java
@@ -155,7 +155,7 @@ class NekoLandFragment : Fragment(), PrefsListener {
                 updateLM()
                 updateCounter(numCatsP)
             }
-        }.start()
+        }
         return numCatsP
     }
 
@@ -172,7 +172,6 @@ class NekoLandFragment : Fragment(), PrefsListener {
     }
     private fun onCatClick(cat: Cat) {
         val context = requireActivity()
-        val icon: Drawable?
         val textLayout: TextInputLayout?
         val catEditor: EditText?
         val catImage: ImageView?
@@ -192,8 +191,8 @@ class NekoLandFragment : Fragment(), PrefsListener {
         bottomsheet!!.dismissWithAnimation = true
         val bottomSheetInternal: View? = bottomsheet!!.findViewById(com.google.android.material.R.id.design_bottom_sheet)
         BottomSheetBehavior.from(bottomSheetInternal!!).peekHeight = resources.getDimensionPixelSize(R.dimen.bottomsheet)
-        BottomSheetBehavior.from(bottomSheetInternal).state = BottomSheetBehavior.STATE_HALF_EXPANDED
-        icon = cat.createIconBitmap(iconSize!!, iconSize!!, mPrefs!!.getIconBackground()).toDrawable(resources)
+        BottomSheetBehavior.from(bottomSheetInternal).state = BottomSheetBehavior.STATE_EXPANDED
+        val icon: Drawable = cat.createIconBitmap(iconSize!!, iconSize!!, mPrefs!!.getIconBackground()).toDrawable(resources)
         textLayout = bottomSheetInternal.findViewById(R.id.catNameField)
         catEditor = bottomSheetInternal.findViewById(R.id.catEditName)
         catImage = bottomSheetInternal.findViewById(R.id.cat_icon)
@@ -592,13 +591,8 @@ class NekoLandFragment : Fragment(), PrefsListener {
     }
 
     private class CatHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageView: ImageView
-        val textView: TextView
-
-        init {
-            imageView = itemView.findViewById(R.id.icon)
-            textView = itemView.findViewById(R.id.title)
-        }
+        val imageView: ImageView = itemView.findViewById(R.id.icon)
+        val textView: TextView = itemView.findViewById(R.id.title)
     }
 
     override fun onResume() {
@@ -687,15 +681,9 @@ class NekoLandFragment : Fragment(), PrefsListener {
             RecyclerView.Adapter<SkinSuitsAdapter.ViewHolder>() {
 
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val textView: TextView
-            val price: TextView
-            val imageView: ImageView
-
-            init {
-                textView = view.findViewById(R.id.skin_text)
-                price = view.findViewById(R.id.price_text)
-                imageView = view.findViewById(R.id.skin_image)
-            }
+            val textView: TextView = view.findViewById(R.id.skin_text)
+            val price: TextView = view.findViewById(R.id.price_text)
+            val imageView: ImageView = view.findViewById(R.id.skin_image)
         }
 
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -770,15 +758,9 @@ class NekoLandFragment : Fragment(), PrefsListener {
             RecyclerView.Adapter<SkinHatsAdapter.ViewHolder>() {
 
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val textView: TextView
-            val price: TextView
-            val imageView: ImageView
-
-            init {
-                textView = view.findViewById(R.id.skin_text)
-                price = view.findViewById(R.id.price_text)
-                imageView = view.findViewById(R.id.skin_image)
-            }
+            val textView: TextView = view.findViewById(R.id.skin_text)
+            val price: TextView = view.findViewById(R.id.price_text)
+            val imageView: ImageView = view.findViewById(R.id.skin_image)
         }
 
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {

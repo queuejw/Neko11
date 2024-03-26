@@ -29,7 +29,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.Paint
-import android.graphics.PixelFormat
+import android.graphics.PixelFormat.TRANSLUCENT
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.os.Build
@@ -297,7 +297,7 @@ class Cat(context: Context, seed: Long, name: String?) : Drawable() {
     override fun setColorFilter(colorFilter: ColorFilter?) {}
 
     @Deprecated("Deprecated in Java", ReplaceWith("PixelFormat.TRANSLUCENT", "android.graphics.PixelFormat"))
-    override fun getOpacity(): Int { return PixelFormat.TRANSLUCENT }
+    override fun getOpacity(): Int { return TRANSLUCENT }
 
     val shortcutId: String
         get() = if (ALL_CATS_IN_ONE_CONVERSATION) GLOBAL_SHORTCUT_ID else SHORTCUT_ID_PREFIX + seed

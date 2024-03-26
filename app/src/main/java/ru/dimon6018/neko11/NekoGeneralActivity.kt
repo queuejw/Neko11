@@ -16,6 +16,7 @@
 package ru.dimon6018.neko11
 
 import android.annotation.SuppressLint
+import android.app.NotificationManager
 import android.app.UiModeManager
 import android.content.Context
 import android.content.DialogInterface
@@ -38,6 +39,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
@@ -77,6 +79,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
     private var pagerAdapter: FragmentStateAdapter? = null
     private var needWelcomeDialog = false
     private var cord: CoordinatorLayout? = null
+    private var uimanager: UiModeManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         nekoprefs = getSharedPreferences(NekoSettingsActivity.SETTINGS, MODE_PRIVATE)
@@ -85,6 +88,7 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
             finish()
             return
         }
+        uimanager = getSystemService(UI_MODE_SERVICE) as UiModeManager
         setupDarkMode()
         setTheme(NekoApplication.getNekoTheme(this))
         super.onCreate(savedInstanceState)
@@ -157,6 +161,18 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         }
         if (getAndroidV()) androidVDialog()
         if (needWelcomeDialog) welcomeDialog()
+        if(!areNotificationsEnabled(NotificationManagerCompat.from(this))) {
+            notificationsDialog()
+        }
+    }
+    private fun areNotificationsEnabled(noman: NotificationManagerCompat) = when {
+        noman.areNotificationsEnabled().not() -> false
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> {
+            noman.notificationChannels.firstOrNull { channel ->
+                channel.importance == NotificationManager.IMPORTANCE_NONE
+            } == null
+        }
+        else -> true
     }
     private fun getAndroidV(): Boolean {
         return (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1)
@@ -167,6 +183,16 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
                     .setMessage(R.string.unsupported_android)
                     .setNegativeButton(android.R.string.ok, null)
                     .show()
+    }
+    private fun notificationsDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setIcon(R.drawable.ic_warning)
+            .setCancelable(false)
+            .setMessage(R.string.notifications_warning)
+            .setNegativeButton(android.R.string.cancel, null)
+            .setPositiveButton(android.R.string.ok) { _: DialogInterface?, _: Int ->
+                NekoSettingsActivity.openSettings(this)
+            }.show()
     }
     override fun onPrefsChanged() {}
 
@@ -234,29 +260,26 @@ class NekoGeneralActivity : AppCompatActivity(), PrefsListener {
         }
     }
     private fun setupDarkMode() {
-        when (nekoprefs!!.getInt("darktheme", 0)) {
+        when (nekoprefs!!.getInt("theme", 0)) {
+            0 -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    uimanager?.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO)
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+            }
             1 -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    val uimanager = getSystemService(UI_MODE_SERVICE) as UiModeManager
-                    uimanager.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES)
+                    uimanager?.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES)
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 }
             }
-            2 -> {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    val uimanager = getSystemService(UI_MODE_SERVICE) as UiModeManager
-                    uimanager.setApplicationNightMode(UiModeManager.MODE_NIGHT_AUTO)
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                }
-            }
             else -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    val uimanager = getSystemService(UI_MODE_SERVICE) as UiModeManager
-                    uimanager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO)
+                    uimanager?.setApplicationNightMode(UiModeManager.MODE_NIGHT_AUTO)
                 } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                 }
             }
         }

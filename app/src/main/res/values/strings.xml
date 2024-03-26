@@ -24,7 +24,7 @@
 	<string name="dark_theme_auto">Auto dark theme</string>
 	<string name="dark_theme_auto_sub">If dark theme is enabled on your device, the app will adapt automatically</string>
     <string name="back">Back</string>
-    <string name="notification_name">Neko 11</string>
+    <string name="notification_name">Neko11</string>
     <string name="promo">Promo code</string>
     <string name="notification_channel_name">New cats</string>
     <string name="default_tile_name">\????</string>
@@ -66,13 +66,10 @@
 	<string name="about_dev3">MG30 - cool ideas, help finding bugs, test first alpha versions</string>
 	<string name="about_dev4">ZaCCCP- help finding bugs, test dynamic colors</string>
 	<string name="about_dev5">DarkFox - testing first versions and first collect 100 cats</string>
-	<string name="about_you">And you &#10084;</string>
+	<string name="about_you">Thanks for your interest in Neko11 &#10084;</string>
 	<string name="rename_cat_title">Rename this cat!</string>
     <string name="input_sub">Type name here</string>
 	<string name="openurl">Open GitHub</string>
-    <string name="update_toast">Download update, if it available</string>
-    <string name="return_to_collection">Return to collection</string>
-    <string name="email">Send me funny SMS: dimon6018t@gmail.com</string>
 	<string name="get_prize">Get prize</string>
 	<string name="welcome_dialog">Welcome to Neko11. Let me teach you the basics of the game. First, pick up your gift (free).</string>
 	<string name="save_title">Save</string>
@@ -282,6 +279,7 @@
     <string name="music_bool">Play music</string>
     <string name="games">Игры</string>
     <string name="minigameNCoins_tip">You got: %d NCoins</string>
+    <string name="notifications_warning">Для правильной работы приложения требуется разрешение на показ уведомлений.</string>
     <integer-array name="food_intervals">
         <item>0</item>
         <item>15</item>

@@ -40,7 +40,7 @@ class NekoApplication : Application() {
         @JvmStatic
         fun getNekoTheme(context: Context): Int {
             val nekoPrefs = context.getSharedPreferences(NekoSettingsActivity.SETTINGS, MODE_PRIVATE)
-            return when (nekoPrefs.getInt("theme", 0)) {
+            return when (nekoPrefs.getInt("colorScheme", 0)) {
                 1 -> R.style.Theme_Neko11_Pink
                 2 -> R.style.Theme_Neko11_Red
                 3 -> R.style.Theme_Neko11_Yellow
@@ -69,7 +69,7 @@ class NekoApplication : Application() {
         @JvmStatic
         fun getTextColor(context: Context): Int {
             val nekoPrefs = context.getSharedPreferences(NekoSettingsActivity.SETTINGS, MODE_PRIVATE)
-            val color = nekoPrefs.getInt("theme", 0)
+            val color = nekoPrefs.getInt("colorScheme", 0)
             return if (color >= 0 && color < accentColors.size) {
                 accentColors[color]
             } else {

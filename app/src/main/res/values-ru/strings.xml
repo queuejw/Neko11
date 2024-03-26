@@ -25,7 +25,7 @@
 	<string name="dark_theme_auto_sub">Если на вашем устройстве включена темная тема, то приложение будет адаптироваться автоматически</string>
     <string name="back">Назад</string>
     <string name="promo">Промокоды</string>
-    <string name="notification_name">Neko 11</string>
+    <string name="notification_name">Neko11</string>
     <string name="notification_channel_name">Новые котики</string>
     <string name="default_tile_name">\????</string>
     <string name="notification_title">К вам пришёл новый котик!</string>
@@ -77,7 +77,7 @@
 	<string name="rename_title">Переименовать</string>
 	<string name="cat_status_string">Статус кота: %s</string>
 	<string name="input_sub_promo">Введите промокод</string>
-	<string name="about_you">И тебе &#10084;</string>
+	<string name="about_you">Спасибо за интерес к Neko11 &#10084;</string>
 	<string name="activation_tip">Попробуйте прокрутить 3 раза =)</string>
 	<string name="github">Neko11 в GitHub (Исходники)</string>	
 	<string name="gift_not_enabled">Получено</string>
@@ -162,7 +162,7 @@
     <string name="mystery_box">Загадочный ящик</string>
     <string name="random_cat">Случайный кот</string>
     <string name="meow">Мяу</string>
-    <string name="shh">Шшшшшшшшшш</string>
+    <string name="shh">Шшшшшшшшш!</string>
     <string name="ops">Ой!</string>
     <string name="touch_cat_error">Коту не понравилось, что вы его потрогали и он вас укусил =)</string>
     <string name="mood">Настроение: %s</string>
@@ -172,6 +172,7 @@
     <string name="mood3">Хорошее</string>
     <string name="mood4">Очень хорошее</string>
     <string name="mood5">Отличное</string>
+
     <string name="boosters_title">Усилители</string>
     <string name="booster_items">У вас осталось: %d</string>
     <string name="choose_booster">Выбери усилители.</string>
@@ -279,6 +280,7 @@
     <string name="music_bool">Включать музыку</string>
     <string name="games">Игры</string>
     <string name="minigameNCoins_tip">Вы получили: %d NCoins</string>
+    <string name="notifications_warning">Для правильной работы приложения требуется разрешение на показ уведомлений.</string>
 
     <integer-array name="food_intervals">
         <item>0</item>

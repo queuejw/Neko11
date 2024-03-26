@@ -38,7 +38,6 @@ class NekoCrash: AppCompatActivity()  {
                     .show()
         }
         restart.setOnClickListener {
-            finishAffinity()
             exitProcess(0)
         }
         clear.setOnClickListener {

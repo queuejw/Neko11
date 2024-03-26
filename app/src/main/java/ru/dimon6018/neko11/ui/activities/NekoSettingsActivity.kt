@@ -42,6 +42,10 @@ import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.slider.Slider
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.xmlpull.v1.XmlPullParserException
 import ru.dimon6018.neko11.BuildConfig
 import ru.dimon6018.neko11.NekoApplication.Companion.getNekoTheme
@@ -98,6 +102,8 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
     //remove in future
     private var ad: MaterialButton? = null
 
+    private var uimanager: UiModeManager? = null
+
     private var pickMedia = registerForActivityResult<PickVisualMediaRequest, Uri>(ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
         if (uri != null) {
             Log.i("PhotoPicker", "Selected URI: $uri")
@@ -110,6 +116,7 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(getNekoTheme(this))
         super.onCreate(savedInstanceState)
+        uimanager = getSystemService(UI_MODE_SERVICE) as UiModeManager
         setContentView(R.layout.neko_settings_activity)
         mPrefs = PrefState(this)
         nekoprefs = getSharedPreferences(SETTINGS, MODE_PRIVATE)
@@ -160,6 +167,7 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
                     mPrefs!!.sortState = 0
                 }
             }
+            refreshUi()
         }
         backgroundGroup!!.addOnButtonCheckedListener { _: MaterialButtonToggleGroup?, checkedId: Int, isChecked: Boolean ->
             if (checkedId == R.id.cat_background_none) {
@@ -177,50 +185,53 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
                     mPrefs!!.setIconBackground(2)
                 }
             }
+            refreshUi()
         }
         accentchoose!!.setOnClickListener { v: View -> showMenu(v, R.menu.neko_colors) }
         recovery!!.setOnClickListener { startRecovery(this) }
         opensettingsbtn!!.setOnClickListener {
-            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-            val uri = Uri.fromParts("package", this.packageName, null)
-            intent.setData(uri)
-            startActivity(intent)
+            openSettings(this)
         }
         whiteswitch!!.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             val editor = nekoprefs!!.edit()
             if (isChecked) {
-                editor.putInt("darktheme", 1)
+                editor.putInt("theme", 1)
                 editor.apply()
                 if (VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    val uimanager = getSystemService(UI_MODE_SERVICE) as UiModeManager
-                    uimanager.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES)
+                    uimanager?.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES)
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 }
             } else {
-                editor.putInt("darktheme", 0)
+                editor.putInt("theme", 0)
                 editor.apply()
                 if (VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    val uimanager = getSystemService(UI_MODE_SERVICE) as UiModeManager
-                    uimanager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO)
+                    uimanager?.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO)
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 }
             }
+            refreshUi()
         }
         autowhiteswitch!!.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             val editor = nekoprefs!!.edit()
             if (isChecked) {
-                whiteswitch!!.setEnabled(false)
-                whiteswitch!!.setChecked(false)
-                editor.putInt("darktheme", 2)
-                editor.apply()
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                editor.putInt("theme", 2)
+                if (VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    uimanager?.setApplicationNightMode(UiModeManager.MODE_NIGHT_AUTO)
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                }
             } else {
-                whiteswitch!!.setEnabled(true)
-                editor.putInt("darktheme", 0)
-                editor.apply()
+                editor.putInt("theme", 0)
+                if (VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    uimanager?.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO)
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
             }
+            editor.apply()
+            refreshUi()
         }
         dyncolor!!.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             val editor = nekoprefs!!.edit()
@@ -231,45 +242,55 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
                 editor.putInt("theme", 0)
                 editor.apply()
             }
+            refreshUi()
         }
         linearcontrol!!.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             val editor = nekoprefs!!.edit()
             editor.putBoolean("linear_control", isChecked)
             editor.apply()
+            refreshUi()
         }
         legacyControls!!.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             val editor = nekoprefs!!.edit()
             editor.putBoolean("legacyGameplay", isChecked)
             editor.apply()
+            refreshUi()
         }
         textMatch!!.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             val editor = nekoprefs!!.edit()
             editor.putBoolean("coloredText", isChecked)
             editor.apply()
+            refreshUi()
         }
         allowCatRun!!.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             val editor = nekoprefs!!.edit()
             editor.putBoolean("gameplayFeature1", isChecked)
             editor.apply()
+            refreshUi()
         }
         controlsFirst!!.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             val editor = nekoprefs!!.edit()
             editor.putBoolean("controlsFirst", isChecked)
             editor.apply()
+            refreshUi()
         }
         musicSwitch!!.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
            mPrefs!!.setMusic(isChecked)
+            refreshUi()
         }
         legacyFood!!.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             mPrefs!!.setLegacyFood(isChecked)
+            refreshUi()
         }
         limitSlider!!.addOnChangeListener(Slider.OnChangeListener { _: Slider?, value: Float, _: Boolean ->
             val valueNew = Math.round(value)
             mPrefs!!.catsInLineLimit = valueNew
+            refreshUi()
         })
         catResizer!!.addOnChangeListener(Slider.OnChangeListener { _: Slider?, value: Float, _: Boolean ->
             val valueNew = Math.round(value)
             mPrefs!!.catIconSize = valueNew
+            refreshUi()
         })
         details!!.setOnClickListener {
             val context: Context = if(VERSION.SDK_INT >= Build.VERSION_CODES.M) ContextThemeWrapper(this, getTheme()) else this
@@ -359,26 +380,24 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
             }
             if (isDelete) {
                 bottomsheet.setContentView(R.layout.neko_settings_bottomsheet_process)
-                object : Thread() {
-                    override fun run() {
-                        try {
-                            mPrefs!!.wipeData()
-                            nekoprefs!!.all.clear()
-                            sleep(1200)
-                            bottomsheet.dismiss()
-                        } catch (e: InterruptedException) {
-                            throw RuntimeException(e)
-                        }
-                        bottomSheetInternal.post {
-                            MaterialAlertDialogBuilder(context)
-                                    .setTitle(R.string.backup_title)
-                                    .setIcon(R.drawable.ic_backup_done)
-                                    .setMessage(R.string.task_success)
-                                    .setNegativeButton(android.R.string.ok, null)
-                                    .show()
-                        }
+                CoroutineScope(Dispatchers.IO).launch {
+                    try {
+                        mPrefs!!.wipeData()
+                        nekoprefs!!.all.clear()
+                        delay(1200)
+                        bottomsheet.dismiss()
+                    } catch (e: InterruptedException) {
+                        throw RuntimeException(e)
                     }
-                }.start()
+                    bottomSheetInternal.post {
+                        MaterialAlertDialogBuilder(context)
+                            .setTitle(R.string.backup_title)
+                            .setIcon(R.drawable.ic_backup_done)
+                            .setMessage(R.string.task_success)
+                            .setNegativeButton(android.R.string.ok, null)
+                            .show()
+                    }
+                }
             }
         }
         getperms.setOnClickListener { checkPerms() }
@@ -487,10 +506,9 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
                 val backuper = BackupParser()
                 backuper.parse(`is`, this)
                 `is`.close()
-                object : Thread() {
-                    override fun run() {
+                CoroutineScope(Dispatchers.IO).launch {
                         try {
-                            sleep(1100)
+                            delay(1200)
                             bottomsheet.dismiss()
                         } catch (e: InterruptedException) {
                             throw RuntimeException(e)
@@ -504,7 +522,6 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
                                     .show()
                         }
                     }
-                }.start()
             } catch (e: IOException) {
                 bottomsheet.dismiss()
                 MaterialAlertDialogBuilder(this)
@@ -565,35 +582,35 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
             when (menuItem.itemId) {
                 R.id.pink_theme -> {
                     item = 1
-                    editor.putInt("theme", item)
+                    editor.putInt("colorScheme", item)
                 }
                 R.id.red_theme -> {
                     item = 2
-                    editor.putInt("theme", item)
+                    editor.putInt("colorScheme", item)
                 }
                 R.id.orange_theme -> {
                     item = 3
-                    editor.putInt("theme", item)
+                    editor.putInt("colorScheme", item)
                 }
                 R.id.green_theme -> {
                     item = 4
-                    editor.putInt("theme", item)
+                    editor.putInt("colorScheme", item)
                 }
                 R.id.lime_theme -> {
                     item = 5
-                    editor.putInt("theme", item)
+                    editor.putInt("colorScheme", item)
                 }
                 R.id.aqua_theme -> {
                     item = 6
-                    editor.putInt("theme", item)
+                    editor.putInt("colorScheme", item)
                 }
                 R.id.blue_theme -> {
                     item = 7
-                    editor.putInt("theme", item)
+                    editor.putInt("colorScheme", item)
                 }
                 R.id.purple_theme -> {
                     item = 0
-                    editor.putInt("theme", item)
+                    editor.putInt("colorScheme", item)
                 }
             }
             editor.apply()
@@ -629,20 +646,28 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
         legacyControls = findViewById(R.id.legacy_controls)
         musicSwitch = findViewById(R.id.musicController)
         legacyFood = findViewById(R.id.legacy_food)
-        val theme = nekoprefs!!.getInt("theme", 0)
-        val darkenabled = nekoprefs!!.getInt("darktheme", 0)
+        removeBack!!.setOnClickListener {
+            mPrefs!!.setCustomBackgroundPath("")
+            showSnackBar(getString(R.string.themeChanged), Snackbar.LENGTH_LONG, removeBack)
+        }
+        chooseBackg!!.setOnClickListener {
+            pickMedia.launch(PickVisualMediaRequest.Builder()
+                    .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                    .build())
+        }
+        refreshUi()
+    }
+    private fun refreshUi() {
+        val colorScheme = nekoprefs!!.getInt("colorScheme", 0)
         val isControlsLinear = nekoprefs!!.getBoolean("linear_control", false)
         val isControlsFirst = nekoprefs!!.getBoolean("controlsFirst", false)
         val isCatCanRun = nekoprefs!!.getBoolean("gameplayFeature1", true)
         val legacyGameplay = nekoprefs!!.getBoolean("legacyGameplay", false)
         val coloredText = nekoprefs!!.getBoolean("coloredText", false)
-        removeBack!!.setOnClickListener {
-            mPrefs!!.setCustomBackgroundPath("")
-            showSnackBar(getString(R.string.themeChanged), Snackbar.LENGTH_LONG, removeBack)
-        }
+        val theme = nekoprefs!!.getInt("theme", 0)
         dyncolor!!.setEnabled(VERSION.SDK_INT >= Build.VERSION_CODES.S)
         linearcontrol!!.setChecked(isControlsLinear)
-        dyncolor!!.isChecked = theme == 8
+        dyncolor!!.isChecked = colorScheme == 8
         legacyControls!!.isChecked = legacyGameplay
         controlsFirst!!.isChecked = isControlsFirst
         musicSwitch!!.isChecked = mPrefs!!.isMusicEnabled()
@@ -651,17 +676,25 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
         textMatch!!.isChecked = coloredText
         limitSlider!!.value = mPrefs!!.catsInLineLimit.toFloat()
         catResizer!!.value = mPrefs!!.catIconSize.toFloat()
-        when (darkenabled) {
+        when (theme) {
+            // 0 - light
+            // 1 - dark
+            // 2 - auto
             0 -> {
+                whiteswitch?.isEnabled = true
                 whiteswitch?.isChecked = false
-                autowhiteswitch?.isChecked = true
+                autowhiteswitch?.isChecked = false
             }
-            1 -> whiteswitch?.isChecked = true
+            1 -> {
+                whiteswitch?.isEnabled = true
+                whiteswitch?.isChecked = true
+                autowhiteswitch?.isChecked = false
+            }
             2 -> {
-                autowhiteswitch?.isChecked = true
+                whiteswitch?.isEnabled = false
                 whiteswitch?.isChecked = false
+                autowhiteswitch?.isChecked = true
             }
-            else -> whiteswitch?.isChecked = false
         }
         when (mPrefs!!.sortState) {
             2 -> namesort!!.isChecked = true
@@ -672,11 +705,6 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
             2 -> backgoundSquare!!.isChecked = true
             1 -> backgoundCircle!!.isChecked = true
             0 -> backgoundNone!!.isChecked = true
-        }
-        chooseBackg!!.setOnClickListener {
-            pickMedia.launch(PickVisualMediaRequest.Builder()
-                    .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                    .build())
         }
     }
     companion object {
@@ -717,6 +745,12 @@ class NekoSettingsActivity : AppCompatActivity(), PrefsListener {
                     .setMessage(context.getString(R.string.error_message, exception))
                     .setNegativeButton(android.R.string.ok, null)
                     .show()
+        }
+        fun openSettings(context: Context) {
+            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+            val uri = Uri.fromParts("package", context.packageName, null)
+            intent.setData(uri)
+            context.startActivity(intent)
         }
     }
 }

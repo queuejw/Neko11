@@ -6,7 +6,7 @@ plugins {
 android {
     namespace 'ru.dimon6018.neko11'
 
-    compileSdk = 34
+    compileSdk 34
 	
     buildFeatures {
         buildConfig = true
@@ -14,9 +14,9 @@ android {
     defaultConfig {
         applicationId "ru.dimon6018.neko11"
         minSdk 21
-        targetSdk = 34
-        versionCode 9
-        versionName '2.3_12_03'
+        targetSdk 34
+        versionCode 10
+        versionName '2.3_12_05'
         multiDexEnabled false
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -42,9 +42,8 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.7.1'
     implementation 'com.google.android.material:material:1.10.0'
     implementation 'androidx.recyclerview:recyclerview:1.4.0-alpha01'
-    implementation 'androidx.core:core:1.12.0'
     implementation 'androidx.core:core-ktx:1.12.0'
-    implementation 'androidx.fragment:fragment:1.7.0-alpha10'
+    implementation 'androidx.fragment:fragment-ktx:1.7.0-beta01'
     implementation "androidx.viewpager2:viewpager2:1.1.0-beta02"
     implementation 'androidx.work:work-runtime:2.9.0'
 	

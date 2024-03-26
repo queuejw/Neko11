@@ -69,9 +69,6 @@
     <string name="rename_cat_title">重命名這隻貓！</string>
     <string name="input_sub">在這裡輸入名稱</string>
     <string name="openurl">打開 GitHub</string>
-    <string name="update_toast">下載更新，如果有的話</string>
-    <string name="return_to_collection">返回收藏</string>
-    <string name="email">發送有趣的短信給我：dimon6018t@gmail.com</string>
     <string name="get_prize">獲得獎品</string>
     <string name="welcome_dialog">歡迎來到Neko11。讓我教你遊戲的基本知識。首先，拿起你的禮物（免費的）。</string>
     <string name="save_title">保存</string>
@@ -286,6 +283,7 @@
     <string name="minigameNCoins_tip">您获得了：%d NCoins</string>
     <string name="a6">游戏玩家</string>
     <string name="a6sub">在跳跃游戏中一次性获得100分</string>
+    <string name="notifications_warning">Для правильной работы приложения требуется разрешение на показ уведомлений.</string>
     <integer-array name="food_intervals">
         <item>0</item>
         <item>15</item>

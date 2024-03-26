@@ -20,7 +20,6 @@ package ru.dimon6018.neko11.workers
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import ru.dimon6018.neko11.ui.activities.NekoSettingsActivity
 import ru.dimon6018.neko11.ui.fragments.NekoLandFragment
@@ -96,6 +95,18 @@ class PrefState(private val mContext: Context) : OnSharedPreferenceChangeListene
                 continue
             }
             else if(key.startsWith(CAT_DIRTY_PREFIX)) {
+                continue
+            }
+            else if(key.startsWith(NCOINS)) {
+                continue
+            }
+            else if(key.startsWith(CAT_HAT_PREFIX)) {
+                continue
+            }
+            else if(key.startsWith(CAT_SUIT_PREFIX)) {
+                continue
+            }
+            else if(key.startsWith(JUMPER_SCORE)) {
                 continue
             }
             else {
@@ -315,7 +326,7 @@ class PrefState(private val mContext: Context) : OnSharedPreferenceChangeListene
         mPrefs.edit().putBoolean(MUSIC, bool).apply()
     }
     fun isMusicEnabled(): Boolean {
-        return mPrefs.getBoolean(MUSIC, true)
+        return mPrefs.getBoolean(MUSIC, false)
     }
     fun setLegacyFood(bool: Boolean) {
         mPrefs.edit().putBoolean(LEGACY_FOOD, bool).apply()
